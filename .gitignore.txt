@@ -1,3 +1,4 @@
-.js
-.css
-.html
+*.js
+*.css
+*.html
+*.Rproj
