@@ -1,0 +1,215 @@
+---
+title: "Class 1: Objects, vectors, and basic mathematics"
+author: "Jeroen Claes <jeroen.claes@kuleuven.be>"
+output:
+  html_document:
+    theme: lumen
+    toc: true
+    toc_depth: 3
+    toc_float: true
+    collapsed: false
+    self_contained: false
+---
+## Objects and vectors 
+```{r, include=FALSE}
+tutorial::go_interactive()
+```
+
+```{r ex="create_a", type="sample-code"}
+# Create a variable a, equal to 5
+
+# Create a variable b, equal to "myname"
+
+# Create numeric vecotr c, equal to 1, 2, 3, 4
+
+# Create a character vector d, in which you store the words "my", "teacher's", "name", "is", "jeroen"
+
+# Print out a
+
+# Print out b
+
+# Print out c
+
+# Print out d
+
+# Find the objects in your workspace
+
+```
+
+```{r ex="create_a", type="solution"}
+# Create a variable a, equal to 5
+a <- 5
+# Create a variable b, equal to "myname"
+b <- "myname"
+# Create numeric vector c, equal to 1, 2, 3, 4
+c <-c(1, 2, 3, 4)
+# Create a character vector d, in which you store the words "my", "teacher's", "name", "is", "jeroen"
+d <- c("my", "teacher's", "name", "is", "jeroen")
+# Print out a
+a
+
+# Print out b
+b
+
+# Print out c
+c
+
+# Print out d
+d
+
+# Find the objects in your workspace
+ls()
+```
+
+```{r ex="create_a", type="sct"}
+test_object("a")
+test_output_contains("d", incorrect_msg = "Make sure to print everything!.")
+success_msg("Great!")
+```
+
+## Using R as a calculator 
+### Setting up your variables 
+```{r ex="create_b", type="sample-code"}
+# Create a variable a, equal to 15
+
+# Create a variable b, equal to 10
+
+# Create numeric vector c, equal to 1, 2, 3, 4
+
+# Create a numeric vector d, equal to 5, 6, 7, 8
+```
+
+```{r ex="create_b", type="solution"}
+# Create a variable a, equal to 5
+a <- 15
+# Create a variable b, equal to "myname"
+b <- 10
+# Create numeric vector c, equal to 1, 2, 3, 4
+c <-c(1, 2, 3, 4)
+# Create a character vector d, in which you store the words "my", "teacher's", "name", "is", "jeroen"
+d <- c(5, 6, 7, 8)
+```
+
+```{r ex="create_b", type="sct"}
+test_object("a")
+#test_output_contains("d", incorrect_msg = "Make sure to print everything!.")
+success_msg("Great!")
+```
+
+### Summation 
+```{r ex="add", type="pre-exercise-code"}
+# Create a variable a, equal to 15
+a<-15
+# Create a variable b, equal to 10
+b<-10
+# Create numeric vector c, equal to 1, 2, 3, 4
+c<- c(1, 2, 3, 4)
+# Create a numeric vector d, equal to 5, 6, 7, 8
+d<-c(5, 6, 7, 8)
+```
+
+```{r ex="add", type="sample-code"}
+# Add a up to b
+
+# Add b up to c
+
+# Add c up to d
+```
+
+```{r ex="add", type="solution"}
+# Add a up to b
+a + b
+# Add b up to c
+b + c 
+# Add c up to d
+c + d
+```
+
+### Substraction 
+```{r ex="substraction", type="pre-exercise-code"}
+# Create a variable a, equal to 15
+a<-15
+# Create a variable b, equal to 10
+b<-10
+# Create numeric vector c, equal to 1, 2, 3, 4
+c<- c(1, 2, 3, 4)
+# Create a numeric vector d, equal to 5, 6, 7, 8
+d<-c(5, 6, 7, 8)
+```
+
+```{r ex="substraction", type="sample-code"}
+# Subtract b from a
+
+# Subtract b from c
+
+# Subtract c from d
+```
+
+```{r ex="substraction", type="solution"}
+# Subtract b from a
+a -b
+# Subtract b from c
+c -b 
+# Subtract c from d
+d - c
+```
+
+### Multiplication 
+```{r ex="multiplication", type="pre-exercise-code"}
+# Create a variable a, equal to 15
+a<-15
+# Create a variable b, equal to 10
+b<-10
+# Create numeric vector c, equal to 1, 2, 3, 4
+c<- c(1, 2, 3, 4)
+# Create a numeric vector d, equal to 5, 6, 7, 8
+d<-c(5, 6, 7, 8)
+```
+
+```{r ex="multiplication", type="sample-code"}
+# Multiply a by b
+
+# Mutiply b by c
+
+# Multiply c by d
+```
+
+```{r ex="multiplication", type="solution"}
+# Multiply a by b
+a * b
+# Mutiply b by c
+b * c
+# Multiply c by d
+c * d 
+```
+
+### Division 
+```{r ex="division", type="pre-exercise-code"}
+# Create a variable a, equal to 15
+a<-15
+# Create a variable b, equal to 10
+b<-10
+# Create numeric vector c, equal to 1, 2, 3, 4
+c<- c(1, 2, 3, 4)
+# Create a numeric vector d, equal to 5, 6, 7, 8
+d<-c(5, 6, 7, 8)
+```
+
+```{r ex="division", type="sample-code"}
+# Divide a by b
+
+# Divide c by b
+
+# Divide c by d
+```
+
+```{r ex="division", type="solution"}
+# Divide a by b
+a / b
+# Divide c by b
+c / b
+# Divide c by d
+c / b
+```
+
+(c) Jeroen Claes, 2018
