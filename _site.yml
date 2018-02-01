@@ -1,0 +1,21 @@
+name: Statistics for linguistics
+navbar:
+  title: Statistics for linguistics
+  left:
+  - text: Home
+    href: index.html
+  - text: 'Class 1: Objects, vectors, and basic mathematics'
+    href: class1.html
+output_dir: _site
+output:
+  html_document:
+    lib_dir: site_libs
+    self_contained: false
+    include:
+      after_body: footer.html
+    theme: lumen
+    toc: true
+    toc_depth: 3
+    toc_float: true
+    collapsed: false
+

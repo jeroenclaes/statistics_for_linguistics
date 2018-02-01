@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "---\ntitle: \"Statistics for Linguistics\"\nauthor: \"Jeroen Claes | <jeroen.claes@kuleuven.be> | <jeroen@cropland.be>\"\noutput:\n  html_document:\n    theme: lumen\n---\n\nWelcome to the companion site for the course *Statistics for linguistics*. \n\n## Slides\nThe slides for the classes are available for download here: \n\n- [Class 1](https://drive.google.com/open?id=13ecOT0AIx1YIvqNfzoehtYxrnkund8HjacHGWBb-_tQ)\n\n## Recommended literature (available upon request)\n- Baayen, R. H. (2008). *Analyzing Linguistic Data: A Practical Introduction to Statistics Using R.* Cambridge: Cambridge University Press.\t\n- Gries, S. Th. (2009). *Quantitative corpus linguistics with R.* Berlin/Boston, MA: De Gruyter.\t\n - Gries, S. Th. (2013). *Statistics for linguistics with R.* Berlin/Boston, MA: De Gruyter.\t\n- Levshina, N. (2015). *How to do linguistics with R.* Amsterdam/Philadelphia, PA: John Benjamins.\t\n- Urdan, T. C. (2010). *Statistics in plain English.* New York, NY: Routledge.\t\n",
+    "created" : 1517517676746.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1760497198",
+    "id" : "99B600F3",
+    "lastKnownWriteTime" : 1517518161,
+    "last_content_update" : 1517518161156,
+    "path" : "~/Desktop/statistics_for_linguistics/labs/index.rmd",
+    "project_path" : "index.rmd",
+    "properties" : {
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

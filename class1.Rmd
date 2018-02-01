@@ -1,14 +1,6 @@
 ---
 title: "Class 1: Objects, vectors, and basic mathematics"
-author: "Jeroen Claes <jeroen.claes@kuleuven.be>"
-output:
-  html_document:
-    theme: lumen
-    toc: true
-    toc_depth: 3
-    toc_float: true
-    collapsed: false
-    self_contained: false
+author: "Jeroen Claes | <jeroen.claes@kuleuven.be> | <jeroen@cropland.be>"
 ---
 ## Objects and vectors 
 ```{r, include=FALSE}
@@ -212,4 +204,3 @@ c / b
 c / b
 ```
 
-(c) Jeroen Claes, 2018
