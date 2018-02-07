@@ -4,8 +4,10 @@ navbar:
   left:
   - text: Home
     href: index.html
-  - text: 'Class 1: Objects, vectors, and basic mathematics'
+  - text: 'Lab 1'
     href: class1.html
+  - text: 'Lab 2'
+    href: class2.html
 output_dir: _site
 output:
   html_document:

@@ -1,0 +1,690 @@
+---
+title: "Class 2: Data frames, measures of central tendency, measures of dispersion, and distributions"
+author: "Jeroen Claes | <jeroen.claes@kuleuven.be> | <jeroen@cropland.be>"
+---
+## 1. Working with data.frames
+### Loading data from CSV
+```{r, include=FALSE}
+tutorial::go_interactive()
+```
+
+```{r ex="create_a", type="sample-code"}
+# Load the readr package
+
+# Load the course data from the course website to the object 'dataSet':
+# http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class2_balota_et_al_2007.csv
+
+# Print out the =last= 6 rows of dataSet
+
+```
+
+```{r ex="create_a", type="solution"}
+# Load the readr package
+library(readr)
+# Load the course data from the course website to the object 'dataSet':
+# http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class2_balota_et_al_2007.csv
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class2_balota_et_al_2007.csv")
+# Print out the =last= 6 rows of dataSet
+tail(dataSet)
+```
+
+```{r ex="create_a", type="sct"}
+test_object("dataSet")
+test_output_contains("tail(dataSet)", incorrect_msg = "Make sure to print the last six rows!")
+success_msg("Great!")
+```
+
+### Exploring data.frames (1/2)
+
+```{r ex="explore", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class2_balota_et_al_2007.csv")
+```
+
+```{r ex="explore", type="sample-code"}
+# The data.frame dataSet is already in your workspace. Call ls() to see it
+
+# Explore its dimensions: how many rows, how many columns?
+
+# Print the first 15 rows of the data.frame
+
+# Load the package dplyr
+
+# Print a "glimpse" of the data.frame
+
+
+```
+
+```{r ex="explore", type="solution"}
+# The data.frame dataSet is already in your workspace. Call ls() to see it
+ls()
+# Explore its dimensions: how many rows, how many columns?
+dim(dataSet)
+# Print the first 15 rows of the data.frame
+head(dataSet, 15)
+# Load the package dplyr
+library(dplyr)
+# Print a "glimpse" of the data.frame
+glimpse(dataSet)
+
+```
+
+```{r ex="explore", type="sct"}
+test_output_contains("dim(dataSet)", incorrect_msg = "Make sure to print the dimensions of the data.frame.")
+test_output_contains("head(dataSet, 15)", incorrect_msg = "Make sure to print the first 15 lines.")
+test_output_contains("glimpse(dataSet)", incorrect_msg = "Make sure to print a glimpse of the dataSet.")
+test_output_contains("library(dplyr)", incorrect_msg = "Make sure to load the dplyr package!")
+success_msg("Great!")
+```
+
+### Exploring data.frames (2/2)
+
+```{r ex="explore2", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class2_balota_et_al_2007.csv")
+```
+
+```{r ex="explore2", type="sample-code"}
+# The data.frame dataSet is already in your workspace. 
+
+# Explore its dimensions: how many rows does it have?
+
+# Explore its dimensions: how many columns does it have?
+
+# Print a summary of the data.frame
+```
+
+```{r ex="explore2", type="solution"}
+# The data.frame dataSet is already in your workspace. Call ls() to see it
+ls()
+# Explore its dimensions: how many rows does it have?
+nrow(dataSet)
+# Explore its dimensions: how many columns does it have?
+ncol(dataSet)
+# Print a summary of the data.frame
+summary(dataSet)
+```
+
+```{r ex="explore2", type="sct"}
+test_output_contains("nrow(dataSet)", incorrect_msg = "Make sure to print the number of rows")
+test_output_contains("ncol(dataSet)", incorrect_msg = "Make sure to print the number of columns")
+test_output_contains("summary(dataSet)", incorrect_msg = "Make sure to print a summary")
+success_msg("Great!")
+```
+
+### Subsetting data.frames (1/2)
+```{r ex="subset1", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class2_balota_et_al_2007.csv")
+```
+
+```{r ex="subset1", type="sample-code"}
+# The data.frame dataSet is already in your workspace. 
+
+# Print the last couple of values of its 'Freq' column
+
+# Create a new data.frame, called "lowFrequency,  which holds all rows of dataSet, where Freq is smaller than or equal to 30
+
+# Print the first, the second, and the 50th row of this data.frame
+
+
+```
+
+```{r ex="subset1", type="solution"}
+# The data.frame dataSet is already in your workspace. 
+
+# Print the last couple of values of its 'Freq' column
+tail(dataSet$Freq)
+# Create a new data.frame, called "lowFrequency,  which holds all rows and columns of dataSet, where Freq is smaller than or equal to 30
+lowFrequency <- dataSet[dataSet$Freq <= 30, ]
+
+# Print the first, the second, and the 50th row of this data.frame
+lowFrequency[c(1, 2, 50), ]
+```
+
+```{r ex="subset1", type="sct"}
+
+test_output_contains("tail(dataSet$Freq)", incorrect_msg = "Make sure to print the last couple of values of Freq")
+test_output_contains("lowFrequency <- dataSet[dataSet$Freq <= 30, ]", incorrect_msg = "Make sure to make a new dataframe 'lowFrequency'")
+test_output_contains("lowFrequency[c(1, 2, 50), ]", incorrect_msg = "Make sure to print the first, the second, and the 50th row of lowFrequency")
+success_msg("Great!")
+```
+
+### Subsetting data.frames (2/2)
+```{r ex="subset1", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class2_balota_et_al_2007.csv")
+```
+
+```{r ex="subset2", type="sample-code"}
+# The data.frame dataSet is already in your workspace. 
+
+# Extract all Words with a reaction time smaller than 600. Print only the first couple of words
+
+# Extract the Length and Freq of the following words: "moneys"  "stinger" "spare"   "bandage" "acorn"  
+
+# Add a new variable to the data.frame, called FreqByTwo which stores the Freq of the word, divided by two
+
+# Print a summary of the modified data.Frame
+```
+
+```{r ex="subset2", type="solution"}
+# The data.frame dataSet is already in your workspace. 
+
+# Extract all Words with a reaction time smaller than 600. Print only the first couple of words
+head(dataSet[dataSet$Mean_RT < 600, ]$Word)
+
+# Extract the Length and Freq of the following words: "moneys"  "stinger" "spare"   "bandage" "acorn"  
+dataSet[dataSet$Word %in% c("moneys", "stinger", "spare", "bandage","acorn"), c("Length", "Freq")]
+
+# Add a new variable to the data.frame, called FreqByTwo which stores the Freq of the word, divided by two
+dataSet$FreqByTwo <- dataSet$Freq/2
+
+# Print a summary of the modified data.Frame
+summary(dataSet)
+```
+
+```{r ex="subset2", type="sct"}
+test_output_contains("head(dataSet[dataSet$Mean_RT < 600, ]$Word)", incorrect_msg = "Make sure to print the first couple of values of Freq < 600")
+test_output_contains('dataSet[dataSet$Word %in% c("moneys", "stinger", "spare", "bandage","acorn"), c("Length", "Freq")]', incorrect_msg = "Make sure to extract the Length and the Freq of the words in the list")
+test_output_contains("dataSet$FreqByTwo <- dataSet$Freq/2", incorrect_msg = "Make sure to create the FreqByTwo variable!")
+success_msg("Great job!")
+```
+
+## 2. Measures of central tendency
+- Calculate these measures for the variables `Freq` and `Mean_RT`
+- **ANALYZE**:
+    - What differences do you spot between `Freq` and `Mean_RT` on the one hand and `Length` on the other?
+
+### 2.1 The `Freq` variable
+```{r ex="Freq", type="pre-exercise-code"}
+library(readr)
+```
+
+```{r ex="Freq", type="sample-code"}
+# Load the data again from
+# http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class2_balota_et_al_2007.csv
+
+# Calculate the mean of 'Freq'
+
+# Calculate the median of 'Freq'
+
+# Calculate the 0.25, 0.5, and 0.75 quantiles of 'Freq'
+
+# Calculate the mode of 'Freq'
+
+# Calculate the minimum of 'Freq'
+
+# Calculate the maximum of 'Freq'
+```
+
+
+```{r ex="Freq", type="solution"}
+# Load the data again from
+# http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class2_balota_et_al_2007.csv
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class2_balota_et_al_2007.csv")
+# Calculate the mean of 'Freq'
+mean(dataSet$Freq, na.rm=TRUE)
+# Calculate the median of 'Freq'
+median(dataSet$Freq, na.rm=TRUE)
+# Calculate the 0.25, 0.5, and 0.75 quantiles of 'Freq'
+quantile(dataSet$Freq, c(0.25, 0.5, 0.75), na.rm = TRUE)
+# Calculate the mode of 'Freq'
+sort(table(dataSet$Freq), decreasing = TRUE)[1]
+# Calculate the minimum of 'Freq'
+min(dataSet$Freq, na.rm=TRUE)
+# Calculate the maximum of 'Freq'
+max(dataSet$Freq, na.rm=TRUE)
+```
+
+```{r ex="Freq", type="sct"}
+test_output_contains("mean(dataSet$Freq, na.rm=TRUE)", incorrect_msg = "Make sure to add 'na.rm=TRUE' to your 'mean' code!")
+test_output_contains('median(dataSet$Freq, na.rm=TRUE)', incorrect_msg = "Make sure to add 'na.rm=TRUE' to your 'median' code!")
+test_output_contains("quantile(dataSet$Freq, c(0.25, 0.5, 0.75), na.rm = TRUE)", incorrect_msg = "Make sure to add 'na.rm=TRUE' to your 'quantile' code!")
+test_output_contains("sort(table(dataSet$Freq), decreasing = TRUE)[1]", incorrect_msg = "Make sure you use the one-line alternative to calculate the mode!")
+test_output_contains("min(dataSet$Freq, na.rm=TRUE)", incorrect_msg = "Make sure you add 'na.rm=TRUE' to your 'min' code!")
+test_output_contains("max(dataSet$Freq, na.rm=TRUE)", incorrect_msg = "Make sure you add 'na.rm=TRUE' to your 'max' code!")
+success_msg("Great job!")
+```
+
+### 2.1 The `Mean_RT` variable
+```{r ex="Mean_RT", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class2_balota_et_al_2007.csv")
+
+```
+
+```{r ex="Mean_RT", type="sample-code"}
+# The object dataSet is already in your workspace
+
+# Calculate the mean of 'Mean_RT'
+
+# Calculate the median of 'Mean_RT'
+
+# Calculate the 0.25, 0.5, and 0.75 quantiles of 'Mean_RT'
+
+# Calculate the mode of 'Mean_RT'
+
+# Calculate the minimum of 'Mean_RT'
+
+# Calculate the maximum of 'Mean_RT'
+```
+
+
+```{r ex="Mean_RT", type="solution"}
+# Calculate the mean of 'Mean_RT'
+mean(dataSet$Mean_RT, na.rm=TRUE)
+# Calculate the median of 'Mean_RT'
+median(dataSet$Mean_RT, na.rm=TRUE)
+# Calculate the 0.25, 0.5, and 0.75 quantiles of 'Mean_RT'
+quantile(dataSet$Mean_RT, c(0.25, 0.5, 0.75), na.rm = TRUE)
+# Calculate the mode of 'Mean_RT'
+sort(table(dataSet$Mean_RT), decreasing = TRUE)[1]
+# Calculate the minimum of 'Mean_RT'
+min(dataSet$Mean_RT, na.rm=TRUE)
+# Calculate the maximum of 'Mean_RT'
+max(dataSet$Mean_RT, na.rm=TRUE)
+```
+
+```{r ex="Mean_RT", type="sct"}
+test_output_contains("mean(dataSet$Mean_RT, na.rm=TRUE)", incorrect_msg = "Make sure to add 'na.rm=TRUE' to your 'mean' code!")
+test_output_contains('median(dataSet$Mean_RT, na.rm=TRUE)', incorrect_msg = "Make sure to add 'na.rm=TRUE' to your 'median' code!")
+test_output_contains("quantile(dataSet$Mean_RT, c(0.25, 0.5, 0.75), na.rm = TRUE)", incorrect_msg = "Make sure to add 'na.rm=TRUE' to your 'quantile' code!")
+test_output_contains("sort(table(dataSet$Mean_RT), decreasing = TRUE)[1]", incorrect_msg = "Make sure you use the one-line alternative to calculate the mode!")
+test_output_contains("min(dataSet$Mean_RT, na.rm=TRUE)", incorrect_msg = "Make sure you add 'na.rm=TRUE' to your 'min' code!")
+test_output_contains("max(dataSet$Mean_RT, na.rm=TRUE)", incorrect_msg = "Make sure you add 'na.rm=TRUE' to your 'max' code!")
+success_msg("Great job!")
+```
+
+## 3. The normal distribution
+- Plot and test the `Freq` and `Mean_RT` variables. 
+- **Analyze**:
+    - Are these variables normally distributed?
+    
+### 3.1 The `Freq` variable    
+####  Mean and median
+```{r ex="Freq_median_mean", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class2_balota_et_al_2007.csv")
+```
+
+```{r ex="Freq_median_mean", type="sample-code"}
+# The object dataSet is already in your workspace
+# Compare the mean of Freq. 
+
+# Compare the median of Freq. 
+
+# Are they close together numerically? Assign the answer (yes|no) as a string to the variable 'answer'
+```
+
+```{r ex="Freq_median_mean", type="solution"}
+## The object dataSet is already in your workspace
+# Compare the mean of Freq. 
+mean(dataSet$Freq, na.rm=TRUE)
+# Compare the median of Freq. 
+median(dataSet$Freq, na.rm=TRUE)
+# Are they close together numerically? Assign the answer (yes|no) as a string to the variable 'answer'
+answer<-"no"
+```
+
+```{r ex="Freq_median_mean", type="sct"}
+test_output_contains("mean(dataSet$Freq, na.rm=TRUE)
+", incorrect_msg = "Make sure to add 'na.rm=TRUE' to your 'mean' code!")
+test_output_contains("median(dataSet$Freq, na.rm=TRUE)", incorrect_msg = "Make sure to add 'na.rm=TRUE' to your 'median' code!")
+test_output_contains('answer<-"no"', incorrect_msg = "Correct answer: No. The mean is more than 10 higher than the median.")
+```
+
+####  Density plot 
+```{r ex="Freq_density", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class2_balota_et_al_2007.csv")
+```
+
+```{r ex="Freq_density", type="sample-code"}
+# The object dataSet is already in your workspace
+# Load the package ggplot2
+
+# Draw up a density plot of the Freq variable
+
+# Does the plot have a bell shape? Assign the answer (yes|no) as a string to the variable 'answer'
+```
+
+```{r ex="Freq_density", type="solution"}
+# The object dataSet is already in your workspace
+# Load the package ggplot2
+library(ggplot2)
+# Draw up a density plot of the Freq variable and add a red line at the mean
+ggplot(dataSet, aes(x=Freq))  + geom_line(stat="density") + geom_vline(aes(xintercept=mean(dataSet$Freq)), color="red")
+# Does the plot have a bell shape? Assign the answer (yes|no) as a string to the variable 'answer'
+answer <- "no"
+```
+
+```{r ex="Freq_density", type="sct"}
+test_output_contains("library(ggplot2)", incorrect_msg = "Make sure you load ggplot2 first!")
+test_output_contains('ggplot(dataSet, aes(x=Freq))  + geom_line(stat="density") + geom_vline(aes(xintercept=mean(dataSet$Freq)), color="red")', incorrect_msg = "Don't forget to add the red line!")
+test_output_contains('answer<-"no"', incorrect_msg = "Correct answer: No. The plot does not look like a bell shape.")
+```
+
+####  QQ-plot 
+```{r ex="Freq_qq", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class2_balota_et_al_2007.csv")
+```
+
+```{r ex="Freq_qq", type="sample-code"}
+# The object dataSet is already in your workspace
+# Draw up a QQ-plot of the Freq variable
+
+# Add a QQ-line for the Freq variable
+
+# Does the plot support that the variable is normally distributed? Assign the answer (yes|no) as a string to the variable 'answer'
+```
+
+```{r ex="Freq_qq", type="solution"}
+# The object dataSet is already in your workspace
+# Draw up a QQ-plot of the Freq variable
+qqnorm(dataSet$Freq)
+# Add a QQ-line for the Freq variable
+qqline(dataSet$Freq)
+# Does the plot support that the variable is normally distributed? Assign the answer (yes|no) as a string to the variable 'answer'
+answer <- "no"
+```
+
+```{r ex="Freq_qq", type="sct"}
+test_output_contains("qqnorm(dataSet$Freq)", incorrect_msg = "Make sure you draw the qqplot!")
+test_output_contains('qqline(dataSet$Freq)', incorrect_msg = "Don't forget to add the qqline!")
+test_output_contains('answer<-"no"', incorrect_msg = "Correct answer: No. The plot does not support that the data is normally distributed.")
+```
+
+####  Shapiro-Wilk test
+```{r ex="Freq_shap", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class2_balota_et_al_2007.csv")
+```
+
+```{r ex="Freq_shap", type="sample-code"}
+# The object dataSet is already in your workspace
+# Perform a Shapiro-Wilk test for your variable
+
+# Does the test support that the variable is normally distributed? Assign the answer (yes|no) as a string to the variable 'answer'
+```
+
+```{r ex="Freq_shap", type="solution"}
+# The object dataSet is already in your workspace
+# Perform a Shapiro-Wilk test for your variable
+shapiro.test(dataSet$Freq)
+# Does the test support that the variable is normally distributed? Assign the answer (yes|no) as a string to the variable 'answer'
+answer <- "no"
+```
+
+```{r ex="Freq_shap", type="sct"}
+test_output_contains("shapiro.test(dataSet$Freq)", incorrect_msg = "Make sure you perform the test!")
+test_output_contains('answer<-"no"', incorrect_msg = "Correct answer: No. p < 0.05, so we can assume that the data is not normally distributed")
+```
+
+### 3.2 The `Mean_RT` variable    
+####  Mean and median
+```{r ex="Mean_RT_median_mean", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class2_balota_et_al_2007.csv")
+```
+
+```{r ex="Mean_RT_median_mean", type="sample-code"}
+# The object dataSet is already in your workspace
+# Compare the mean of Mean_RT. 
+
+# Compare the median of Mean_RT. 
+
+# Are they close together numerically? Assign the answer (yes|no) as a string to the variable 'answer'
+```
+
+```{r ex="Mean_RT_median_mean", type="solution"}
+## The object dataSet is already in your workspace
+# Compare the mean of Mean_RT. 
+mean(dataSet$Mean_RT, na.rm=TRUE)
+# Compare the median of Mean_RT. 
+median(dataSet$Mean_RT, na.rm=TRUE)
+# Are they close together numerically? Assign the answer (yes|no) as a string to the variable 'answer'
+answer<-"no"
+```
+
+```{r ex="Mean_RT_median_mean", type="sct"}
+test_output_contains("mean(dataSet$Mean_RT, na.rm=TRUE)
+                     ", incorrect_msg = "Make sure to add 'na.rm=TRUE' to your 'mean' code!")
+test_output_contains("median(dataSet$Mean_RT, na.rm=TRUE)", incorrect_msg = "Make sure to add 'na.rm=TRUE' to your 'median' code!")
+test_output_contains('answer<-"no"', incorrect_msg = "Correct answer: No. The mean is more than 10 higher than the median.")
+```
+
+####  Density plot 
+```{r ex="Mean_RT_density", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class2_balota_et_al_2007.csv")
+```
+
+```{r ex="Mean_RT_density", type="sample-code"}
+# The object dataSet is already in your workspace
+# Load the package ggplot2
+
+# Draw up a density plot of the Mean_RT variable
+
+# Does the plot have a bell shape? Assign the answer (yes|no) as a string to the variable 'answer'
+```
+
+```{r ex="Mean_RT_density", type="solution"}
+# The object dataSet is already in your workspace
+# Load the package ggplot2
+library(ggplot2)
+# Draw up a density plot of the Mean_RT variable and add a red line at the mean
+ggplot(dataSet, aes(x=Mean_RT))  + geom_line(stat="density") + geom_vline(aes(xintercept=mean(dataSet$Mean_RT)), color="red")
+# Does the plot have a bell shape? Assign the answer (yes|no) as a string to the variable 'answer'
+answer <- "no"
+```
+
+```{r ex="Mean_RT_density", type="sct"}
+test_output_contains("library(ggplot2)", incorrect_msg = "Make sure you load ggplot2 first!")
+test_output_contains('ggplot(dataSet, aes(x=Mean_RT))  + geom_line(stat="density") + geom_vline(aes(xintercept=mean(dataSet$Mean_RT)), color="red")', incorrect_msg = "Don't forget to add the red line!")
+test_output_contains('answer<-"no"', incorrect_msg = "Correct answer: No. The plot does not look like a bell shape.")
+```
+
+####  QQ-plot 
+```{r ex="Mean_RT_qq", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class2_balota_et_al_2007.csv")
+```
+
+```{r ex="Mean_RT_qq", type="sample-code"}
+# The object dataSet is already in your workspace
+# Draw up a QQ-plot of the Mean_RT variable
+
+# Add a QQ-line for the Mean_RT variable
+
+# Does the plot support that the variable is normally distributed? Assign the answer (yes|no) as a string to the variable 'answer'
+```
+
+```{r ex="Mean_RT_qq", type="solution"}
+# The object dataSet is already in your workspace
+# Draw up a QQ-plot of the Mean_RT variable
+qqnorm(dataSet$Mean_RT)
+# Add a QQ-line for the Mean_RT variable
+qqline(dataSet$Mean_RT)
+# Does the plot support that the variable is normally distributed? Assign the answer (yes|no) as a string to the variable 'answer'
+answer <- "no"
+```
+
+```{r ex="Mean_RT_qq", type="sct"}
+test_output_contains("qqnorm(dataSet$Mean_RT)", incorrect_msg = "Make sure you draw the qqplot!")
+test_output_contains('qqline(dataSet$Mean_RT)', incorrect_msg = "Don't forget to add the qqline!")
+test_output_contains('answer<-"no"', incorrect_msg = "Correct answer: No. The plot does not support that the data is normally distributed.")
+```
+
+####  Shapiro-Wilk test
+```{r ex="Mean_RT_shap", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class2_balota_et_al_2007.csv")
+```
+
+```{r ex="Mean_RT_shap", type="sample-code"}
+# The object dataSet is already in your workspace
+# Perform a Shapiro-Wilk test for your variable
+
+# Does the test support that the variable is normally distributed? Assign the answer (yes|no) as a string to the variable 'answer'
+```
+
+```{r ex="Mean_RT_shap", type="solution"}
+# The object dataSet is already in your workspace
+# Perform a Shapiro-Wilk test for your variable
+shapiro.test(dataSet$Mean_RT)
+# Does the test support that the variable is normally distributed? Assign the answer (yes|no) as a string to the variable 'answer'
+answer <- "no"
+```
+
+```{r ex="Mean_RT_shap", type="sct"}
+test_output_contains("shapiro.test(dataSet$Mean_RT)", incorrect_msg = "Make sure you perform the test!")
+test_output_contains('answer<-"no"', incorrect_msg = "Correct answer: No. p < 0.05, so we can assume that the data is not normally distributed")
+```
+
+## 4. Measures of dispersion
+- Calculate the Range, Variance, standard deviation, interquartile range, and  median absolute deviation of the `Freq` and `Mean_RT` variables. 
+- Analyze:
+    - Which one of these two is the most dispersed? I.e., which one has the least 'normal' distribution?
+
+### 4.1 The `Freq` variable
+
+#### Range, Variance, standard deviation, interquartile range, and  median absolute deviation 
+```{r ex="Freq_dispersion", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class2_balota_et_al_2007.csv")
+```
+
+```{r ex="Freq_dispersion", type="sample-code"}
+# The object dataSet is already in your workspace
+# Range of Freq
+
+# Variance of Freq
+
+# Standard deviation of Freq
+
+# Interquartile range of Freq
+
+# Median absolute deviation of Freq
+```
+
+```{r ex="Freq_dispersion", type="solution"}
+# The object dataSet is already in your workspace
+# Range of Freq
+max(dataSet$Freq, na.rm=TRUE) - min(dataSet$Freq)
+# Variance of Freq
+var(dataSet$Freq, na.rm=TRUE)
+# Standard deviation of Freq
+sd(dataSet$Freq, na.rm=TRUE)
+# Interquartile range of Freq
+IQR(dataSet$Freq, na.rm=TRUE)
+# Median absolute deviation of Freq
+mad(dataSet$Freq, na.rm=TRUE)
+```
+
+```{r ex="Freq_dispersion", type="sct"}
+test_output_contains("max(dataSet$Freq, na.rm=TRUE) - min(dataSet$Freq)", incorrect_msg = "Make sure you add na.rm to your max and min statements!")
+test_output_contains('var(dataSet$Freq, na.rm=TRUE)', incorrect_msg = "Make sure you add 'na.rm=TRUE' to your code to calculate the variance")
+test_output_contains('sd(dataSet$Freq, na.rm=TRUE)', incorrect_msg = "Make sure you add 'na.rm=TRUE' to your code to calculate the standard deviation")
+test_output_contains('IQR(dataSet$Freq, na.rm=TRUE)', incorrect_msg = "Make sure you add 'na.rm=TRUE' to your code to calculate the Interquartile range")
+test_output_contains('var(dataSet$Freq, na.rm=TRUE)', incorrect_msg = "Make sure you add 'na.rm=TRUE' to your code to calculate the mean absolute deviation")
+```
+
+#### Box-and-whiskers plot
+```{r ex="Freq_boxplot", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class2_balota_et_al_2007.csv")
+```
+
+```{r ex="Freq_boxplot", type="sample-code"}
+# The object dataSet is already in your workspace
+# Load ggplot2
+
+# Draw a boxplot of Freq
+
+```
+
+```{r ex="Freq_boxplot", type="solution"}
+# The object dataSet is already in your workspace
+# Load ggplot2
+library(ggplot2)
+# Draw the boxplot
+ggplot(dataSet, aes(x=1, y=Freq)) + geom_boxplot()
+```
+
+```{r ex="Freq_boxplot", type="sct"}
+test_output_contains("ibrary(ggplot2)", incorrect_msg = "Don't forget to load ggplot2")
+test_output_contains('ggplot(dataSet, aes(x=1, y=Freq)) + geom_boxplot()', incorrect_msg = "Make sure you draw the boxplot!")
+```
+
+### 4.1 The `Mean_RT` variable
+
+#### Range, Variance, standard deviation, interquartile range, and  median absolute deviation 
+```{r ex="Mean_RT_dispersion", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class2_balota_et_al_2007.csv")
+```
+
+```{r ex="Mean_RT_dispersion", type="sample-code"}
+# The object dataSet is already in your workspace
+# Range of Mean_RT
+
+# Variance of Mean_RT
+
+# Standard deviation of Mean_RT
+
+# Interquartile range of Mean_RT
+
+# Median absolute deviation of Mean_RT
+```
+
+```{r ex="Mean_RT_dispersion", type="solution"}
+# The object dataSet is already in your workspace
+# Range of Mean_RT
+max(dataSet$Mean_RT, na.rm=TRUE) - min(dataSet$Mean_RT)
+# Variance of Mean_RT
+var(dataSet$Mean_RT, na.rm=TRUE)
+# Standard deviation of Mean_RT
+sd(dataSet$Mean_RT, na.rm=TRUE)
+# Interquartile range of Mean_RT
+IQR(dataSet$Mean_RT, na.rm=TRUE)
+# Median absolute deviation of Mean_RT
+mad(dataSet$Mean_RT, na.rm=TRUE)
+```
+
+```{r ex="Mean_RT_dispersion", type="sct"}
+test_output_contains("max(dataSet$Mean_RT, na.rm=TRUE) - min(dataSet$Mean_RT)", incorrect_msg = "Make sure you add na.rm to your max and min statements!")
+test_output_contains('var(dataSet$Mean_RT, na.rm=TRUE)', incorrect_msg = "Make sure you add 'na.rm=TRUE' to your code to calculate the variance")
+test_output_contains('sd(dataSet$Mean_RT, na.rm=TRUE)', incorrect_msg = "Make sure you add 'na.rm=TRUE' to your code to calculate the standard deviation")
+test_output_contains('IQR(dataSet$Mean_RT, na.rm=TRUE)', incorrect_msg = "Make sure you add 'na.rm=TRUE' to your code to calculate the Interquartile range")
+test_output_contains('var(dataSet$Mean_RT, na.rm=TRUE)', incorrect_msg = "Make sure you add 'na.rm=TRUE' to your code to calculate the mean absolute deviation")
+```
+
+#### Box-and-whiskers plot
+```{r ex="Mean_RT_boxplot", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class2_balota_et_al_2007.csv")
+```
+
+```{r ex="Mean_RT_boxplot", type="sample-code"}
+# The object dataSet is already in your workspace
+# Load ggplot2
+
+# Draw a boxplot of Mean_RT
+
+```
+
+```{r ex="Mean_RT_boxplot", type="solution"}
+# The object dataSet is already in your workspace
+# Load ggplot2
+library(ggplot2)
+# Draw the boxplot
+ggplot(dataSet, aes(x=1, y=Mean_RT)) + geom_boxplot()
+```
+
+```{r ex="Mean_RT_boxplot", type="sct"}
+test_output_contains("ibrary(ggplot2)", incorrect_msg = "Don't forget to load ggplot2")
+test_output_contains('ggplot(dataSet, aes(x=1, y=Mean_RT)) + geom_boxplot()', incorrect_msg = "Make sure you draw the boxplot!")
+```
+
