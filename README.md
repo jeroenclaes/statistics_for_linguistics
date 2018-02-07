@@ -1,5 +1,5 @@
 # statistics for linguistics
-Labs for a course at Université Catholique de Louvain
+Labs for the course *LFIAL2260 - Statistics for Linguistics* I am teaching in the second semester of 2017-2018 at Université Catholique de Louvain (Louvain La Neuve, Belgium)
 
 The rendered files are hosted at: 
-- http://www.jeroenclaes.be/statistics_for_linguistics/class1.html
+- http://www.jeroenclaes.be/statistics_for_linguistics/
