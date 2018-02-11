@@ -73,7 +73,6 @@ glimpse(dataSet)
 test_output_contains("dim(dataSet)", incorrect_msg = "Make sure to print the dimensions of the data.frame.")
 test_output_contains("head(dataSet, 15)", incorrect_msg = "Make sure to print the first 15 lines.")
 test_output_contains("glimpse(dataSet)", incorrect_msg = "Make sure to print a glimpse of the dataSet.")
-test_output_contains("library(dplyr)", incorrect_msg = "Make sure to load the dplyr package!")
 success_msg("Great!")
 ```
 
@@ -136,22 +135,22 @@ dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datase
 # Print the last couple of values of its 'Freq' column
 tail(dataSet$Freq)
 # Create a new data.frame, called "lowFrequency,  which holds all rows and columns of dataSet, where Freq is smaller than or equal to 30
-lowFrequency <- dataSet[dataSet$Freq <= 30, ]
+lowFrequency <- dataSet[dataSet$Freq <= 30,]
 
 # Print the first, the second, and the 50th row of this data.frame
-lowFrequency[c(1, 2, 50), ]
+lowFrequency[c(1, 2, 50),]
 ```
 
 ```{r ex="subset1", type="sct"}
 
 test_output_contains("tail(dataSet$Freq)", incorrect_msg = "Make sure to print the last couple of values of Freq")
-test_output_contains("lowFrequency <- dataSet[dataSet$Freq <= 30, ]", incorrect_msg = "Make sure to make a new dataframe 'lowFrequency'")
-test_output_contains("lowFrequency[c(1, 2, 50), ]", incorrect_msg = "Make sure to print the first, the second, and the 50th row of lowFrequency")
+test_output_contains("lowFrequency <- dataSet[dataSet$Freq <= 30,]", incorrect_msg = "Make sure to make a new dataframe 'lowFrequency'")
+test_output_contains("lowFrequency[c(1, 2, 50),]", incorrect_msg = "Make sure to print the first, the second, and the 50th row of lowFrequency")
 success_msg("Great!")
 ```
 
 ### Subsetting data.frames (2/2)
-```{r ex="subset1", type="pre-exercise-code"}
+```{r ex="subset2", type="pre-exercise-code"}
 library(readr)
 dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class2_balota_et_al_2007.csv")
 ```
@@ -159,9 +158,9 @@ dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datase
 ```{r ex="subset2", type="sample-code"}
 # The data.frame dataSet is already in your workspace. 
 
-# Extract all Words with a reaction time smaller than 600. Print only the first couple of words
+# Extract all values of Word with Mean_RT smaller than 600. Print only the first couple of words
 
-# Extract the Length and Freq of the following words: "moneys"  "stinger" "spare"   "bandage" "acorn"  
+# Extract Length and Freq of the following words: "moneys"  "stinger" "spare"   "bandage" "acorn"  
 
 # Add a new variable to the data.frame, called FreqByTwo which stores the Freq of the word, divided by two
 
@@ -172,7 +171,7 @@ dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datase
 # The data.frame dataSet is already in your workspace. 
 
 # Extract all Words with a reaction time smaller than 600. Print only the first couple of words
-head(dataSet[dataSet$Mean_RT < 600, ]$Word)
+head(dataSet[dataSet$Mean_RT < 600,]$Word)
 
 # Extract the Length and Freq of the following words: "moneys"  "stinger" "spare"   "bandage" "acorn"  
 dataSet[dataSet$Word %in% c("moneys", "stinger", "spare", "bandage","acorn"), c("Length", "Freq")]
@@ -185,9 +184,9 @@ summary(dataSet)
 ```
 
 ```{r ex="subset2", type="sct"}
-test_output_contains("head(dataSet[dataSet$Mean_RT < 600, ]$Word)", incorrect_msg = "Make sure to print the first couple of values of Freq < 600")
+test_output_contains("head(dataSet[dataSet$Mean_RT < 600,]$Word)", incorrect_msg = "Make sure to print the first couple of values of Freq < 600")
 test_output_contains('dataSet[dataSet$Word %in% c("moneys", "stinger", "spare", "bandage","acorn"), c("Length", "Freq")]', incorrect_msg = "Make sure to extract the Length and the Freq of the words in the list")
-test_output_contains("dataSet$FreqByTwo <- dataSet$Freq/2", incorrect_msg = "Make sure to create the FreqByTwo variable!")
+test_output_contains("dataSet$FreqByTwo", incorrect_msg = "Make sure to create the FreqByTwo variable!")
 success_msg("Great job!")
 ```
 
@@ -197,13 +196,11 @@ success_msg("Great job!")
     - What differences do you spot between `Freq` and `Mean_RT` on the one hand and `Length` on the other?
 
 ### 2.1 The `Freq` variable
-```{r ex="Freq", type="pre-exercise-code"}
-library(readr)
-```
 
 ```{r ex="Freq", type="sample-code"}
 # Load the data again from
 # http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class2_balota_et_al_2007.csv
+# Remember that you will need the package readr for that
 
 # Calculate the mean of 'Freq'
 
@@ -222,6 +219,8 @@ library(readr)
 ```{r ex="Freq", type="solution"}
 # Load the data again from
 # http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class2_balota_et_al_2007.csv
+# Remember that you will need the package readr for that
+library(readr)
 dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class2_balota_et_al_2007.csv")
 # Calculate the mean of 'Freq'
 mean(dataSet$Freq, na.rm=TRUE)
@@ -310,28 +309,28 @@ dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datase
 
 ```{r ex="Freq_median_mean", type="sample-code"}
 # The object dataSet is already in your workspace
-# Compare the mean of Freq. 
+# Compute the mean of Freq. 
 
-# Compare the median of Freq. 
+# Compute the median of Freq. 
 
-# Are they close together numerically? Assign the answer (yes|no) as a string to the variable 'answer'
+# Are the mean and the median close together numerically?  You will find the correct answer on the tab Solution
 ```
 
 ```{r ex="Freq_median_mean", type="solution"}
 ## The object dataSet is already in your workspace
-# Compare the mean of Freq. 
+# Compute the mean of Freq. 
 mean(dataSet$Freq, na.rm=TRUE)
-# Compare the median of Freq. 
+# Compute the median of Freq. 
 median(dataSet$Freq, na.rm=TRUE)
-# Are they close together numerically? Assign the answer (yes|no) as a string to the variable 'answer'
-answer<-"no"
+# Are the mean and the median close together numerically? 
+# No, the mean is more than ten times higher than the median
+
 ```
 
 ```{r ex="Freq_median_mean", type="sct"}
 test_output_contains("mean(dataSet$Freq, na.rm=TRUE)
 ", incorrect_msg = "Make sure to add 'na.rm=TRUE' to your 'mean' code!")
 test_output_contains("median(dataSet$Freq, na.rm=TRUE)", incorrect_msg = "Make sure to add 'na.rm=TRUE' to your 'median' code!")
-test_output_contains('answer<-"no"', incorrect_msg = "Correct answer: No. The mean is more than 10 higher than the median.")
 ```
 
 ####  Density plot 
@@ -346,7 +345,7 @@ dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datase
 
 # Draw up a density plot of the Freq variable
 
-# Does the plot have a bell shape? Assign the answer (yes|no) as a string to the variable 'answer'
+# Does the plot have a bell shape?  You will find the correct answer on the tab Solution
 ```
 
 ```{r ex="Freq_density", type="solution"}
@@ -355,14 +354,13 @@ dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datase
 library(ggplot2)
 # Draw up a density plot of the Freq variable and add a red line at the mean
 ggplot(dataSet, aes(x=Freq))  + geom_line(stat="density") + geom_vline(aes(xintercept=mean(dataSet$Freq)), color="red")
-# Does the plot have a bell shape? Assign the answer (yes|no) as a string to the variable 'answer'
-answer <- "no"
+# Does the plot have a bell shape? 
+# No, not at all
 ```
 
 ```{r ex="Freq_density", type="sct"}
 test_output_contains("library(ggplot2)", incorrect_msg = "Make sure you load ggplot2 first!")
 test_output_contains('ggplot(dataSet, aes(x=Freq))  + geom_line(stat="density") + geom_vline(aes(xintercept=mean(dataSet$Freq)), color="red")', incorrect_msg = "Don't forget to add the red line!")
-test_output_contains('answer<-"no"', incorrect_msg = "Correct answer: No. The plot does not look like a bell shape.")
 ```
 
 ####  QQ-plot 
@@ -377,7 +375,7 @@ dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datase
 
 # Add a QQ-line for the Freq variable
 
-# Does the plot support that the variable is normally distributed? Assign the answer (yes|no) as a string to the variable 'answer'
+# Does the plot support that the variable is normally distributed? You may want to enlarge the plot before answering this question.  You will find the correct answer on the tab Solution
 ```
 
 ```{r ex="Freq_qq", type="solution"}
@@ -386,14 +384,13 @@ dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datase
 qqnorm(dataSet$Freq)
 # Add a QQ-line for the Freq variable
 qqline(dataSet$Freq)
-# Does the plot support that the variable is normally distributed? Assign the answer (yes|no) as a string to the variable 'answer'
-answer <- "no"
+# Does the plot support that the variable is normally distributed? You may want to enlarge the plot before answering this question. 
+# No, the points do not follow the qqline at all
 ```
 
 ```{r ex="Freq_qq", type="sct"}
 test_output_contains("qqnorm(dataSet$Freq)", incorrect_msg = "Make sure you draw the qqplot!")
 test_output_contains('qqline(dataSet$Freq)', incorrect_msg = "Don't forget to add the qqline!")
-test_output_contains('answer<-"no"', incorrect_msg = "Correct answer: No. The plot does not support that the data is normally distributed.")
 ```
 
 ####  Shapiro-Wilk test
@@ -406,23 +403,22 @@ dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datase
 # The object dataSet is already in your workspace
 # Perform a Shapiro-Wilk test for your variable
 
-# Does the test support that the variable is normally distributed? Assign the answer (yes|no) as a string to the variable 'answer'
+# Does the test support that the variable is normally distributed? You will find the correct answer on the tab Solution
 ```
 
 ```{r ex="Freq_shap", type="solution"}
 # The object dataSet is already in your workspace
 # Perform a Shapiro-Wilk test for your variable
 shapiro.test(dataSet$Freq)
-# Does the test support that the variable is normally distributed? Assign the answer (yes|no) as a string to the variable 'answer'
-answer <- "no"
+# Does the test support that the variable is normally distributed? You will find the correct answer on the tab Solution
+#  No. p < 0.05, so we can assume that the data are not normally distributed"
 ```
 
 ```{r ex="Freq_shap", type="sct"}
 test_output_contains("shapiro.test(dataSet$Freq)", incorrect_msg = "Make sure you perform the test!")
-test_output_contains('answer<-"no"', incorrect_msg = "Correct answer: No. p < 0.05, so we can assume that the data is not normally distributed")
 ```
 
-### 3.2 The `Mean_RT` variable    
+### 3.1 The `Mean_RT` variable    
 ####  Mean and median
 ```{r ex="Mean_RT_median_mean", type="pre-exercise-code"}
 library(readr)
@@ -431,28 +427,28 @@ dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datase
 
 ```{r ex="Mean_RT_median_mean", type="sample-code"}
 # The object dataSet is already in your workspace
-# Compare the mean of Mean_RT. 
+# Compute the mean of Mean_RT. 
 
-# Compare the median of Mean_RT. 
+# Compute the median of Mean_RT. 
 
-# Are they close together numerically? Assign the answer (yes|no) as a string to the variable 'answer'
+# Are the mean and the median close together numerically?  You will find the correct answer on the tab Solution
 ```
 
 ```{r ex="Mean_RT_median_mean", type="solution"}
 ## The object dataSet is already in your workspace
-# Compare the mean of Mean_RT. 
+# Compute the mean of Mean_RT. 
 mean(dataSet$Mean_RT, na.rm=TRUE)
-# Compare the median of Mean_RT. 
+# Compute the median of Mean_RT. 
 median(dataSet$Mean_RT, na.rm=TRUE)
-# Are they close together numerically? Assign the answer (yes|no) as a string to the variable 'answer'
-answer<-"no"
+# Are the mean and the median close together numerically? 
+# No, the mean is more than ten times higher than the median
+
 ```
 
 ```{r ex="Mean_RT_median_mean", type="sct"}
 test_output_contains("mean(dataSet$Mean_RT, na.rm=TRUE)
                      ", incorrect_msg = "Make sure to add 'na.rm=TRUE' to your 'mean' code!")
 test_output_contains("median(dataSet$Mean_RT, na.rm=TRUE)", incorrect_msg = "Make sure to add 'na.rm=TRUE' to your 'median' code!")
-test_output_contains('answer<-"no"', incorrect_msg = "Correct answer: No. The mean is more than 10 higher than the median.")
 ```
 
 ####  Density plot 
@@ -467,7 +463,7 @@ dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datase
 
 # Draw up a density plot of the Mean_RT variable
 
-# Does the plot have a bell shape? Assign the answer (yes|no) as a string to the variable 'answer'
+# Does the plot have a bell shape?  You will find the correct answer on the tab Solution
 ```
 
 ```{r ex="Mean_RT_density", type="solution"}
@@ -476,14 +472,13 @@ dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datase
 library(ggplot2)
 # Draw up a density plot of the Mean_RT variable and add a red line at the mean
 ggplot(dataSet, aes(x=Mean_RT))  + geom_line(stat="density") + geom_vline(aes(xintercept=mean(dataSet$Mean_RT)), color="red")
-# Does the plot have a bell shape? Assign the answer (yes|no) as a string to the variable 'answer'
-answer <- "no"
+# Does the plot have a bell shape? 
+# No, not at all
 ```
 
 ```{r ex="Mean_RT_density", type="sct"}
 test_output_contains("library(ggplot2)", incorrect_msg = "Make sure you load ggplot2 first!")
 test_output_contains('ggplot(dataSet, aes(x=Mean_RT))  + geom_line(stat="density") + geom_vline(aes(xintercept=mean(dataSet$Mean_RT)), color="red")', incorrect_msg = "Don't forget to add the red line!")
-test_output_contains('answer<-"no"', incorrect_msg = "Correct answer: No. The plot does not look like a bell shape.")
 ```
 
 ####  QQ-plot 
@@ -498,7 +493,7 @@ dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datase
 
 # Add a QQ-line for the Mean_RT variable
 
-# Does the plot support that the variable is normally distributed? Assign the answer (yes|no) as a string to the variable 'answer'
+# Does the plot support that the variable is normally distributed? You may want to enlarge the plot before answering this question.  You will find the correct answer on the tab Solution
 ```
 
 ```{r ex="Mean_RT_qq", type="solution"}
@@ -507,14 +502,13 @@ dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datase
 qqnorm(dataSet$Mean_RT)
 # Add a QQ-line for the Mean_RT variable
 qqline(dataSet$Mean_RT)
-# Does the plot support that the variable is normally distributed? Assign the answer (yes|no) as a string to the variable 'answer'
-answer <- "no"
+# Does the plot support that the variable is normally distributed? You may want to enlarge the plot before answering this question. 
+# No, the points do not follow the qqline at all
 ```
 
 ```{r ex="Mean_RT_qq", type="sct"}
 test_output_contains("qqnorm(dataSet$Mean_RT)", incorrect_msg = "Make sure you draw the qqplot!")
 test_output_contains('qqline(dataSet$Mean_RT)', incorrect_msg = "Don't forget to add the qqline!")
-test_output_contains('answer<-"no"', incorrect_msg = "Correct answer: No. The plot does not support that the data is normally distributed.")
 ```
 
 ####  Shapiro-Wilk test
@@ -527,20 +521,19 @@ dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datase
 # The object dataSet is already in your workspace
 # Perform a Shapiro-Wilk test for your variable
 
-# Does the test support that the variable is normally distributed? Assign the answer (yes|no) as a string to the variable 'answer'
+# Does the test support that the variable is normally distributed? You will find the correct answer on the tab Solution
 ```
 
 ```{r ex="Mean_RT_shap", type="solution"}
 # The object dataSet is already in your workspace
 # Perform a Shapiro-Wilk test for your variable
 shapiro.test(dataSet$Mean_RT)
-# Does the test support that the variable is normally distributed? Assign the answer (yes|no) as a string to the variable 'answer'
-answer <- "no"
+# Does the test support that the variable is normally distributed? You will find the correct answer on the tab Solution
+#  No. p < 0.05, so we can assume that the data are not normally distributed"
 ```
 
 ```{r ex="Mean_RT_shap", type="sct"}
 test_output_contains("shapiro.test(dataSet$Mean_RT)", incorrect_msg = "Make sure you perform the test!")
-test_output_contains('answer<-"no"', incorrect_msg = "Correct answer: No. p < 0.05, so we can assume that the data is not normally distributed")
 ```
 
 ## 4. Measures of dispersion
