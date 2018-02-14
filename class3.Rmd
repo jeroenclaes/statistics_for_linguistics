@@ -1,10 +1,14 @@
 ---
 title: "Class 3: Data frames (recap), normal distribution and outliers (recap), and exploring qualitative variables"
 author: "Jeroen Claes | <jeroen.claes@kuleuven.be> | <jeroen@cropland.be>"
+output: 
+ html_document:
+  self_contained: false 
 ---
 ## 1. Working with data.frames (recap)
 ### Loading data from CSV
 ```{r, include=FALSE}
+#library(testwhat)
 tutorial::go_interactive()
 ```
 
@@ -34,7 +38,9 @@ glimpse(dataSet)
 
 ```{r ex="create_a", type="sct"}
 test_object("dataSet")
-test_output_contains("glimpse(dataSet)", incorrect_msg = "Make sure to print the last six rows!")
+test_library_function("readr", "Make sure to call the 'readr' package!")
+test_library_function("dplyr", "Make sure to call the 'dplyr' package!")
+test_output_contains("glimpse(dataSet)",   incorrect_msg = "Make sure to print a 'glimpse' of the data!")
 success_msg("Great!")
 ```
 
@@ -42,8 +48,9 @@ success_msg("Great!")
 ### Subsetting data.frames (1/4)
 
 ```{r ex="explore", type="pre-exercise-code"}
+Sys.setlocale(category = 'LC_ALL','en_US.UTF-8')
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv")
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv", locale=locale(encoding = "UTF-8"))
 ```
 
 ```{r ex="explore", type="sample-code"}
@@ -58,18 +65,19 @@ dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datase
 # The data.frame dataSet is already in your workspace. 
 
 # Print the first 25 values of its noun column
-head(dataSet$noun)
+head(dataSet$noun,25)
 
 ```
 
 ```{r ex="explore", type="sct"}
-test_output_contains("head(dataSet$noun, 25)", incorrect_msg = "Make sure to print the first 25 nouns")
+test_output_contains("head(dataSet$noun, 25)",  incorrect_msg = "Make sure to print the first 25 nouns")
 success_msg("Great!")
 ```
 
-### Subsetting data.frames  (2/4)
+### Subsetting data.frames (2/4)
 
 ```{r ex="explore2", type="pre-exercise-code"}
+Sys.setlocale(category = 'LC_ALL','en_US.UTF-8')
 library(readr)
 dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv")
 ```
@@ -89,12 +97,13 @@ head(dataSet[dataSet$noun_length==6,c("noun")])
 ```
 
 ```{r ex="explore2", type="sct"}
-test_output_contains('head(dataSet[dataSet$noun_length==6,c("noun")])', incorrect_msg = "Make sure to print the first sixrows")
+test_output_contains('head(dataSet[dataSet$noun_length==6,c("noun")])', incorrect_msg= "Make sure to print the first six rows")
 success_msg("Great!")
 ```
 
 ### Subsetting data.frames (3/4)
 ```{r ex="subset1", type="pre-exercise-code"}
+Sys.setlocale(category = 'LC_ALL','en_US.UTF-8')
 library(readr)
 dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv")
 ```
@@ -102,9 +111,9 @@ dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datase
 ```{r ex="subset1", type="sample-code"}
 # The data.frame dataSet is already in your workspace. 
 
-# Print the last 20  values 'noun' that have a length smaller than 5
+# Print the last 20 values 'noun' that have a noun_length smaller than 5
 
-# Create a new data.frame, called shortNouns,  which holds all rows and all columns of dataSet, where noun_length is smaller than or equal to 10
+# Create a new data.frame, called shortNouns, which holds all rows and all columns of dataSet, where noun_length is smaller than or equal to 10
 
 # Print the 10th, the thirtieth, and the 100th row of this data.frame
 
@@ -114,10 +123,10 @@ dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datase
 ```{r ex="subset1", type="solution"}
 # The data.frame dataSet is already in your workspace. 
 
-# Print the last 20  values 'noun' that have a length smaller than 5
+# Print the last 20 values 'noun' that have a noun_length smaller than 5
 tail(dataSet[dataSet$noun_length < 5,c("noun")],20)
 
-# Create a new data.frame, called shortNouns,  which holds all rows and all columns of dataSet, where noun_length is smaller than or equal to 10
+# Create a new data.frame, called shortNouns, which holds all rows and all columns of dataSet, where noun_length is smaller than or equal to 10
 shortNouns <- dataSet[dataSet$noun_length <= 10,]
 
 # Print the first, the second, and the 50th row of this data.frame
@@ -126,14 +135,15 @@ shortNouns[c(10, 30, 100),]
 
 ```{r ex="subset1", type="sct"}
 
-test_output_contains('tail(dataSet[dataSet$noun_length < 5,c("noun")],20)', incorrect_msg = "Make sure to print the last 20  values of noun")
-test_output_contains("shortNouns <- dataSet[dataSet$noun_length <= 10,]", incorrect_msg = "Make sure to make a new dataframe 'shortNouns'")
-test_output_contains("shortNouns[c(10, 30, 100),]", incorrect_msg = "Make sure to print the first, the second, and the 50th row of lowFrequency")
+ test_output_contains('tail(dataSet[dataSet$noun_length < 5, c("noun")],20)',  incorrect_msg  = "Make sure to print the last 20 values of noun")
+test_object("shortNouns")
+test_output_contains("shortNouns[c(10, 30, 100),]",  incorrect_msg = "Make sure to print the first, the second, and the 50th row of lowFrequency")
 success_msg("Great!")
 ```
 
 ### Subsetting data.frames (4/4)
 ```{r ex="subset2", type="pre-exercise-code"}
+Sys.setlocale(category = 'LC_ALL','en_US.UTF-8')
 library(readr)
 library(dplyr)
 dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv")
@@ -143,9 +153,9 @@ dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datase
 # The data.frame dataSet is already in your workspace. 
 # The package dplyr is already loaded
 
-# Extract all values of `noun` with noun_length smaller than 5. Print only the first 15  nouns
+# Extract all values of `noun` with noun_length smaller than 5. Print only the first 15 nouns
 
-# Extract the noun_length of the following nouns: "restricciones"  "fotos" "olivas"   "periodistas" "cosechadoras"  
+# Extract the noun_length of the following nouns: "restricciones" "fotos" "olivas"  "periodistas" "cosechadoras" 
 
 # Add a new variable to the data.frame, called meanLength which stores the mean of noun_length
 
@@ -156,11 +166,11 @@ dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datase
 # The data.frame dataSet is already in your workspace. 
 # The package dplyr is already loaded
 
-# Extract all values of `noun` with noun_length smaller than 5. Print only the first 15  words
-head(dataSet[dataSet$noun_length < 5,]$noun, 15)
+# Extract all values of `noun` with noun_length smaller than 5. Print only the first 15 words
+head(dataSet[dataSet$noun_length < 5,c("noun")], 15)
 
-# Extract the noun_length of the following nouns: "restricciones"  "fotos" "olivas"   "periodistas" "cosechadoras"  
-dataSet[dataSet$Word %in% c("restricciones", "fotos", "olivas", "periodistas","cosechadoras"), c("noun_length")]
+# Extract the noun_length of the following nouns: "restricciones" "fotos" "olivas"  "periodistas" "cosechadoras" 
+dataSet[dataSet$noun %in% c("restricciones", "fotos", "olivas", "periodistas","cosechadoras"), c("noun_length")]
 
 # Add a new variable to the data.frame, called FreqByTwo which stores the Freq of the word, divided by two
 dataSet$meanLength <- mean(dataSet$noun_length, na.rm=TRUE)
@@ -170,26 +180,27 @@ glimpse(dataSet)
 ```
 
 ```{r ex="subset2", type="sct"}
-test_output_contains("head(dataSet[dataSet$noun_length < 5,]$noun, 15)", incorrect_msg = "Make sure to print the first couple of values of Freq < 600")
-test_output_contains('dataSet[dataSet$Word %in% c("restricciones", "fotos", "olivas", "periodistas","cosechadoras"), c("noun_length")]', incorrect_msg = "Make sure to extract the Length and the Freq of the words in the list")
-test_output_contains("dataSet$meanLength", incorrect_msg = "Make sure to create the meanLength variable!")
+test_output_contains('head(dataSet[dataSet$noun_length < 5,c("noun")], 15)', incorrect_msg =  "Make sure to print the first 15 values of 'noun' where noun_length < 5")
+test_output_contains('dataSet[dataSet$Word %in% c("restricciones", "fotos", "olivas", "periodistas","cosechadoras"), c("noun_length")]',  incorrect_msg = "Make sure to extract the Length and the Freq of the words in the list")
+test_output_contains('glimpse(dataSet)', incorrect_msg =  "Make sure to print a glimpse of the modified data.frame!")
 success_msg("Great job!")
 ```
 
 ## 2. The normal distribution (recap)
 
 - **ANALYZE**:
-    - Are the `characters_before_noun` and `noun_length` variables distributed normally?
-    - Why do you think so?
+  - Are the `characters_before_noun` and `noun_length` variables distributed normally?
+  - Why do you think so?
 
-### 2.2 The `characters_before_noun` variable 
+### 2.1 The `characters_before_noun` variable 
 
-```{r ex="normal1", type="pre-exercise-code"}
+```{r ex="normal1_characters_before_noun", type="pre-exercise-code"}
+Sys.setlocale(category = 'LC_ALL','en_US.UTF-8')
 library(readr)
 dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv")
 ```
 
-```{r ex="normal1", type="sample-code"}
+```{r ex="normal1_characters_before_noun", type="sample-code"}
 # The data.frame dataSet is already in your workspace. 
 # Calculate and compare the mean of characters_before_noun to the median of characters_before_noun
 
@@ -205,7 +216,7 @@ dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datase
 
 ```
 
-```{r ex="normal1", type="solution"}
+```{r ex="normal1_characters_before_noun", type="solution"}
 # The data.frame dataSet is already in your workspace. 
 # Calculate and compare the mean of characters_before_noun to the median of characters_before_noun
 mean(dataSet$characters_before_noun)
@@ -227,20 +238,21 @@ shapiro.test(dataSet$characters_before_noun)
 # - The shapiro.test has a p < 0.05
 ```
 
-```{r ex="normal1", type="sct"}
-test_output_contains("mean", incorrect_msg = "Make sure to calculate the mean")
-test_output_contains("median", incorrect_msg = "Make sure to calculate the median")
-test_output_contains('qqnorm', incorrect_msg = "Make sure to draw a qqplot")
-test_output_contains('qqline', incorrect_msg = "Make sure to add a qqpline to your qqplot")
-test_output_contains('geom_line', incorrect_msg = "Make sure to draw a density plot")
-test_output_contains('geom_vline', incorrect_msg = "Make sure to add a vertical line at the mean")
-test_output_contains("shapiro.test", incorrect_msg = "Make sure to perform a Shapiro-Wilk test!")
+```{r ex="normal1_characters_before_noun", type="sct"}
+test_library_function("ggplot2", incorrect_msg = "Don't forget to load the ggplot2 package")
+test_output_contains("mean(dataSet$characters_before_noun)",  incorrect_msg = "Make sure to calculate the mean")
+test_output_contains("median(dataSet$characters_before_noun)",  incorrect_msg = "Make sure to calculate the median")
+test_function("qqnorm", args = c("y"), incorrect_msg = "Make sure to draw a qqplot!")
+test_function("qqline", args = c("y"), incorrect_msg = "Make sure to add a qqline to your qqplot!")
+test_ggplot(index=1, all_fail_msg = "Computer says no. This plot is completely wrong", data_fail_msg = "Make sure you include the data in the ggplot call", aes_fail_msg = "Make sure you define the correct aesthetics (aes)", geom_fail_msg = "Make sure you define the correct plotting function (geom_)")
+ test_output_contains("shapiro.test(dataSet$characters_before_noun)",  incorrect_msg = "Make sure to perform a Shapiro-Wilk test!")
 success_msg("Great job!")
 ```
 
 ### 2.2 The `noun_length` variable
 
 ```{r ex="normal2", type="pre-exercise-code"}
+Sys.setlocale(category = 'LC_ALL','en_US.UTF-8')
 library(readr)
 dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv")
 ```
@@ -283,23 +295,24 @@ shapiro.test(dataSet$noun_length)
 ```
 
 ```{r ex="normal2", type="sct"}
-test_output_contains("mean", incorrect_msg = "Make sure to calculate the mean")
-test_output_contains("median", incorrect_msg = "Make sure to calculate the median")
-test_output_contains('qqnorm', incorrect_msg = "Make sure to draw a qqplot")
-test_output_contains('qqline', incorrect_msg = "Make sure to add a qqpline to your qqplot")
-test_output_contains('geom_line', incorrect_msg = "Make sure to draw a density plot")
-test_output_contains('geom_vline', incorrect_msg = "Make sure to add a vertical line at the mean")
-test_output_contains("shapiro.test", incorrect_msg = "Make sure to perform a Shapiro-Wilk test!")
+test_library_function("ggplot2", incorrect_msg = "Don't forget to load the ggplot2 package")
+test_output_contains("mean(dataSet$noun_length)",  incorrect_msg = "Make sure to calculate the mean")
+test_output_contains("median(dataSet$noun_length)",  incorrect_msg = "Make sure to calculate the median")
+test_function("qqnorm", args = c("y"), incorrect_msg = "Make sure to draw a qqplot!")
+test_function("qqline", args = c("y"), incorrect_msg = "Make sure to add a qqline to your qqplot!")
+test_ggplot(index=1, all_fail_msg = "Computer says no. This plot is completely wrong", data_fail_msg = "Make sure you include the data in the ggplot call", aes_fail_msg = "Make sure you define the correct aesthetics (aes)", geom_fail_msg = "Make sure you define the correct plotting function (geom_)")
+test_output_contains("shapiro.test(dataSet$noun_length)",  incorrect_msg = "Make sure to perform a Shapiro-Wilk test!")
 success_msg("Great job!")
 ```
 
 ## 3. Outliers 
 - The previous excercises have shown that:
-    - `noun_length` is mostly normally distributed, except for a few outliers in the right tail of the distribution. If we exclude these values, it will be distributed normally
-    - `number_of_characters_before_noun` has a power-law distribution. We will need a `logarithmic` transformation to correct its distribution
-    
-### 3.1 `noun_length`
+  - `noun_length` is mostly normally distributed, except for a few outliers in the right tail of the distribution, which draw the mean to the right. If we exclude these values, it will be distributed normally
+  - `number_of_characters_before_noun` has a power-law distribution. We will need a `logarithmic` transformation to correct its distribution
+  
+### 3.1 Removing outliers from `noun_length`
 ```{r ex="noun_length_outliers", type="pre-exercise-code"}
+Sys.setlocale(category = 'LC_ALL','en_US.UTF-8')
 library(readr)
 dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv")
 ```
@@ -311,9 +324,11 @@ dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datase
 
 # Overwrite `noun_length_zscore` so that it contains the absolute values of the z-scores
 
-# Remove all outliers. Remember that outliers are values with z-scores of more than two
+# Remove all outliers from dataSet. Remember that outliers are values with absolute z-scores of two or more
 
-# Draw a qqplot with a qqline 
+# Print a summary of the noun_length column
+
+# Draw a qqplot of noun_length and add a qqline 
 
 # ANALYZE: Does this fix the problem?
 ```
@@ -326,9 +341,12 @@ dataSet$noun_length_zscore <- scale(dataSet$noun_length)
 
 # Overwrite `noun_length_zscore` so that it contains the absolute values of the z-scores
 dataSet$noun_length_zscore <- abs(dataSet$noun_length_zscore)
-# Remove all outliers. Remember that outliers are values with z-scores of more than two
-dataSet <- dataSet[dataSet$noun_length_zscore < 2, ]
-# Draw a qqplot of noun_length with a qqline 
+# Remove all outliers from dataSet. Remember that outliers are values with absolute z-scores of two or more
+dataSet <- dataSet[dataSet$noun_length_zscore <= 2, ]
+
+# Print a summary of the noun_length column
+summary(dataSet$noun_length)
+# Draw a qqplot of noun_length and add a qqline 
 qqnorm(dataSet$noun_length)
 qqline(dataSet$noun_length)
 
@@ -338,60 +356,9 @@ qqline(dataSet$noun_length)
 ```
 
 ```{r ex="noun_length_outliers", type="sct"}
-test_output_contains("dataSet$noun_length_zscore", incorrect_msg = "Make sure to add the noun_length_zscore column")
-test_output_contains("abs", incorrect_msg = "Make sure to calculate the absolute value of the z-scores")
-test_output_contains('scale', incorrect_msg = "Make sure to calculate z-scores")
-test_output_contains('qqline', incorrect_msg = "Make sure to add a qqpline to your qqplot")
-test_output_contains('qqnorm', incorrect_msg = "Make sure to draw a qqplot")
-success_msg("Great job!")
-```
-
-### 3.2 `number_of_characters_before_noun` 
-
-```{r ex="number_of_characters_before_noun_outliers", type="pre-exercise-code"}
-library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv")
-```
-
-```{r ex="number_of_characters_before_noun_outliers", type="sample-code"}
-# The data.frame dataSet is already in your workspace. 
-
-# Add a new column to the dataSet called `number_of_characters_before_noun_zscore`, in which you store z-scores for number_of_characters_before_noun
-
-# Overwrite `number_of_characters_before_noun_zscore` so that it contains the absolute values of the z-scores
-
-# Remove all outliers. Remember that outliers are values with z-scores of more than two
-
-# Draw a qqplot with a qqline 
-
-# ANALYZE: Does this fix the problem?
-```
-
-```{r ex="number_of_characters_before_noun_outliers", type="solution"}
-# The data.frame dataSet is already in your workspace. 
-
-# Add a new column to the dataSet called `number_of_characters_before_noun_zscore`, in which you store z-scores for number_of_characters_before_noun
-dataSet$number_of_characters_before_noun_zscore <- scale(dataSet$number_of_characters_before_noun)
-
-# Overwrite `number_of_characters_before_noun_zscore` so that it contains the absolute values of the z-scores
-dataSet$number_of_characters_before_noun_zscore <- abs(dataSet$number_of_characters_before_noun_zscore)
-# Remove all outliers. Remember that outliers are values with z-scores of more than two
-dataSet <- dataSet[dataSet$number_of_characters_before_noun_zscore < 2, ]
-# Draw a qqplot of number_of_characters_before_noun with a qqline 
-qqnorm(dataSet$number_of_characters_before_noun)
-qqline(dataSet$number_of_characters_before_noun)
-
-# ANALYZE: Does this fix the problem?
-# The distribution is much closer to a normal distribution, but it is still far from ideal
-
-```
-
-```{r ex="number_of_characters_before_noun_outliers", type="sct"}
-test_output_contains("dataSet$number_of_characters_before_noun_zscore", incorrect_msg = "Make sure to add the number_of_characters_before_noun_zscore column")
-test_output_contains("abs", incorrect_msg = "Make sure to calculate the absolute value of the z-scores")
-test_output_contains('scale', incorrect_msg = "Make sure to calculate z-scores")
-test_output_contains('qqline', incorrect_msg = "Make sure to add a qqpline to your qqplot")
-test_output_contains('qqnorm', incorrect_msg = "Make sure to draw a qqplot")
+test_output_contains("summary(dataSet$noun_length)", incorrect_msg = "Make sure to print a summary of the filtered noun_length column")
+test_function("qqnorm", args = c("y"), incorrect_msg = "Make sure to draw a qqplot!")
+test_function("qqline", args = c("y"), incorrect_msg = "Make sure to add a qqline to your qqplot!")
 success_msg("Great job!")
 ```
 
@@ -399,6 +366,7 @@ success_msg("Great job!")
 ### 4.1 Factor levels
 
 ```{r ex="factors1", type="pre-exercise-code"}
+Sys.setlocale(category = 'LC_ALL','en_US.UTF-8')
 library(readr)
 dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv")
 ```
@@ -418,20 +386,19 @@ dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datase
 # Convert the column state to a factor
 dataSet$state <- as.factor(dataSet$state)
 # Print its levels
-levels(dataSet$state )
+levels(dataSet$state)
 ```
 
 ```{r ex="factors1", type="sct"}
-test_output_contains('as.factor', incorrect_msg = "Make sure to convert the column to a factor!")
-test_output_contains('levels', incorrect_msg = "Make sure to print the levels of the factor!")
+ test_output_contains('levels(dataSet$state)',  incorrect_msg  = "Make sure to print the levels of the factor!")
 success_msg("Great!")
 ```
 
 ### 4.2 Recoding factors
 ```{r ex="factors2", type="pre-exercise-code"}
+Sys.setlocale(category = 'LC_ALL','en_US.UTF-8')
 library(readr)
 dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv") 
-
 ```
 
 ```{r ex="factors2", type="sample-code"}
@@ -442,7 +409,7 @@ dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datase
 
 # The `state` column has quite some duplicates: 
 # "Andalucía" and "Andalusia", "Aragon" and "Aragón", "Castile-La Mancha" and "Castilla-La-Mancha", "Castile and León" and "Castilla y León", "Catalonia" and "Cataluña", "Community of Madrid" and "Comunidad de Madrid", "Valencian Community" and "Comunidad Valenciana", "Basque Country" and "País Vasco"
-# Recode all Spanish names to the English alternative
+# Recode all Spanish names to their English alternative
 
 # Print the new levels of the `state` column
 
@@ -455,23 +422,23 @@ library(dplyr)
 # Convert all character columns to factor
 dataSet <- mutate_if(dataSet, is.character, as.factor)
 # The state column has quite some duplicates: 
-# "Andalucía" and "Andalusia" ,"Aragón"  and  "Aragon","Castilla-La-Mancha" and   "Castile-La Mancha",  "Castilla y León" and "Castile and León",  "Cataluña" and "Catalonia", "Comunidad de Madrid" and "Community of Madrid", "Comunidad Valenciana" and "Valencian Community",  "País Vasco" and "Basque Country"
-# Recode all Spanish names to the English alternative
-dataSet$state<-recode(dataSet$state, "Andalucía"="Andalusia" ,"Aragón" = "Aragon","Castilla-La-Mancha"=  "Castile-La Mancha",  "Castilla y León"="Castile-and-León",  "Cataluña"="Catalonia", "Comunidad de Madrid"="Community of Madrid", "Comunidad Valenciana"="Valencian Community",  "País Vasco"="Basque Country")
+# "Andalucía" and "Andalusia","Aragón" and "Aragon","Castilla-La-Mancha" and "Castile-La Mancha", "Castilla y León" and "Castile and León", "Cataluña" and "Catalonia", "Comunidad de Madrid" and "Community of Madrid", "Comunidad Valenciana" and "Valencian Community", "País Vasco" and "Basque Country"
+# Recode all Spanish names to their English alternative
+dataSet$state<-recode(dataSet$state, "Andalucía"="Andalusia" ,"Aragón" = "Aragon","Castilla-La-Mancha"= "Castile-La Mancha", "Castilla y León"="Castile-and-León", "Cataluña"="Catalonia", "Comunidad de Madrid"="Community of Madrid", "Comunidad Valenciana"="Valencian Community", "País Vasco"="Basque Country")
 # Print the new levels of the `state` column
 levels(dataSet$state)
 ```
 
 ```{r ex="factors2", type="sct"}
-test_output_contains('dplyr', incorrect_msg = "Make sure to load the dplyr package!")
-test_output_contains('mutate_if', incorrect_msg = "Make sure to convert all character columns to factor!")
-test_output_contains('recode', incorrect_msg = "Make sure to recode the factor 'state'!")
+test_library_function("dplyr", incorrect_msg="Make sure to load the dplyr package!")
+test_output_contains('levels(dataSet$state)',  incorrect_msg = "Make sure to print the new levels of the factor 'state'!")
 success_msg("Great!")
 ```
 
 ### 4.3 Re-organizing factors
 
 ```{r ex="factors3", type="pre-exercise-code"}
+Sys.setlocale(category = 'LC_ALL','en_US.UTF-8')
 library(readr)
 dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv")
 ```
@@ -485,6 +452,8 @@ dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datase
 
 # Relevel the corpus factor: its first value should be 'Twitter'
 
+# Print its levels again
+
 ```
 
 ```{r ex="factors3", type="solution"}
@@ -493,26 +462,28 @@ dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datase
 # Convert the column corpus to a factor
 dataSet$corpus <- as.factor(dataSet$corpus)
 # Print its levels
-levels(dataSet$corpus )
+levels(dataSet$corpus)
 # Relevel the corpus factor: its first value should be 'Twitter'
 dataSet$corpus <- relevel(dataSet$corpus, ref="Twitter")
+# Print its levels again
+levels(dataSet$corpus)
+
 ```
 
 ```{r ex="factors3", type="sct"}
-test_output_contains('as.factor', incorrect_msg = "Make sure to convert the column to a factor!")
-test_output_contains('levels', incorrect_msg = "Make sure to print the levels of the factor!")
-test_output_contains('relevel', incorrect_msg = "Make sure to reorder the levels of the factor!")
+test_output_contains("levels(dataSet$corpus)", incorrect_msg = "Make sure to print the levels of the factor!")
 success_msg("Great!")
 ```
 
 ## 5. Frequencies: counting values
 ### 5.1 Counting the `negation` variable 
-```{r ex="counts_negation", type="pre-exercise-code"}
+```{r ex="counts_negation_freq", type="pre-exercise-code"}
+Sys.setlocale(category = 'LC_ALL','en_US.UTF-8')
 library(readr)
 dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv")
 ```
 
-```{r ex="counts_negation", type="sample-code"}
+```{r ex="counts_negation_freq", type="sample-code"}
 # The data.frame dataSet is already in your workspace. 
 
 # Convert the column negation to a factor
@@ -526,7 +497,7 @@ dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datase
 
 ```
 
-```{r ex="counts_negation", type="solution"}
+```{r ex="counts_negation_freq", type="solution"}
 # The data.frame dataSet is already in your workspace. 
 
 # Convert the column negation to a factor
@@ -539,15 +510,16 @@ negationTab<-as.data.frame(negationTab)
 negationTab
 ```
 
-```{r ex="counts_negation", type="sct"}
-test_output_contains('as.factor', incorrect_msg = "Make sure to convert the column to a factor!")
-test_output_contains('table', incorrect_msg = "Make sure to compute the table!")
-test_output_contains('as.data.frame', incorrect_msg = "Make sure to convert the table to a data.frame!")
+```{r ex="counts_negation_freq", type="sct"}
+test_object("negationTab",incorrect_msg="Make sure to compute the table!")
+test_output_contains("negationTab", incorrect_msg = "Make sure to print the table!")
 success_msg("Great!")
+
 ```
 
 ### 5.2 Counting the `province` variable 
 ```{r ex="counts_province", type="pre-exercise-code"}
+Sys.setlocale(category = 'LC_ALL','en_US.UTF-8')
 library(readr)
 dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv")
 ```
@@ -580,14 +552,14 @@ provinceTab
 ```
 
 ```{r ex="counts_province", type="sct"}
-test_output_contains('as.factor', incorrect_msg = "Make sure to convert the column to a factor!")
-test_output_contains('table', incorrect_msg = "Make sure to compute the table!")
-test_output_contains('as.data.frame', incorrect_msg = "Make sure to convert the table to a data.frame!")
+test_object("provinceTab", incorrect_msg="Make sure to compute the table!")
+test_output_contains("provinceTab", incorrect_msg="Make sure to print the table!")
 success_msg("Great!")
 ```
 
 ### 5.3 Counting the `Typical.Action.Chain.Pos` variable 
 ```{r ex="counts_Typical.Action.Chain.Pos", type="pre-exercise-code"}
+Sys.setlocale(category = 'LC_ALL','en_US.UTF-8')
 library(readr)
 dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv")
 ```
@@ -620,9 +592,8 @@ Typical.Action.Chain.PosTab
 ```
 
 ```{r ex="counts_Typical.Action.Chain.Pos", type="sct"}
-test_output_contains('as.factor', incorrect_msg = "Make sure to convert the column to a factor!")
-test_output_contains('table', incorrect_msg = "Make sure to compute the table!")
-test_output_contains('as.data.frame', incorrect_msg = "Make sure to convert the table to a data.frame!")
+test_object("Typical.Action.Chain.PosTab",incorrect_msg="Make sure to compute the table!")
+test_output_contains("Typical.Action.Chain.PosTab", incorrect_msg="Make sure to print the table!")
 success_msg("Great!")
 ```
 
@@ -630,6 +601,7 @@ success_msg("Great!")
 ## 6. Proportions
 ### 6.1 Proportions for the `Typical.Action.Chain.Pos` variable 
 ```{r ex="proportionsTypical.Action.Chain.Pos", type="pre-exercise-code"}
+Sys.setlocale(category = 'LC_ALL','en_US.UTF-8')
 library(readr)
 dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv")
 ```
@@ -662,19 +634,19 @@ Typical.Action.Chain.PosTab
 ```
 
 ```{r ex="proportionsTypical.Action.Chain.Pos", type="sct"}
-test_output_contains('as.factor', incorrect_msg = "Make sure to convert the column to a factor!")
-test_output_contains('table', incorrect_msg = "Make sure to compute the table!")
-test_output_contains('prop.table', incorrect_msg = "Make sure to compute proportions for the table!")
+test_object("Typical.Action.Chain.PosTab",incorrect_msg="Make sure to compute the table!")
+test_output_contains('Typical.Action.Chain.PosTab',  incorrect_msg = "Make sure to compute proportions for the table!")
 success_msg("Great!")
 ```
 
 ### 6.2 Proportions for the `corpus` variable 
-```{r ex="proportionscorpus", type="pre-exercise-code"}
+```{r ex="proportionscorpus1", type="pre-exercise-code"}
+Sys.setlocale(category = 'LC_ALL','en_US.UTF-8')
 library(readr)
 dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv")
 ```
 
-```{r ex="proportionscorpus", type="sample-code"}
+```{r ex="proportionscorpus1", type="sample-code"}
 # The data.frame dataSet is already in your workspace. 
 
 # Convert the column corpus to a factor
@@ -683,13 +655,13 @@ dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datase
 
 # Convert the corpusTab object to a data.frame 
 
-# Compute proportions based on the Freq column of that data.frame. Store the proportionsin a new column called 'prop'
+# Compute proportions based on the Freq column of that data.frame. Store the proportions in a new column called 'prop'
 
 # Print corpusTab
 
 ```
 
-```{r ex="proportionscorpus", type="solution"}
+```{r ex="proportionscorpus1", type="solution"}
 # The data.frame dataSet is already in your workspace. 
 
 # Convert the column corpus to a factor
@@ -704,70 +676,19 @@ corpusTab$prop<-corpusTab$Freq/sum(corpusTab$Freq, na.rm=TRUE)
 corpusTab
 ```
 
-```{r ex="proportionscorpus", type="sct"}
-test_output_contains('as.factor', incorrect_msg = "Make sure to convert the column to a factor!")
-test_output_contains('table', incorrect_msg = "Make sure to compute the table!")
-test_output_contains('as.data.frame', incorrect_msg = "Make sure to convert the table to a data.frame!")
-test_output_contains('sum', incorrect_msg = "Make sure to compute the proportions!")
+```{r ex="proportionscorpus1", type="sct"}
+test_object("corpusTab",incorrect_msg="Make sure to compute the table!")
+test_output_contains('corpusTab',  incorrect_msg="Make sure to compute proportions for the table!")
 success_msg("Great!")
 ```
 
-### 6.3 Proportions for the `broad.regions` variable 
-```{r ex="proportionsbroad.regions", type="pre-exercise-code"}
-library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv")
-```
-
-```{r ex="proportionsbroad.regions", type="sample-code"}
-# The data.frame dataSet is already in your workspace. 
-
-# Convert the column broad.regions to a factor
-
-# Compute a table for the broad.regions variable, store it in the variable 'broad.regionsTab'
-
-# Compute proportions for the table. Overwrite the broad.regionsTab object
-
-# Multiply the proportions by 100
-
-# Round to 2 decimals
-
-# Print
-
-
-```
-
-```{r ex="proportionsbroad.regions", type="solution"}
-# The data.frame dataSet is already in your workspace. 
-
-# Convert the column broad.regions to a factor
-dataSet$broad.regions<-as.factor(dataSet$broad.regions)
-# Compute a table for the broad.regions variable, store it in the variable 'broad.regionsTab'
-broad.regionsTab<-table(dataSet$broad.regions)
-# Compute proportions for the table. Overwrite the broad.regionsTab object
-broad.regionsTab<-prop.table(dataSet$broad.regions)
-# Multiply the proportions by 100
-broad.regionsTab<-broad.regionsTab*100
-# Round to 2 decimals
-broad.regionsTab<-round(broad.regionsTab, 2)
-# Print
-broad.regionsTab
-```
-
-```{r ex="proportionsbroad.regions", type="sct"}
-test_output_contains('as.factor', incorrect_msg = "Make sure to convert the column to a factor!")
-test_output_contains('table', incorrect_msg = "Make sure to compute the table!")
-test_output_contains('round', incorrect_msg = "Make sure to round the proportions to 2 decimals!")
-test_output_contains('prop.table', incorrect_msg = "Make sure to compute the proportions!")
-test_output_contains('100', incorrect_msg = "Make sure to multiply the proportions by 100!")
-success_msg("Great!")
-```
-
-## 7. Bar plots for Freq
+## 7. Bar plots 
 ### 7.1 Exploring the counts of the `corpus` variable (1/2)
 - **ANALYZE**:
-      - Which corpus provided the most examples?
+   - Which corpus provided the most examples?
 
 ```{r ex="freq1", type="pre-exercise-code"}
+Sys.setlocale(category = 'LC_ALL','en_US.UTF-8')
 library(readr)
 dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv")
 ```
@@ -792,14 +713,13 @@ table(dataSet$corpus)
 ```
 
 ```{r ex="freq1", type="sct"}
-test_output_contains('as.factor', incorrect_msg = "Make sure to convert the column to a factor!")
-test_output_contains('table', incorrect_msg = "Make sure to print the table!")
-
+test_output_contains("table(dataSet$corpus)", incorrect_msg = "Don't forget to print the table!")
 success_msg("Great!")
 ```
 
 ### 7.1 Exploring the counts of the `corpus` variable (2/2)
 ```{r ex="freq2", type="pre-exercise-code"}
+Sys.setlocale(category = 'LC_ALL','en_US.UTF-8')
 library(readr)
 dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv")
 ```
@@ -827,17 +747,17 @@ ggplot(dataSet, aes(x=corpus)) + geom_bar()
 ```
 
 ```{r ex="freq2", type="sct"}
-test_output_contains('as.factor', incorrect_msg = "Make sure to convert the column to a factor!")
-test_output_contains('geom_bar', incorrect_msg = "Make sure to draw the bar chart!")
-
+test_library_function("ggplot2", incorrect_msg = "Don't forget to load ggplot2")
+test_ggplot(index = 1)
 success_msg("Great!")
 ```
 
 ### 7.2 Exploring the counts of the `broad.regions` variable (1/2)
 - **ANALYZE**:
-    - Which broad.regions provided the most examples?
+  - Which broad.regions provided the most examples?
 
 ```{r ex="broad.regions_1", type="pre-exercise-code"}
+Sys.setlocale(category = 'LC_ALL','en_US.UTF-8')
 library(readr)
 dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv")
 ```
@@ -862,14 +782,14 @@ table(dataSet$broad.regions)
 ```
 
 ```{r ex="broad.regions_1", type="sct"}
-test_output_contains('as.factor', incorrect_msg = "Make sure to convert the column to a factor!")
-test_output_contains('table', incorrect_msg = "Make sure to print the table!")
+ test_output_contains('table(dataSet$broad.regions)',  incorrect_msg = "Make sure to print the table!")
 
 success_msg("Great!")
 ```
 
 ### 7.2 Exploring the counts of the `broad.regions` variable (2/2)
 ```{r ex="broad.regions", type="pre-exercise-code"}
+Sys.setlocale(category = 'LC_ALL','en_US.UTF-8')
 library(readr)
 dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv")
 ```
@@ -897,17 +817,17 @@ ggplot(dataSet, aes(x=broad.regions, fill=broad.regions, color=broad.regions)) +
 ```
 
 ```{r ex="broad.regions", type="sct"}
-test_output_contains('as.factor', incorrect_msg = "Make sure to convert the column to a factor!")
-test_output_contains('geom_bar', incorrect_msg = "Make sure to draw the bar chart!")
-
+test_library_function("ggplot2")
+test_ggplot(index=1, all_fail_msg = "Computer says no. This plot is completely wrong", data_fail_msg = "Make sure you include the data in the ggplot call", aes_fail_msg = "Make sure you define the correct aesthetics (aes)", geom_fail_msg = "Make sure you define the correct plotting function (geom_)")
 success_msg("Great!")
 ```
 
 ### 7.3 Exploring the the counts of the `negation` variable 
 - **ANALYZE**:
-    - Do tokens with and without negation occur with equal frequency?
-    
+      - Do tokens with and without negation occur with equal frequency?
+  
 ```{r ex="negation", type="pre-exercise-code"}
+Sys.setlocale(category = 'LC_ALL','en_US.UTF-8')
 library(readr)
 dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv")
 ```
@@ -939,18 +859,20 @@ ggplot(dataSet, aes(x=negation, fill=negation, color=negation)) + geom_bar() + t
 ```
 
 ```{r ex="negation", type="sct"}
-test_output_contains('as.factor', incorrect_msg = "Make sure to convert the column to a factor!")
-test_output_contains('table', incorrect_msg = "Make sure to print a table of the column!")
-test_output_contains('geom_bar', incorrect_msg = "Make sure to draw the bar chart!")
+
+test_output_contains("table(dataSet$negation", incorrect_msg = "Make sure to print a table of negation")
+test_library_function("ggplot2")
+test_ggplot(index=1, all_fail_msg = "Computer says no. This plot is completely wrong", data_fail_msg = "Make sure you include the data in the ggplot call", aes_fail_msg = "Make sure you define the correct aesthetics (aes)", geom_fail_msg = "Make sure you define the correct plotting function (geom_)")
 
 success_msg("Great!")
 ```
 
 ### 7.4 Exploring the proportions of the `corpus` variable (1/2)
 - **ANALYZE**:
-    - Which corpus provided the most examples?
+      - Which corpus provided the most examples?
 
 ```{r ex="freq1_prop", type="pre-exercise-code"}
+Sys.setlocale(category = 'LC_ALL','en_US.UTF-8')
 library(readr)
 dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv")
 ```
@@ -975,19 +897,20 @@ prop.table(table(dataSet$corpus))
 ```
 
 ```{r ex="freq1_prop", type="sct"}
-test_output_contains('as.factor', incorrect_msg = "Make sure to convert the column to a factor!")
-test_output_contains('table', incorrect_msg = "Make sure to print the table!")
+
+ test_output_contains('prop.table(table(dataSet$corpus))',  incorrect_msg = "Make sure to print the table!")
 
 success_msg("Great!")
 ```
 
 ### 7.4 Exploring the proportions of the `corpus` variable (2/2)
-```{r ex="freq2", type="pre-exercise-code"}
+```{r ex="prop2", type="pre-exercise-code"}
+Sys.setlocale(category = 'LC_ALL','en_US.UTF-8')
 library(readr)
 dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv")
 ```
 
-```{r ex="freq2", type="sample-code"}
+```{r ex="prop2", type="sample-code"}
 # The data.frame dataSet is already in your workspace. 
 
 # Convert the column corpus to a factor
@@ -998,7 +921,7 @@ dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datase
 
 ```
 
-```{r ex="freq2", type="solution"}
+```{r ex="prop2", type="solution"}
 # The data.frame dataSet is already in your workspace. 
 
 # Convert the column corpus to a factor
@@ -1009,18 +932,19 @@ library(ggplot2)
 ggplot(dataSet, aes(x=corpus)) + geom_bar(aes(y=..count../sum(..count..)))
 ```
 
-```{r ex="freq2", type="sct"}
-test_output_contains('as.factor', incorrect_msg = "Make sure to convert the column to a factor!")
-test_output_contains('geom_bar', incorrect_msg = "Make sure to draw the bar chart!")
+```{r ex="prop2", type="sct"}
+test_library_function("ggplot2")
+test_ggplot(index=1, all_fail_msg = "Computer says no. This plot is completely wrong", data_fail_msg = "Make sure you include the data in the ggplot call", aes_fail_msg = "Make sure you define the correct aesthetics (aes)", geom_fail_msg = "Make sure you define the correct plotting function (geom_)")
 
 success_msg("Great!")
 ```
 
 ### 7.5 Exploring the proportions of the `broad.regions` variable (1/2)
 - **ANALYZE**:
-    - Which broad.regions provided the most examples?
+      - Which broad.regions provided the most examples?
 
 ```{r ex="broad.regions_1", type="pre-exercise-code"}
+Sys.setlocale(category = 'LC_ALL','en_US.UTF-8')
 library(readr)
 dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv")
 ```
@@ -1045,14 +969,14 @@ table(dataSet$broad.regions)
 ```
 
 ```{r ex="broad.regions_1", type="sct"}
-test_output_contains('as.factor', incorrect_msg = "Make sure to convert the column to a factor!")
-test_output_contains('table', incorrect_msg = "Make sure to print the table!")
+ test_output_contains('table(dataSet$broad.regions)',  incorrect_msg = "Make sure to print the table!")
 
 success_msg("Great!")
 ```
 
 ### 7.5 Exploring the proportions of the `broad.regions` variable (2/2)
 ```{r ex="broad.regions_prop", type="pre-exercise-code"}
+Sys.setlocale(category = 'LC_ALL','en_US.UTF-8')
 library(readr)
 dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv")
 ```
@@ -1075,22 +999,22 @@ dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datase
 dataSet$broad.regions<-as.factor(dataSet$broad.regions)
 # Load ggplot2
 library(ggplot2)
-# Draw a basic bar chart of the proportions of the broad.regions factor
+# Draw a pretty bar chart of the proportions of the broad.regions factor: each region has its own fill and color, there is no legend title, the Y axis title is "Number of occurrences", the X axis title is "Large regions", the plot title is "Number of occurrences per region"
 ggplot(dataSet, aes(x=broad.regions, fill=broad.regions, color=broad.regions)) + geom_bar(aes(y=..count../sum(..count..))) + theme(legend.title = element_blank()) + labs(x="Large regions", y="Number of occurrences", title="Number of occurrences per region")
 ```
 
 ```{r ex="broad.regions_prop", type="sct"}
-test_output_contains('as.factor', incorrect_msg = "Make sure to convert the column to a factor!")
-test_output_contains('geom_bar', incorrect_msg = "Make sure to draw the bar chart!")
-
+test_library_function("ggplot2")
+test_ggplot(index=1, all_fail_msg = "Computer says no. This plot is completely wrong", data_fail_msg = "Make sure you include the data in the ggplot call", aes_fail_msg = "Make sure you define the correct aesthetics (aes)", geom_fail_msg = "Make sure you define the correct plotting function (geom_)")
 success_msg("Great!")
 ```
 
 ### 7.6 Exploring the the proportions of the `negation` variable 
 - **ANALYZE**:
-    - Do tokens with and without negation occur with equal frequency?
+        - Do tokens with and without negation occur with equal frequency?
 
 ```{r ex="negation_prop", type="pre-exercise-code"}
+Sys.setlocale(category = 'LC_ALL','en_US.UTF-8')
 library(readr)
 dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv")
 ```
@@ -1117,15 +1041,14 @@ dataSet$negation<-as.factor(dataSet$negation)
 table(dataSet$negation)
 # Load ggplot2
 library(ggplot2)
-# Draw a basic bar chart of the proportions of the negation factor
+# Draw a pretty bar chart of the proportions of the negation factor: each value has its own fill and color, there is no legend title, the Y axis title is "Number of occurrences", the X axis title is "Absence/presence of negation", the plot title is "Number of occurrences per Absence/presence of negation"
 ggplot(dataSet, aes(x=negation, fill=negation, color=negation)) + geom_bar(aes(y=..count../sum(..count..))) + theme(legend.title = element_blank()) + labs(x="Large regions", y="Number of occurrences", title="Number of occurrences per region")
 ```
 
 ```{r ex="negation_prop", type="sct"}
-test_output_contains('as.factor', incorrect_msg = "Make sure to convert the column to a factor!")
-test_output_contains('table', incorrect_msg = "Make sure to print a table of the column!")
-test_output_contains('geom_bar', incorrect_msg = "Make sure to draw the bar chart!")
+test_output_contains("table(dataSet$negation)", "Remember to print a table of negation")
+test_library_function("ggplot2")
+test_ggplot(index=1, all_fail_msg = "Computer says no. This plot is completely wrong", data_fail_msg = "Make sure you include the data in the ggplot call", aes_fail_msg = "Make sure you define the correct aesthetics (aes)", geom_fail_msg = "Make sure you define the correct plotting function (geom_)")
 
 success_msg("Great!")
 ```
-

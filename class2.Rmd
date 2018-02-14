@@ -37,6 +37,8 @@ glimpse(dataSet)
 
 ```{r ex="create_a", type="sct"}
 test_object("dataSet")
+test_library_function("dplyr")
+test_library_function("readr")
 test_output_contains("glimpse(dataSet)", incorrect_msg = "Make sure to print the last six rows!")
 success_msg("Great!")
 ```
@@ -142,7 +144,7 @@ lowFrequency[c(1, 2, 50),]
 ```{r ex="subset1", type="sct"}
 
 test_output_contains("tail(dataSet$Freq)", incorrect_msg = "Make sure to print the last couple of values of Freq")
-test_output_contains("lowFrequency <- dataSet[dataSet$Freq <= 30,]", incorrect_msg = "Make sure to make a new dataframe 'lowFrequency'")
+test_object("lowFrequency")
 test_output_contains("lowFrequency[c(1, 2, 50),]", incorrect_msg = "Make sure to print the first, the second, and the 50th row of lowFrequency")
 success_msg("Great!")
 ```
@@ -184,7 +186,6 @@ summary(dataSet)
 ```{r ex="subset2", type="sct"}
 test_output_contains("head(dataSet[dataSet$Mean_RT < 600,]$Word)", incorrect_msg = "Make sure to print the first couple of values of Freq < 600")
 test_output_contains('dataSet[dataSet$Word %in% c("moneys", "stinger", "spare", "bandage","acorn"), c("Length", "Freq")]', incorrect_msg = "Make sure to extract the Length and the Freq of the words in the list")
-test_output_contains("dataSet$FreqByTwo", incorrect_msg = "Make sure to create the FreqByTwo variable!")
 success_msg("Great job!")
 ```
 
@@ -241,6 +242,7 @@ test_output_contains("quantile(dataSet$Freq, c(0.25, 0.5, 0.75), na.rm = TRUE)",
 test_output_contains("sort(table(dataSet$Freq), decreasing = TRUE)[1]", incorrect_msg = "Make sure you use the one-line alternative to calculate the mode!")
 test_output_contains("min(dataSet$Freq, na.rm=TRUE)", incorrect_msg = "Make sure you add 'na.rm=TRUE' to your 'min' code!")
 test_output_contains("max(dataSet$Freq, na.rm=TRUE)", incorrect_msg = "Make sure you add 'na.rm=TRUE' to your 'max' code!")
+test_library_function("readr")
 success_msg("Great job!")
 ```
 
@@ -357,8 +359,10 @@ ggplot(dataSet, aes(x=Freq))  + geom_line(stat="density") + geom_vline(aes(xinte
 ```
 
 ```{r ex="Freq_density", type="sct"}
-test_output_contains("library(ggplot2)", incorrect_msg = "Make sure you load ggplot2 first!")
-test_output_contains('ggplot(dataSet, aes(x=Freq))  + geom_line(stat="density") + geom_vline(aes(xintercept=mean(dataSet$Freq)), color="red")', incorrect_msg = "Don't forget to add the red line!")
+test_library_function("ggplot2")
+test_ggplot(index=1, all_fail_msg = "Computer says no. This plot is completely wrong", data_fail_msg = "Make sure you include the data in the ggplot call", aes_fail_msg = "Make sure you define the correct aesthetics (aes)", geom_fail_msg = "Make sure you define the correct plotting function (geom_)")
+success_msg("Great!")
+
 ```
 
 ####  QQ-plot 
@@ -387,9 +391,11 @@ qqline(dataSet$Freq)
 ```
 
 ```{r ex="Freq_qq", type="sct"}
-test_output_contains("qqnorm(dataSet$Freq)", incorrect_msg = "Make sure you draw the qqplot!")
-test_output_contains('qqline(dataSet$Freq)', incorrect_msg = "Don't forget to add the qqline!")
+test_function("qqnorm", args = "y")
+test_function("qqline", args ="y")
+success_msg("Great!")
 ```
+
 
 ####  Shapiro-Wilk test
 ```{r ex="Freq_shap", type="pre-exercise-code"}
@@ -445,7 +451,7 @@ median(dataSet$Mean_RT, na.rm=TRUE)
 
 ```{r ex="Mean_RT_median_mean", type="sct"}
 test_output_contains("mean(dataSet$Mean_RT, na.rm=TRUE)
-                     ", incorrect_msg = "Make sure to add 'na.rm=TRUE' to your 'mean' code!")
+", incorrect_msg = "Make sure to add 'na.rm=TRUE' to your 'mean' code!")
 test_output_contains("median(dataSet$Mean_RT, na.rm=TRUE)", incorrect_msg = "Make sure to add 'na.rm=TRUE' to your 'median' code!")
 ```
 
@@ -475,8 +481,10 @@ ggplot(dataSet, aes(x=Mean_RT))  + geom_line(stat="density") + geom_vline(aes(xi
 ```
 
 ```{r ex="Mean_RT_density", type="sct"}
-test_output_contains("library(ggplot2)", incorrect_msg = "Make sure you load ggplot2 first!")
-test_output_contains('ggplot(dataSet, aes(x=Mean_RT))  + geom_line(stat="density") + geom_vline(aes(xintercept=mean(dataSet$Mean_RT)), color="red")', incorrect_msg = "Don't forget to add the red line!")
+test_library_function("ggplot2")
+test_ggplot(index = 1)
+success_msg("Great!")
+
 ```
 
 ####  QQ-plot 
@@ -505,8 +513,9 @@ qqline(dataSet$Mean_RT)
 ```
 
 ```{r ex="Mean_RT_qq", type="sct"}
-test_output_contains("qqnorm(dataSet$Mean_RT)", incorrect_msg = "Make sure you draw the qqplot!")
-test_output_contains('qqline(dataSet$Mean_RT)', incorrect_msg = "Don't forget to add the qqline!")
+test_function("qqnorm", args = c("y"), incorrect_msg = "Make sure you draw the qqplot!")
+test_function("qqline", args= c("y"), incorrect_msg = "Don't forget to add the qqline!")
+success_msg("Great!")
 ```
 
 ####  Shapiro-Wilk test
@@ -532,6 +541,7 @@ shapiro.test(dataSet$Mean_RT)
 
 ```{r ex="Mean_RT_shap", type="sct"}
 test_output_contains("shapiro.test(dataSet$Mean_RT)", incorrect_msg = "Make sure you perform the test!")
+success_msg("Great job!")
 ```
 
 ## 4. Measures of dispersion
@@ -580,6 +590,7 @@ test_output_contains('var(dataSet$Freq, na.rm=TRUE)', incorrect_msg = "Make sure
 test_output_contains('sd(dataSet$Freq, na.rm=TRUE)', incorrect_msg = "Make sure you add 'na.rm=TRUE' to your code to calculate the standard deviation")
 test_output_contains('IQR(dataSet$Freq, na.rm=TRUE)', incorrect_msg = "Make sure you add 'na.rm=TRUE' to your code to calculate the Interquartile range")
 test_output_contains('var(dataSet$Freq, na.rm=TRUE)', incorrect_msg = "Make sure you add 'na.rm=TRUE' to your code to calculate the mean absolute deviation")
+success_msg("Great job!")
 ```
 
 #### Box-and-whiskers plot
@@ -605,8 +616,9 @@ ggplot(dataSet, aes(x=1, y=Freq)) + geom_boxplot()
 ```
 
 ```{r ex="Freq_boxplot", type="sct"}
-test_output_contains("ibrary(ggplot2)", incorrect_msg = "Don't forget to load ggplot2")
-test_output_contains('ggplot(dataSet, aes(x=1, y=Freq)) + geom_boxplot()', incorrect_msg = "Make sure you draw the boxplot!")
+test_library_function("ggplot2")
+test_ggplot(index=1, all_fail_msg = "Computer says no. This plot is completely wrong", data_fail_msg = "Make sure you include the data in the ggplot call", aes_fail_msg = "Make sure you define the correct aesthetics (aes)", geom_fail_msg = "Make sure you define the correct plotting function (geom_)")
+success_msg("Great!")
 ```
 
 ### 4.1 The `Mean_RT` variable
@@ -650,6 +662,7 @@ test_output_contains('var(dataSet$Mean_RT, na.rm=TRUE)', incorrect_msg = "Make s
 test_output_contains('sd(dataSet$Mean_RT, na.rm=TRUE)', incorrect_msg = "Make sure you add 'na.rm=TRUE' to your code to calculate the standard deviation")
 test_output_contains('IQR(dataSet$Mean_RT, na.rm=TRUE)', incorrect_msg = "Make sure you add 'na.rm=TRUE' to your code to calculate the Interquartile range")
 test_output_contains('var(dataSet$Mean_RT, na.rm=TRUE)', incorrect_msg = "Make sure you add 'na.rm=TRUE' to your code to calculate the mean absolute deviation")
+success_msg("Great job!")
 ```
 
 #### Box-and-whiskers plot
@@ -675,7 +688,8 @@ ggplot(dataSet, aes(x=1, y=Mean_RT)) + geom_boxplot()
 ```
 
 ```{r ex="Mean_RT_boxplot", type="sct"}
-test_output_contains("ibrary(ggplot2)", incorrect_msg = "Don't forget to load ggplot2")
-test_output_contains('ggplot(dataSet, aes(x=1, y=Mean_RT)) + geom_boxplot()', incorrect_msg = "Make sure you draw the boxplot!")
+test_library_function("ggplot2")
+test_ggplot(index=1, all_fail_msg = "Computer says no. This plot is completely wrong", data_fail_msg = "Make sure you include the data in the ggplot call", aes_fail_msg = "Make sure you define the correct aesthetics (aes)", geom_fail_msg = "Make sure you define the correct plotting function (geom_)")
+success_msg("Great!")
 ```
 
