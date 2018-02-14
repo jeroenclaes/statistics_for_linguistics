@@ -1,0 +1,5 @@
+"0","library(ggplot2)"
+"0","ggplot(dataSet, aes(x=type))  + "
+"0","  geom_bar() +"
+"0","  theme_minimal() + "
+"0","  theme(axis.text.x = element_text(angle=90), legend.title = element_blank())"

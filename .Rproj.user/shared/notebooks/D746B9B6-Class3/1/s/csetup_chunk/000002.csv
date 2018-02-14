@@ -1,0 +1,27 @@
+"0","knitr::opts_chunk$set(echo = TRUE, eval=TRUE, message=FALSE, warning=FALSE, error=FALSE, fig.height = 4, dpi = 300)"
+"0","library(pander)"
+"2","package ‘pander’ was built under R version 3.4.1"
+"0","library(readr)"
+"0","library(dplyr)"
+"0","dataSet <- read_csv(""http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv"")"
+"2","Parsed with column specification:
+cols(
+  type = col_character(),
+  noun = col_character(),
+  Typical.Action.Chain.Pos = col_character(),
+  province = col_character(),
+  state = col_character(),
+  negation = col_character(),
+  broad.regions = col_character(),
+  locality = col_character(),
+  before = col_character(),
+  token = col_character(),
+  after = col_character(),
+  tense = col_character(),
+  corpus = col_character(),
+  long = col_double(),
+  lat = col_double(),
+  characters_before_noun = col_integer(),
+  noun_length = col_integer()
+)
+"

@@ -1,0 +1,4 @@
+"0","library(ggplot2)"
+"0","ggplot(dataSet, aes(x=type, color=type, fill=type) ) + "
+"0","  geom_bar(aes(y=..count../sum(..count..))) + "
+"0","  theme(legend.title =  element_blank())"

@@ -1,0 +1,7 @@
+"0","library(ggplot2)"
+"0","library(scales)"
+"0","ggplot(dataSet, aes(x=type, color=type, fill=type))  +"
+"0","  geom_bar(aes(y=..count../sum(..count..))) +"
+"0","  scale_y_continuous(labels=percent) +"
+"0","  theme(legend.title=element_blank()) + "
+"0","  labs(y=""Percentages"")"

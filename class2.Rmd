@@ -14,7 +14,10 @@ tutorial::go_interactive()
 # Load the course data from the course website to the object 'dataSet':
 # http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class2_balota_et_al_2007.csv
 
-# Print out the =last= 6 rows of dataSet
+# Load dplyr
+
+# Print a 'glimpse' of the dataset to inspect its structure
+
 
 ```
 
@@ -24,13 +27,17 @@ library(readr)
 # Load the course data from the course website to the object 'dataSet':
 # http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class2_balota_et_al_2007.csv
 dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class2_balota_et_al_2007.csv")
-# Print out the =last= 6 rows of dataSet
-tail(dataSet)
+
+# Load dplyr
+library(dplyr)
+
+# Print a 'glimpse' of the dataset to inspect its structure
+glimpse(dataSet)
 ```
 
 ```{r ex="create_a", type="sct"}
 test_object("dataSet")
-test_output_contains("tail(dataSet)", incorrect_msg = "Make sure to print the last six rows!")
+test_output_contains("glimpse(dataSet)", incorrect_msg = "Make sure to print the last six rows!")
 success_msg("Great!")
 ```
 
@@ -48,10 +55,6 @@ dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datase
 
 # Print the first 15 rows of the data.frame
 
-# Load the package dplyr
-
-# Print a "glimpse" of the data.frame
-
 
 ```
 
@@ -62,17 +65,12 @@ ls()
 dim(dataSet)
 # Print the first 15 rows of the data.frame
 head(dataSet, 15)
-# Load the package dplyr
-library(dplyr)
-# Print a "glimpse" of the data.frame
-glimpse(dataSet)
 
 ```
 
 ```{r ex="explore", type="sct"}
 test_output_contains("dim(dataSet)", incorrect_msg = "Make sure to print the dimensions of the data.frame.")
 test_output_contains("head(dataSet, 15)", incorrect_msg = "Make sure to print the first 15 lines.")
-test_output_contains("glimpse(dataSet)", incorrect_msg = "Make sure to print a glimpse of the dataSet.")
 success_msg("Great!")
 ```
 
