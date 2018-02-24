@@ -422,7 +422,7 @@ shapiro.test(dataSet$Freq)
 test_output_contains("shapiro.test(dataSet$Freq)", incorrect_msg = "Make sure you perform the test!")
 ```
 
-### 3.1 The `Mean_RT` variable    
+### 3.2 The `Mean_RT` variable    
 ####  Mean and median
 ```{r ex="Mean_RT_median_mean", type="pre-exercise-code"}
 library(readr)
@@ -445,7 +445,7 @@ mean(dataSet$Mean_RT, na.rm=TRUE)
 # Compute the median of Mean_RT. 
 median(dataSet$Mean_RT, na.rm=TRUE)
 # Are the mean and the median close together numerically? 
-# No, the mean is more than ten times higher than the median
+# Yes, the difference between the mean and the median is not really large. 
 
 ```
 

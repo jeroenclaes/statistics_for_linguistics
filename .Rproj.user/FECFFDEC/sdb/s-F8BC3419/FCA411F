@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "```{r ex=\"paired_paired_t-test\", type=\"pre-exercise-code\"}\nlibrary(readr)\ndataSet <- read_csv(\"http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class4_Paivio_et_al_1968.csv\")\n```\n\n\n```{r ex=\"paired_t-test\", type=\"sample-code\"}\n# The data.frame dataSet is already in your workspace\n\n# We should test the assumptions of the paired_t-test first\n# Count the number of rows in the data.frame. Is the sample size > 30?\n\n# Is the 'associations' variable normally distributed? Draw up a density plot\n\n# Draw a qqplot with a qqline\n\n# Perform a shapiro-wilk test\n\n# Is the variable normally distributed? You will find the correct answer on the Solution tab\n```\n\n```{r ex=\"paired_t-test\", type=\"solution\"}\n# The data.frame dataSet is already in your workspace\n\n# We should test the assumptions of the paired_t-test first\n# Count the number of rows in the data.frame. Is the sample size > 30?\nnrow(dataSet)\n# Is the 'associations' variable normally distributed? Draw up a density plot\n# Add a red vertical line at the mean\nlibrary(ggplot2)\nggplot(dataSet, aes(x=associations)) + geom_line(stat=\"density\") + geom_vline(aes(xintercept=mean(dataSet$associations)), color=\"red\")\n# Draw a qqplot with a qqline\nqqnorm(dataSet$associations)\nqqline(dataSet$associations)\n# Perform a shapiro-wilk test\nshapiro.test(dataSet$associations)\n# Is the variable normally distributed? You will find the correct answer on the Solution tab\n# Yes, the variable approaches the normal distribution:\n# - The distribution shows up as a bell-shaped curve in the density plot (but, there is a slight negative skew)\n#  - The dots follow the QQ-line \n# - p > 0.05 in the Shapiro-Wilk test\n```\n\n```{r ex=\"paired_t-test\", type=\"sct\"}\ntest_library_function(\"ggplot2\", \"Make sure to call the 'ggplot2' package!\")\ntest_output_contains(\"nrow(dataSet2)\", \"Don't forget to count the number of rows to determine the sample size!\")\ntest_output_contains(\"shapiro.test(dataSet$associations)\", \"Make sure to perform the Shapiro-Wilk test!\")\ntest_ggplot(index = 1)\nsuccess_msg(\"Great!\")\n```\n\n",
+    "created" : 1519479947494.000,
+    "dirty" : true,
+    "encoding" : "",
+    "folds" : "",
+    "hash" : "1914535991",
+    "id" : "FCA411F",
+    "lastKnownWriteTime" : 1519479684,
+    "last_content_update" : 1519479959023,
+    "path" : null,
+    "project_path" : null,
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 12,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

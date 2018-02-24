@@ -1,0 +1,802 @@
+---
+title: "Class 4: Comparing the central tendency of two groups"
+author: "Jeroen Claes | <jeroen.claes@kuleuven.be> | <jeroen@cropland.be>"
+output: 
+ html_document:
+  self_contained: false 
+---
+## 1. Case study one: *Dude* or *Duuude*?
+```{r, include=FALSE}
+#library(testwhat)
+tutorial::go_interactive()
+```
+-  The data for this exercise were taken from a study of the way Californians pronounce the /u/ in the word *dude*
+- 193 people were recorded saying the word *dude* and the F2 formant of the /u/ was measured
+- Research question:
+    - *Do surfers pronounce the word* dude *differently from non-surfers?*
+- Hypothesis:
+    - *Surfers will have higher F2 values than non-surfers*
+
+### 1.1 Loading and exploring the data
+```{r ex="create_a", type="sample-code"}
+# Load the readr package
+
+# Load the course data from the course website to the object 'dataSet':
+# http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class4_dude.csv
+
+# Load the dplyr package
+
+# Print a 'glimpse' of the dataSet
+
+# Print a summary of the F2 column
+
+```
+
+```{r ex="create_a", type="solution"}
+# Load the readr package
+library(readr)
+# Load the course data from the course website to the object 'dataSet':
+# http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class4_dude.csv
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class4_dude.csv")
+# Load the dplyr package
+library(dplyr)
+# Print a 'glimpse' of the dataSet
+glimpse(dataSet)
+# Print a summary of the F2 column
+summary(dataSet$F2)
+```
+
+```{r ex="create_a", type="sct"}
+test_object("dataSet")
+test_library_function("readr", "Make sure to call the 'readr' package!")
+test_library_function("dplyr", "Make sure to call the 'dplyr' package!")
+test_output_contains("glimpse(dataSet)",   incorrect_msg = "Make sure to print a 'glimpse' of the data!")
+test_output_contains("summary(dataSet$F2)",   incorrect_msg = "Make sure to print a 'summary' of the F2 column!")
+success_msg("Great!")
+```
+
+### 1.2 A first exploration of the differences with a box-and-whisker plot
+
+```{r ex="boxplot", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class4_dude.csv")
+```
+
+```{r ex="boxplot", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Load the ggplot2 package
+
+# Draw a box-and-whisker plot to compare the medians of the Surfer_or_nonSurfer groups
+
+# Which of the two groups has the highest median F2? You will find the correct solution on the Solution tab
+```
+
+```{r ex="boxplot", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Load the ggplot2 package
+library(ggplot2)
+# Draw a box-and-whisker plot to compare the medians of the Surfer_or_nonSurfer groups
+ggplot(dataSet, aes(x=Surfer_or_nonSurfer, y=F2)) + geom_boxplot()
+# Which of the two groups has the highest median F2? You will find the correct solution on the Solution tab
+# The surfers clearly have the highest F2-value
+```
+
+```{r ex="boxplot", type="sct"}
+test_library_function("ggplot2", "Make sure to call the 'ggplot2' package!")
+test_ggplot(index = 1)
+success_msg("Great!")
+```
+
+### 1.3 Checking the assumptions of statistical tests
+
+```{r ex="dude_distribution", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class4_dude.csv")
+```
+
+```{r ex="dude_distribution", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Before we move on to test whether or not our results are significant, we should test the assumptions of either the t-test or the Wilcoxon-test
+
+# Count the number of rows of dataSet to establish the sample size
+
+# Load the ggplot2 package
+
+# Draw a density plot of the F2-column for both groups and add a red vertical line at the mean
+
+# Compute a Shapiro-Wilk test for both groups
+
+# Are the data distributed normally? Is the sample size large enough? What type of test can we use in this case? You will find the correct answer on the Solution tab 
+
+```
+
+```{r ex="dude_distribution", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Before we move on to test whether or not our results are significant, we should test the assumptions of either the t-test or the Wilcoxon-test
+
+# Count the number of rows of dataSet to establish the sample size
+nrow(dataSet)
+
+# Load the ggplot2 package
+library(ggplot2)
+
+# Draw a density plot of the F2-column for both groups and add a red vertical line at the mean
+ggplot(dataSet[dataSet$Surfer_or_nonSurfer=="surfer", ], aes(x=F2)) + geom_line(stat="density") + geom_vline(aes(xintercept =mean(dataSet[dataSet$Surfer_or_nonSurfer=="surfer", ]$F2) ), color="red")
+
+ggplot(dataSet[dataSet$Surfer_or_nonSurfer=="Non-surfer", ], aes(x=F2)) + geom_line(stat="density") + geom_vline(aes(xintercept =mean(dataSet[dataSet$Surfer_or_nonSurfer=="Non-surfer", ]$F2) ), color="red")
+
+# Compute a Shapiro-Wilk test for both groups
+shapiro.test(dataSet[dataSet$Surfer_or_nonSurfer=="surfer", ]$F2)
+shapiro.test(dataSet[dataSet$Surfer_or_nonSurfer=="Non-surfer", ]$F2)
+
+# Are the data distributed normally? Is the sample size large enough? What type of test can we use in this case? You will find the correct answer on the Solution tab 
+# For both groups, the data are distributed normally. In addition, the sample size is larger than 30. This means we can use the t-test to see if our results are significant
+```
+
+```{r ex="dude_distribution", type="sct"}
+test_library_function("ggplot2", "Make sure to call the 'ggplot2' package!")
+test_ggplot(index = 1)
+test_ggplot(index = 2)
+
+test_output_contains('shapiro.test(dataSet[dataSet$Surfer_or_nonSurfer=="Non-surfer", ]$F2)', "Don't forget to perform the shapiro.test for the Non-surfers!")
+test_output_contains('shapiro.test(dataSet[dataSet$Surfer_or_nonSurfer=="surfer", ]$F2)',  "Don't forget to perform the shapiro.test for the surfers!")
+test_output_contains('nrow(dataSet)',  "Don't forget to count the number of rows of dataSet to establish the sample size!")
+success_msg("Great work!")
+```
+
+### 1.4 Performing the statistical test
+```{r ex="dude_test", type="pre-exercise-code"}
+library(readr)
+library(ggplot2)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class4_dude.csv")
+```
+
+```{r ex="dude_test", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Convert 'Surfer_or_nonSurfer' to a factor
+
+# Relevel 'Surfer_or_nonSurfer' so that the reference level is 'surfer'
+
+# Perform a t-test of the differences bretween surfers and non-surfers. You will need to use the formula method.
+# Also, keep in mind our hypothesis: Surfers will have higher F2-values
+
+# Is the result significant? You will find the correct answer on the Solution tab
+
+# Calculate Cohen's d 
+
+# Is the effect large or small? You will find the correct answer on the Solution tab
+
+```
+
+```{r ex="dude_test", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Convert 'Surfer_or_nonSurfer' to a factor
+dataSet$Surfer_or_nonSurfer <- as.factor(dataSet$Surfer_or_nonSurfer)
+
+# Relevel 'Surfer_or_nonSurfer' so that the reference level is 'surfer'
+dataSet$Surfer_or_nonSurfer <- relevel(dataSet$Surfer_or_nonSurfer, ref="surfer")
+
+# Perform a t-test of the differences bretween surfers and non-surfers. You will need to use the formula method.
+# Also, keep in mind our hypothesis: Surfers will have higher F2-values
+t.test(F2 ~ Surfer_or_nonSurfer, data=dataSet, alternative="greater")
+
+# Is the result significant? Yes, surfers have significantly higher F2 values when they pronounce 'dude'
+
+# Calculate Cohen's d 
+(mean(dataSet[dataSet$Surfer_or_nonSurfer=="surfer",]$F2) - mean(dataSet[dataSet$Surfer_or_nonSurfer=="Non-surfer",]$F2))/sd(dataSet$F2)
+
+# Is the effect large or small? The effect is very large, more than one standard deviation
+
+```
+
+```{r ex="dude_test", type="sct"}
+
+test_output_contains('t.test(F2 ~ Surfer_or_nonSurfer, data=dataSet, alternative="greater")', "Don't forget to calculate the t-test!")
+test_output_contains('(mean(dataSet[dataSet$Surfer_or_nonSurfer=="surfer",]$F2) - mean(dataSet[dataSet$Surfer_or_nonSurfer=="Non-surfer",]$F2))/sd(dataSet$F2)', "Make sure you calculate Cohen's d for the difference between the groups!")
+success_msg("Great!")
+```
+
+### 1.5 Plotting the differences between the groups
+```{r ex="dude_plot", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class4_dude.csv")
+```
+
+```{r ex="dude_plot", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Convert 'Surfer_or_nonSurfer' to a factor
+
+# Relevel 'Surfer_or_nonSurfer' so that the reference level is 'surfer'
+
+# Calculate the standard error of the F2 variable (standard deviation/square root of sample size)
+
+# Load the 'dplyr' package
+
+# Calculate the data for the plot, including the upper and lower bounds of the confidence intervals:
+dataForPlot <- dataSet %>%
+  group_by(___) %>%
+    summarise(lowerBound= ___, 
+    upperBound=___, 
+    mean=___)
+
+# Load the ggplot2 package
+
+
+# Create a colored barplot to compare the two group means in the 'dataForPlot' data.frame.
+# Add error bars to the barplot
+```
+
+```{r ex="dude_plot", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Convert 'Surfer_or_nonSurfer' to a factor
+dataSet$Surfer_or_nonSurfer <- as.factor(dataSet$Surfer_or_nonSurfer)
+
+# Relevel 'Surfer_or_nonSurfer' so that the reference level is 'surfer'
+dataSet$Surfer_or_nonSurfer <- relevel(dataSet$Surfer_or_nonSurfer, ref="surfer")
+
+# Calculate the standard error of the F2 variable (standard deviation/square root of sample size)
+SE<-sd(dataSet$F2)/sqrt(nrow(dataSet))
+# Load the 'dplyr' package
+library(dplyr)
+# Calculate the data for the plot, including the upper and lower bounds of the confidence intervals:
+dataForPlot <- dataSet %>%
+  group_by(Surfer_or_nonSurfer) %>%
+    summarise(lowerBound= mean(F2)-(1.96*SE), 
+    upperBound=mean(F2)+(1.96*SE), 
+    mean=mean(F2))
+
+# Load the ggplot2 package
+library(ggplot2)
+
+# Create a colored barplot to compare the two group means in the 'dataForPlot' data.frame.
+# Add error bars to the barplot
+ggplot(dataForPlot, aes(x=Surfer_or_nonSurfer, y=mean, color=Surfer_or_nonSurfer, fill=Surfer_or_nonSurfer)) + geom_bar(stat="identity") + geom_errorbar(aes(ymin=lowerBound, ymax=upperBound), width=0.5, color="black")
+
+```
+
+```{r ex="dude_plot", type="sct"}
+test_library_function("ggplot2", "Make sure to call the 'ggplot2' package!")
+test_library_function("dplyr", "Make sure to call the 'dplyr' package!")
+
+test_ggplot(index = 1)
+
+success_msg("Great!")
+```
+
+
+## 2. Case study 2: high- and low-frequency words and their associations
+- Paivio et al. (1968) instructed groups of college students to rate 925 nouns for the following characteristics (see Levshina, 2015: 89, who provided the data): 
+    - `concreteness`, on a 7-point scale, *How directly is the concept related to immediate reference?*
+    - `imaginability`, on a 7-point scale, *What is the relative capacity of the concept to evoke non-verbal mental images?*
+    - `associations`: the number of associations that is triggered by the word in a 30-second time window
+- The research question we are addressing is the following:
+    - *Do high-frequency nouns evoke more associations?*
+- Our hypothesis is that:
+    - *High-frequency noun evoke more associations than low-frequency nouns*
+- The null hypothesis is that:
+    - *There is no difference in the number of associations that are triggered by high - and low-frequency nouns*
+
+### 2.1 Loading and exploring the data
+```{r ex="load_explore_associations", type="sample-code"}
+# Load the readr package
+
+# Load the course data from the course website to the object 'dataSet':
+# http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class4_Paivio_et_al_1968.csv
+
+# Load the dplyr package
+
+# Print a 'glimpse' of the dataSet
+
+# Print a summary of the associations column
+
+```
+
+```{r ex="load_explore_associations", type="solution"}
+# Load the readr package
+library(readr)
+# Load the course data from the course website to the object 'dataSet':
+# http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class4_Paivio_et_al_1968.csv
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class4_Paivio_et_al_1968.csv")
+# Load the dplyr package
+library(dplyr)
+# Print a 'glimpse' of the dataSet
+glimpse(dataSet)
+# Print a summary of the associations column
+summary(dataSet$associations)
+```
+
+```{r ex="load_explore_associations", type="sct"}
+test_object("dataSet")
+test_library_function("readr", "Make sure to call the 'readr' package!")
+test_library_function("dplyr", "Make sure to call the 'dplyr' package!")
+test_output_contains("glimpse(dataSet)",   incorrect_msg = "Make sure to print a 'glimpse' of the data!")
+test_output_contains("summary(dataSet$associations)",   incorrect_msg = "Make sure to print a 'summary' of the associations column!")
+success_msg("Great!")
+```
+
+### 2.2  A first exploration of the differences with a box-and-whisker plot
+```{r ex="boxplot_associations", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class4_Paivio_et_al_1968.csv")
+```
+
+```{r ex="boxplot_associations", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Load the ggplot2 package
+
+# Draw a box-and-whisker plot to compare the medians of the type groups
+
+# Which of the two groups has the highest median number of associations? You will find the correct solution on the Solution tab
+```
+
+```{r ex="boxplot_associations", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Load the ggplot2 package
+library(ggplot2)
+# Draw a box-and-whisker plot to compare the medians of the type groups
+ggplot(dataSet, aes(x=type, y=associations)) + geom_boxplot()
+# Which of the two groups has the highest median number of associations? You will find the correct solution on the Solution tab
+# The 'high-frequency' group clearly has the highest median number of associations 
+```
+
+```{r ex="boxplot_associations", type="sct"}
+test_library_function("ggplot2", "Make sure to call the 'ggplot2' package!")
+test_ggplot(index = 1)
+success_msg("Great!")
+```
+
+### 2.3. Checking the assumptions of statistical tests
+
+```{r ex="associations_distribution", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class4_Paivio_et_al_1968.csv")
+```
+
+```{r ex="associations_distribution", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Before we move on to test whether or not our results are significant, we should test the assumptions of either the t-test or the Wilcoxon-test
+
+# Count the number of rows of dataSet to establish the sample size
+
+# Load the ggplot2 package
+
+# Draw a density plot of the associations-column for both groups and add a red vertical line at the mean
+
+# Compute a Shapiro-Wilk test for both groups
+
+# Are the data distributed normally and how large is the sample?  What type of test can we use in this case? You will find the correct answer on the Solution tab 
+
+```
+
+```{r ex="associations_distribution", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Before we move on to test whether or not our results are significant, we should test the assumptions of either the t-test or the Wilcoxon-test
+
+# Count the number of rows of dataSet to establish the sample size
+nrow(dataSet)
+# Load the ggplot2 package
+library(ggplot2)
+
+# Draw a density plot of the associations-column for both groups and add a red vertical line at the mean
+ggplot(dataSet[dataSet$type=="low", ], aes(x=associations)) + geom_line(stat="density") + geom_vline(aes(xintercept =mean(dataSet[dataSet$type=="low", ]$associations) ), color="red")
+
+ggplot(dataSet[dataSet$type=="high", ], aes(x=associations)) + geom_line(stat="density") + geom_vline(aes(xintercept =mean(dataSet[dataSet$type=="high", ]$associations) ), color="red")
+
+# Compute a Shapiro-Wilk test for both groups
+shapiro.test(dataSet[dataSet$type=="low", ]$associations)
+shapiro.test(dataSet[dataSet$type=="high", ]$associations)
+
+# Are the data distributed normally and how large is the sample? What type of test can we use in this case? You will find the correct answer on the Solution tab 
+# For both groups, the data are distributed quasi-normally. In addition, the sample size is large. This means we can use the t-test to see if our results are significant
+```
+
+```{r ex="associations_distribution", type="sct"}
+test_library_function("ggplot2", "Make sure to call the 'ggplot2' package!")
+test_ggplot(index = 1)
+test_ggplot(index = 2)
+test_output_contains("nrow(dataSet)", "Make sure you count the number of rows in dataSet")
+test_output_contains('shapiro.test(dataSet[dataSet$type=="high", ]$associations)', "Don't forget to perform the shapiro.test for the high group!")
+test_output_contains('shapiro.test(dataSet[dataSet$type=="low", ]$associations)',  "Don't forget to perform the shapiro.test for the low group!")
+
+success_msg("Good work!")
+```
+
+### 2.4 Performing the statistical test
+```{r ex="associations_test", type="pre-exercise-code"}
+library(readr)
+library(ggplot2)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class4_Paivio_et_al_1968.csv")
+```
+
+```{r ex="associations_test", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Convert 'type' to a factor
+
+# Relevel 'type' so that the reference level is 'high'
+
+# Perform a t-test of the differences between high- and low-frequency nouns. You will need to use the formula method.
+# Also, keep in mind our hypothesis: High-frequency nouns will have higher associations-values
+
+# Is the result significant? You will find the correct answer on the Solution tab
+
+# Calculate Cohen's d 
+
+# Is the effect large or small? You will find the correct answer on the Solution tab
+
+```
+
+```{r ex="associations_test", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Convert 'type' to a factor
+dataSet$type <- as.factor(dataSet$type)
+
+# Relevel 'type' so that the reference level is 'low'
+dataSet$type <- relevel(dataSet$type, ref="high")
+
+# Perform a t-test of the differences bretween surfers and non-surfers. You will need to use the formula method.
+# Also, keep in mind our hypothesis: High-frequency nouns will have higher associations-values
+t.test(associations ~ type, data=dataSet, alternative="greater")
+
+# Is the result significant? Yes, 'high-frequency' nouns trigger significantly more associations than low-frequency nouns
+
+# Calculate Cohen's d 
+(mean(dataSet[dataSet$type=="high",]$associations) - mean(dataSet[dataSet$type=="low",]$associations))/sd(dataSet$associations)
+
+# Is the effect large or small? The effect is moderately large, about 0.5 standard deviations
+```
+
+```{r ex="associations_test", type="sct"}
+
+
+test_output_contains('t.test(associations ~ type, data=dataSet, alternative="greater")', "Don't forget to calculate the t-test!")
+test_output_contains('(mean(dataSet[dataSet$type=="high",]$associations) - mean(dataSet[dataSet$type=="low",]$associations))/sd(dataSet$associations)', "Make sure you calculate Cohen's d for the difference between the groups!")
+success_msg("Great job!")
+```
+
+### 2.5 Plotting the differences between the groups
+```{r ex="associations_plot", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class4_Paivio_et_al_1968.csv")
+```
+
+```{r ex="associations_plot", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Convert 'type' to a factor
+
+# Relevel 'type' so that the reference level is 'high'
+
+# Calculate the standard error of the associations variable (standard deviation/square root of sample size)
+
+# Load the 'dplyr' package
+
+# Calculate the data for the plot, including the upper and lower bounds of the confidence intervals:
+dataForPlot <- dataSet %>%
+  group_by(___) %>%
+  summarise(lowerBound= ___, 
+            upperBound=___, 
+            mean=___)
+
+# Load the ggplot2 package
+
+
+# Create a colored barplot to compare the two group means in the 'dataForPlot' data.frame.
+# Add error bars to the barplot
+```
+
+```{r ex="associations_plot", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Convert 'type' to a factor
+dataSet$type <- as.factor(dataSet$type)
+
+# Relevel 'type' so that the reference level is 'low'
+dataSet$type <- relevel(dataSet$type, ref="low")
+
+# Calculate the standard error of the associations variable (standard deviation/square root of sample size)
+SE<-sd(dataSet$associations)/sqrt(nrow(dataSet))
+# Load the 'dplyr' package
+library(dplyr)
+# Calculate the data for the plot, including the upper and lower bounds of the confidence intervals:
+dataForPlot <- dataSet %>%
+  group_by(type) %>%
+  summarise(lowerBound= mean(associations)-(1.96*SE), 
+            upperBound=mean(associations)+(1.96*SE), 
+            mean=mean(associations))
+
+# Load the ggplot2 package
+library(ggplot2)
+
+# Create a colored barplot to compare the two group means in the 'dataForPlot' data.frame.
+# Add error bars to the barplot
+ggplot(dataForPlot, aes(x=type, y=mean, color=type, fill=type)) + geom_bar(stat="identity") + geom_errorbar(aes(ymin=lowerBound, ymax=upperBound), width=0.5, color="black")
+
+```
+
+```{r ex="associations_plot", type="sct"}
+test_library_function("ggplot2", "Make sure to call the 'ggplot2' package!")
+test_library_function("dplyr", "Make sure to call the 'dplyr' package!")
+
+test_ggplot(index = 1)
+
+success_msg("Great!")
+```
+
+## 3. The influence of formal and semantic similarity on acceptability tasks
+- Eddington & Ruiz de Mendoza (2010) presented subjects with the same test sentences under two conditions:
+    - Primed with a syntactically similar sentence
+    - Primed with a syntactically and semantically similar sentence
+- The subjects were asked to rate the test sentences as `acceptable` or `unaccceptable`
+- The reaction times were measured as the outcome variable
+- Research question:
+    - *If subjects are primed with a formally and semantically similar sentence, are they faster at judging the grammaticality of test sentences than when they are primed with just a formally similar sentence?*
+- Hypothesis:
+    - *Priming with a formally and a semantically similar sentence will decrease subjects' reaction times*
+
+### 3.1 Loading and exploring the data
+```{r ex="load_explore_conditions_RT", type="sample-code"}
+# Load the readr package
+
+# Load the course data from the course website to the object 'dataSet':
+# http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class4_Eddington_and_Ruiz-Mendoza_2010.csv
+
+# Load the dplyr package
+
+# Print a 'glimpse' of the dataSet
+
+# Print a summary of the Mean_RT column
+
+```
+
+```{r ex="load_explore_conditions_RT", type="solution"}
+# Load the readr package
+library(readr)
+# Load the course data from the course website to the object 'dataSet':
+# http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class4_Eddington_and_Ruiz-Mendoza_2010.csv
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class4_Eddington_and_Ruiz-Mendoza_2010.csv")
+# Load the dplyr package
+library(dplyr)
+# Print a 'glimpse' of the dataSet
+glimpse(dataSet)
+# Print a summary of the Mean_RT column
+summary(dataSet$Mean_RT)
+```
+
+```{r ex="load_explore_conditions_RT", type="sct"}
+test_object("dataSet")
+test_library_function("readr", "Make sure to call the 'readr' package!")
+test_library_function("dplyr", "Make sure to call the 'dplyr' package!")
+test_output_contains("glimpse(dataSet)",   incorrect_msg = "Make sure to print a 'glimpse' of the data!")
+test_output_contains("summary(dataSet$Mean_RT)",   incorrect_msg = "Make sure to print a 'summary' of the Mean_RT column!")
+success_msg("Great!")
+```
+
+### 3.2  A first exploration of the differences with a box-and-whisker plot
+```{r ex="boxplot_conditions_RT", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class4_Eddington_and_Ruiz-Mendoza_2010.csv")
+```
+
+```{r ex="boxplot_conditions_RT", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Load the ggplot2 package
+
+# Draw a box-and-whisker plot to compare the medians of the condition groups
+
+# Which of the two groups has the highest median Mean_RT? You will find the correct solution on the Solution tab
+```
+
+```{r ex="boxplot_conditions_RT", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Load the ggplot2 package
+library(ggplot2)
+# Draw a box-and-whisker plot to compare the medians of the condition groups
+ggplot(dataSet, aes(x=condition, y=Mean_RT)) + geom_boxplot()
+# Which of the two groups has the highest median Mean_RT? You will find the correct solution on the Solution tab
+# The condition 'syntax and semantics' clearly has the lowest Mean_RT 
+```
+
+```{r ex="boxplot_conditions_RT", type="sct"}
+test_library_function("ggplot2", "Make sure to call the 'ggplot2' package!")
+test_ggplot(index = 1)
+success_msg("Great!")
+```
+
+### 3.3. Checking the assumptions of statistical tests
+
+```{r ex="conditions_RT_distribution", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class4_Eddington_and_Ruiz-Mendoza_2010.csv")
+```
+
+```{r ex="conditions_RT_distribution", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Before we move on to test whether or not our results are significant, we should test the assumptions of either the t-test or the Wilcoxon-test
+
+# Count the number of rows of dataSet to establish the sample size
+
+# Load the ggplot2 package
+
+# Draw a density plot of the Mean_RT-column for both groups and add a red vertical line at the mean
+
+# Compute a Shapiro-Wilk test for both groups
+
+# Are the data distributed normally and how large is the sample?  What type of test can we use in this case? You will find the correct answer on the Solution tab 
+
+```
+
+```{r ex="conditions_RT_distribution", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Before we move on to test whether or not our results are significant, we should test the assumptions of either the t-test or the Wilcoxon-test
+
+# Count the number of rows of dataSet to establish the sample size
+nrow(dataSet)
+# Load the ggplot2 package
+library(ggplot2)
+# Draw a density plot of the Mean_RT-column for both groups and add a red vertical line at the mean
+ggplot(dataSet[dataSet$condition=="only syntax", ], aes(x=Mean_RT)) + geom_line(stat="density") + geom_vline(aes(xintercept =mean(dataSet[dataSet$condition=="only syntax", ]$Mean_RT) ), color="red")
+
+ggplot(dataSet[dataSet$condition=="syntax and semantics", ], aes(x=Mean_RT)) + geom_line(stat="density") + geom_vline(aes(xintercept =mean(dataSet[dataSet$condition=="syntax and semantics", ]$Mean_RT) ), color="red")
+
+# Compute a Shapiro-Wilk test for both groups
+shapiro.test(dataSet[dataSet$condition=="only syntax", ]$Mean_RT)
+shapiro.test(dataSet[dataSet$condition=="syntax and semantics", ]$Mean_RT)
+
+# Are the data distributed normally and how large is the sample? What type of test can we use in this case? You will find the correct answer on the Solution tab 
+# For both groups, the data do not seem to follow a normal distribution: 
+# - The Shapiro-Wilk tests suggest a normal distribution, but the density plots do not support this. This may be due to the small sample size. 
+# In addition, the sample size is too small to ignore this result
+# This means we should use a Wilcoxon test, just to be safe
+```
+
+```{r ex="conditions_RT_distribution", type="sct"}
+test_library_function("ggplot2", "Make sure to call the 'ggplot2' package!")
+test_ggplot(index = 1)
+test_ggplot(index = 2)
+test_output_contains("nrow(dataSet)", "Make sure you count the number of rows in dataSet")
+test_output_contains('shapiro.test(dataSet[dataSet$condition=="syntax and semantics", ]$Mean_RT)', "Don't forget to perform the shapiro.test for the high group!")
+test_output_contains('shapiro.test(dataSet[dataSet$condition=="only syntax", ]$Mean_RT)',  "Don't forget to perform the shapiro.test for the low group!")
+
+success_msg("Great!")
+```
+
+### 3.4 Performing the statistical test
+```{r ex="conditions_RT_test", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class4_Eddington_and_Ruiz-Mendoza_2010.csv")
+```
+
+```{r ex="conditions_RT_test", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Convert 'condition' to a factor
+
+# Relevel 'condition' so that the reference level is 'syntax and semantics'
+
+# Perform a Wilcoxon tests of the differences between the two conditios. You will need to use the formula method.
+# Also, keep in mind that:
+# - Our data is paired
+# - Our hypothesis states: The 'syntax and semantics' condition will trigger shorter reaction times
+
+# Is the result significant? You will find the correct answer on the Solution tab
+
+```
+
+```{r ex="conditions_RT_test", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Convert 'condition' to a factor
+dataSet$condition <- as.factor(dataSet$condition)
+
+# Relevel 'condition' so that the reference level is 'low'
+dataSet$condition <- relevel(dataSet$condition, ref="syntax and semantics")
+
+# Perform a t-test of the differences bretween surfers and non-surfers. You will need to use the formula method.
+# Also, keep in mind our hypothesis: Surfers will have higher Mean_RT-values
+wilcox.test(Mean_RT ~ condition, data=dataSet, alternative="less", paired=TRUE)
+
+# Is the result significant? Yes, the 'syntax and semantics' condition triggered significantly shorter reaction times  
+```
+
+```{r ex="conditions_RT_test", type="sct"}
+
+test_output_contains("wilcox.test(Mean_RT ~ condition, data=dataSet, alternative='less', paired=TRUE)", "Don't forget to calculate the paired Wilcoxon test!")
+success_msg("Great!")
+```
+
+### 3.5 Plotting the differences between the groups
+```{r ex="conditions_RT_plot", type="pre-exercise-code"}
+library(readr)
+confMedian <- function(x) {
+  sort(x)[qbinom(c(.025,.975), length(x), 0.5)]
+}
+
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class4_Eddington_and_Ruiz-Mendoza_2010.csv")
+```
+
+```{r ex="conditions_RT_plot", type="sample-code"}
+# The data.frame dataSet is already in your workspace, as is the confMedian function
+confMedian <- function(x) {
+  sort(x)[qbinom(c(.025,.975), length(x), 0.5)]
+}
+
+# Convert 'condition' to a factor
+
+# Relevel 'condition' so that the reference level is 'syntax and semantics'
+
+# Load the 'dplyr' package
+
+# Calculate the data for the plot, including the upper and lower bounds of the confidence intervals:
+dataForPlot <- dataSet %>%
+  group_by(___) %>%
+  summarise(lowerBound= ___, 
+            upperBound=___, 
+            median=___)
+
+# Load the ggplot2 package
+
+
+# Create a colored barplot to compare the two group medians in the 'dataForPlot' data.frame.
+# Add error bars to the barplot
+```
+
+```{r ex="conditions_RT_plot", type="solution"}
+# The data.frame dataSet is already in your workspace, as is the confMedian function
+confMedian <- function(x) {
+  sort(x)[qbinom(c(.025,.975), length(x), 0.5)]
+}
+# Convert 'condition' to a factor
+dataSet$condition <- as.factor(dataSet$condition)
+
+# Relevel 'condition' so that the reference level is 'syntax and semantics'
+dataSet$condition <- relevel(dataSet$condition, ref="syntax and semantics")
+
+# Load the 'dplyr' package
+library(dplyr)
+# Calculate the data for the plot, including the upper and lower bounds of the confidence intervals:
+dataForPlot <- dataSet %>%
+  group_by(condition) %>%
+  summarise(lowerBound= confMedian(Mean_RT)[1], 
+            upperBound=confMedian(Mean_RT)[2], 
+            median=median(Mean_RT))
+
+# Load the ggplot2 package
+library(ggplot2)
+
+# Create a colored barplot to compare the two group medians in the 'dataForPlot' data.frame.
+# Add error bars to the barplot
+ggplot(dataForPlot, aes(x=condition, y=median, color=condition, fill=condition)) + geom_bar(stat="identity") + geom_errorbar(aes(ymin=lowerBound, ymax=upperBound), width=0.5, color="black")
+
+```
+
+```{r ex="conditions_RT_plot", type="sct"}
+test_library_function("ggplot2", "Make sure to call the 'ggplot2' package!")
+test_library_function("dplyr", "Make sure to call the 'dplyr' package!")
+
+test_ggplot(index = 1)
+
+success_msg("Great!")
+```
+
+## References
+- Eddington, D., & Ruiz De Mendoza, F. J. (2010). Argument constructions and language processing: Evidence from a priming experiment and pedagogical implications. In S. De Knop, F. Boers, A. De Rycker (eds.), *Fostering Language Teaching Efficiency through Cognitive Linguistics* (213-238). Berlin/Boston, MA: De Gruyter.
+- Levshina, N. (2015). *How to do linguistics with R: Data exploration and statistical analysis*. Amsterdam/Philadelphia, PA: John Benjamin's. 
+- Paivio, A., Juille, J. C., & Madigan, S. (1968). Concreteness, imagery, and meaningfulness values for 925 nouns. *Journal of Experimental Psychology*, 76(1, Pt. 2), 1-25.

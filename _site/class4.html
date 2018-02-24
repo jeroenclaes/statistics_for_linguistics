@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+<meta name="author" content="Jeroen Claes | jeroen.claes@kuleuven.be | jeroen@cropland.be" />
+
+
+<title>Class 4: Comparing the central tendency of two groups</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/lumen.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 54px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 59px;
+  margin-top: -59px;
+}
+
+.section h2 {
+  padding-top: 59px;
+  margin-top: -59px;
+}
+.section h3 {
+  padding-top: 59px;
+  margin-top: -59px;
+}
+.section h4 {
+  padding-top: 59px;
+  margin-top: -59px;
+}
+.section h5 {
+  padding-top: 59px;
+  margin-top: -59px;
+}
+.section h6 {
+  padding-top: 59px;
+  margin-top: -59px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Statistics for linguistics</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="class1.html">Lab 1</a>
+</li>
+<li>
+  <a href="class2.html">Lab 2</a>
+</li>
+<li>
+  <a href="class3.html">Lab 3</a>
+</li>
+<li>
+  <a href="class4.html">Lab 4</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Class 4: Comparing the central tendency of two groups</h1>
+<h4 class="author"><em>Jeroen Claes | <a href="mailto:jeroen.claes@kuleuven.be">jeroen.claes@kuleuven.be</a> | <a href="mailto:jeroen@cropland.be">jeroen@cropland.be</a></em></h4>
+
+</div>
+
+
+<script src="https://cdn.datacamp.com/datacamp-light-latest.min.js"></script>
+<div id="case-study-one-dude-or-duuude" class="section level2">
+<h2>1. Case study one: <em>Dude</em> or <em>Duuude</em>?</h2>
+<ul>
+<li>The data for this exercise were taken from a study of the way Californians pronounce the /u/ in the word <em>dude</em></li>
+<li>193 people were recorded saying the word <em>dude</em> and the F2 formant of the /u/ was measured</li>
+<li>Research question:
+<ul>
+<li><em>Do surfers pronounce the word</em> dude <em>differently from non-surfers?</em></li>
+</ul></li>
+<li>Hypothesis:
+<ul>
+<li><em>Surfers will have higher F2 values than non-surfers</em></li>
+</ul></li>
+</ul>
+<div id="loading-and-exploring-the-data" class="section level3">
+<h3>1.1 Loading and exploring the data</h3>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIjIExvYWQgdGhlIHJlYWRyIHBhY2thZ2VcblxuIyBMb2FkIHRoZSBjb3Vyc2UgZGF0YSBmcm9tIHRoZSBjb3Vyc2Ugd2Vic2l0ZSB0byB0aGUgb2JqZWN0ICdkYXRhU2V0JzpcbiMgaHR0cDovL3d3dy5qZXJvZW5jbGFlcy5iZS9zdGF0aXN0aWNzX2Zvcl9saW5ndWlzdGljcy9kYXRhc2V0cy9jbGFzczRfZHVkZS5jc3ZcblxuIyBMb2FkIHRoZSBkcGx5ciBwYWNrYWdlXG5cbiMgUHJpbnQgYSAnZ2xpbXBzZScgb2YgdGhlIGRhdGFTZXRcblxuIyBQcmludCBhIHN1bW1hcnkgb2YgdGhlIEYyIGNvbHVtbiIsInNvbHV0aW9uIjoiIyBMb2FkIHRoZSByZWFkciBwYWNrYWdlXG5saWJyYXJ5KHJlYWRyKVxuIyBMb2FkIHRoZSBjb3Vyc2UgZGF0YSBmcm9tIHRoZSBjb3Vyc2Ugd2Vic2l0ZSB0byB0aGUgb2JqZWN0ICdkYXRhU2V0JzpcbiMgaHR0cDovL3d3dy5qZXJvZW5jbGFlcy5iZS9zdGF0aXN0aWNzX2Zvcl9saW5ndWlzdGljcy9kYXRhc2V0cy9jbGFzczRfZHVkZS5jc3ZcbmRhdGFTZXQgPC0gcmVhZF9jc3YoXCJodHRwOi8vd3d3Lmplcm9lbmNsYWVzLmJlL3N0YXRpc3RpY3NfZm9yX2xpbmd1aXN0aWNzL2RhdGFzZXRzL2NsYXNzNF9kdWRlLmNzdlwiKVxuIyBMb2FkIHRoZSBkcGx5ciBwYWNrYWdlXG5saWJyYXJ5KGRwbHlyKVxuIyBQcmludCBhICdnbGltcHNlJyBvZiB0aGUgZGF0YVNldFxuZ2xpbXBzZShkYXRhU2V0KVxuIyBQcmludCBhIHN1bW1hcnkgb2YgdGhlIEYyIGNvbHVtblxuc3VtbWFyeShkYXRhU2V0JEYyKSIsInNjdCI6InRlc3Rfb2JqZWN0KFwiZGF0YVNldFwiKVxudGVzdF9saWJyYXJ5X2Z1bmN0aW9uKFwicmVhZHJcIiwgXCJNYWtlIHN1cmUgdG8gY2FsbCB0aGUgJ3JlYWRyJyBwYWNrYWdlIVwiKVxudGVzdF9saWJyYXJ5X2Z1bmN0aW9uKFwiZHBseXJcIiwgXCJNYWtlIHN1cmUgdG8gY2FsbCB0aGUgJ2RwbHlyJyBwYWNrYWdlIVwiKVxudGVzdF9vdXRwdXRfY29udGFpbnMoXCJnbGltcHNlKGRhdGFTZXQpXCIsICAgaW5jb3JyZWN0X21zZyA9IFwiTWFrZSBzdXJlIHRvIHByaW50IGEgJ2dsaW1wc2UnIG9mIHRoZSBkYXRhIVwiKVxudGVzdF9vdXRwdXRfY29udGFpbnMoXCJzdW1tYXJ5KGRhdGFTZXQkRjIpXCIsICAgaW5jb3JyZWN0X21zZyA9IFwiTWFrZSBzdXJlIHRvIHByaW50IGEgJ3N1bW1hcnknIG9mIHRoZSBGMiBjb2x1bW4hXCIpXG5zdWNjZXNzX21zZyhcIkdyZWF0IVwiKSJ9
+</div>
+</div>
+<div id="a-first-exploration-of-the-differences-with-a-box-and-whisker-plot" class="section level3">
+<h3>1.2 A first exploration of the differences with a box-and-whisker plot</h3>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6ImxpYnJhcnkocmVhZHIpXG5kYXRhU2V0IDwtIHJlYWRfY3N2KFwiaHR0cDovL3d3dy5qZXJvZW5jbGFlcy5iZS9zdGF0aXN0aWNzX2Zvcl9saW5ndWlzdGljcy9kYXRhc2V0cy9jbGFzczRfZHVkZS5jc3ZcIikiLCJzYW1wbGUiOiIjIFRoZSBkYXRhLmZyYW1lIGRhdGFTZXQgaXMgYWxyZWFkeSBpbiB5b3VyIHdvcmtzcGFjZVxuXG4jIExvYWQgdGhlIGdncGxvdDIgcGFja2FnZVxuXG4jIERyYXcgYSBib3gtYW5kLXdoaXNrZXIgcGxvdCB0byBjb21wYXJlIHRoZSBtZWRpYW5zIG9mIHRoZSBTdXJmZXJfb3Jfbm9uU3VyZmVyIGdyb3Vwc1xuXG4jIFdoaWNoIG9mIHRoZSB0d28gZ3JvdXBzIGhhcyB0aGUgaGlnaGVzdCBtZWRpYW4gRjI/IFlvdSB3aWxsIGZpbmQgdGhlIGNvcnJlY3Qgc29sdXRpb24gb24gdGhlIFNvbHV0aW9uIHRhYiIsInNvbHV0aW9uIjoiIyBUaGUgZGF0YS5mcmFtZSBkYXRhU2V0IGlzIGFscmVhZHkgaW4geW91ciB3b3Jrc3BhY2VcblxuIyBMb2FkIHRoZSBnZ3Bsb3QyIHBhY2thZ2VcbmxpYnJhcnkoZ2dwbG90MilcbiMgRHJhdyBhIGJveC1hbmQtd2hpc2tlciBwbG90IHRvIGNvbXBhcmUgdGhlIG1lZGlhbnMgb2YgdGhlIFN1cmZlcl9vcl9ub25TdXJmZXIgZ3JvdXBzXG5nZ3Bsb3QoZGF0YVNldCwgYWVzKHg9U3VyZmVyX29yX25vblN1cmZlciwgeT1GMikpICsgZ2VvbV9ib3hwbG90KClcbiMgV2hpY2ggb2YgdGhlIHR3byBncm91cHMgaGFzIHRoZSBoaWdoZXN0IG1lZGlhbiBGMj8gWW91IHdpbGwgZmluZCB0aGUgY29ycmVjdCBzb2x1dGlvbiBvbiB0aGUgU29sdXRpb24gdGFiXG4jIFRoZSBzdXJmZXJzIGNsZWFybHkgaGF2ZSB0aGUgaGlnaGVzdCBGMi12YWx1ZSIsInNjdCI6InRlc3RfbGlicmFyeV9mdW5jdGlvbihcImdncGxvdDJcIiwgXCJNYWtlIHN1cmUgdG8gY2FsbCB0aGUgJ2dncGxvdDInIHBhY2thZ2UhXCIpXG50ZXN0X2dncGxvdChpbmRleCA9IDEpXG5zdWNjZXNzX21zZyhcIkdyZWF0IVwiKSJ9
+</div>
+</div>
+<div id="checking-the-assumptions-of-statistical-tests" class="section level3">
+<h3>1.3 Checking the assumptions of statistical tests</h3>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6ImxpYnJhcnkocmVhZHIpXG5kYXRhU2V0IDwtIHJlYWRfY3N2KFwiaHR0cDovL3d3dy5qZXJvZW5jbGFlcy5iZS9zdGF0aXN0aWNzX2Zvcl9saW5ndWlzdGljcy9kYXRhc2V0cy9jbGFzczRfZHVkZS5jc3ZcIikiLCJzYW1wbGUiOiIjIFRoZSBkYXRhLmZyYW1lIGRhdGFTZXQgaXMgYWxyZWFkeSBpbiB5b3VyIHdvcmtzcGFjZVxuXG4jIEJlZm9yZSB3ZSBtb3ZlIG9uIHRvIHRlc3Qgd2hldGhlciBvciBub3Qgb3VyIHJlc3VsdHMgYXJlIHNpZ25pZmljYW50LCB3ZSBzaG91bGQgdGVzdCB0aGUgYXNzdW1wdGlvbnMgb2YgZWl0aGVyIHRoZSB0LXRlc3Qgb3IgdGhlIFdpbGNveG9uLXRlc3RcblxuIyBDb3VudCB0aGUgbnVtYmVyIG9mIHJvd3Mgb2YgZGF0YVNldCB0byBlc3RhYmxpc2ggdGhlIHNhbXBsZSBzaXplXG5cbiMgTG9hZCB0aGUgZ2dwbG90MiBwYWNrYWdlXG5cbiMgRHJhdyBhIGRlbnNpdHkgcGxvdCBvZiB0aGUgRjItY29sdW1uIGZvciBib3RoIGdyb3VwcyBhbmQgYWRkIGEgcmVkIHZlcnRpY2FsIGxpbmUgYXQgdGhlIG1lYW5cblxuIyBDb21wdXRlIGEgU2hhcGlyby1XaWxrIHRlc3QgZm9yIGJvdGggZ3JvdXBzXG5cbiMgQXJlIHRoZSBkYXRhIGRpc3RyaWJ1dGVkIG5vcm1hbGx5PyBJcyB0aGUgc2FtcGxlIHNpemUgbGFyZ2UgZW5vdWdoPyBXaGF0IHR5cGUgb2YgdGVzdCBjYW4gd2UgdXNlIGluIHRoaXMgY2FzZT8gWW91IHdpbGwgZmluZCB0aGUgY29ycmVjdCBhbnN3ZXIgb24gdGhlIFNvbHV0aW9uIHRhYiAiLCJzb2x1dGlvbiI6IiMgVGhlIGRhdGEuZnJhbWUgZGF0YVNldCBpcyBhbHJlYWR5IGluIHlvdXIgd29ya3NwYWNlXG5cbiMgQmVmb3JlIHdlIG1vdmUgb24gdG8gdGVzdCB3aGV0aGVyIG9yIG5vdCBvdXIgcmVzdWx0cyBhcmUgc2lnbmlmaWNhbnQsIHdlIHNob3VsZCB0ZXN0IHRoZSBhc3N1bXB0aW9ucyBvZiBlaXRoZXIgdGhlIHQtdGVzdCBvciB0aGUgV2lsY294b24tdGVzdFxuXG4jIENvdW50IHRoZSBudW1iZXIgb2Ygcm93cyBvZiBkYXRhU2V0IHRvIGVzdGFibGlzaCB0aGUgc2FtcGxlIHNpemVcbm5yb3coZGF0YVNldClcblxuIyBMb2FkIHRoZSBnZ3Bsb3QyIHBhY2thZ2VcbmxpYnJhcnkoZ2dwbG90MilcblxuIyBEcmF3IGEgZGVuc2l0eSBwbG90IG9mIHRoZSBGMi1jb2x1bW4gZm9yIGJvdGggZ3JvdXBzIGFuZCBhZGQgYSByZWQgdmVydGljYWwgbGluZSBhdCB0aGUgbWVhblxuZ2dwbG90KGRhdGFTZXRbZGF0YVNldCRTdXJmZXJfb3Jfbm9uU3VyZmVyPT1cInN1cmZlclwiLCBdLCBhZXMoeD1GMikpICsgZ2VvbV9saW5lKHN0YXQ9XCJkZW5zaXR5XCIpICsgZ2VvbV92bGluZShhZXMoeGludGVyY2VwdCA9bWVhbihkYXRhU2V0W2RhdGFTZXQkU3VyZmVyX29yX25vblN1cmZlcj09XCJzdXJmZXJcIiwgXSRGMikgKSwgY29sb3I9XCJyZWRcIilcblxuZ2dwbG90KGRhdGFTZXRbZGF0YVNldCRTdXJmZXJfb3Jfbm9uU3VyZmVyPT1cIk5vbi1zdXJmZXJcIiwgXSwgYWVzKHg9RjIpKSArIGdlb21fbGluZShzdGF0PVwiZGVuc2l0eVwiKSArIGdlb21fdmxpbmUoYWVzKHhpbnRlcmNlcHQgPW1lYW4oZGF0YVNldFtkYXRhU2V0JFN1cmZlcl9vcl9ub25TdXJmZXI9PVwiTm9uLXN1cmZlclwiLCBdJEYyKSApLCBjb2xvcj1cInJlZFwiKVxuXG4jIENvbXB1dGUgYSBTaGFwaXJvLVdpbGsgdGVzdCBmb3IgYm90aCBncm91cHNcbnNoYXBpcm8udGVzdChkYXRhU2V0W2RhdGFTZXQkU3VyZmVyX29yX25vblN1cmZlcj09XCJzdXJmZXJcIiwgXSRGMilcbnNoYXBpcm8udGVzdChkYXRhU2V0W2RhdGFTZXQkU3VyZmVyX29yX25vblN1cmZlcj09XCJOb24tc3VyZmVyXCIsIF0kRjIpXG5cbiMgQXJlIHRoZSBkYXRhIGRpc3RyaWJ1dGVkIG5vcm1hbGx5PyBJcyB0aGUgc2FtcGxlIHNpemUgbGFyZ2UgZW5vdWdoPyBXaGF0IHR5cGUgb2YgdGVzdCBjYW4gd2UgdXNlIGluIHRoaXMgY2FzZT8gWW91IHdpbGwgZmluZCB0aGUgY29ycmVjdCBhbnN3ZXIgb24gdGhlIFNvbHV0aW9uIHRhYiBcbiMgRm9yIGJvdGggZ3JvdXBzLCB0aGUgZGF0YSBhcmUgZGlzdHJpYnV0ZWQgbm9ybWFsbHkuIEluIGFkZGl0aW9uLCB0aGUgc2FtcGxlIHNpemUgaXMgbGFyZ2VyIHRoYW4gMzAuIFRoaXMgbWVhbnMgd2UgY2FuIHVzZSB0aGUgdC10ZXN0IHRvIHNlZSBpZiBvdXIgcmVzdWx0cyBhcmUgc2lnbmlmaWNhbnQiLCJzY3QiOiJ0ZXN0X2xpYnJhcnlfZnVuY3Rpb24oXCJnZ3Bsb3QyXCIsIFwiTWFrZSBzdXJlIHRvIGNhbGwgdGhlICdnZ3Bsb3QyJyBwYWNrYWdlIVwiKVxudGVzdF9nZ3Bsb3QoaW5kZXggPSAxKVxudGVzdF9nZ3Bsb3QoaW5kZXggPSAyKVxuXG50ZXN0X291dHB1dF9jb250YWlucygnc2hhcGlyby50ZXN0KGRhdGFTZXRbZGF0YVNldCRTdXJmZXJfb3Jfbm9uU3VyZmVyPT1cIk5vbi1zdXJmZXJcIiwgXSRGMiknLCBcIkRvbid0IGZvcmdldCB0byBwZXJmb3JtIHRoZSBzaGFwaXJvLnRlc3QgZm9yIHRoZSBOb24tc3VyZmVycyFcIilcbnRlc3Rfb3V0cHV0X2NvbnRhaW5zKCdzaGFwaXJvLnRlc3QoZGF0YVNldFtkYXRhU2V0JFN1cmZlcl9vcl9ub25TdXJmZXI9PVwic3VyZmVyXCIsIF0kRjIpJywgIFwiRG9uJ3QgZm9yZ2V0IHRvIHBlcmZvcm0gdGhlIHNoYXBpcm8udGVzdCBmb3IgdGhlIHN1cmZlcnMhXCIpXG50ZXN0X291dHB1dF9jb250YWlucygnbnJvdyhkYXRhU2V0KScsICBcIkRvbid0IGZvcmdldCB0byBjb3VudCB0aGUgbnVtYmVyIG9mIHJvd3Mgb2YgZGF0YVNldCB0byBlc3RhYmxpc2ggdGhlIHNhbXBsZSBzaXplIVwiKVxuc3VjY2Vzc19tc2coXCJHcmVhdCB3b3JrIVwiKSJ9
+</div>
+</div>
+<div id="performing-the-statistical-test" class="section level3">
+<h3>1.4 Performing the statistical test</h3>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6ImxpYnJhcnkocmVhZHIpXG5saWJyYXJ5KGdncGxvdDIpXG5kYXRhU2V0IDwtIHJlYWRfY3N2KFwiaHR0cDovL3d3dy5qZXJvZW5jbGFlcy5iZS9zdGF0aXN0aWNzX2Zvcl9saW5ndWlzdGljcy9kYXRhc2V0cy9jbGFzczRfZHVkZS5jc3ZcIikiLCJzYW1wbGUiOiIjIFRoZSBkYXRhLmZyYW1lIGRhdGFTZXQgaXMgYWxyZWFkeSBpbiB5b3VyIHdvcmtzcGFjZVxuXG4jIENvbnZlcnQgJ1N1cmZlcl9vcl9ub25TdXJmZXInIHRvIGEgZmFjdG9yXG5cbiMgUmVsZXZlbCAnU3VyZmVyX29yX25vblN1cmZlcicgc28gdGhhdCB0aGUgcmVmZXJlbmNlIGxldmVsIGlzICdzdXJmZXInXG5cbiMgUGVyZm9ybSBhIHQtdGVzdCBvZiB0aGUgZGlmZmVyZW5jZXMgYnJldHdlZW4gc3VyZmVycyBhbmQgbm9uLXN1cmZlcnMuIFlvdSB3aWxsIG5lZWQgdG8gdXNlIHRoZSBmb3JtdWxhIG1ldGhvZC5cbiMgQWxzbywga2VlcCBpbiBtaW5kIG91ciBoeXBvdGhlc2lzOiBTdXJmZXJzIHdpbGwgaGF2ZSBoaWdoZXIgRjItdmFsdWVzXG5cbiMgSXMgdGhlIHJlc3VsdCBzaWduaWZpY2FudD8gWW91IHdpbGwgZmluZCB0aGUgY29ycmVjdCBhbnN3ZXIgb24gdGhlIFNvbHV0aW9uIHRhYlxuXG4jIENhbGN1bGF0ZSBDb2hlbidzIGQgXG5cbiMgSXMgdGhlIGVmZmVjdCBsYXJnZSBvciBzbWFsbD8gWW91IHdpbGwgZmluZCB0aGUgY29ycmVjdCBhbnN3ZXIgb24gdGhlIFNvbHV0aW9uIHRhYiIsInNvbHV0aW9uIjoiIyBUaGUgZGF0YS5mcmFtZSBkYXRhU2V0IGlzIGFscmVhZHkgaW4geW91ciB3b3Jrc3BhY2VcblxuIyBDb252ZXJ0ICdTdXJmZXJfb3Jfbm9uU3VyZmVyJyB0byBhIGZhY3RvclxuZGF0YVNldCRTdXJmZXJfb3Jfbm9uU3VyZmVyIDwtIGFzLmZhY3RvcihkYXRhU2V0JFN1cmZlcl9vcl9ub25TdXJmZXIpXG5cbiMgUmVsZXZlbCAnU3VyZmVyX29yX25vblN1cmZlcicgc28gdGhhdCB0aGUgcmVmZXJlbmNlIGxldmVsIGlzICdzdXJmZXInXG5kYXRhU2V0JFN1cmZlcl9vcl9ub25TdXJmZXIgPC0gcmVsZXZlbChkYXRhU2V0JFN1cmZlcl9vcl9ub25TdXJmZXIsIHJlZj1cInN1cmZlclwiKVxuXG4jIFBlcmZvcm0gYSB0LXRlc3Qgb2YgdGhlIGRpZmZlcmVuY2VzIGJyZXR3ZWVuIHN1cmZlcnMgYW5kIG5vbi1zdXJmZXJzLiBZb3Ugd2lsbCBuZWVkIHRvIHVzZSB0aGUgZm9ybXVsYSBtZXRob2QuXG4jIEFsc28sIGtlZXAgaW4gbWluZCBvdXIgaHlwb3RoZXNpczogU3VyZmVycyB3aWxsIGhhdmUgaGlnaGVyIEYyLXZhbHVlc1xudC50ZXN0KEYyIH4gU3VyZmVyX29yX25vblN1cmZlciwgZGF0YT1kYXRhU2V0LCBhbHRlcm5hdGl2ZT1cImdyZWF0ZXJcIilcblxuIyBJcyB0aGUgcmVzdWx0IHNpZ25pZmljYW50PyBZZXMsIHN1cmZlcnMgaGF2ZSBzaWduaWZpY2FudGx5IGhpZ2hlciBGMiB2YWx1ZXMgd2hlbiB0aGV5IHByb25vdW5jZSAnZHVkZSdcblxuIyBDYWxjdWxhdGUgQ29oZW4ncyBkIFxuKG1lYW4oZGF0YVNldFtkYXRhU2V0JFN1cmZlcl9vcl9ub25TdXJmZXI9PVwic3VyZmVyXCIsXSRGMikgLSBtZWFuKGRhdGFTZXRbZGF0YVNldCRTdXJmZXJfb3Jfbm9uU3VyZmVyPT1cIk5vbi1zdXJmZXJcIixdJEYyKSkvc2QoZGF0YVNldCRGMilcblxuIyBJcyB0aGUgZWZmZWN0IGxhcmdlIG9yIHNtYWxsPyBUaGUgZWZmZWN0IGlzIHZlcnkgbGFyZ2UsIG1vcmUgdGhhbiBvbmUgc3RhbmRhcmQgZGV2aWF0aW9uIiwic2N0IjoidGVzdF9vdXRwdXRfY29udGFpbnMoJ3QudGVzdChGMiB+IFN1cmZlcl9vcl9ub25TdXJmZXIsIGRhdGE9ZGF0YVNldCwgYWx0ZXJuYXRpdmU9XCJncmVhdGVyXCIpJywgXCJEb24ndCBmb3JnZXQgdG8gY2FsY3VsYXRlIHRoZSB0LXRlc3QhXCIpXG50ZXN0X291dHB1dF9jb250YWlucygnKG1lYW4oZGF0YVNldFtkYXRhU2V0JFN1cmZlcl9vcl9ub25TdXJmZXI9PVwic3VyZmVyXCIsXSRGMikgLSBtZWFuKGRhdGFTZXRbZGF0YVNldCRTdXJmZXJfb3Jfbm9uU3VyZmVyPT1cIk5vbi1zdXJmZXJcIixdJEYyKSkvc2QoZGF0YVNldCRGMiknLCBcIk1ha2Ugc3VyZSB5b3UgY2FsY3VsYXRlIENvaGVuJ3MgZCBmb3IgdGhlIGRpZmZlcmVuY2UgYmV0d2VlbiB0aGUgZ3JvdXBzIVwiKVxuc3VjY2Vzc19tc2coXCJHcmVhdCFcIikifQ==
+</div>
+</div>
+<div id="plotting-the-differences-between-the-groups" class="section level3">
+<h3>1.5 Plotting the differences between the groups</h3>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6ImxpYnJhcnkocmVhZHIpXG5kYXRhU2V0IDwtIHJlYWRfY3N2KFwiaHR0cDovL3d3dy5qZXJvZW5jbGFlcy5iZS9zdGF0aXN0aWNzX2Zvcl9saW5ndWlzdGljcy9kYXRhc2V0cy9jbGFzczRfZHVkZS5jc3ZcIikiLCJzYW1wbGUiOiIjIFRoZSBkYXRhLmZyYW1lIGRhdGFTZXQgaXMgYWxyZWFkeSBpbiB5b3VyIHdvcmtzcGFjZVxuXG4jIENvbnZlcnQgJ1N1cmZlcl9vcl9ub25TdXJmZXInIHRvIGEgZmFjdG9yXG5cbiMgUmVsZXZlbCAnU3VyZmVyX29yX25vblN1cmZlcicgc28gdGhhdCB0aGUgcmVmZXJlbmNlIGxldmVsIGlzICdzdXJmZXInXG5cbiMgQ2FsY3VsYXRlIHRoZSBzdGFuZGFyZCBlcnJvciBvZiB0aGUgRjIgdmFyaWFibGUgKHN0YW5kYXJkIGRldmlhdGlvbi9zcXVhcmUgcm9vdCBvZiBzYW1wbGUgc2l6ZSlcblxuIyBMb2FkIHRoZSAnZHBseXInIHBhY2thZ2VcblxuIyBDYWxjdWxhdGUgdGhlIGRhdGEgZm9yIHRoZSBwbG90LCBpbmNsdWRpbmcgdGhlIHVwcGVyIGFuZCBsb3dlciBib3VuZHMgb2YgdGhlIGNvbmZpZGVuY2UgaW50ZXJ2YWxzOlxuZGF0YUZvclBsb3QgPC0gZGF0YVNldCAlPiVcbiAgZ3JvdXBfYnkoX19fKSAlPiVcbiAgICBzdW1tYXJpc2UobG93ZXJCb3VuZD0gX19fLCBcbiAgICB1cHBlckJvdW5kPV9fXywgXG4gICAgbWVhbj1fX18pXG5cbiMgTG9hZCB0aGUgZ2dwbG90MiBwYWNrYWdlXG5cblxuIyBDcmVhdGUgYSBjb2xvcmVkIGJhcnBsb3QgdG8gY29tcGFyZSB0aGUgdHdvIGdyb3VwIG1lYW5zIGluIHRoZSAnZGF0YUZvclBsb3QnIGRhdGEuZnJhbWUuXG4jIEFkZCBlcnJvciBiYXJzIHRvIHRoZSBiYXJwbG90Iiwic29sdXRpb24iOiIjIFRoZSBkYXRhLmZyYW1lIGRhdGFTZXQgaXMgYWxyZWFkeSBpbiB5b3VyIHdvcmtzcGFjZVxuXG4jIENvbnZlcnQgJ1N1cmZlcl9vcl9ub25TdXJmZXInIHRvIGEgZmFjdG9yXG5kYXRhU2V0JFN1cmZlcl9vcl9ub25TdXJmZXIgPC0gYXMuZmFjdG9yKGRhdGFTZXQkU3VyZmVyX29yX25vblN1cmZlcilcblxuIyBSZWxldmVsICdTdXJmZXJfb3Jfbm9uU3VyZmVyJyBzbyB0aGF0IHRoZSByZWZlcmVuY2UgbGV2ZWwgaXMgJ3N1cmZlcidcbmRhdGFTZXQkU3VyZmVyX29yX25vblN1cmZlciA8LSByZWxldmVsKGRhdGFTZXQkU3VyZmVyX29yX25vblN1cmZlciwgcmVmPVwic3VyZmVyXCIpXG5cbiMgQ2FsY3VsYXRlIHRoZSBzdGFuZGFyZCBlcnJvciBvZiB0aGUgRjIgdmFyaWFibGUgKHN0YW5kYXJkIGRldmlhdGlvbi9zcXVhcmUgcm9vdCBvZiBzYW1wbGUgc2l6ZSlcblNFPC1zZChkYXRhU2V0JEYyKS9zcXJ0KG5yb3coZGF0YVNldCkpXG4jIExvYWQgdGhlICdkcGx5cicgcGFja2FnZVxubGlicmFyeShkcGx5cilcbiMgQ2FsY3VsYXRlIHRoZSBkYXRhIGZvciB0aGUgcGxvdCwgaW5jbHVkaW5nIHRoZSB1cHBlciBhbmQgbG93ZXIgYm91bmRzIG9mIHRoZSBjb25maWRlbmNlIGludGVydmFsczpcbmRhdGFGb3JQbG90IDwtIGRhdGFTZXQgJT4lXG4gIGdyb3VwX2J5KFN1cmZlcl9vcl9ub25TdXJmZXIpICU+JVxuICAgIHN1bW1hcmlzZShsb3dlckJvdW5kPSBtZWFuKEYyKS0oMS45NipTRSksIFxuICAgIHVwcGVyQm91bmQ9bWVhbihGMikrKDEuOTYqU0UpLCBcbiAgICBtZWFuPW1lYW4oRjIpKVxuXG4jIExvYWQgdGhlIGdncGxvdDIgcGFja2FnZVxubGlicmFyeShnZ3Bsb3QyKVxuXG4jIENyZWF0ZSBhIGNvbG9yZWQgYmFycGxvdCB0byBjb21wYXJlIHRoZSB0d28gZ3JvdXAgbWVhbnMgaW4gdGhlICdkYXRhRm9yUGxvdCcgZGF0YS5mcmFtZS5cbiMgQWRkIGVycm9yIGJhcnMgdG8gdGhlIGJhcnBsb3RcbmdncGxvdChkYXRhRm9yUGxvdCwgYWVzKHg9U3VyZmVyX29yX25vblN1cmZlciwgeT1tZWFuLCBjb2xvcj1TdXJmZXJfb3Jfbm9uU3VyZmVyLCBmaWxsPVN1cmZlcl9vcl9ub25TdXJmZXIpKSArIGdlb21fYmFyKHN0YXQ9XCJpZGVudGl0eVwiKSArIGdlb21fZXJyb3JiYXIoYWVzKHltaW49bG93ZXJCb3VuZCwgeW1heD11cHBlckJvdW5kKSwgd2lkdGg9MC41LCBjb2xvcj1cImJsYWNrXCIpIiwic2N0IjoidGVzdF9saWJyYXJ5X2Z1bmN0aW9uKFwiZ2dwbG90MlwiLCBcIk1ha2Ugc3VyZSB0byBjYWxsIHRoZSAnZ2dwbG90MicgcGFja2FnZSFcIilcbnRlc3RfbGlicmFyeV9mdW5jdGlvbihcImRwbHlyXCIsIFwiTWFrZSBzdXJlIHRvIGNhbGwgdGhlICdkcGx5cicgcGFja2FnZSFcIilcblxudGVzdF9nZ3Bsb3QoaW5kZXggPSAxKVxuXG5zdWNjZXNzX21zZyhcIkdyZWF0IVwiKSJ9
+</div>
+</div>
+</div>
+<div id="case-study-2-high--and-low-frequency-words-and-their-associations" class="section level2">
+<h2>2. Case study 2: high- and low-frequency words and their associations</h2>
+<ul>
+<li>Paivio et al. (1968) instructed groups of college students to rate 925 nouns for the following characteristics (see Levshina, 2015: 89, who provided the data):
+<ul>
+<li><code>concreteness</code>, on a 7-point scale, <em>How directly is the concept related to immediate reference?</em></li>
+<li><code>imaginability</code>, on a 7-point scale, <em>What is the relative capacity of the concept to evoke non-verbal mental images?</em></li>
+<li><code>associations</code>: the number of associations that is triggered by the word in a 30-second time window</li>
+</ul></li>
+<li>The research question we are addressing is the following:
+<ul>
+<li><em>Do high-frequency nouns evoke more associations?</em></li>
+</ul></li>
+<li>Our hypothesis is that:
+<ul>
+<li><em>High-frequency noun evoke more associations than low-frequency nouns</em></li>
+</ul></li>
+<li>The null hypothesis is that:
+<ul>
+<li><em>There is no difference in the number of associations that are triggered by high - and low-frequency nouns</em></li>
+</ul></li>
+</ul>
+<div id="loading-and-exploring-the-data-1" class="section level3">
+<h3>2.1 Loading and exploring the data</h3>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIjIExvYWQgdGhlIHJlYWRyIHBhY2thZ2VcblxuIyBMb2FkIHRoZSBjb3Vyc2UgZGF0YSBmcm9tIHRoZSBjb3Vyc2Ugd2Vic2l0ZSB0byB0aGUgb2JqZWN0ICdkYXRhU2V0JzpcbiMgaHR0cDovL3d3dy5qZXJvZW5jbGFlcy5iZS9zdGF0aXN0aWNzX2Zvcl9saW5ndWlzdGljcy9kYXRhc2V0cy9jbGFzczRfUGFpdmlvX2V0X2FsXzE5NjguY3N2XG5cbiMgTG9hZCB0aGUgZHBseXIgcGFja2FnZVxuXG4jIFByaW50IGEgJ2dsaW1wc2UnIG9mIHRoZSBkYXRhU2V0XG5cbiMgUHJpbnQgYSBzdW1tYXJ5IG9mIHRoZSBhc3NvY2lhdGlvbnMgY29sdW1uIiwic29sdXRpb24iOiIjIExvYWQgdGhlIHJlYWRyIHBhY2thZ2VcbmxpYnJhcnkocmVhZHIpXG4jIExvYWQgdGhlIGNvdXJzZSBkYXRhIGZyb20gdGhlIGNvdXJzZSB3ZWJzaXRlIHRvIHRoZSBvYmplY3QgJ2RhdGFTZXQnOlxuIyBodHRwOi8vd3d3Lmplcm9lbmNsYWVzLmJlL3N0YXRpc3RpY3NfZm9yX2xpbmd1aXN0aWNzL2RhdGFzZXRzL2NsYXNzNF9QYWl2aW9fZXRfYWxfMTk2OC5jc3ZcbmRhdGFTZXQgPC0gcmVhZF9jc3YoXCJodHRwOi8vd3d3Lmplcm9lbmNsYWVzLmJlL3N0YXRpc3RpY3NfZm9yX2xpbmd1aXN0aWNzL2RhdGFzZXRzL2NsYXNzNF9QYWl2aW9fZXRfYWxfMTk2OC5jc3ZcIilcbiMgTG9hZCB0aGUgZHBseXIgcGFja2FnZVxubGlicmFyeShkcGx5cilcbiMgUHJpbnQgYSAnZ2xpbXBzZScgb2YgdGhlIGRhdGFTZXRcbmdsaW1wc2UoZGF0YVNldClcbiMgUHJpbnQgYSBzdW1tYXJ5IG9mIHRoZSBhc3NvY2lhdGlvbnMgY29sdW1uXG5zdW1tYXJ5KGRhdGFTZXQkYXNzb2NpYXRpb25zKSIsInNjdCI6InRlc3Rfb2JqZWN0KFwiZGF0YVNldFwiKVxudGVzdF9saWJyYXJ5X2Z1bmN0aW9uKFwicmVhZHJcIiwgXCJNYWtlIHN1cmUgdG8gY2FsbCB0aGUgJ3JlYWRyJyBwYWNrYWdlIVwiKVxudGVzdF9saWJyYXJ5X2Z1bmN0aW9uKFwiZHBseXJcIiwgXCJNYWtlIHN1cmUgdG8gY2FsbCB0aGUgJ2RwbHlyJyBwYWNrYWdlIVwiKVxudGVzdF9vdXRwdXRfY29udGFpbnMoXCJnbGltcHNlKGRhdGFTZXQpXCIsICAgaW5jb3JyZWN0X21zZyA9IFwiTWFrZSBzdXJlIHRvIHByaW50IGEgJ2dsaW1wc2UnIG9mIHRoZSBkYXRhIVwiKVxudGVzdF9vdXRwdXRfY29udGFpbnMoXCJzdW1tYXJ5KGRhdGFTZXQkYXNzb2NpYXRpb25zKVwiLCAgIGluY29ycmVjdF9tc2cgPSBcIk1ha2Ugc3VyZSB0byBwcmludCBhICdzdW1tYXJ5JyBvZiB0aGUgYXNzb2NpYXRpb25zIGNvbHVtbiFcIilcbnN1Y2Nlc3NfbXNnKFwiR3JlYXQhXCIpIn0=
+</div>
+</div>
+<div id="a-first-exploration-of-the-differences-with-a-box-and-whisker-plot-1" class="section level3">
+<h3>2.2 A first exploration of the differences with a box-and-whisker plot</h3>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6ImxpYnJhcnkocmVhZHIpXG5kYXRhU2V0IDwtIHJlYWRfY3N2KFwiaHR0cDovL3d3dy5qZXJvZW5jbGFlcy5iZS9zdGF0aXN0aWNzX2Zvcl9saW5ndWlzdGljcy9kYXRhc2V0cy9jbGFzczRfUGFpdmlvX2V0X2FsXzE5NjguY3N2XCIpIiwic2FtcGxlIjoiIyBUaGUgZGF0YS5mcmFtZSBkYXRhU2V0IGlzIGFscmVhZHkgaW4geW91ciB3b3Jrc3BhY2VcblxuIyBMb2FkIHRoZSBnZ3Bsb3QyIHBhY2thZ2VcblxuIyBEcmF3IGEgYm94LWFuZC13aGlza2VyIHBsb3QgdG8gY29tcGFyZSB0aGUgbWVkaWFucyBvZiB0aGUgdHlwZSBncm91cHNcblxuIyBXaGljaCBvZiB0aGUgdHdvIGdyb3VwcyBoYXMgdGhlIGhpZ2hlc3QgbWVkaWFuIG51bWJlciBvZiBhc3NvY2lhdGlvbnM/IFlvdSB3aWxsIGZpbmQgdGhlIGNvcnJlY3Qgc29sdXRpb24gb24gdGhlIFNvbHV0aW9uIHRhYiIsInNvbHV0aW9uIjoiIyBUaGUgZGF0YS5mcmFtZSBkYXRhU2V0IGlzIGFscmVhZHkgaW4geW91ciB3b3Jrc3BhY2VcblxuIyBMb2FkIHRoZSBnZ3Bsb3QyIHBhY2thZ2VcbmxpYnJhcnkoZ2dwbG90MilcbiMgRHJhdyBhIGJveC1hbmQtd2hpc2tlciBwbG90IHRvIGNvbXBhcmUgdGhlIG1lZGlhbnMgb2YgdGhlIHR5cGUgZ3JvdXBzXG5nZ3Bsb3QoZGF0YVNldCwgYWVzKHg9dHlwZSwgeT1hc3NvY2lhdGlvbnMpKSArIGdlb21fYm94cGxvdCgpXG4jIFdoaWNoIG9mIHRoZSB0d28gZ3JvdXBzIGhhcyB0aGUgaGlnaGVzdCBtZWRpYW4gbnVtYmVyIG9mIGFzc29jaWF0aW9ucz8gWW91IHdpbGwgZmluZCB0aGUgY29ycmVjdCBzb2x1dGlvbiBvbiB0aGUgU29sdXRpb24gdGFiXG4jIFRoZSAnaGlnaC1mcmVxdWVuY3knIGdyb3VwIGNsZWFybHkgaGFzIHRoZSBoaWdoZXN0IG1lZGlhbiBudW1iZXIgb2YgYXNzb2NpYXRpb25zICIsInNjdCI6InRlc3RfbGlicmFyeV9mdW5jdGlvbihcImdncGxvdDJcIiwgXCJNYWtlIHN1cmUgdG8gY2FsbCB0aGUgJ2dncGxvdDInIHBhY2thZ2UhXCIpXG50ZXN0X2dncGxvdChpbmRleCA9IDEpXG5zdWNjZXNzX21zZyhcIkdyZWF0IVwiKSJ9
+</div>
+</div>
+<div id="checking-the-assumptions-of-statistical-tests-1" class="section level3">
+<h3>2.3. Checking the assumptions of statistical tests</h3>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6ImxpYnJhcnkocmVhZHIpXG5kYXRhU2V0IDwtIHJlYWRfY3N2KFwiaHR0cDovL3d3dy5qZXJvZW5jbGFlcy5iZS9zdGF0aXN0aWNzX2Zvcl9saW5ndWlzdGljcy9kYXRhc2V0cy9jbGFzczRfUGFpdmlvX2V0X2FsXzE5NjguY3N2XCIpIiwic2FtcGxlIjoiIyBUaGUgZGF0YS5mcmFtZSBkYXRhU2V0IGlzIGFscmVhZHkgaW4geW91ciB3b3Jrc3BhY2VcblxuIyBCZWZvcmUgd2UgbW92ZSBvbiB0byB0ZXN0IHdoZXRoZXIgb3Igbm90IG91ciByZXN1bHRzIGFyZSBzaWduaWZpY2FudCwgd2Ugc2hvdWxkIHRlc3QgdGhlIGFzc3VtcHRpb25zIG9mIGVpdGhlciB0aGUgdC10ZXN0IG9yIHRoZSBXaWxjb3hvbi10ZXN0XG5cbiMgQ291bnQgdGhlIG51bWJlciBvZiByb3dzIG9mIGRhdGFTZXQgdG8gZXN0YWJsaXNoIHRoZSBzYW1wbGUgc2l6ZVxuXG4jIExvYWQgdGhlIGdncGxvdDIgcGFja2FnZVxuXG4jIERyYXcgYSBkZW5zaXR5IHBsb3Qgb2YgdGhlIGFzc29jaWF0aW9ucy1jb2x1bW4gZm9yIGJvdGggZ3JvdXBzIGFuZCBhZGQgYSByZWQgdmVydGljYWwgbGluZSBhdCB0aGUgbWVhblxuXG4jIENvbXB1dGUgYSBTaGFwaXJvLVdpbGsgdGVzdCBmb3IgYm90aCBncm91cHNcblxuIyBBcmUgdGhlIGRhdGEgZGlzdHJpYnV0ZWQgbm9ybWFsbHkgYW5kIGhvdyBsYXJnZSBpcyB0aGUgc2FtcGxlPyAgV2hhdCB0eXBlIG9mIHRlc3QgY2FuIHdlIHVzZSBpbiB0aGlzIGNhc2U/IFlvdSB3aWxsIGZpbmQgdGhlIGNvcnJlY3QgYW5zd2VyIG9uIHRoZSBTb2x1dGlvbiB0YWIgIiwic29sdXRpb24iOiIjIFRoZSBkYXRhLmZyYW1lIGRhdGFTZXQgaXMgYWxyZWFkeSBpbiB5b3VyIHdvcmtzcGFjZVxuXG4jIEJlZm9yZSB3ZSBtb3ZlIG9uIHRvIHRlc3Qgd2hldGhlciBvciBub3Qgb3VyIHJlc3VsdHMgYXJlIHNpZ25pZmljYW50LCB3ZSBzaG91bGQgdGVzdCB0aGUgYXNzdW1wdGlvbnMgb2YgZWl0aGVyIHRoZSB0LXRlc3Qgb3IgdGhlIFdpbGNveG9uLXRlc3RcblxuIyBDb3VudCB0aGUgbnVtYmVyIG9mIHJvd3Mgb2YgZGF0YVNldCB0byBlc3RhYmxpc2ggdGhlIHNhbXBsZSBzaXplXG5ucm93KGRhdGFTZXQpXG4jIExvYWQgdGhlIGdncGxvdDIgcGFja2FnZVxubGlicmFyeShnZ3Bsb3QyKVxuXG4jIERyYXcgYSBkZW5zaXR5IHBsb3Qgb2YgdGhlIGFzc29jaWF0aW9ucy1jb2x1bW4gZm9yIGJvdGggZ3JvdXBzIGFuZCBhZGQgYSByZWQgdmVydGljYWwgbGluZSBhdCB0aGUgbWVhblxuZ2dwbG90KGRhdGFTZXRbZGF0YVNldCR0eXBlPT1cImxvd1wiLCBdLCBhZXMoeD1hc3NvY2lhdGlvbnMpKSArIGdlb21fbGluZShzdGF0PVwiZGVuc2l0eVwiKSArIGdlb21fdmxpbmUoYWVzKHhpbnRlcmNlcHQgPW1lYW4oZGF0YVNldFtkYXRhU2V0JHR5cGU9PVwibG93XCIsIF0kYXNzb2NpYXRpb25zKSApLCBjb2xvcj1cInJlZFwiKVxuXG5nZ3Bsb3QoZGF0YVNldFtkYXRhU2V0JHR5cGU9PVwiaGlnaFwiLCBdLCBhZXMoeD1hc3NvY2lhdGlvbnMpKSArIGdlb21fbGluZShzdGF0PVwiZGVuc2l0eVwiKSArIGdlb21fdmxpbmUoYWVzKHhpbnRlcmNlcHQgPW1lYW4oZGF0YVNldFtkYXRhU2V0JHR5cGU9PVwiaGlnaFwiLCBdJGFzc29jaWF0aW9ucykgKSwgY29sb3I9XCJyZWRcIilcblxuIyBDb21wdXRlIGEgU2hhcGlyby1XaWxrIHRlc3QgZm9yIGJvdGggZ3JvdXBzXG5zaGFwaXJvLnRlc3QoZGF0YVNldFtkYXRhU2V0JHR5cGU9PVwibG93XCIsIF0kYXNzb2NpYXRpb25zKVxuc2hhcGlyby50ZXN0KGRhdGFTZXRbZGF0YVNldCR0eXBlPT1cImhpZ2hcIiwgXSRhc3NvY2lhdGlvbnMpXG5cbiMgQXJlIHRoZSBkYXRhIGRpc3RyaWJ1dGVkIG5vcm1hbGx5IGFuZCBob3cgbGFyZ2UgaXMgdGhlIHNhbXBsZT8gV2hhdCB0eXBlIG9mIHRlc3QgY2FuIHdlIHVzZSBpbiB0aGlzIGNhc2U/IFlvdSB3aWxsIGZpbmQgdGhlIGNvcnJlY3QgYW5zd2VyIG9uIHRoZSBTb2x1dGlvbiB0YWIgXG4jIEZvciBib3RoIGdyb3VwcywgdGhlIGRhdGEgYXJlIGRpc3RyaWJ1dGVkIHF1YXNpLW5vcm1hbGx5LiBJbiBhZGRpdGlvbiwgdGhlIHNhbXBsZSBzaXplIGlzIGxhcmdlLiBUaGlzIG1lYW5zIHdlIGNhbiB1c2UgdGhlIHQtdGVzdCB0byBzZWUgaWYgb3VyIHJlc3VsdHMgYXJlIHNpZ25pZmljYW50Iiwic2N0IjoidGVzdF9saWJyYXJ5X2Z1bmN0aW9uKFwiZ2dwbG90MlwiLCBcIk1ha2Ugc3VyZSB0byBjYWxsIHRoZSAnZ2dwbG90MicgcGFja2FnZSFcIilcbnRlc3RfZ2dwbG90KGluZGV4ID0gMSlcbnRlc3RfZ2dwbG90KGluZGV4ID0gMilcbnRlc3Rfb3V0cHV0X2NvbnRhaW5zKFwibnJvdyhkYXRhU2V0KVwiLCBcIk1ha2Ugc3VyZSB5b3UgY291bnQgdGhlIG51bWJlciBvZiByb3dzIGluIGRhdGFTZXRcIilcbnRlc3Rfb3V0cHV0X2NvbnRhaW5zKCdzaGFwaXJvLnRlc3QoZGF0YVNldFtkYXRhU2V0JHR5cGU9PVwiaGlnaFwiLCBdJGFzc29jaWF0aW9ucyknLCBcIkRvbid0IGZvcmdldCB0byBwZXJmb3JtIHRoZSBzaGFwaXJvLnRlc3QgZm9yIHRoZSBoaWdoIGdyb3VwIVwiKVxudGVzdF9vdXRwdXRfY29udGFpbnMoJ3NoYXBpcm8udGVzdChkYXRhU2V0W2RhdGFTZXQkdHlwZT09XCJsb3dcIiwgXSRhc3NvY2lhdGlvbnMpJywgIFwiRG9uJ3QgZm9yZ2V0IHRvIHBlcmZvcm0gdGhlIHNoYXBpcm8udGVzdCBmb3IgdGhlIGxvdyBncm91cCFcIilcblxuc3VjY2Vzc19tc2coXCJHb29kIHdvcmshXCIpIn0=
+</div>
+</div>
+<div id="performing-the-statistical-test-1" class="section level3">
+<h3>2.4 Performing the statistical test</h3>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6ImxpYnJhcnkocmVhZHIpXG5saWJyYXJ5KGdncGxvdDIpXG5kYXRhU2V0IDwtIHJlYWRfY3N2KFwiaHR0cDovL3d3dy5qZXJvZW5jbGFlcy5iZS9zdGF0aXN0aWNzX2Zvcl9saW5ndWlzdGljcy9kYXRhc2V0cy9jbGFzczRfUGFpdmlvX2V0X2FsXzE5NjguY3N2XCIpIiwic2FtcGxlIjoiIyBUaGUgZGF0YS5mcmFtZSBkYXRhU2V0IGlzIGFscmVhZHkgaW4geW91ciB3b3Jrc3BhY2VcblxuIyBDb252ZXJ0ICd0eXBlJyB0byBhIGZhY3RvclxuXG4jIFJlbGV2ZWwgJ3R5cGUnIHNvIHRoYXQgdGhlIHJlZmVyZW5jZSBsZXZlbCBpcyAnaGlnaCdcblxuIyBQZXJmb3JtIGEgdC10ZXN0IG9mIHRoZSBkaWZmZXJlbmNlcyBiZXR3ZWVuIGhpZ2gtIGFuZCBsb3ctZnJlcXVlbmN5IG5vdW5zLiBZb3Ugd2lsbCBuZWVkIHRvIHVzZSB0aGUgZm9ybXVsYSBtZXRob2QuXG4jIEFsc28sIGtlZXAgaW4gbWluZCBvdXIgaHlwb3RoZXNpczogSGlnaC1mcmVxdWVuY3kgbm91bnMgd2lsbCBoYXZlIGhpZ2hlciBhc3NvY2lhdGlvbnMtdmFsdWVzXG5cbiMgSXMgdGhlIHJlc3VsdCBzaWduaWZpY2FudD8gWW91IHdpbGwgZmluZCB0aGUgY29ycmVjdCBhbnN3ZXIgb24gdGhlIFNvbHV0aW9uIHRhYlxuXG4jIENhbGN1bGF0ZSBDb2hlbidzIGQgXG5cbiMgSXMgdGhlIGVmZmVjdCBsYXJnZSBvciBzbWFsbD8gWW91IHdpbGwgZmluZCB0aGUgY29ycmVjdCBhbnN3ZXIgb24gdGhlIFNvbHV0aW9uIHRhYiIsInNvbHV0aW9uIjoiIyBUaGUgZGF0YS5mcmFtZSBkYXRhU2V0IGlzIGFscmVhZHkgaW4geW91ciB3b3Jrc3BhY2VcblxuIyBDb252ZXJ0ICd0eXBlJyB0byBhIGZhY3RvclxuZGF0YVNldCR0eXBlIDwtIGFzLmZhY3RvcihkYXRhU2V0JHR5cGUpXG5cbiMgUmVsZXZlbCAndHlwZScgc28gdGhhdCB0aGUgcmVmZXJlbmNlIGxldmVsIGlzICdsb3cnXG5kYXRhU2V0JHR5cGUgPC0gcmVsZXZlbChkYXRhU2V0JHR5cGUsIHJlZj1cImhpZ2hcIilcblxuIyBQZXJmb3JtIGEgdC10ZXN0IG9mIHRoZSBkaWZmZXJlbmNlcyBicmV0d2VlbiBzdXJmZXJzIGFuZCBub24tc3VyZmVycy4gWW91IHdpbGwgbmVlZCB0byB1c2UgdGhlIGZvcm11bGEgbWV0aG9kLlxuIyBBbHNvLCBrZWVwIGluIG1pbmQgb3VyIGh5cG90aGVzaXM6IEhpZ2gtZnJlcXVlbmN5IG5vdW5zIHdpbGwgaGF2ZSBoaWdoZXIgYXNzb2NpYXRpb25zLXZhbHVlc1xudC50ZXN0KGFzc29jaWF0aW9ucyB+IHR5cGUsIGRhdGE9ZGF0YVNldCwgYWx0ZXJuYXRpdmU9XCJncmVhdGVyXCIpXG5cbiMgSXMgdGhlIHJlc3VsdCBzaWduaWZpY2FudD8gWWVzLCAnaGlnaC1mcmVxdWVuY3knIG5vdW5zIHRyaWdnZXIgc2lnbmlmaWNhbnRseSBtb3JlIGFzc29jaWF0aW9ucyB0aGFuIGxvdy1mcmVxdWVuY3kgbm91bnNcblxuIyBDYWxjdWxhdGUgQ29oZW4ncyBkIFxuKG1lYW4oZGF0YVNldFtkYXRhU2V0JHR5cGU9PVwiaGlnaFwiLF0kYXNzb2NpYXRpb25zKSAtIG1lYW4oZGF0YVNldFtkYXRhU2V0JHR5cGU9PVwibG93XCIsXSRhc3NvY2lhdGlvbnMpKS9zZChkYXRhU2V0JGFzc29jaWF0aW9ucylcblxuIyBJcyB0aGUgZWZmZWN0IGxhcmdlIG9yIHNtYWxsPyBUaGUgZWZmZWN0IGlzIG1vZGVyYXRlbHkgbGFyZ2UsIGFib3V0IDAuNSBzdGFuZGFyZCBkZXZpYXRpb25zIiwic2N0IjoidGVzdF9vdXRwdXRfY29udGFpbnMoJ3QudGVzdChhc3NvY2lhdGlvbnMgfiB0eXBlLCBkYXRhPWRhdGFTZXQsIGFsdGVybmF0aXZlPVwiZ3JlYXRlclwiKScsIFwiRG9uJ3QgZm9yZ2V0IHRvIGNhbGN1bGF0ZSB0aGUgdC10ZXN0IVwiKVxudGVzdF9vdXRwdXRfY29udGFpbnMoJyhtZWFuKGRhdGFTZXRbZGF0YVNldCR0eXBlPT1cImhpZ2hcIixdJGFzc29jaWF0aW9ucykgLSBtZWFuKGRhdGFTZXRbZGF0YVNldCR0eXBlPT1cImxvd1wiLF0kYXNzb2NpYXRpb25zKSkvc2QoZGF0YVNldCRhc3NvY2lhdGlvbnMpJywgXCJNYWtlIHN1cmUgeW91IGNhbGN1bGF0ZSBDb2hlbidzIGQgZm9yIHRoZSBkaWZmZXJlbmNlIGJldHdlZW4gdGhlIGdyb3VwcyFcIilcbnN1Y2Nlc3NfbXNnKFwiR3JlYXQgam9iIVwiKSJ9
+</div>
+</div>
+<div id="plotting-the-differences-between-the-groups-1" class="section level3">
+<h3>2.5 Plotting the differences between the groups</h3>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6ImxpYnJhcnkocmVhZHIpXG5kYXRhU2V0IDwtIHJlYWRfY3N2KFwiaHR0cDovL3d3dy5qZXJvZW5jbGFlcy5iZS9zdGF0aXN0aWNzX2Zvcl9saW5ndWlzdGljcy9kYXRhc2V0cy9jbGFzczRfUGFpdmlvX2V0X2FsXzE5NjguY3N2XCIpIiwic2FtcGxlIjoiIyBUaGUgZGF0YS5mcmFtZSBkYXRhU2V0IGlzIGFscmVhZHkgaW4geW91ciB3b3Jrc3BhY2VcblxuIyBDb252ZXJ0ICd0eXBlJyB0byBhIGZhY3RvclxuXG4jIFJlbGV2ZWwgJ3R5cGUnIHNvIHRoYXQgdGhlIHJlZmVyZW5jZSBsZXZlbCBpcyAnaGlnaCdcblxuIyBDYWxjdWxhdGUgdGhlIHN0YW5kYXJkIGVycm9yIG9mIHRoZSBhc3NvY2lhdGlvbnMgdmFyaWFibGUgKHN0YW5kYXJkIGRldmlhdGlvbi9zcXVhcmUgcm9vdCBvZiBzYW1wbGUgc2l6ZSlcblxuIyBMb2FkIHRoZSAnZHBseXInIHBhY2thZ2VcblxuIyBDYWxjdWxhdGUgdGhlIGRhdGEgZm9yIHRoZSBwbG90LCBpbmNsdWRpbmcgdGhlIHVwcGVyIGFuZCBsb3dlciBib3VuZHMgb2YgdGhlIGNvbmZpZGVuY2UgaW50ZXJ2YWxzOlxuZGF0YUZvclBsb3QgPC0gZGF0YVNldCAlPiVcbiAgZ3JvdXBfYnkoX19fKSAlPiVcbiAgc3VtbWFyaXNlKGxvd2VyQm91bmQ9IF9fXywgXG4gICAgICAgICAgICB1cHBlckJvdW5kPV9fXywgXG4gICAgICAgICAgICBtZWFuPV9fXylcblxuIyBMb2FkIHRoZSBnZ3Bsb3QyIHBhY2thZ2VcblxuXG4jIENyZWF0ZSBhIGNvbG9yZWQgYmFycGxvdCB0byBjb21wYXJlIHRoZSB0d28gZ3JvdXAgbWVhbnMgaW4gdGhlICdkYXRhRm9yUGxvdCcgZGF0YS5mcmFtZS5cbiMgQWRkIGVycm9yIGJhcnMgdG8gdGhlIGJhcnBsb3QiLCJzb2x1dGlvbiI6IiMgVGhlIGRhdGEuZnJhbWUgZGF0YVNldCBpcyBhbHJlYWR5IGluIHlvdXIgd29ya3NwYWNlXG5cbiMgQ29udmVydCAndHlwZScgdG8gYSBmYWN0b3JcbmRhdGFTZXQkdHlwZSA8LSBhcy5mYWN0b3IoZGF0YVNldCR0eXBlKVxuXG4jIFJlbGV2ZWwgJ3R5cGUnIHNvIHRoYXQgdGhlIHJlZmVyZW5jZSBsZXZlbCBpcyAnbG93J1xuZGF0YVNldCR0eXBlIDwtIHJlbGV2ZWwoZGF0YVNldCR0eXBlLCByZWY9XCJsb3dcIilcblxuIyBDYWxjdWxhdGUgdGhlIHN0YW5kYXJkIGVycm9yIG9mIHRoZSBhc3NvY2lhdGlvbnMgdmFyaWFibGUgKHN0YW5kYXJkIGRldmlhdGlvbi9zcXVhcmUgcm9vdCBvZiBzYW1wbGUgc2l6ZSlcblNFPC1zZChkYXRhU2V0JGFzc29jaWF0aW9ucykvc3FydChucm93KGRhdGFTZXQpKVxuIyBMb2FkIHRoZSAnZHBseXInIHBhY2thZ2VcbmxpYnJhcnkoZHBseXIpXG4jIENhbGN1bGF0ZSB0aGUgZGF0YSBmb3IgdGhlIHBsb3QsIGluY2x1ZGluZyB0aGUgdXBwZXIgYW5kIGxvd2VyIGJvdW5kcyBvZiB0aGUgY29uZmlkZW5jZSBpbnRlcnZhbHM6XG5kYXRhRm9yUGxvdCA8LSBkYXRhU2V0ICU+JVxuICBncm91cF9ieSh0eXBlKSAlPiVcbiAgc3VtbWFyaXNlKGxvd2VyQm91bmQ9IG1lYW4oYXNzb2NpYXRpb25zKS0oMS45NipTRSksIFxuICAgICAgICAgICAgdXBwZXJCb3VuZD1tZWFuKGFzc29jaWF0aW9ucykrKDEuOTYqU0UpLCBcbiAgICAgICAgICAgIG1lYW49bWVhbihhc3NvY2lhdGlvbnMpKVxuXG4jIExvYWQgdGhlIGdncGxvdDIgcGFja2FnZVxubGlicmFyeShnZ3Bsb3QyKVxuXG4jIENyZWF0ZSBhIGNvbG9yZWQgYmFycGxvdCB0byBjb21wYXJlIHRoZSB0d28gZ3JvdXAgbWVhbnMgaW4gdGhlICdkYXRhRm9yUGxvdCcgZGF0YS5mcmFtZS5cbiMgQWRkIGVycm9yIGJhcnMgdG8gdGhlIGJhcnBsb3RcbmdncGxvdChkYXRhRm9yUGxvdCwgYWVzKHg9dHlwZSwgeT1tZWFuLCBjb2xvcj10eXBlLCBmaWxsPXR5cGUpKSArIGdlb21fYmFyKHN0YXQ9XCJpZGVudGl0eVwiKSArIGdlb21fZXJyb3JiYXIoYWVzKHltaW49bG93ZXJCb3VuZCwgeW1heD11cHBlckJvdW5kKSwgd2lkdGg9MC41LCBjb2xvcj1cImJsYWNrXCIpIiwic2N0IjoidGVzdF9saWJyYXJ5X2Z1bmN0aW9uKFwiZ2dwbG90MlwiLCBcIk1ha2Ugc3VyZSB0byBjYWxsIHRoZSAnZ2dwbG90MicgcGFja2FnZSFcIilcbnRlc3RfbGlicmFyeV9mdW5jdGlvbihcImRwbHlyXCIsIFwiTWFrZSBzdXJlIHRvIGNhbGwgdGhlICdkcGx5cicgcGFja2FnZSFcIilcblxudGVzdF9nZ3Bsb3QoaW5kZXggPSAxKVxuXG5zdWNjZXNzX21zZyhcIkdyZWF0IVwiKSJ9
+</div>
+</div>
+</div>
+<div id="the-influence-of-formal-and-semantic-similarity-on-acceptability-tasks" class="section level2">
+<h2>3. The influence of formal and semantic similarity on acceptability tasks</h2>
+<ul>
+<li>Eddington &amp; Ruiz de Mendoza (2010) presented subjects with the same test sentences under two conditions:
+<ul>
+<li>Primed with a syntactically similar sentence</li>
+<li>Primed with a syntactically and semantically similar sentence</li>
+</ul></li>
+<li>The subjects were asked to rate the test sentences as <code>acceptable</code> or <code>unaccceptable</code></li>
+<li>The reaction times were measured as the outcome variable</li>
+<li>Research question:
+<ul>
+<li><em>If subjects are primed with a formally and semantically similar sentence, are they faster at judging the grammaticality of test sentences than when they are primed with just a formally similar sentence?</em></li>
+</ul></li>
+<li>Hypothesis:
+<ul>
+<li><em>Priming with a formally and a semantically similar sentence will decrease subjects’ reaction times</em></li>
+</ul></li>
+</ul>
+<div id="loading-and-exploring-the-data-2" class="section level3">
+<h3>3.1 Loading and exploring the data</h3>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJzYW1wbGUiOiIjIExvYWQgdGhlIHJlYWRyIHBhY2thZ2VcblxuIyBMb2FkIHRoZSBjb3Vyc2UgZGF0YSBmcm9tIHRoZSBjb3Vyc2Ugd2Vic2l0ZSB0byB0aGUgb2JqZWN0ICdkYXRhU2V0JzpcbiMgaHR0cDovL3d3dy5qZXJvZW5jbGFlcy5iZS9zdGF0aXN0aWNzX2Zvcl9saW5ndWlzdGljcy9kYXRhc2V0cy9jbGFzczRfRWRkaW5ndG9uX2FuZF9SdWl6LU1lbmRvemFfMjAxMC5jc3ZcblxuIyBMb2FkIHRoZSBkcGx5ciBwYWNrYWdlXG5cbiMgUHJpbnQgYSAnZ2xpbXBzZScgb2YgdGhlIGRhdGFTZXRcblxuIyBQcmludCBhIHN1bW1hcnkgb2YgdGhlIE1lYW5fUlQgY29sdW1uIiwic29sdXRpb24iOiIjIExvYWQgdGhlIHJlYWRyIHBhY2thZ2VcbmxpYnJhcnkocmVhZHIpXG4jIExvYWQgdGhlIGNvdXJzZSBkYXRhIGZyb20gdGhlIGNvdXJzZSB3ZWJzaXRlIHRvIHRoZSBvYmplY3QgJ2RhdGFTZXQnOlxuIyBodHRwOi8vd3d3Lmplcm9lbmNsYWVzLmJlL3N0YXRpc3RpY3NfZm9yX2xpbmd1aXN0aWNzL2RhdGFzZXRzL2NsYXNzNF9FZGRpbmd0b25fYW5kX1J1aXotTWVuZG96YV8yMDEwLmNzdlxuZGF0YVNldCA8LSByZWFkX2NzdihcImh0dHA6Ly93d3cuamVyb2VuY2xhZXMuYmUvc3RhdGlzdGljc19mb3JfbGluZ3Vpc3RpY3MvZGF0YXNldHMvY2xhc3M0X0VkZGluZ3Rvbl9hbmRfUnVpei1NZW5kb3phXzIwMTAuY3N2XCIpXG4jIExvYWQgdGhlIGRwbHlyIHBhY2thZ2VcbmxpYnJhcnkoZHBseXIpXG4jIFByaW50IGEgJ2dsaW1wc2UnIG9mIHRoZSBkYXRhU2V0XG5nbGltcHNlKGRhdGFTZXQpXG4jIFByaW50IGEgc3VtbWFyeSBvZiB0aGUgTWVhbl9SVCBjb2x1bW5cbnN1bW1hcnkoZGF0YVNldCRNZWFuX1JUKSIsInNjdCI6InRlc3Rfb2JqZWN0KFwiZGF0YVNldFwiKVxudGVzdF9saWJyYXJ5X2Z1bmN0aW9uKFwicmVhZHJcIiwgXCJNYWtlIHN1cmUgdG8gY2FsbCB0aGUgJ3JlYWRyJyBwYWNrYWdlIVwiKVxudGVzdF9saWJyYXJ5X2Z1bmN0aW9uKFwiZHBseXJcIiwgXCJNYWtlIHN1cmUgdG8gY2FsbCB0aGUgJ2RwbHlyJyBwYWNrYWdlIVwiKVxudGVzdF9vdXRwdXRfY29udGFpbnMoXCJnbGltcHNlKGRhdGFTZXQpXCIsICAgaW5jb3JyZWN0X21zZyA9IFwiTWFrZSBzdXJlIHRvIHByaW50IGEgJ2dsaW1wc2UnIG9mIHRoZSBkYXRhIVwiKVxudGVzdF9vdXRwdXRfY29udGFpbnMoXCJzdW1tYXJ5KGRhdGFTZXQkTWVhbl9SVClcIiwgICBpbmNvcnJlY3RfbXNnID0gXCJNYWtlIHN1cmUgdG8gcHJpbnQgYSAnc3VtbWFyeScgb2YgdGhlIE1lYW5fUlQgY29sdW1uIVwiKVxuc3VjY2Vzc19tc2coXCJHcmVhdCFcIikifQ==
+</div>
+</div>
+<div id="a-first-exploration-of-the-differences-with-a-box-and-whisker-plot-2" class="section level3">
+<h3>3.2 A first exploration of the differences with a box-and-whisker plot</h3>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6ImxpYnJhcnkocmVhZHIpXG5kYXRhU2V0IDwtIHJlYWRfY3N2KFwiaHR0cDovL3d3dy5qZXJvZW5jbGFlcy5iZS9zdGF0aXN0aWNzX2Zvcl9saW5ndWlzdGljcy9kYXRhc2V0cy9jbGFzczRfRWRkaW5ndG9uX2FuZF9SdWl6LU1lbmRvemFfMjAxMC5jc3ZcIikiLCJzYW1wbGUiOiIjIFRoZSBkYXRhLmZyYW1lIGRhdGFTZXQgaXMgYWxyZWFkeSBpbiB5b3VyIHdvcmtzcGFjZVxuXG4jIExvYWQgdGhlIGdncGxvdDIgcGFja2FnZVxuXG4jIERyYXcgYSBib3gtYW5kLXdoaXNrZXIgcGxvdCB0byBjb21wYXJlIHRoZSBtZWRpYW5zIG9mIHRoZSBjb25kaXRpb24gZ3JvdXBzXG5cbiMgV2hpY2ggb2YgdGhlIHR3byBncm91cHMgaGFzIHRoZSBoaWdoZXN0IG1lZGlhbiBNZWFuX1JUPyBZb3Ugd2lsbCBmaW5kIHRoZSBjb3JyZWN0IHNvbHV0aW9uIG9uIHRoZSBTb2x1dGlvbiB0YWIiLCJzb2x1dGlvbiI6IiMgVGhlIGRhdGEuZnJhbWUgZGF0YVNldCBpcyBhbHJlYWR5IGluIHlvdXIgd29ya3NwYWNlXG5cbiMgTG9hZCB0aGUgZ2dwbG90MiBwYWNrYWdlXG5saWJyYXJ5KGdncGxvdDIpXG4jIERyYXcgYSBib3gtYW5kLXdoaXNrZXIgcGxvdCB0byBjb21wYXJlIHRoZSBtZWRpYW5zIG9mIHRoZSBjb25kaXRpb24gZ3JvdXBzXG5nZ3Bsb3QoZGF0YVNldCwgYWVzKHg9Y29uZGl0aW9uLCB5PU1lYW5fUlQpKSArIGdlb21fYm94cGxvdCgpXG4jIFdoaWNoIG9mIHRoZSB0d28gZ3JvdXBzIGhhcyB0aGUgaGlnaGVzdCBtZWRpYW4gTWVhbl9SVD8gWW91IHdpbGwgZmluZCB0aGUgY29ycmVjdCBzb2x1dGlvbiBvbiB0aGUgU29sdXRpb24gdGFiXG4jIFRoZSBjb25kaXRpb24gJ3N5bnRheCBhbmQgc2VtYW50aWNzJyBjbGVhcmx5IGhhcyB0aGUgbG93ZXN0IE1lYW5fUlQgIiwic2N0IjoidGVzdF9saWJyYXJ5X2Z1bmN0aW9uKFwiZ2dwbG90MlwiLCBcIk1ha2Ugc3VyZSB0byBjYWxsIHRoZSAnZ2dwbG90MicgcGFja2FnZSFcIilcbnRlc3RfZ2dwbG90KGluZGV4ID0gMSlcbnN1Y2Nlc3NfbXNnKFwiR3JlYXQhXCIpIn0=
+</div>
+</div>
+<div id="checking-the-assumptions-of-statistical-tests-2" class="section level3">
+<h3>3.3. Checking the assumptions of statistical tests</h3>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6ImxpYnJhcnkocmVhZHIpXG5kYXRhU2V0IDwtIHJlYWRfY3N2KFwiaHR0cDovL3d3dy5qZXJvZW5jbGFlcy5iZS9zdGF0aXN0aWNzX2Zvcl9saW5ndWlzdGljcy9kYXRhc2V0cy9jbGFzczRfRWRkaW5ndG9uX2FuZF9SdWl6LU1lbmRvemFfMjAxMC5jc3ZcIikiLCJzYW1wbGUiOiIjIFRoZSBkYXRhLmZyYW1lIGRhdGFTZXQgaXMgYWxyZWFkeSBpbiB5b3VyIHdvcmtzcGFjZVxuXG4jIEJlZm9yZSB3ZSBtb3ZlIG9uIHRvIHRlc3Qgd2hldGhlciBvciBub3Qgb3VyIHJlc3VsdHMgYXJlIHNpZ25pZmljYW50LCB3ZSBzaG91bGQgdGVzdCB0aGUgYXNzdW1wdGlvbnMgb2YgZWl0aGVyIHRoZSB0LXRlc3Qgb3IgdGhlIFdpbGNveG9uLXRlc3RcblxuIyBDb3VudCB0aGUgbnVtYmVyIG9mIHJvd3Mgb2YgZGF0YVNldCB0byBlc3RhYmxpc2ggdGhlIHNhbXBsZSBzaXplXG5cbiMgTG9hZCB0aGUgZ2dwbG90MiBwYWNrYWdlXG5cbiMgRHJhdyBhIGRlbnNpdHkgcGxvdCBvZiB0aGUgTWVhbl9SVC1jb2x1bW4gZm9yIGJvdGggZ3JvdXBzIGFuZCBhZGQgYSByZWQgdmVydGljYWwgbGluZSBhdCB0aGUgbWVhblxuXG4jIENvbXB1dGUgYSBTaGFwaXJvLVdpbGsgdGVzdCBmb3IgYm90aCBncm91cHNcblxuIyBBcmUgdGhlIGRhdGEgZGlzdHJpYnV0ZWQgbm9ybWFsbHkgYW5kIGhvdyBsYXJnZSBpcyB0aGUgc2FtcGxlPyAgV2hhdCB0eXBlIG9mIHRlc3QgY2FuIHdlIHVzZSBpbiB0aGlzIGNhc2U/IFlvdSB3aWxsIGZpbmQgdGhlIGNvcnJlY3QgYW5zd2VyIG9uIHRoZSBTb2x1dGlvbiB0YWIgIiwic29sdXRpb24iOiIjIFRoZSBkYXRhLmZyYW1lIGRhdGFTZXQgaXMgYWxyZWFkeSBpbiB5b3VyIHdvcmtzcGFjZVxuXG4jIEJlZm9yZSB3ZSBtb3ZlIG9uIHRvIHRlc3Qgd2hldGhlciBvciBub3Qgb3VyIHJlc3VsdHMgYXJlIHNpZ25pZmljYW50LCB3ZSBzaG91bGQgdGVzdCB0aGUgYXNzdW1wdGlvbnMgb2YgZWl0aGVyIHRoZSB0LXRlc3Qgb3IgdGhlIFdpbGNveG9uLXRlc3RcblxuIyBDb3VudCB0aGUgbnVtYmVyIG9mIHJvd3Mgb2YgZGF0YVNldCB0byBlc3RhYmxpc2ggdGhlIHNhbXBsZSBzaXplXG5ucm93KGRhdGFTZXQpXG4jIExvYWQgdGhlIGdncGxvdDIgcGFja2FnZVxubGlicmFyeShnZ3Bsb3QyKVxuIyBEcmF3IGEgZGVuc2l0eSBwbG90IG9mIHRoZSBNZWFuX1JULWNvbHVtbiBmb3IgYm90aCBncm91cHMgYW5kIGFkZCBhIHJlZCB2ZXJ0aWNhbCBsaW5lIGF0IHRoZSBtZWFuXG5nZ3Bsb3QoZGF0YVNldFtkYXRhU2V0JGNvbmRpdGlvbj09XCJvbmx5IHN5bnRheFwiLCBdLCBhZXMoeD1NZWFuX1JUKSkgKyBnZW9tX2xpbmUoc3RhdD1cImRlbnNpdHlcIikgKyBnZW9tX3ZsaW5lKGFlcyh4aW50ZXJjZXB0ID1tZWFuKGRhdGFTZXRbZGF0YVNldCRjb25kaXRpb249PVwib25seSBzeW50YXhcIiwgXSRNZWFuX1JUKSApLCBjb2xvcj1cInJlZFwiKVxuXG5nZ3Bsb3QoZGF0YVNldFtkYXRhU2V0JGNvbmRpdGlvbj09XCJzeW50YXggYW5kIHNlbWFudGljc1wiLCBdLCBhZXMoeD1NZWFuX1JUKSkgKyBnZW9tX2xpbmUoc3RhdD1cImRlbnNpdHlcIikgKyBnZW9tX3ZsaW5lKGFlcyh4aW50ZXJjZXB0ID1tZWFuKGRhdGFTZXRbZGF0YVNldCRjb25kaXRpb249PVwic3ludGF4IGFuZCBzZW1hbnRpY3NcIiwgXSRNZWFuX1JUKSApLCBjb2xvcj1cInJlZFwiKVxuXG4jIENvbXB1dGUgYSBTaGFwaXJvLVdpbGsgdGVzdCBmb3IgYm90aCBncm91cHNcbnNoYXBpcm8udGVzdChkYXRhU2V0W2RhdGFTZXQkY29uZGl0aW9uPT1cIm9ubHkgc3ludGF4XCIsIF0kTWVhbl9SVClcbnNoYXBpcm8udGVzdChkYXRhU2V0W2RhdGFTZXQkY29uZGl0aW9uPT1cInN5bnRheCBhbmQgc2VtYW50aWNzXCIsIF0kTWVhbl9SVClcblxuIyBBcmUgdGhlIGRhdGEgZGlzdHJpYnV0ZWQgbm9ybWFsbHkgYW5kIGhvdyBsYXJnZSBpcyB0aGUgc2FtcGxlPyBXaGF0IHR5cGUgb2YgdGVzdCBjYW4gd2UgdXNlIGluIHRoaXMgY2FzZT8gWW91IHdpbGwgZmluZCB0aGUgY29ycmVjdCBhbnN3ZXIgb24gdGhlIFNvbHV0aW9uIHRhYiBcbiMgRm9yIGJvdGggZ3JvdXBzLCB0aGUgZGF0YSBkbyBub3Qgc2VlbSB0byBmb2xsb3cgYSBub3JtYWwgZGlzdHJpYnV0aW9uOiBcbiMgLSBUaGUgU2hhcGlyby1XaWxrIHRlc3RzIHN1Z2dlc3QgYSBub3JtYWwgZGlzdHJpYnV0aW9uLCBidXQgdGhlIGRlbnNpdHkgcGxvdHMgZG8gbm90IHN1cHBvcnQgdGhpcy4gVGhpcyBtYXkgYmUgZHVlIHRvIHRoZSBzbWFsbCBzYW1wbGUgc2l6ZS4gXG4jIEluIGFkZGl0aW9uLCB0aGUgc2FtcGxlIHNpemUgaXMgdG9vIHNtYWxsIHRvIGlnbm9yZSB0aGlzIHJlc3VsdFxuIyBUaGlzIG1lYW5zIHdlIHNob3VsZCB1c2UgYSBXaWxjb3hvbiB0ZXN0LCBqdXN0IHRvIGJlIHNhZmUiLCJzY3QiOiJ0ZXN0X2xpYnJhcnlfZnVuY3Rpb24oXCJnZ3Bsb3QyXCIsIFwiTWFrZSBzdXJlIHRvIGNhbGwgdGhlICdnZ3Bsb3QyJyBwYWNrYWdlIVwiKVxudGVzdF9nZ3Bsb3QoaW5kZXggPSAxKVxudGVzdF9nZ3Bsb3QoaW5kZXggPSAyKVxudGVzdF9vdXRwdXRfY29udGFpbnMoXCJucm93KGRhdGFTZXQpXCIsIFwiTWFrZSBzdXJlIHlvdSBjb3VudCB0aGUgbnVtYmVyIG9mIHJvd3MgaW4gZGF0YVNldFwiKVxudGVzdF9vdXRwdXRfY29udGFpbnMoJ3NoYXBpcm8udGVzdChkYXRhU2V0W2RhdGFTZXQkY29uZGl0aW9uPT1cInN5bnRheCBhbmQgc2VtYW50aWNzXCIsIF0kTWVhbl9SVCknLCBcIkRvbid0IGZvcmdldCB0byBwZXJmb3JtIHRoZSBzaGFwaXJvLnRlc3QgZm9yIHRoZSBoaWdoIGdyb3VwIVwiKVxudGVzdF9vdXRwdXRfY29udGFpbnMoJ3NoYXBpcm8udGVzdChkYXRhU2V0W2RhdGFTZXQkY29uZGl0aW9uPT1cIm9ubHkgc3ludGF4XCIsIF0kTWVhbl9SVCknLCAgXCJEb24ndCBmb3JnZXQgdG8gcGVyZm9ybSB0aGUgc2hhcGlyby50ZXN0IGZvciB0aGUgbG93IGdyb3VwIVwiKVxuXG5zdWNjZXNzX21zZyhcIkdyZWF0IVwiKSJ9
+</div>
+</div>
+<div id="performing-the-statistical-test-2" class="section level3">
+<h3>3.4 Performing the statistical test</h3>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6ImxpYnJhcnkocmVhZHIpXG5kYXRhU2V0IDwtIHJlYWRfY3N2KFwiaHR0cDovL3d3dy5qZXJvZW5jbGFlcy5iZS9zdGF0aXN0aWNzX2Zvcl9saW5ndWlzdGljcy9kYXRhc2V0cy9jbGFzczRfRWRkaW5ndG9uX2FuZF9SdWl6LU1lbmRvemFfMjAxMC5jc3ZcIikiLCJzYW1wbGUiOiIjIFRoZSBkYXRhLmZyYW1lIGRhdGFTZXQgaXMgYWxyZWFkeSBpbiB5b3VyIHdvcmtzcGFjZVxuXG4jIENvbnZlcnQgJ2NvbmRpdGlvbicgdG8gYSBmYWN0b3JcblxuIyBSZWxldmVsICdjb25kaXRpb24nIHNvIHRoYXQgdGhlIHJlZmVyZW5jZSBsZXZlbCBpcyAnc3ludGF4IGFuZCBzZW1hbnRpY3MnXG5cbiMgUGVyZm9ybSBhIFdpbGNveG9uIHRlc3RzIG9mIHRoZSBkaWZmZXJlbmNlcyBiZXR3ZWVuIHRoZSB0d28gY29uZGl0aW9zLiBZb3Ugd2lsbCBuZWVkIHRvIHVzZSB0aGUgZm9ybXVsYSBtZXRob2QuXG4jIEFsc28sIGtlZXAgaW4gbWluZCB0aGF0OlxuIyAtIE91ciBkYXRhIGlzIHBhaXJlZFxuIyAtIE91ciBoeXBvdGhlc2lzIHN0YXRlczogVGhlICdzeW50YXggYW5kIHNlbWFudGljcycgY29uZGl0aW9uIHdpbGwgdHJpZ2dlciBzaG9ydGVyIHJlYWN0aW9uIHRpbWVzXG5cbiMgSXMgdGhlIHJlc3VsdCBzaWduaWZpY2FudD8gWW91IHdpbGwgZmluZCB0aGUgY29ycmVjdCBhbnN3ZXIgb24gdGhlIFNvbHV0aW9uIHRhYiIsInNvbHV0aW9uIjoiIyBUaGUgZGF0YS5mcmFtZSBkYXRhU2V0IGlzIGFscmVhZHkgaW4geW91ciB3b3Jrc3BhY2VcblxuIyBDb252ZXJ0ICdjb25kaXRpb24nIHRvIGEgZmFjdG9yXG5kYXRhU2V0JGNvbmRpdGlvbiA8LSBhcy5mYWN0b3IoZGF0YVNldCRjb25kaXRpb24pXG5cbiMgUmVsZXZlbCAnY29uZGl0aW9uJyBzbyB0aGF0IHRoZSByZWZlcmVuY2UgbGV2ZWwgaXMgJ2xvdydcbmRhdGFTZXQkY29uZGl0aW9uIDwtIHJlbGV2ZWwoZGF0YVNldCRjb25kaXRpb24sIHJlZj1cInN5bnRheCBhbmQgc2VtYW50aWNzXCIpXG5cbiMgUGVyZm9ybSBhIHQtdGVzdCBvZiB0aGUgZGlmZmVyZW5jZXMgYnJldHdlZW4gc3VyZmVycyBhbmQgbm9uLXN1cmZlcnMuIFlvdSB3aWxsIG5lZWQgdG8gdXNlIHRoZSBmb3JtdWxhIG1ldGhvZC5cbiMgQWxzbywga2VlcCBpbiBtaW5kIG91ciBoeXBvdGhlc2lzOiBTdXJmZXJzIHdpbGwgaGF2ZSBoaWdoZXIgTWVhbl9SVC12YWx1ZXNcbndpbGNveC50ZXN0KE1lYW5fUlQgfiBjb25kaXRpb24sIGRhdGE9ZGF0YVNldCwgYWx0ZXJuYXRpdmU9XCJsZXNzXCIsIHBhaXJlZD1UUlVFKVxuXG4jIElzIHRoZSByZXN1bHQgc2lnbmlmaWNhbnQ/IFllcywgdGhlICdzeW50YXggYW5kIHNlbWFudGljcycgY29uZGl0aW9uIHRyaWdnZXJlZCBzaWduaWZpY2FudGx5IHNob3J0ZXIgcmVhY3Rpb24gdGltZXMgICIsInNjdCI6InRlc3Rfb3V0cHV0X2NvbnRhaW5zKFwid2lsY294LnRlc3QoTWVhbl9SVCB+IGNvbmRpdGlvbiwgZGF0YT1kYXRhU2V0LCBhbHRlcm5hdGl2ZT0nbGVzcycsIHBhaXJlZD1UUlVFKVwiLCBcIkRvbid0IGZvcmdldCB0byBjYWxjdWxhdGUgdGhlIHBhaXJlZCBXaWxjb3hvbiB0ZXN0IVwiKVxuc3VjY2Vzc19tc2coXCJHcmVhdCFcIikifQ==
+</div>
+</div>
+<div id="plotting-the-differences-between-the-groups-2" class="section level3">
+<h3>3.5 Plotting the differences between the groups</h3>
+<div data-datacamp-exercise="" data-height="300" data-encoded="true">
+eyJsYW5ndWFnZSI6InIiLCJwcmVfZXhlcmNpc2VfY29kZSI6ImxpYnJhcnkocmVhZHIpXG5jb25mTWVkaWFuIDwtIGZ1bmN0aW9uKHgpIHtcbiAgc29ydCh4KVtxYmlub20oYyguMDI1LC45NzUpLCBsZW5ndGgoeCksIDAuNSldXG59XG5cbmRhdGFTZXQgPC0gcmVhZF9jc3YoXCJodHRwOi8vd3d3Lmplcm9lbmNsYWVzLmJlL3N0YXRpc3RpY3NfZm9yX2xpbmd1aXN0aWNzL2RhdGFzZXRzL2NsYXNzNF9FZGRpbmd0b25fYW5kX1J1aXotTWVuZG96YV8yMDEwLmNzdlwiKSIsInNhbXBsZSI6IiMgVGhlIGRhdGEuZnJhbWUgZGF0YVNldCBpcyBhbHJlYWR5IGluIHlvdXIgd29ya3NwYWNlLCBhcyBpcyB0aGUgY29uZk1lZGlhbiBmdW5jdGlvblxuY29uZk1lZGlhbiA8LSBmdW5jdGlvbih4KSB7XG4gIHNvcnQoeClbcWJpbm9tKGMoLjAyNSwuOTc1KSwgbGVuZ3RoKHgpLCAwLjUpXVxufVxuXG4jIENvbnZlcnQgJ2NvbmRpdGlvbicgdG8gYSBmYWN0b3JcblxuIyBSZWxldmVsICdjb25kaXRpb24nIHNvIHRoYXQgdGhlIHJlZmVyZW5jZSBsZXZlbCBpcyAnc3ludGF4IGFuZCBzZW1hbnRpY3MnXG5cbiMgTG9hZCB0aGUgJ2RwbHlyJyBwYWNrYWdlXG5cbiMgQ2FsY3VsYXRlIHRoZSBkYXRhIGZvciB0aGUgcGxvdCwgaW5jbHVkaW5nIHRoZSB1cHBlciBhbmQgbG93ZXIgYm91bmRzIG9mIHRoZSBjb25maWRlbmNlIGludGVydmFsczpcbmRhdGFGb3JQbG90IDwtIGRhdGFTZXQgJT4lXG4gIGdyb3VwX2J5KF9fXykgJT4lXG4gIHN1bW1hcmlzZShsb3dlckJvdW5kPSBfX18sIFxuICAgICAgICAgICAgdXBwZXJCb3VuZD1fX18sIFxuICAgICAgICAgICAgbWVkaWFuPV9fXylcblxuIyBMb2FkIHRoZSBnZ3Bsb3QyIHBhY2thZ2VcblxuXG4jIENyZWF0ZSBhIGNvbG9yZWQgYmFycGxvdCB0byBjb21wYXJlIHRoZSB0d28gZ3JvdXAgbWVkaWFucyBpbiB0aGUgJ2RhdGFGb3JQbG90JyBkYXRhLmZyYW1lLlxuIyBBZGQgZXJyb3IgYmFycyB0byB0aGUgYmFycGxvdCIsInNvbHV0aW9uIjoiIyBUaGUgZGF0YS5mcmFtZSBkYXRhU2V0IGlzIGFscmVhZHkgaW4geW91ciB3b3Jrc3BhY2UsIGFzIGlzIHRoZSBjb25mTWVkaWFuIGZ1bmN0aW9uXG5jb25mTWVkaWFuIDwtIGZ1bmN0aW9uKHgpIHtcbiAgc29ydCh4KVtxYmlub20oYyguMDI1LC45NzUpLCBsZW5ndGgoeCksIDAuNSldXG59XG4jIENvbnZlcnQgJ2NvbmRpdGlvbicgdG8gYSBmYWN0b3JcbmRhdGFTZXQkY29uZGl0aW9uIDwtIGFzLmZhY3RvcihkYXRhU2V0JGNvbmRpdGlvbilcblxuIyBSZWxldmVsICdjb25kaXRpb24nIHNvIHRoYXQgdGhlIHJlZmVyZW5jZSBsZXZlbCBpcyAnc3ludGF4IGFuZCBzZW1hbnRpY3MnXG5kYXRhU2V0JGNvbmRpdGlvbiA8LSByZWxldmVsKGRhdGFTZXQkY29uZGl0aW9uLCByZWY9XCJzeW50YXggYW5kIHNlbWFudGljc1wiKVxuXG4jIExvYWQgdGhlICdkcGx5cicgcGFja2FnZVxubGlicmFyeShkcGx5cilcbiMgQ2FsY3VsYXRlIHRoZSBkYXRhIGZvciB0aGUgcGxvdCwgaW5jbHVkaW5nIHRoZSB1cHBlciBhbmQgbG93ZXIgYm91bmRzIG9mIHRoZSBjb25maWRlbmNlIGludGVydmFsczpcbmRhdGFGb3JQbG90IDwtIGRhdGFTZXQgJT4lXG4gIGdyb3VwX2J5KGNvbmRpdGlvbikgJT4lXG4gIHN1bW1hcmlzZShsb3dlckJvdW5kPSBjb25mTWVkaWFuKE1lYW5fUlQpWzFdLCBcbiAgICAgICAgICAgIHVwcGVyQm91bmQ9Y29uZk1lZGlhbihNZWFuX1JUKVsyXSwgXG4gICAgICAgICAgICBtZWRpYW49bWVkaWFuKE1lYW5fUlQpKVxuXG4jIExvYWQgdGhlIGdncGxvdDIgcGFja2FnZVxubGlicmFyeShnZ3Bsb3QyKVxuXG4jIENyZWF0ZSBhIGNvbG9yZWQgYmFycGxvdCB0byBjb21wYXJlIHRoZSB0d28gZ3JvdXAgbWVkaWFucyBpbiB0aGUgJ2RhdGFGb3JQbG90JyBkYXRhLmZyYW1lLlxuIyBBZGQgZXJyb3IgYmFycyB0byB0aGUgYmFycGxvdFxuZ2dwbG90KGRhdGFGb3JQbG90LCBhZXMoeD1jb25kaXRpb24sIHk9bWVkaWFuLCBjb2xvcj1jb25kaXRpb24sIGZpbGw9Y29uZGl0aW9uKSkgKyBnZW9tX2JhcihzdGF0PVwiaWRlbnRpdHlcIikgKyBnZW9tX2Vycm9yYmFyKGFlcyh5bWluPWxvd2VyQm91bmQsIHltYXg9dXBwZXJCb3VuZCksIHdpZHRoPTAuNSwgY29sb3I9XCJibGFja1wiKSIsInNjdCI6InRlc3RfbGlicmFyeV9mdW5jdGlvbihcImdncGxvdDJcIiwgXCJNYWtlIHN1cmUgdG8gY2FsbCB0aGUgJ2dncGxvdDInIHBhY2thZ2UhXCIpXG50ZXN0X2xpYnJhcnlfZnVuY3Rpb24oXCJkcGx5clwiLCBcIk1ha2Ugc3VyZSB0byBjYWxsIHRoZSAnZHBseXInIHBhY2thZ2UhXCIpXG5cbnRlc3RfZ2dwbG90KGluZGV4ID0gMSlcblxuc3VjY2Vzc19tc2coXCJHcmVhdCFcIikifQ==
+</div>
+</div>
+</div>
+<div id="references" class="section level2">
+<h2>References</h2>
+<ul>
+<li>Eddington, D., &amp; Ruiz De Mendoza, F. J. (2010). Argument constructions and language processing: Evidence from a priming experiment and pedagogical implications. In S. De Knop, F. Boers, A. De Rycker (eds.), <em>Fostering Language Teaching Efficiency through Cognitive Linguistics</em> (213-238). Berlin/Boston, MA: De Gruyter.</li>
+<li>Levshina, N. (2015). <em>How to do linguistics with R: Data exploration and statistical analysis</em>. Amsterdam/Philadelphia, PA: John Benjamin’s.</li>
+<li>Paivio, A., Juille, J. C., &amp; Madigan, S. (1968). Concreteness, imagery, and meaningfulness values for 925 nouns. <em>Journal of Experimental Psychology</em>, 76(1, Pt. 2), 1-25.</li>
+</ul>
+</div>
+
+<p>&copy; 2018 Jeroen Claes</p>
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

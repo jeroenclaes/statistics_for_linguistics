@@ -44,7 +44,6 @@ test_output_contains("glimpse(dataSet)",   incorrect_msg = "Make sure to print a
 success_msg("Great!")
 ```
 
-## 2. Working with data.frames (recap)
 ### Subsetting data.frames (1/4)
 
 ```{r ex="explore", type="pre-exercise-code"}
