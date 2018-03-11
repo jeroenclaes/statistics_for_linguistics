@@ -1,5 +1,5 @@
 ---
-title: "Class 1: Objects, vectors, and basic mathematics"
+title: "Topic 1: Objects, vectors, and basic mathematics"
 author: "Jeroen Claes | <jeroen.claes@kuleuven.be> | <jeroen@cropland.be>"
 ---
 ## Objects and vectors 

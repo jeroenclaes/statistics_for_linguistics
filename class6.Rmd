@@ -1,0 +1,741 @@
+---
+title: "Topic 6:  Relationships between qualitative variables"
+author: "Jeroen Claes | <jeroen.claes@kuleuven.be> | <jeroen@cropland.be>"
+output: 
+ html_document:
+  self_contained: false 
+---
+
+```{r, include=FALSE}
+#library(testwhat)
+tutorial::go_interactive()
+```
+
+
+## A classic: Labov's (2006 [1966]) *Department Store Survey*
+- Labov studied the use of full and elided postvocalic /r/ in the Lower East Side of New York City
+- New Yorkers tend to omit /r/ in those contexts. The use of /r/ is regarded as a high-prestige feature
+- To gain more insight into the social stratification of /r/, Labov devised a clever study:
+    - New York department stores were highly socially stratified in the early 1960s:
+        - The upper class shopped predominantly at Saks (high-fashion; expensive)
+        - The middle class did their shopping at Macy's ('normal' prices and fashion)
+        - The lower classes went to Klein's (cheap prices)
+    - Labov suspected that shop assistants would accomodate to their public
+    - To study the use of /r/ among shop assistants, he located an item that was located on the *fourth floor* (note that there's two possible contexts there) and he simply asked shop assistants where he could find the item. Labov wrote down the pronunciation and repeated the experiment with another unknowning shop assistant. 
+- Data:
+    - `r`: /r/ type
+    - `store`: Klein's, Macy's, or Saks
+    - `emphasis`: pronunciation emphasis
+    - `word`: *fourth* or *floor*
+
+## 1. Loading and exploring the data
+```{r ex="Labov_load_explore_associations", type="sample-code"}
+# Load the readr package
+
+# Load the course data from the course website to the object 'dataSet':
+# http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class6_Labov_1966.csv
+
+# Load the dplyr package
+
+# Convert all character values to factor with mutate_if
+
+# Print a summary of the dataSet 
+
+
+```
+
+```{r ex="Labov_load_explore_associations", type="solution"}
+# Load the readr package
+library(readr)
+# Load the course data from the course website to the object 'dataSet':
+# http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class5_Labov_et_al_2012.csv
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class6_Labov_1966.csv")
+# Load the dplyr package
+library(dplyr)
+# Load the dplyr package
+
+# Convert all character values to factor with mutate_if
+dataSet <- mutate_if(dataSet, is.character, as.factor)
+
+# Print a summary of the dataSet 
+summary(dataSet)
+```
+
+```{r ex="Labov_load_explore_associations", type="sct"}
+test_object("dataSet")
+test_library_function("readr", "Make sure to call the 'readr' package!")
+test_library_function("dplyr", "Make sure to call the 'dplyr' package!")
+test_output_contains("summary(dataSet)",   incorrect_msg = "Make sure to print a 'summary' of the dataSet!")
+
+success_msg("Great!")
+```
+
+## 2. The social stratification of /r/ in New York City: Store vs /r/
+### 2.1 Frequency of /r/ by store
+```{r ex="Labov_store_freq", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class6_Labov_1966.csv")
+```
+
+```{r ex="Labov_store_freq", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Compute a table of the use of /r/ by store
+
+# Compute a table with proportions of the use of /r/ by store. The columns should sum one
+
+# Compute a table with proportions of the use of /r/ by store. The rows should sum one
+
+# What do you see? You will find the correct answer on the Solution tab.
+# - Which store provided the largest proportion of examples?
+# - Which store has the highest ocurrence rate of the "full" /r/?
+# You will find the correct answers on the Solution tab. 
+
+```
+
+```{r ex="Labov_store_freq", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Compute a table of the use of /r/ by store
+table(dataSet$store, dataSet$r)
+
+# Compute a table with proportions of the use of /r/ by store. The columns should sum one
+prop.table(table(dataSet$store, dataSet$r), 2)
+# Compute a table with proportions of the use of /r/ by store. The rows should sum one
+prop.table(table(dataSet$store, dataSet$r), 1)
+
+# What do you see? 
+# - Which store provided the largest proportion of full examples?
+# Macy's provides about 54% of the full /r/ tokens
+# - Which store has the highest ocurrence rate of the "full" /r/?
+# Saks has the highest occurance rate of the 'full' /r/, with 47%
+# You will find the correct answers on the Solution tab. 
+```
+
+```{r ex="Labov_store_freq", type="sct"}
+test_output_contains("table(dataSet$store, dataSet$r)", "Don't forget to compute a table of 'store' vs. '/r/'!")
+test_output_contains("prop.table(table(dataSet$store, dataSet$r), 2)", "Don't forget to calculate the distribution of /r/ tokens over stores!!")
+
+test_output_contains("prop.table(table(dataSet$store, dataSet$r), 1)", "Don't forget to calculate the relative frequency of the  /r/ allophones by store!")
+
+success_msg("Wonderful!")
+```
+
+### 2.2 Validating the assumptions of the significance test
+```{r ex="Labov_store_significance0", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class6_Labov_1966.csv")
+```
+
+```{r ex="Labov_store_significance0", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Perform a chisq.test to test the association between 'store' and 'r'. Store the test in the object 'test'
+
+# Extract and print the expected frequencies from the 'test' object
+
+# Extract and print the pearson residuals to see which cells constribute significantly to the test result
+
+# What do you see?
+# - Can we use the chisq.test in this case? 
+# - Which cells contribute significantly to the chi-squared value? Recall that a cell contributes significantly to the result if it has a standardized residual of more/less than +/-1.96
+#You will find the correct answer on the Solution tab.
+```
+
+```{r ex="Labov_store_significance0", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Perform a chisq.test to test the association between 'store' and 'r'. Store the test in the object 'test'
+test<-chisq.test(dataSet$store, dataSet$r)
+
+# Extract and print the expected frequencies from the 'test' object
+test$expected
+
+# Extract the pearson residuals to see which cells constribute significantly to the test result
+test$stdres
+
+# What do you see?
+# - Can we use the chisq.test in this case? 
+# Yes, none of the expected frequencies is smaller than 5.
+# - Which cells contribute significantly to the chi-squared value? Recall that a cell contributes significantly to the result if it has a standardized residual of more/less than +/-1.96
+# All cells have more extreme values than 1.96
+
+```
+
+```{r ex="Labov_store_significance0", type="sct"}
+test_object("test")
+test_output_contains("test$expected", "Don't forget to print the expected frequencies!")
+test_output_contains("test$stdres", "Don't forget to print the standardized residuals!")
+
+success_msg("Excellent work!")
+```
+
+### 2.3 Significance test and effect size
+
+```{r ex="Labov_store_significanceEffect", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class6_Labov_1966.csv")
+```
+
+```{r ex="Labov_store_significanceEffect", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Compute the chisq.test again to evaluate the association between store and /r/
+
+# Load the 'vcd' library
+
+# Compute the effect sizes for store vs /r/
+
+# What can we conclude? 
+# - Is the difference between the stores significant?
+# - Is the effect large?
+# You will find the correct answers on the Solution tab
+```
+
+```{r ex="Labov_store_significanceEffect", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Compute the chisq.test again to evaluate the association between store and /r/
+chisq.test(dataSet$store, dataSet$r)
+# Load the 'vcd' library
+library(vcd)
+# Compute the effect sizes for store vs /r/
+assocstats(table(dataSet$store, dataSet$r))
+# What can we conclude? 
+# - Is the difference between the stores significant?
+# p < 0.05, so it is generally considered to be significant
+# -  Is the effect large?
+# Cramer's V is estimated to be 0.317, so the effect is moderate
+```
+
+```{r ex="Labov_store_significanceEffect", type="sct"}
+test_library_function("vcd", "Make sure to call the 'car' package!")
+test_output_contains('chisq.test(dataSet$store, dataSet$r)', "Make sure you perform the chisq.test!")
+test_output_contains('assocstats(table(dataSet$store, dataSet$r))', "Don't forget to calculate the effect size measures")
+success_msg("Great!")
+```
+
+### 2.4 Plotting the differences between stores
+```{r ex="Labov_store_plot", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class6_Labov_1966.csv")
+```
+
+```{r ex="Labov_store_plot", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Load the 'ggplot2' library
+
+# Draw a plot of the amount of tokens Labov collected per store
+
+```
+
+```{r ex="Labov_store_plot", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Load the 'ggplot2' library
+library(ggplot2)
+# Draw a stacked plot of the amount of tokens Labov collected per store
+ggplot(dataSet, aes(x=store, fill=r, color=r)) + geom_bar(position="stack")
+```
+
+```{r ex="Labov_store_plot", type="sct"}
+test_library_function("ggplot2", "Make sure to call the 'ggplot2' package!")
+test_ggplot()
+success_msg("Great!")
+```
+
+
+```{r ex="Labov_store_plot0", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class6_Labov_1966.csv")
+```
+
+```{r ex="Labov_store_plot0", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Load the 'ggplot2' library
+
+# Draw a plot of the relative frequency of the /r/ variants per store.  Add percent formatting to the y-axis
+
+```
+
+```{r ex="Labov_store_plot0", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Load the 'ggplot2' library
+library(ggplot2)
+# Load the 'scales' library
+library(scales)
+# Draw a plot of the amount of tokens Labov collected per store. Add percent formatting to the y-axis
+ggplot(dataSet, aes(x=store, fill=r, color=r)) + geom_bar(position="fill") + scale_y_continuous(labels=percent)
+```
+
+```{r ex="Labov_store_plot0", type="sct"}
+test_library_function("ggplot2", "Make sure to call the 'ggplot2' package!")
+test_library_function("scales", "Make sure to call the 'scales' package!")
+test_ggplot()
+success_msg("Great!")
+success_msg("Great!")
+```
+
+
+
+
+## 3. The phonological conditioning of /r/ in New York City: the role of emphasis
+### 3.1 Frequency of /r/ by emphasis
+```{r ex="Labov_emphasis_freq", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class6_Labov_1966.csv")
+```
+
+```{r ex="Labov_emphasis_freq", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Compute a table of the use of /r/ by emphasis
+
+# Compute a table with proportions of the use of /r/ by emphasis. The columns should sum one
+
+# Compute a table with proportions of the use of /r/ by emphasis. The rows should sum one
+
+# What do you see? You will find the correct answer on the Solution tab.
+# - Which emphasis provided the largest proportion of examples?
+# - Which emphasis has the highest ocurrence rate of the "full" /r/?
+# You will find the correct answers on the Solution tab. 
+
+```
+
+```{r ex="Labov_emphasis_freq", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Compute a table of the use of /r/ by emphasis
+table(dataSet$emphasis, dataSet$r)
+
+# Compute a table with proportions of the use of /r/ by emphasis. The columns should sum one
+prop.table(table(dataSet$emphasis, dataSet$r), 2)
+# Compute a table with proportions of the use of /r/ by emphasis. The rows should sum one
+prop.table(table(dataSet$emphasis, dataSet$r), 1)
+
+# What do you see? 
+# - Which emphasis provided the largest proportion of full examples?
+# About 59% of the full tokens were drawn from non-emphatic contexts
+# - Which emphasis condition has the highest ocurrence rate of the "full" /r/?
+# The emphatic condition has the highest occurrence rate of the 'full' /r/, about 35%
+```
+
+```{r ex="Labov_emphasis_freq", type="sct"}
+test_output_contains("table(dataSet$emphasis, dataSet$r)", "Don't forget to compute a table of 'emphasis' vs. '/r/'!")
+test_output_contains("prop.table(table(dataSet$emphasis, dataSet$r), 2)", "Don't forget to calculate the distribution of /r/ tokens over emphasis!!")
+
+test_output_contains("prop.table(table(dataSet$emphasis, dataSet$r), 1)", "Don't forget to calculate the relative frequency of the  /r/ allophones by emphasis!")
+
+success_msg("Wonderful!")
+```
+
+### 3.2 Validating the assumptions of the significance test
+```{r ex="Labov_emphasis_significance0", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class6_Labov_1966.csv")
+```
+
+```{r ex="Labov_emphasis_significance0", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Perform a chisq.test to test the association between 'emphasis' and 'r'. Store the test in the object 'test'
+
+# Extract and print the expected frequencies from the 'test' object
+
+# Extract and print the pearson residuals to see which cells constribute significantly to the test result
+
+# What do you see?
+# - Can we use the chisq.test in this case? 
+# - Which cells contribute significantly to the chi-squared value? Recall that a cell contributes significantly to the result if it has a standardized residual of more/less than +/-1.96
+#You will find the correct answer on the Solution tab.
+```
+
+```{r ex="Labov_emphasis_significance0", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Perform a chisq.test to test the association between 'emphasis' and 'r'. Store the test in the object 'test'
+test<-chisq.test(dataSet$emphasis, dataSet$r)
+
+# Extract and print the expected frequencies from the 'test' object
+test$expected
+
+# Extract the pearson residuals to see which cells constribute significantly to the test result
+test$stdres
+
+# What do you see?
+# - Can we use the chisq.test in this case? 
+# Yes, none of the expected frequencies is smaller than 5.
+# - Which cells contribute significantly to the chi-squared value? Recall that a cell contributes significantly to the result if it has a standardized residual of more/less than +/-1.96
+# All cells have less extreme values than 1.96. This suggests that the difference between emphatic and non-emphatic contexts is not significant at the 0.05 level
+
+```
+
+```{r ex="Labov_emphasis_significance0", type="sct"}
+test_object("test")
+test_output_contains("test$expected", "Don't forget to print the expected frequencies!")
+test_output_contains("test$stdres", "Don't forget to print the standardized residuals!")
+
+success_msg("Fantastic work!")
+```
+
+### 3.3 Significance test and effect size
+
+```{r ex="Labov_emphasis_significanceEffect", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class6_Labov_1966.csv")
+```
+
+```{r ex="Labov_emphasis_significanceEffect", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Compute the chisq.test again to evaluate the association between emphasis and /r/
+
+# Load the 'vcd' library
+
+# Compute the effect sizes for emphasis vs /r/
+
+# What can we conclude? 
+# - Is the difference between the emphasis conditions significant?
+# - Is the effect large?
+# You will find the correct answers on the Solution tab
+```
+
+```{r ex="Labov_emphasis_significanceEffect", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Compute the chisq.test again to evaluate the association between emphasis and /r/
+chisq.test(dataSet$emphasis, dataSet$r)
+# Load the 'vcd' library
+library(vcd)
+# Compute the effect sizes for emphasis vs /r/
+assocstats(table(dataSet$emphasis, dataSet$r))
+# What can we conclude? 
+# - Is the difference between the emphasis conditions significant?
+# p > 0.05, so it is generally not considered to be significant
+# -  Is the effect large?
+# Cramer's V is estimated to be 0.05, so the effect is tiny
+# The conclusion that we can draw from this is that /r/ is not conditioned by phonetic emphasis in New York City
+```
+
+```{r ex="Labov_emphasis_significanceEffect", type="sct"}
+test_library_function("vcd", "Make sure to call the 'car' package!")
+test_output_contains('chisq.test(dataSet$emphasis, dataSet$r)', "Make sure you perform the chisq.test!")
+test_output_contains('assocstats(table(dataSet$emphasis, dataSet$r))', "Don't forget to calculate the effect size measures")
+success_msg("Great!")
+```
+
+### 3.4 Plotting the differences between emphasis conditions
+- We know now that `emphasis` does not play a role in the choice between full and elided postvocalic /r/ in New York City. 
+- Obtaining and reporting non-significant results is as important than obtaining and reporting significant ones! So we will go ahead and continue our analysis here.
+```{r ex="Labov_emphasis_plot", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class6_Labov_1966.csv")
+```
+
+```{r ex="Labov_emphasis_plot", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Load the 'ggplot2' library
+
+# Draw a plot of the amount of tokens Labov collected per emphasis
+
+```
+
+```{r ex="Labov_emphasis_plot", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Load the 'ggplot2' library
+library(ggplot2)
+# Draw a stacked plot of the amount of tokens Labov collected per emphasis
+ggplot(dataSet, aes(x=emphasis, fill=r, color=r)) + geom_bar(position="stack")
+```
+
+```{r ex="Labov_emphasis_plot", type="sct"}
+test_library_function("ggplot2", "Make sure to call the 'ggplot2' package!")
+test_ggplot()
+success_msg("Great!")
+```
+
+
+```{r ex="Labov_emphasis_plot0", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class6_Labov_1966.csv")
+```
+
+```{r ex="Labov_emphasis_plot0", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Load the 'ggplot2' library
+
+# Draw a plot of the relative frequency of the /r/ variants per emphasis.  Add percent formatting to the y-axis
+
+```
+
+```{r ex="Labov_emphasis_plot0", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Load the 'ggplot2' library
+library(ggplot2)
+# Load the 'scales' library
+library(scales)
+# Draw a plot of the amount of tokens Labov collected per emphasis. Add percent formatting to the y-axis
+ggplot(dataSet, aes(x=emphasis, fill=r, color=r)) + geom_bar(position="fill") + scale_y_continuous(labels=percent)
+```
+
+```{r ex="Labov_emphasis_plot0", type="sct"}
+test_library_function("ggplot2", "Make sure to call the 'ggplot2' package!")
+test_library_function("scales", "Make sure to call the 'scales' package!")
+test_ggplot()
+success_msg("Great!")
+success_msg("Great!")
+```
+
+
+## 4. The phonological conditioning of /r/ in New York City: The role of word-final vs preconsonantal position
+- The difference between *fourth* and *floor* consists in that the postvocalic /r/ in *fourth* is followed by a consonant, whereas the one in *floor* is word-final
+- Any differences between these two words may point to an effect of these two phonetic conditions
+
+### 4.1 Frequency of /r/ by word
+```{r ex="Labov_word_freq", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class6_Labov_1966.csv")
+```
+
+```{r ex="Labov_word_freq", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Compute a table of the use of /r/ by word
+
+# Compute a table with proportions of the use of /r/ by word. The columns should sum one
+
+# Compute a table with proportions of the use of /r/ by word. The rows should sum one
+
+# What do you see? You will find the correct answer on the Solution tab.
+# - Which word provided the largest proportion of examples?
+# - Which word has the highest ocurrence rate of the "full" /r/?
+# You will find the correct answers on the Solution tab. 
+
+```
+
+```{r ex="Labov_word_freq", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Compute a table of the use of /r/ by word
+table(dataSet$word, dataSet$r)
+
+# Compute a table with proportions of the use of /r/ by word. The columns should sum one
+prop.table(table(dataSet$word, dataSet$r), 2)
+# Compute a table with proportions of the use of /r/ by word. The rows should sum one
+prop.table(table(dataSet$word, dataSet$r), 1)
+
+# What do you see? 
+# - Which word provided the largest proportion of full examples?
+# "Floor" provides about 62% of the full /r/ tokens
+# - Which word has the highest ocurrence rate of the "full" /r/?
+# Again, "floor" has the highest occurance rate of the 'full' /r/, with 41%
+```
+
+```{r ex="Labov_word_freq", type="sct"}
+test_output_contains("table(dataSet$word, dataSet$r)", "Don't forget to compute a table of 'word' vs. '/r/'!")
+test_output_contains("prop.table(table(dataSet$word, dataSet$r), 2)", "Don't forget to calculate the distribution of /r/ tokens over words!!")
+
+test_output_contains("prop.table(table(dataSet$word, dataSet$r), 1)", "Don't forget to calculate the relative frequency of the  /r/ allophones by word!")
+
+success_msg("Wonderful!")
+```
+
+### 4.2 Validating the assumptions of the significance test
+```{r ex="Labov_word_significance0", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class6_Labov_1966.csv")
+```
+
+```{r ex="Labov_word_significance0", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Perform a chisq.test to test the association between 'word' and 'r'. word the test in the object 'test'
+
+# Extract and print the expected frequencies from the 'test' object
+
+# Extract and print the pearson residuals to see which cells constribute significantly to the test result
+
+# What do you see?
+# - Can we use the chisq.test in this case? 
+# - Which cells contribute significantly to the chi-squared value? Recall that a cell contributes significantly to the result if it has a standardized residual of more/less than +/-1.96
+#You will find the correct answer on the Solution tab.
+```
+
+```{r ex="Labov_word_significance0", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Perform a chisq.test to test the association between 'word' and 'r'.Store the test in the object 'test'
+test<-chisq.test(dataSet$word, dataSet$r)
+
+# Extract and print the expected frequencies from the 'test' object
+test$expected
+
+# Extract the pearson residuals to see which cells constribute significantly to the test result
+test$stdres
+
+# What do you see?
+# - Can we use the chisq.test in this case? 
+# Yes, none of the expected frequencies is smaller than 5.
+# - Which cells contribute significantly to the chi-squared value? Recall that a cell contributes significantly to the result if it has a standardized residual of more/less than +/-1.96
+# All cells have more extreme values than 1.96
+
+```
+
+```{r ex="Labov_word_significance0", type="sct"}
+test_object("test")
+test_output_contains("test$expected", "Don't forget to print the expected frequencies!")
+test_output_contains("test$stdres", "Don't forget to print the standardized residuals!")
+
+success_msg("Excellent work!")
+```
+
+### 4.3 Significance test and effect size
+
+```{r ex="Labov_word_significanceEffect", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class6_Labov_1966.csv")
+```
+
+```{r ex="Labov_word_significanceEffect", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Compute the chisq.test again to evaluate the association between word and /r/
+
+# Load the 'vcd' library
+
+# Compute the effect sizes for word vs /r/
+
+# What can we conclude? 
+# - Is the difference between the words significant?
+# - Is the effect large?
+# You will find the correct answers on the Solution tab
+```
+
+```{r ex="Labov_word_significanceEffect", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Compute the chisq.test again to evaluate the association between word and /r/
+chisq.test(dataSet$word, dataSet$r)
+# Load the 'vcd' library
+library(vcd)
+# Compute the effect sizes for word vs /r/
+assocstats(table(dataSet$word, dataSet$r))
+# What can we conclude? 
+# - Is the difference between the words significant?
+# p < 0.05, so it is generally considered to be significant
+# -  Is the effect large?
+# Cramer's V is estimated to be 1.94, so the effect is small
+```
+
+```{r ex="Labov_word_significanceEffect", type="sct"}
+test_library_function("vcd", "Make sure to call the 'car' package!")
+test_output_contains('chisq.test(dataSet$word, dataSet$r)', "Make sure you perform the chisq.test!")
+test_output_contains('assocstats(table(dataSet$word, dataSet$r))', "Don't forget to calculate the effect size measures")
+success_msg("Great!")
+```
+
+### 4.4 Plotting the differences between words
+```{r ex="Labov_word_plot", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class6_Labov_1966.csv")
+```
+
+```{r ex="Labov_word_plot", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Load the 'ggplot2' library
+
+# Draw a plot of the amount of tokens Labov collected per word
+
+```
+
+```{r ex="Labov_word_plot", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Load the 'ggplot2' library
+library(ggplot2)
+# Draw a stacked plot of the amount of tokens Labov collected per word
+ggplot(dataSet, aes(x=word, fill=r, color=r)) + geom_bar(position="stack")
+```
+
+```{r ex="Labov_word_plot", type="sct"}
+test_library_function("ggplot2", "Make sure to call the 'ggplot2' package!")
+test_ggplot()
+success_msg("Great!")
+```
+
+
+```{r ex="Labov_word_plot0", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class6_Labov_1966.csv")
+```
+
+```{r ex="Labov_word_plot0", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Load the 'ggplot2' library
+
+# Draw a plot of the relative frequency of the /r/ variants per word.  Add percent formatting to the y-axis
+
+```
+
+```{r ex="Labov_word_plot0", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Load the 'ggplot2' library
+library(ggplot2)
+# Load the 'scales' library
+library(scales)
+# Draw a plot of the amount of tokens Labov collected per word. Add percent formatting to the y-axis
+ggplot(dataSet, aes(x=word, fill=r, color=r)) + geom_bar(position="fill") + scale_y_continuous(labels=percent)
+```
+
+```{r ex="Labov_word_plot0", type="sct"}
+test_library_function("ggplot2", "Make sure to call the 'ggplot2' package!")
+test_library_function("scales", "Make sure to call the 'scales' package!")
+test_ggplot()
+success_msg("Great!")
+success_msg("Great!")
+```
+
+
+## 5. Quiz
+- If you paid attention to what you were doing and you have really understood the results, answering the following questions should be easy
+
+
+```{r ex="Labov_quiz", type="sample-code"}
+# Rank the variables "word, store, emphasis" by effect size. Store your result in the object "answer1"" as a string separated by spaces (e.g. answer1<-"a b c" )
+
+# Complete the sentence by assigning one of the following strings to the variable "answer2": "phonetic context", "social class": 
+# In New York City, postvocalic /r/ is primarily conditioned by...
+
+```
+
+```{r ex="Labov_quiz", type="solution"}
+# Rank the variables "word, store, emphasis" by effect size. Store your result in the object "answer1"" as a string separated by spaces (e.g. answer1<-"a b c" )
+answer1<-"store word emphasis"
+# Complete the sentence by assigning one of the following strings to the variable "answer2": "phonetic context", "social class": 
+# In New York City, postvocalic /r/ is primarily conditioned by...
+answer2<-"social class"
+```
+
+```{r ex="Labov_quiz", type="sct"}
+test_object("answer1", undefined_msg="Don't forget to answer the first question!", incorrect_msg = "The correct order is: store word emphasis")
+
+test_object("answer1", undefined_msg="Don't forget to answer the second question!", incorrect_msg = "The correct answer is:'social class'. 'Store' has a much larger effect size than any other of the variables.")
+success_msg("Good job!")
+```
+
+
+## References
+- Labov, W. (2006 [1966]). *The social stratification of English in New York City. Second edition*. Oxford: Wiley.
+
+## Acknowledgements
+A warm *thank you!* goes out to **Daniel Ezra Johnson**, who generously provided the Labov data

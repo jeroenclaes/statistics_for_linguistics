@@ -1,11 +1,11 @@
 ---
-title: "Class 4: Comparing the central tendency of two groups"
+title: "Topic 4: Comparing the central tendency of two groups"
 author: "Jeroen Claes | <jeroen.claes@kuleuven.be> | <jeroen@cropland.be>"
 output: 
  html_document:
   self_contained: false 
 ---
-## 1. Case study one: *Dude* or *Duuude*?
+## 1. Case study 1: *Dude* or *Duuude*?
 ```{r, include=FALSE}
 #library(testwhat)
 tutorial::go_interactive()
@@ -162,7 +162,7 @@ dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datase
 
 # Relevel 'Surfer_or_nonSurfer' so that the reference level is 'surfer'
 
-# Perform a t-test of the differences bretween surfers and non-surfers. You will need to use the formula method.
+# Perform a t-test of the differences between surfers and non-surfers. You will need to use the formula method.
 # Also, keep in mind our hypothesis: Surfers will have higher F2-values
 
 # Is the result significant? You will find the correct answer on the Solution tab
@@ -182,7 +182,7 @@ dataSet$Surfer_or_nonSurfer <- as.factor(dataSet$Surfer_or_nonSurfer)
 # Relevel 'Surfer_or_nonSurfer' so that the reference level is 'surfer'
 dataSet$Surfer_or_nonSurfer <- relevel(dataSet$Surfer_or_nonSurfer, ref="surfer")
 
-# Perform a t-test of the differences bretween surfers and non-surfers. You will need to use the formula method.
+# Perform a t-test of the differences between surfers and non-surfers. You will need to use the formula method.
 # Also, keep in mind our hypothesis: Surfers will have higher F2-values
 t.test(F2 ~ Surfer_or_nonSurfer, data=dataSet, alternative="greater")
 
@@ -373,7 +373,7 @@ dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datase
 
 # Draw a density plot of the associations-column for both groups and add a red vertical line at the mean
 
-# Compute a Shapiro-Wilk test for both groups
+# Compute a Shapiro-Wilk test for the two 'type' groups
 
 # Are the data distributed normally and how large is the sample?  What type of test can we use in this case? You will find the correct answer on the Solution tab 
 
@@ -394,7 +394,7 @@ ggplot(dataSet[dataSet$type=="low", ], aes(x=associations)) + geom_line(stat="de
 
 ggplot(dataSet[dataSet$type=="high", ], aes(x=associations)) + geom_line(stat="density") + geom_vline(aes(xintercept =mean(dataSet[dataSet$type=="high", ]$associations) ), color="red")
 
-# Compute a Shapiro-Wilk test for both groups
+# Compute a Shapiro-Wilk test for the two 'type' groups
 shapiro.test(dataSet[dataSet$type=="low", ]$associations)
 shapiro.test(dataSet[dataSet$type=="high", ]$associations)
 
@@ -447,7 +447,7 @@ dataSet$type <- as.factor(dataSet$type)
 # Relevel 'type' so that the reference level is 'low'
 dataSet$type <- relevel(dataSet$type, ref="high")
 
-# Perform a t-test of the differences bretween surfers and non-surfers. You will need to use the formula method.
+# Perform a t-test of the differences between high- and low-frequency nouns. You will need to use the formula method.
 # Also, keep in mind our hypothesis: High-frequency nouns will have higher associations-values
 t.test(associations ~ type, data=dataSet, alternative="greater")
 
@@ -536,7 +536,7 @@ test_ggplot(index = 1)
 success_msg("Great!")
 ```
 
-## 3. The influence of formal and semantic similarity on acceptability tasks
+## 3. Case study 3: The influence of formal and semantic similarity on acceptability tasks
 - Eddington & Ruiz de Mendoza (2010) presented subjects with the same test sentences under two conditions:
     - Primed with a syntactically similar sentence
     - Primed with a syntactically and semantically similar sentence
@@ -598,7 +598,7 @@ dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datase
 
 # Draw a box-and-whisker plot to compare the medians of the condition groups
 
-# Which of the two groups has the highest median Mean_RT? You will find the correct solution on the Solution tab
+# Which of the two conditions has the highest median Mean_RT? You will find the correct solution on the Solution tab
 ```
 
 ```{r ex="boxplot_conditions_RT", type="solution"}
@@ -608,7 +608,7 @@ dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datase
 library(ggplot2)
 # Draw a box-and-whisker plot to compare the medians of the condition groups
 ggplot(dataSet, aes(x=condition, y=Mean_RT)) + geom_boxplot()
-# Which of the two groups has the highest median Mean_RT? You will find the correct solution on the Solution tab
+# Which of the two conditions has the highest median Mean_RT? You will find the correct solution on the Solution tab
 # The condition 'syntax and semantics' clearly has the lowest Mean_RT 
 ```
 
@@ -634,9 +634,9 @@ dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datase
 
 # Load the ggplot2 package
 
-# Draw a density plot of the Mean_RT-column for both groups and add a red vertical line at the mean
+# Draw a density plot of the Mean_RT-column for both conditions and add a red vertical line at the mean
 
-# Compute a Shapiro-Wilk test for both groups
+# Compute a Shapiro-Wilk test for both conditions
 
 # Are the data distributed normally and how large is the sample?  What type of test can we use in this case? You will find the correct answer on the Solution tab 
 
@@ -651,12 +651,12 @@ dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datase
 nrow(dataSet)
 # Load the ggplot2 package
 library(ggplot2)
-# Draw a density plot of the Mean_RT-column for both groups and add a red vertical line at the mean
+# Draw a density plot of the Mean_RT-column for both conditions and add a red vertical line at the mean
 ggplot(dataSet[dataSet$condition=="only syntax", ], aes(x=Mean_RT)) + geom_line(stat="density") + geom_vline(aes(xintercept =mean(dataSet[dataSet$condition=="only syntax", ]$Mean_RT) ), color="red")
 
 ggplot(dataSet[dataSet$condition=="syntax and semantics", ], aes(x=Mean_RT)) + geom_line(stat="density") + geom_vline(aes(xintercept =mean(dataSet[dataSet$condition=="syntax and semantics", ]$Mean_RT) ), color="red")
 
-# Compute a Shapiro-Wilk test for both groups
+# Compute a Shapiro-Wilk test for both conditions
 shapiro.test(dataSet[dataSet$condition=="only syntax", ]$Mean_RT)
 shapiro.test(dataSet[dataSet$condition=="syntax and semantics", ]$Mean_RT)
 
@@ -691,7 +691,7 @@ dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datase
 
 # Relevel 'condition' so that the reference level is 'syntax and semantics'
 
-# Perform a Wilcoxon tests of the differences between the two conditios. You will need to use the formula method.
+# Perform a Wilcoxon tests of the differences between the two conditions. You will need to use the formula method.
 # Also, keep in mind that:
 # - Our data is paired
 # - Our hypothesis states: The 'syntax and semantics' condition will trigger shorter reaction times
@@ -706,11 +706,10 @@ dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datase
 # Convert 'condition' to a factor
 dataSet$condition <- as.factor(dataSet$condition)
 
-# Relevel 'condition' so that the reference level is 'low'
+# Relevel 'condition' so that the reference level is 'syntax and semantics'
 dataSet$condition <- relevel(dataSet$condition, ref="syntax and semantics")
 
-# Perform a t-test of the differences bretween surfers and non-surfers. You will need to use the formula method.
-# Also, keep in mind our hypothesis: Surfers will have higher Mean_RT-values
+# Perform a Wilcoxon tests of the differences between the two conditions. You will need to use the formula method.
 wilcox.test(Mean_RT ~ condition, data=dataSet, alternative="less", paired=TRUE)
 
 # Is the result significant? Yes, the 'syntax and semantics' condition triggered significantly shorter reaction times  

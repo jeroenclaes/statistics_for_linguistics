@@ -1,5 +1,5 @@
 ---
-title: "Class 3: Data frames (recap), normal distribution and outliers (recap), and exploring qualitative variables"
+title: "Topic 3: Data frames (recap), normal distribution and outliers (recap), and exploring qualitative variables"
 author: "Jeroen Claes | <jeroen.claes@kuleuven.be> | <jeroen@cropland.be>"
 output: 
  html_document:
@@ -15,7 +15,7 @@ tutorial::go_interactive()
 ```{r ex="create_a", type="sample-code"}
 # Load the readr package
 
-# Load the course data from the course website to the object 'dataSet':
+# Load the course data from the coutrse website to the object 'dataSet':
 # http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv
 
 # Load the dplyr package
@@ -626,7 +626,7 @@ dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datase
 dataSet$Typical.Action.Chain.Pos<-as.factor(dataSet$Typical.Action.Chain.Pos)
 # Compute a table for the Typical.Action.Chain.Pos variable, store it in the variable 'Typical.Action.Chain.PosTab'
 Typical.Action.Chain.PosTab<-table(dataSet$Typical.Action.Chain.Pos)
-# Convert 'Typical.Action.Chain.PosTab' to a data.frame
+# Compute proportions for that table
 Typical.Action.Chain.PosTab<-prop.table(Typical.Action.Chain.PosTab)
 # Print 'Typical.Action.Chain.PosTab'
 Typical.Action.Chain.PosTab
@@ -697,7 +697,7 @@ dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datase
 
 # Convert the column corpus to a factor
 
-# Print a table of the number of times 'COSER' and 'Twitter' occur
+# Print a table of the corpus factor 
 
 ```
 
@@ -707,7 +707,7 @@ dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datase
 # Convert the column corpus to a factor
 dataSet$corpus<-as.factor(dataSet$corpus)
 
-# Print a table of the number of times 'COSER' and 'Twitter' occ
+# Print a table of the corpus factor 
 table(dataSet$corpus)
 ```
 
@@ -766,7 +766,7 @@ dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datase
 
 # Convert the column broad.regions to a factor
 
-# Print a table of the number of times 'COSER' and 'Twitter' occur
+# Print a table of the broad.regions factor
 
 ```
 
@@ -776,7 +776,7 @@ dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datase
 # Convert the column broad.regions to a factor
 dataSet$broad.regions<-as.factor(dataSet$broad.regions)
 
-# Print a table of the number of occurrences that were provided by each region
+# Print a table of the broad.regions factor
 table(dataSet$broad.regions)
 ```
 
@@ -881,7 +881,7 @@ dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datase
 
 # Convert the column corpus to a factor
 
-# Print a table of the proportions of 'COSER' and 'Twitter' 
+# Print a table of the proportions of the corpus factor 
 
 ```
 
@@ -891,7 +891,7 @@ dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datase
 # Convert the column corpus to a factor
 dataSet$corpus<-as.factor(dataSet$corpus)
 
-# Print a table of the proportions of 'COSER' and 'Twitter' 
+# Print a table of the proportions of the corpus factor 
 prop.table(table(dataSet$corpus))
 ```
 
@@ -953,7 +953,7 @@ dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datase
 
 # Convert the column broad.regions to a factor
 
-# Print a table of the number of times 'COSER' and 'Twitter' occur
+# Print a table of the proportions of the broad.regions factor 
 
 ```
 
@@ -963,7 +963,7 @@ dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datase
 # Convert the column broad.regions to a factor
 dataSet$broad.regions<-as.factor(dataSet$broad.regions)
 
-# Print a table of the number of occurrences that were provided by each region
+# Print a table of the proportions of the broad.regions factor 
 table(dataSet$broad.regions)
 ```
 

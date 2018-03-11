@@ -1,0 +1,562 @@
+---
+title: "Topic 5: Correlations"
+author: "Jeroen Claes | <jeroen.claes@kuleuven.be> | <jeroen@cropland.be>"
+output: 
+ html_document:
+  self_contained: false 
+---
+
+```{r, include=FALSE}
+#library(testwhat)
+tutorial::go_interactive()
+```
+
+
+## 1. The relationship between `Word length` and  `age of acquisition` 
+- Kuperman et al. (2012) gathered age of acquisition estimates for a large collection of words via Amazon Mechanical Turk
+- Here we use a sample of 1000 words
+- Resarch question:
+    - *Are shorter nouns acquired earlier on in life?*
+- Hypothesis:
+    - *Word length correlates positively with age of acquisition*
+- Null hypothesis:
+    - *Word length is not correlated with age of acquisition*
+
+
+### 1.1 Loading and exploring the data
+```{r ex="Kuperman_load_explore_associations", type="sample-code"}
+# Load the readr package
+
+# Load the course data from the course website to the object 'dataSet':
+# http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class5_Kuperman_et_al_2012.csv
+
+# Load the dplyr package
+
+# Print a 'glimpse' of the dataSet
+
+# Print a summary of the AgeOfAcquisition column
+
+# Print a summary of the WordLength column
+
+```
+
+```{r ex="Kuperman_load_explore_associations", type="solution"}
+# Load the readr package
+library(readr)
+# Load the course data from the course website to the object 'dataSet':
+# http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class5_Kuperman_et_al_2012.csv
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class5_Kuperman_et_al_2012.csv")
+# Load the dplyr package
+library(dplyr)
+# Print a 'glimpse' of the dataSet
+glimpse(dataSet)
+# Print a summary of the AgeOfAcquisition column
+summary(dataSet$AgeOfAcquisition)
+# Print a summary of the WordLength column
+summary(dataSet$WordLength)
+```
+
+```{r ex="Kuperman_load_explore_associations", type="sct"}
+test_object("dataSet")
+test_library_function("readr", "Make sure to call the 'readr' package!")
+test_library_function("dplyr", "Make sure to call the 'dplyr' package!")
+test_output_contains("glimpse(dataSet)",   incorrect_msg = "Make sure to print a 'glimpse' of the data!")
+test_output_contains("summary(dataSet$AgeOfAcquisition)",   incorrect_msg = "Make sure to print a 'summary' of the AgeOfAcquisition column!")
+test_output_contains("summary(dataSet$WordLength)",   incorrect_msg = "Make sure to print a 'summary' of the WordLength column!")
+success_msg("Great!")
+```
+
+### 1.2  A first visual inspection of the relationship
+```{r ex="Kuperman_boxplot_associations", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class5_Kuperman_et_al_2012.csv")
+```
+
+```{r ex="Kuperman_boxplot_associations", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Load the ggplot2 package
+
+# Draw a scatterplot of  WordLength (X-axis) vs AgeOfAcquisition (y-axis)
+# Add a linear (lm) trendline 
+
+# What do you see? Is the relationship monotonic and linear? You will find the correct answer on the 'Solution' tab
+
+```
+
+```{r ex="Kuperman_boxplot_associations", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Load the ggplot2 package
+library(ggplot2)
+# Draw a scatterplot of  WordLength (X-axis) vs AgeOfAcquisition (y-axis)
+# Add a linear (lm) trendline 
+ggplot(dataSet, aes(x=WordLength, y=AgeOfAcquisition)) + 
+  geom_point() + 
+  geom_smooth(method="lm")
+# What do you see? Is the relationship monotonic and linear? 
+# The relationship is monotonic: When word length goes up, there is also an increase in AgeOfAcquisition
+# The relationship is not linear: When word length goes up with one unit, there is not a constant increase in the values of AgeOfAcquisition across the word length continuum
+```
+
+```{r ex="Kuperman_boxplot_associations", type="sct"}
+test_library_function("ggplot2", "Make sure to call the 'ggplot2' package!")
+test_ggplot(index = 1)
+success_msg("Great!")
+```
+
+### 1.3  Testing the assumptions of Pearson's *r*: bivariate normal distribution and smaple size
+- The plot tells us that the relationship is not linear, but it is monotonic
+- This tells us already that we cannot use the Pearson's correlation without transforming the data
+- For practice, let's see if the data satisfy the other assumptions 
+
+```{r ex="Kuperman_bivariate_normal", type="pre-exercise-code"}
+library(readr)
+library(energy)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class5_Kuperman_et_al_2012.csv")
+```
+
+```{r ex="Kuperman_bivariate_normal", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Load the energy package
+
+# Perform a mvnorm.etest to see if 'AgeOfAcquisition'  and WordLength have a bivariate normal distribution. Use 1000 replicates
+
+# Check the sample size by computing the number of rows in dataSet
+
+# What does the test tell you, do the two columns have a bivariate normal distribution? You will find the correct answer on the 'Solution' tab
+```
+
+```{r ex="Kuperman_bivariate_normal", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Load the energy package
+library(energy)
+
+# Perform a mvnorm.etest to see if 'AgeOfAcquisition'  and WordLength have a bivariate normal distribution. Use 1000 replicates
+mvnorm.etest(dataSet[, c("AgeOfAcquisition", "WordLength")], 1000)
+
+# Check the sample size by computing the number of rows in dataSet
+nrow(dataSet)
+
+# What does the test tell you, do the two columns have a bivariate normal distribution?
+# p < 0.05, so the data do not follow a bivariate normal distribution. Note that this is not that big of an issue, because the sample size is large
+```
+
+```{r ex="Kuperman_bivariate_normal", type="sct"}
+test_library_function("energy", "Make sure to call the 'energy' package!")
+test_output_contains('mvnorm.etest(dataSet[, c("AgeOfAcquisition", "WordLength")], 1000)', "Make sure you perform the mvnorm.etest!")
+test_output_contains('nrow(dataSet)', "Don't forget to compute the sample size!")
+success_msg("Excellent work!")
+```
+
+### 1.4  Testing the assumptions of Pearson's *r*: homoskedastic data
+
+```{r ex="Kuperman_heteroske_normal", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class5_Kuperman_et_al_2012.csv")
+```
+
+```{r ex="Kuperman_heteroske_normal", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Load the car package
+
+# Specificy a linear regression model 'mod' that regresses AgeOfAcquisition on WordLength 
+
+# Perform a ncvTest on this regression model
+
+# What does the test tell you, are the data heteroskedastic or homoskedastic? You will find the correct answer on the 'Solution' tab
+```
+
+```{r ex="Kuperman_heteroske_normal", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Load the car package
+library(car)
+# Specificy a linear regression model 'mod' that regresses AgeOfAcquisition on WordLength 
+mod <- lm(AgeOfAcquisition ~ WordLength, dataSet)
+# Perform a ncvTest on this regression model
+ncvTest(mod)
+# What does the test tell you, are the data heteroskedastic or homoskedastic?
+# p < 0.05 confirms what we saw on the plot: the relationship is not linear and the data are heteroskedastic
+
+```
+
+```{r ex="Kuperman_heteroske_normal", type="sct"}
+test_library_function("car", "Make sure to call the 'car' package!")
+test_output_contains('ncvTest(mod)', "Make sure you perform the ncvTest!")
+success_msg("Great!")
+```
+
+
+### 1.5  Testing the assumptions of Pearson's *r*: independent data
+
+```{r ex="Kuperman_autocorr_normal", type="pre-exercise-code"}
+library(readr)
+library(energy)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class5_Kuperman_et_al_2012.csv")
+```
+
+```{r ex="Kuperman_autocorr_normal", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Load the car package
+
+# Specificy a linear regression model 'mod' that regresses AgeOfAcquisition on WordLength 
+
+# Perform a Durbin-Watson test on this regression model
+
+# What does the test tell you, are the data autocorrelated? You will find the correct answers on the Solution tab
+```
+
+```{r ex="Kuperman_autocorr_normal", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Load the car package
+library(car)
+# Specificy a linear regression model 'mod' that regresses AgeOfAcquisition on WordLength 
+mod <- lm(AgeOfAcquisition ~ WordLength, dataSet)
+# Perform a ncvTest on this regression model
+durbinWatsonTest(mod)
+# What does the test tell you, are the data autocorrelated?
+# p > 0.05 tells us that autocorrelation is not an issue
+```
+
+```{r ex="Kuperman_autocorr_normal", type="sct"}
+test_library_function("car", "Make sure to call the 'car' package!")
+test_output_contains('durbinWatsonTest(mod)', "Make sure you perform the durbinWatsonTest!")
+success_msg("Great!")
+```
+
+### 1.6  Performing the correlations test
+- All of our previous exercises point in the same direction: the data are not suited for the Pearson's correlation test:
+    - The relationship is not linear
+    - The relationship is heteroskedastic
+    - The data do not follow a bivariate normal distribution (less important, as the sample size is large)
+- Spearman's *Rho* and Kendall's *tau* are our only two options
+
+```{r ex="Kuperman_test_normal", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class5_Kuperman_et_al_2012.csv")
+```
+
+```{r ex="Kuperman_test_normal", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Perform a cor.test with the 'spearman' method. Recall that our hypothesis is directional: it predicts a positive correlation
+
+# Perform a cor.test with the 'kendall' method. Recall that our hypothesis is directional: it predicts a positive correlation
+
+# What do the two tests tell you: 
+# - Is the relationship between the two variables strong? 
+# - Is the relationship positive or negative? 
+# - Is it significant? 
+# Which test yields the most extreme estimate?
+# You will find the correct answers on the Solution tab
+```
+
+```{r ex="Kuperman_test_normal", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Perform a cor.test with the 'spearman' method. Recall that our hypothesis is directional: it predicts a positive correlation
+cor.test(dataSet$AgeOfAcquisition, dataSet$WordLength, alternative="greater", method="spearman")
+
+# Perform a cor.test with the 'kendall' method. Recall that our hypothesis is directional: it predicts a positive correlation
+cor.test(dataSet$AgeOfAcquisition, dataSet$WordLength, alternative="greater", method="kendall")
+
+# What does the two tests tell you: 
+# - Is the relationship between the two variables strong? 
+# The relationship is weak to moderate (rho and tau around 0.3)
+# - Is the relationship positive or negative? 
+# The relationship is positive, the coefficients are greater than zero
+# - Is it significant? 
+# p < 0.05 so we can consider the relationship to be weak, but significant
+# Which test yields the most extreme estimate?
+# As is often the case, Spearman's rho is more extreme than Kendall's tau
+# You will find the correct answers on the Solution tab
+```
+
+```{r ex="Kuperman_test_normal", type="sct"}
+test_output_contains('cor.test(dataSet$AgeOfAcquisition, dataSet$WordLength, alternative="greater", method="kendall")', "Make sure you perform the cor.test with the 'kendall' method!")
+test_output_contains('cor.test(dataSet$AgeOfAcquisition, dataSet$WordLength, alternative="greater", method="spearman")', "Make sure you perform the cor.test with the 'spearman' method!")
+success_msg("Good job!")
+```
+
+## 2. The relationship between Degree of `synthesis` and  `isolation` across languages 
+- Greenberg (1960) calculated different indices based on a large collection of texts for different languages (the data were donated by Freek Van de Velde, KU Leuven):
+    - `Synthesis_Index` indicator of the degree of syntheticity of a language. It expresses the ratio of morphemes to words (i.e., how many morphemes occur in a typical word). Ranges from 0 to +Inf, but values above 3 do not occur
+    - `Isolation_Index` indicator of the number of words that are necessary to convey a relationship between words at the level of the sentence. Ranges from 0 (no words) to 1 (one word)
+    - Since the two indices are on a different scale, they were transformed to z-scores
+- Our hypothesis is the following:
+    - *Languages high on the Synthesis index will be low on the Isolation index and vice versa* 
+- Our null hypothesis states:
+    - *There is no relationship between syntheticity and isolation in language*
+
+### 2.1 Loading and exploring the data
+```{r ex="Greenberg_load_explore_associations", type="sample-code"}
+# Load the readr package
+
+# Load the course data from the course website to the object 'dataSet':
+# http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class5_Greenberg_1960.csv
+
+# Load the dplyr package
+
+# Print a 'glimpse' of the dataSet
+
+# Print a summary of the Synthesis_Index column
+
+# Print a summary of the Isolation_Index column
+
+```
+
+```{r ex="Greenberg_load_explore_associations", type="solution"}
+# Load the readr package
+library(readr)
+# Load the course data from the course website to the object 'dataSet':
+# http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class5_Greenberg_1960.csv
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class5_Greenberg_1960.csv")
+# Load the dplyr package
+library(dplyr)
+# Print a 'glimpse' of the dataSet
+glimpse(dataSet)
+# Print a summary of the Synthesis_Index column
+summary(dataSet$Synthesis_Index)
+# Print a summary of the Isolation_Index column
+summary(dataSet$Isolation_Index)
+```
+
+```{r ex="Greenberg_load_explore_associations", type="sct"}
+test_object("dataSet")
+test_library_function("readr", "Make sure to call the 'readr' package!")
+test_library_function("dplyr", "Make sure to call the 'dplyr' package!")
+test_output_contains("glimpse(dataSet)",   incorrect_msg = "Make sure to print a 'glimpse' of the data!")
+test_output_contains("summary(dataSet$Synthesis_Index)",   incorrect_msg = "Make sure to print a 'summary' of the Synthesis_Index column!")
+test_output_contains("summary(dataSet$Isolation_Index)",   incorrect_msg = "Make sure to print a 'summary' of the Isolation_Index column!")
+success_msg("Great!")
+```
+
+### 2.2  A first visual inspection of the relationship
+```{r ex="Greenberg_boxplot_associations", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class5_Greenberg_1960.csv")
+```
+
+```{r ex="Greenberg_boxplot_associations", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Load the ggplot2 package
+
+# Draw a scatterplot of  Isolation_Index (X-axis) vs Synthesis_Index (y-axis)
+# Add a linear (lm) trendline 
+
+# What do you see? Is the relationship monotonic and linear? You will find the correct answer on the 'Solution' tab
+
+```
+
+```{r ex="Greenberg_boxplot_associations", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Load the ggplot2 package
+library(ggplot2)
+# Draw a scatterplot of  Isolation_Index (X-axis) vs Synthesis_Index (y-axis)
+# Add a linear (lm) trendline 
+ggplot(dataSet, aes(x=Isolation_Index, y=Synthesis_Index)) + 
+  geom_point() + 
+  geom_smooth(method="lm")
+# What do you see? Is the relationship monotonic and linear? 
+# The relationship is monotonic: When Synthesis_Index goes up, there is a decrease in Isolation_Index
+# The relationship is linear: When Synthesis_Index goes up with one unit, there is a constant decrease in the values of Isolation_Index across the Isolation_Index continuum
+```
+
+```{r ex="Greenberg_boxplot_associations", type="sct"}
+test_library_function("ggplot2", "Make sure to call the 'ggplot2' package!")
+test_ggplot(index = 1)
+success_msg("Fantastic work!")
+```
+
+### 2.3  Testing the assumptions of Pearson's *r*: bivariate normal distribution and sample size
+- The plot tells us that the relationship is linear and monotonic
+- This tells us that Pearson's *r* could be a valid correlation statistic for our data
+- Let's see if the data also satisfy its other assumptions 
+
+```{r ex="Greenberg_bivariate_normal", type="pre-exercise-code"}
+library(readr)
+library(energy)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class5_Greenberg_1960.csv")
+```
+
+```{r ex="Greenberg_bivariate_normal", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Load the energy package
+
+# Perform a mvnorm.etest to see if 'Synthesis_Index'  and Isolation_Index have a bivariate normal distribution. Use 1000 replicates
+
+# Compute the sample size by calculating the number of rows in dataSet
+
+# What does the test tell you, do the two columns have a bivariate normal distribution? You will find the correct answer on the 'Solution' tab
+```
+
+```{r ex="Greenberg_bivariate_normal", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Load the energy package
+library(energy)
+# Perform a mvnorm.etest to see if 'Synthesis_Index'  and Isolation_Index have a bivariate normal distribution. Use 1000 replicates
+mvnorm.etest(dataSet[, c("Synthesis_Index", "Isolation_Index")], 1000)
+
+# Compute the sample size by calculating the number of rows in dataSet
+nrow(dataSet)
+
+# What does the test tell you, do the two columns have a bivariate normal distribution?
+# p > 0.05, so the data follow a bivariate normal distribution. Note that this is important here, as the sample size is so small
+```
+
+```{r ex="Greenberg_bivariate_normal", type="sct"}
+test_library_function("energy", "Make sure to call the 'energy' package!")
+test_output_contains("nrow(dataSet)", "Don't forget to compute the sample size!")
+test_output_contains('mvnorm.etest(dataSet[, c("Synthesis_Index", "Isolation_Index")], 1000)', "Make sure you perform the mvnorm.etest!")
+success_msg("Good job!")
+```
+
+### 2.4  Testing the assumptions of Pearson's *r*: homoskedastic data
+
+```{r ex="Greenberg_heteroske_normal", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class5_Greenberg_1960.csv")
+```
+
+```{r ex="Greenberg_heteroske_normal", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Load the car package
+
+# Specificy a linear regression model 'mod' that regresses Synthesis_Index on Isolation_Index 
+
+# Perform a ncvTest on this regression model
+
+# What does the test tell you, are the data heteroskedastic or homoskedastic? You will find the correct answer on the 'Solution' tab
+```
+
+```{r ex="Greenberg_heteroske_normal", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Load the car package
+library(car)
+# Specificy a linear regression model 'mod' that regresses Synthesis_Index on Isolation_Index 
+mod <- lm(Synthesis_Index ~ Isolation_Index, dataSet)
+# Perform a ncvTest on this regression model
+ncvTest(mod)
+# What does the test tell you, are the data heteroskedastic or homoskedastic?
+# p > 0.05 confirms what we saw on the plot: the relationship is linear and the data are homoskedastic
+
+```
+
+```{r ex="Greenberg_heteroske_normal", type="sct"}
+test_library_function("car", "Make sure to call the 'car' package!")
+test_output_contains('ncvTest(mod)', "Make sure you perform the ncvTest!")
+success_msg("Great!")
+```
+
+
+### 2.5  Testing the assumptions of Pearson's *r*: independent data
+
+```{r ex="Greenberg_autocorr_normal", type="pre-exercise-code"}
+library(readr)
+library(energy)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class5_Greenberg_1960.csv")
+```
+
+```{r ex="Greenberg_autocorr_normal", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Load the car package
+
+# Specificy a linear regression model 'mod' that regresses Synthesis_Index on Isolation_Index 
+
+# Perform a Durbin-Watson test on this regression model
+
+# What does the test tell you, are the data autocorrelated? You will find the correct answer on the Solution tab
+```
+
+```{r ex="Greenberg_autocorr_normal", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Load the car package
+library(car)
+# Specificy a linear regression model 'mod' that regresses Synthesis_Index on Isolation_Index 
+mod <- lm(Synthesis_Index ~ Isolation_Index, dataSet)
+# Perform a ncvTest on this regression model
+durbinWatsonTest(mod)
+# What does the test tell you, are the data autocorrelated?
+# p > 0.05 tells us that autocorrelation is not an issue
+```
+
+```{r ex="Greenberg_autocorr_normal", type="sct"}
+test_library_function("car", "Make sure to call the 'car' package!")
+test_output_contains('durbinWatsonTest(mod)', "Make sure you perform the durbinWatsonTest!")
+success_msg("Great!")
+```
+
+### 2.6  Performing the correlations test
+- All of our previous exercises point in the same direction: the data are perfectly suited for the Pearson's correlation test:
+    - The relationship is linear and monotonic
+    - The relationship is homoskedastic
+    - The data follow a bivariate normal distribution (this is important, because the sample size is small)
+- We can use Pearson's *r*
+
+```{r ex="Greenberg_test_normal", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class5_Greenberg_1960.csv")
+```
+
+```{r ex="Greenberg_test_normal", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Perform a cor.test with the 'pearson' method. Recall that our hypothesis is directional: it predicts a negative correlation
+
+# Calculate the r-squared value of the relationship. How much of the variance of  Isolation_Index is explained by Synthesis_Index?
+
+# What do the tests tell you: 
+# - Is the relationship between the two variables strong? 
+# - Is the relationship positive or negative? 
+# - Is it significant? 
+# - How much of the variance of  Isolation_Index is explained by Synthesis_Index?
+# You will find the correct answers on the Solution tab
+```
+
+```{r ex="Greenberg_test_normal", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Perform a cor.test with the 'pearson' method. Recall that our hypothesis is directional: it predicts a negative correlation
+cor.test(dataSet$Synthesis_Index, dataSet$Isolation_Index, alternative="less", method="pearson")
+
+# Calculate the r-squared value of the relationship. 
+cor(dataSet$Synthesis_Index, dataSet$Isolation_Index)^2
+
+# What do the tests tell you: 
+# - Is the relationship between the two variables strong? 
+# The relationship is very strong
+# - Is the relationship positive or negative? 
+# The relationship is negative, the coefficient is smaller than zero
+# - Is it significant? 
+# p < 0.05 so we can consider the relationship to be strong AND significant
+# - How much of the variance of  Isolation_Index is explained by Synthesis_Index?
+# The Synthesis_Index explains about 71% of the variance of Isolation_Index
+```
+
+```{r ex="Greenberg_test_normal", type="sct"}
+test_output_contains('cor.test(dataSet$Synthesis_Index, dataSet$Isolation_Index, alternative="less", method="pearson")', "Make sure you perform the cor.test with the 'pearson' method!")
+test_output_contains('cor(dataSet$Synthesis_Index, dataSet$Isolation_Index)^2', "Don't forget to calculate the r-squared value!")
+success_msg("Good work!")
+```
+
+
+## References
+- Greenberg, J. (1960). A quantitative approach to the morphological typology of language. *International Journal of American Linguistics* 26(3). 178-194.
+- Kuperman, V., Stadthagen-Gonzalez,  H., Brysbaert, M. (2012). Age-of-acquisition ratings for 30,000 English words.*Behavior Research Methods* 44(4).978–990.
+
+## Acknowledgements
+A warm *thank you!* goes out to **Freek Van de Velde** (KU Leuven), who generously donated the Greenberg (1960) data for the second exercise

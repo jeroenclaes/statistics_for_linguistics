@@ -11,23 +11,31 @@ Welcome to the companion site for the course *LFIAL2260 - Statistics for linguis
 ## Slides
 The slides for the classes are available for download here: 
 
-- [Class 1: Introduction: Statistics for linguistics, R, Rstudio, and using R as a calculator](https://drive.google.com/open?id=13ecOT0AIx1YIvqNfzoehtYxrnkund8HjacHGWBb-_tQ)
-- [Class 2: Distributions and basic descriptive statistics for quantitative variables](http://www.jeroenclaes.be/statistics_for_linguistics/slides/Class2.html)
-- [Class 3: Exploring qualitative variables](http://www.jeroenclaes.be/statistics_for_linguistics/slides/Class3.html)
-- [Class 4: Comparing the central tendency of two groups](http://www.jeroenclaes.be/statistics_for_linguistics/slides/Class4.html)
+- [Topic 1: Introduction: Statistics for linguistics, R, Rstudio, and using R as a calculator](https://drive.google.com/open?id=13ecOT0AIx1YIvqNfzoehtYxrnkund8HjacHGWBb-_tQ)
+- [Topic 2: Distributions and basic descriptive statistics for quantitative variables](http://www.jeroenclaes.be/statistics_for_linguistics/slides/Class2.html)
+- [Topic 3: Exploring qualitative variables](http://www.jeroenclaes.be/statistics_for_linguistics/slides/Class3.html)
+- [Topic 4: Comparing the central tendency of two groups](http://www.jeroenclaes.be/statistics_for_linguistics/slides/Class4.html)
+- [Topic 5: Correlations](http://www.jeroenclaes.be/statistics_for_linguistics/slides/Class5.html)
+- [Topic 6: Associations between qualitative variables](http://www.jeroenclaes.be/statistics_for_linguistics/slides/Class6.html)
 
 ## Syllabus
 A version of the slides rendered as Word documents can be found here so can you take notes more easily:
 
-- [Class 2: Distributions and basic descriptive statistics for quantitative variables](http://www.jeroenclaes.be/statistics_for_linguistics/syllabus/Class2.docx)
-- [Class 3: Class 3: Exploring qualitative variables](http://www.jeroenclaes.be/statistics_for_linguistics/syllabus/Class3.docx)
-- [Class 4: Comparing the central tendency of two groups](http://www.jeroenclaes.be/statistics_for_linguistics/syllabus/Class4.docx)
+- [Topic 2: Distributions and basic descriptive statistics for quantitative variables](http://www.jeroenclaes.be/statistics_for_linguistics/syllabus/Class2.docx)
+- [Topic 3: Exploring qualitative variables](http://www.jeroenclaes.be/statistics_for_linguistics/syllabus/Class3.docx)
+- [Topic 4: Comparing the central tendency of two groups](http://www.jeroenclaes.be/statistics_for_linguistics/syllabus/Class4.docx)
+- [Topic 5: Correlations](http://www.jeroenclaes.be/statistics_for_linguistics/syllabus/Class5.docx)
+- [Topic 6: Associations between qualitative variables](http://www.jeroenclaes.be/statistics_for_linguistics/syllabus/Class6.docx)
+
 
 ## Labs
 - [Lab 1: Objects, vectors, and basic mathematics](http://www.jeroenclaes.be/statistics_for_linguistics/class1.html)
 - [Lab 2: Data frames, measures of central tendency, measures of dispersion, and distributions](http://www.jeroenclaes.be/statistics_for_linguistics/class2.html)
 - [Lab 3: Data frames (recap), normal distribution and outliers (recap), and exploring qualitative variables](http://www.jeroenclaes.be/statistics_for_linguistics/class3.html)
 - [Lab 4: Comparing the central tendency of two groups](http://www.jeroenclaes.be/statistics_for_linguistics/class4.html)
+- [Lab 5: Correlations](http://www.jeroenclaes.be/statistics_for_linguistics/class5.html)
+- [Lab 6: Associations between qualitative variables](http://www.jeroenclaes.be/statistics_for_linguistics/class6.html)
+
 
 ## R and RStudio cheat sheets (provided by RStudio)
 - [Basic R](http://www.jeroenclaes.be/statistics_for_linguistics/cheatsheets/baseR.pdf)
