@@ -1,5 +1,0 @@
-*.js
-*.css
-*.html
-*.Rproj
-_site/
