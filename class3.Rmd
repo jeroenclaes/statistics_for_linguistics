@@ -1051,3 +1051,6 @@ test_ggplot(index=1, all_fail_msg = "Computer says no. This plot is completely w
 
 success_msg("Great!")
 ```
+
+## 8. References
+- Claes, J. (2017). Cognitive and geographic constraints on morphosyntactic variation: The variable agreement of presentational haber in Peninsular Spanish. *Belgian Journal of Linguistics* (31), 28-53.

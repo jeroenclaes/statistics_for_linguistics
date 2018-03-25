@@ -17,6 +17,12 @@ The slides for the classes are available for download here:
 - [Topic 4: Comparing the central tendency of two groups](http://www.jeroenclaes.be/statistics_for_linguistics/slides/Class4.html)
 - [Topic 5: Correlations](http://www.jeroenclaes.be/statistics_for_linguistics/slides/Class5.html)
 - [Topic 6: Associations between qualitative variables](http://www.jeroenclaes.be/statistics_for_linguistics/slides/Class6.html)
+- [Topic 7: Linear regression: Theory and assumptions](http://www.jeroenclaes.be/statistics_for_linguistics/slides/Class7.html)
+- Topic 8: The science (or art?) of fitting linear regression models
+- Topic 9: Analysis of Variance
+- Topic 10: Logistic regression: Theory, assumptions and model fitting (with elements of Poisson and Negative Binomial regression)
+- Topic 11: Mixed-effects regression  
+- Topic 12: When things aren't quite linear: Polynomial regression and Generalized Additive Modeling
 
 ## Syllabus
 A version of the slides rendered as Word documents can be found here so can you take notes more easily:
@@ -26,7 +32,7 @@ A version of the slides rendered as Word documents can be found here so can you 
 - [Topic 4: Comparing the central tendency of two groups](http://www.jeroenclaes.be/statistics_for_linguistics/syllabus/Class4.docx)
 - [Topic 5: Correlations](http://www.jeroenclaes.be/statistics_for_linguistics/syllabus/Class5.docx)
 - [Topic 6: Associations between qualitative variables](http://www.jeroenclaes.be/statistics_for_linguistics/syllabus/Class6.docx)
-
+- [Topic 7: Linear regression: Theory and assumptions](http://www.jeroenclaes.be/statistics_for_linguistics/syllabus/Class7.docx)
 
 ## Labs
 - [Lab 1: Objects, vectors, and basic mathematics](http://www.jeroenclaes.be/statistics_for_linguistics/class1.html)
@@ -35,7 +41,7 @@ A version of the slides rendered as Word documents can be found here so can you 
 - [Lab 4: Comparing the central tendency of two groups](http://www.jeroenclaes.be/statistics_for_linguistics/class4.html)
 - [Lab 5: Correlations](http://www.jeroenclaes.be/statistics_for_linguistics/class5.html)
 - [Lab 6: Associations between qualitative variables](http://www.jeroenclaes.be/statistics_for_linguistics/class6.html)
-
+- [Lab 7: Linear regression: Theory and assumptions](http://www.jeroenclaes.be/statistics_for_linguistics/class7.html)
 
 ## R and RStudio cheat sheets (provided by RStudio)
 - [Basic R](http://www.jeroenclaes.be/statistics_for_linguistics/cheatsheets/baseR.pdf)

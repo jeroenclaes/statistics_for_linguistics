@@ -1,0 +1,1419 @@
+---
+title: "Topic 7: Linear regression: Theory and assumptions"
+author: "Jeroen Claes | <jeroen.claes@kuleuven.be> | <jeroen@cropland.be>"
+---
+  
+```{r, include=FALSE}
+#library(testwhat)
+tutorial::go_interactive()
+```
+
+
+## A multivariate approach to lexical decision latencies
+- Baayen et al. (2006) used data provided by Balota et al. (2004) to investigate the contributions of several additional predictor variables to subjects' mean reaction times in lexical decision experiments
+- Here we will consider the following of their predictors:
+    - `Familiarity`: subjective familiarity ratings
+    - `AgeSubject`: young or older speakers
+    - `WrittenFrequency`: logged frequency of the word in the CELEX database
+    - `WordCategory`: Part-of-speech category of the word
+    - `LengthInLetters`: word length in letters
+    - `FrequencyInitialDiphoneWord`: logged frequency of the combination of the first two letters
+  
+## 1. Loading and exploring the data
+```{r ex="Kuperman_load_explore_associations", type="sample-code"}
+# Load the readr package
+
+# Load the course data from the course website to the object 'dataSet':
+# http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class7_Baayen_et_al_2006.csv
+
+# Load the dplyr package
+
+# Print a 'glimpse' of the dataSet
+
+```
+
+```{r ex="Kuperman_load_explore_associations", type="solution"}
+# Load the readr package
+library(readr)
+# Load the course data from the course website to the object 'dataSet':
+# http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class5_Kuperman_et_al_2012.csv
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class7_Baayen_et_al_2006.csv")
+# Load the dplyr package
+library(dplyr)
+# Print a 'glimpse' of the dataSet
+glimpse(dataSet)
+```
+
+```{r ex="Kuperman_load_explore_associations", type="sct"}
+test_object("dataSet")
+test_library_function("readr", "Make sure to call the 'readr' package!")
+test_library_function("dplyr", "Make sure to call the 'dplyr' package!")
+test_output_contains("glimpse(dataSet)",   incorrect_msg = "Make sure to print a 'glimpse' of the data!")
+success_msg("Great!")
+```
+
+## 2. Getting to know the data: the dependent variable `RTlexdec`
+### 2.1 Central tendency
+```{r ex="shape_RTlexdec", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class7_Baayen_et_al_2006.csv")
+```
+
+```{r ex="shape_RTlexdec", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Compute the mean of RTlexdec
+
+# Compute the median of RTlexdec
+
+# Draw a qqplot of RTlexdec
+
+# Does the data look normally distributed? You will find the correct answer on the Solution tab
+
+```
+
+```{r ex="shape_RTlexdec", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Compute the mean of RTlexdec
+mean(dataSet$RTlexdec)
+
+# Compute the median of RTlexdec
+median(dataSet$RTlexdec)
+
+# Draw a qqplot of RTlexdec
+qqnorm(dataSet$RTlexdec)
+qqline(dataSet$RTlexdec)
+
+# Does the data look normally distributed? You will find the correct answer on the Solution tab
+# - The data do not follow the normal distribution completely, but they are pretty close
+# - However, the mean and the median are not really far apart, so this will not cause many issues here
+
+```
+
+```{r ex="shape_RTlexdec", type="sct"}
+test_output_contains("mean(dataSet$RTlexdec)",   incorrect_msg = "Make sure to compute the mean of the RTlexdec variable!")
+test_output_contains("median(dataSet$RTlexdec)",   incorrect_msg = "Make sure to compute the median of the RTlexdec variable!")
+success_msg("I can't evaluate your plot, but I think you did great!")
+```
+
+### 2.2 Dispersion
+```{r ex="dispersion_RTlexdec", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class7_Baayen_et_al_2006.csv")
+```
+
+```{r ex="dispersion_RTlexdec", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Compute the standard deviation of RTlexdec
+
+# Compute a summary of RTlexdec
+
+# Load the ggplot2 package
+
+# Draw a boxplot of the RTlexdec variable
+
+# Is the data highly dispersed and/or are there any outliers? You will find the correct answer on the Solution tab
+
+```
+
+```{r ex="dispersion_RTlexdec", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Compute the standard deviation of RTlexdec
+sd(dataSet$RTlexdec)
+# Compute a summary of RTlexdec
+summary(dataSet$RTlexdec)
+# Load the ggplot2 package
+library(ggplot2)
+# Draw a boxplot of the RTlexdec variable
+ggplot(dataSet, aes(x=1, y=RTlexdec)) + geom_boxplot()
+# Is the data highly dispersed and/or are there any outliers? 
+# - The standard deviation is low (< 1)
+# - If we substract the standard deviation from the mean,  we add the standard deviation to the mean and we compare these numbers to the 1st and the 3rd quartile we can see that more than 50% of the values are clustered within one standard deviation from the mean
+# - This points to a low level of dispersion and a distribution that comes close to being normal
+# - The boxplot reveals that there may be some outliers in the right tail of the distribution (the dots on the plot)
+```
+
+```{r ex="dispersion_RTlexdec", type="sct"}
+test_output_contains("sd(dataSet$RTlexdec)",   incorrect_msg = "Make sure to compute the standard deviation of the RTlexdec variable!")
+test_output_contains("median(dataSet$RTlexdec)",   incorrect_msg = "Make sure to compute the median of the RTlexdec variable!")
+test_library_function("ggplot2")
+test_ggplot(1)
+success_msg("Good work!")
+```
+
+## 3. Getting to know the data: `Familiarity`
+### 3.1 Central tendency
+```{r ex="shape_Familiarity", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class7_Baayen_et_al_2006.csv")
+```
+
+```{r ex="shape_Familiarity", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Compute the mean of Familiarity
+
+# Compute the median of Familiarity
+
+# Draw a qqplot of Familiarity
+
+# Does the data look normally distributed? You will find the correct answer on the Solution tab
+
+```
+
+```{r ex="shape_Familiarity", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Compute the mean of Familiarity
+mean(dataSet$Familiarity)
+
+# Compute the median of Familiarity
+median(dataSet$Familiarity)
+
+# Draw a qqplot of Familiarity
+qqnorm(dataSet$Familiarity)
+qqline(dataSet$Familiarity)
+
+# Does the data look normally distributed? You will find the correct answer on the Solution tab
+# - The data do not follow the normal distribution completely, but they are pretty close
+# - However, the mean and the median are not really far apart, so this will not cause many issues here
+
+```
+
+```{r ex="shape_Familiarity", type="sct"}
+test_output_contains("mean(dataSet$Familiarity)",   incorrect_msg = "Make sure to compute the mean of the Familiarity variable!")
+test_output_contains("median(dataSet$Familiarity)",   incorrect_msg = "Make sure to compute the median of the Familiarity variable!")
+success_msg("I can't evaluate your plot, but I think you did great!")
+```
+
+### 3.2 Dispersion
+```{r ex="dispersion_Familiarity", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class7_Baayen_et_al_2006.csv")
+```
+
+```{r ex="dispersion_Familiarity", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Compute the standard deviation of Familiarity
+
+# Compute a summary of Familiarity
+
+# Load the ggplot2 package
+
+# Draw a boxplot of the Familiarity variable
+
+# Is the data highly dispersed and/or are there any outliers? You will find the correct answer on the Solution tab
+
+```
+
+```{r ex="dispersion_Familiarity", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Compute the standard deviation of Familiarity
+sd(dataSet$Familiarity)
+# Compute a summary of Familiarity
+summary(dataSet$Familiarity)
+# Load the ggplot2 package
+library(ggplot2)
+# Draw a boxplot of the Familiarity variable
+ggplot(dataSet, aes(x=1, y=Familiarity)) + geom_boxplot()
+
+# Is the data highly dispersed and/or are there any outliers? 
+# - The standard deviation is high (> 1)
+# - If we substract the standard deviation from the mean,  we add the standard deviation to the mean and we compare these numbers to the 1st and the 3rd quartile we can see that more than 50% of the values are clustered within one standard deviation from the mean
+# - This points to a higher level of dispersion, but the distribution still comes close to being normal
+# - The boxplot reveals that there may be one outlier in the right tail of the distribution (the dot on the plot)
+```
+
+```{r ex="dispersion_Familiarity", type="sct"}
+test_output_contains("sd(dataSet$Familiarity)",   incorrect_msg = "Make sure to compute the standard deviation of the Familiarity variable!")
+test_output_contains("median(dataSet$Familiarity)",   incorrect_msg = "Make sure to compute the median of the Familiarity variable!")
+test_library_function("ggplot2")
+test_ggplot(1)
+success_msg("Good job!")
+```
+
+## 4. Getting to know the data: `AgeSubject`
+### 4.1 Counts
+```{r ex="shape_AgeSubject", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class7_Baayen_et_al_2006.csv")
+```
+
+```{r ex="shape_AgeSubject", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Compute a table of AgeSubject
+
+# Compute proportions for the table
+
+# Are the categories distributed evenly? You will find the correct answer on the Solution tab
+
+```
+
+```{r ex="shape_AgeSubject", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Compute a table of AgeSubject
+table(dataSet$AgeSubject)
+
+# Compute proportions for the table
+prop.table(table(dataSet$AgeSubject))
+
+# Are the categories distributed evenly? 
+# - Yes
+```
+
+```{r ex="shape_AgeSubject", type="sct"}
+test_output_contains("table(dataSet$AgeSubject)",   incorrect_msg = "Make sure to compute a table for the AgeSubject variable!")
+test_output_contains("prop.table(table(dataSet$AgeSubject))",   incorrect_msg = "Make sure to compute proportions for the AgeSubject variable!")
+success_msg("Well done!")
+```
+
+## 5. Getting to know the data: `WrittenFrequency`
+### 5.1 Central tendency
+```{r ex="shape_WrittenFrequency", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class7_Baayen_et_al_2006.csv")
+```
+
+```{r ex="shape_WrittenFrequency", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Compute the mean of WrittenFrequency
+
+# Compute the median of WrittenFrequency
+
+# Draw a qqplot of WrittenFrequency
+
+# Does the data look normally distributed? You will find the correct answer on the Solution tab
+
+```
+
+```{r ex="shape_WrittenFrequency", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Compute the mean of WrittenFrequency
+mean(dataSet$WrittenFrequency)
+
+# Compute the median of WrittenFrequency
+median(dataSet$WrittenFrequency)
+
+# Draw a qqplot of WrittenFrequency
+qqnorm(dataSet$WrittenFrequency)
+qqline(dataSet$WrittenFrequency)
+
+# Does the data look normally distributed? You will find the correct answer on the Solution tab
+# - Judging from the qqplot, the data look pretty normally distributed
+# - The mean and the median are not really far apart either
+```
+
+```{r ex="shape_WrittenFrequency", type="sct"}
+test_output_contains("mean(dataSet$WrittenFrequency)",   incorrect_msg = "Make sure to compute the mean of the WrittenFrequency variable!")
+test_output_contains("median(dataSet$WrittenFrequency)",   incorrect_msg = "Make sure to compute the median of the WrittenFrequency variable!")
+success_msg("I can't evaluate your plot, but I think you did great!")
+```
+
+### 5.2 Dispersion
+```{r ex="dispersion_WrittenFrequency", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class7_Baayen_et_al_2006.csv")
+```
+
+```{r ex="dispersion_WrittenFrequency", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Compute the standard deviation of WrittenFrequency
+
+# Compute a summary of WrittenFrequency
+
+# Load the ggplot2 package
+
+# Draw a boxplot of the WrittenFrequency variable
+
+# Is the data highly dispersed and/or are there any outliers? You will find the correct answer on the Solution tab
+
+```
+
+```{r ex="dispersion_WrittenFrequency", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Compute the standard deviation of WrittenFrequency
+sd(dataSet$WrittenFrequency)
+# Compute a summary of WrittenFrequency
+summary(dataSet$WrittenFrequency)
+# Load the ggplot2 package
+library(ggplot2)
+# Draw a boxplot of the WrittenFrequency variable
+ggplot(dataSet, aes(x=1, y=WrittenFrequency)) + geom_boxplot()
+# Is the data highly dispersed and/or are there any outliers? 
+# - The standard deviation is high (> 1)
+# - If we substract the standard deviation from the mean,  we add the standard deviation to the mean and we compare these numbers to the 1st and the 3rd quartile we can see that more than 50% of the values are clustered within one standard deviation from the mean
+# - This points to a higher level of dispersion, but the distribution still comes close to being normal
+# - The boxplot reveals that there are some outliers in the left and the right tail of the distribution
+```
+
+```{r ex="dispersion_WrittenFrequency", type="sct"}
+test_output_contains("sd(dataSet$WrittenFrequency)",   incorrect_msg = "Make sure to compute the standard deviation of the WrittenFrequency variable!")
+test_output_contains("median(dataSet$WrittenFrequency)",   incorrect_msg = "Make sure to compute the median of the WrittenFrequency variable!")
+success_msg("I can't evaluate your plot, but I think you did great!")
+```
+
+## 6. Getting to know the data: `WordCategory`
+### 6.1 Counts
+```{r ex="shape_WordCategory", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class7_Baayen_et_al_2006.csv")
+```
+
+```{r ex="shape_WordCategory", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Compute a table of WordCategory
+
+# Compute proportions for the table
+
+# Are the categories distributed evenly? You will find the correct answer on the Solution tab
+
+```
+
+```{r ex="shape_WordCategory", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Compute a table of WordCategory
+table(dataSet$WordCategory)
+
+# Compute proportions for the table
+prop.table(table(dataSet$WordCategory))
+
+# Are the categories distributed evenly? 
+# - No, nouns account for 64% of the data
+```
+
+```{r ex="shape_WordCategory", type="sct"}
+test_output_contains("table(dataSet$WordCategory)",   incorrect_msg = "Make sure to compute a table for the WordCategory variable!")
+test_output_contains("prop.table(table(dataSet$WordCategory))",   incorrect_msg = "Make sure to compute proportions for the WordCategory variable!")
+success_msg("Well done!")
+```
+
+## 7. Getting to know the data: `LengthInLetters`
+### 7.1 Central tendency
+```{r ex="shape_LengthInLetters", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class7_Baayen_et_al_2006.csv")
+```
+
+```{r ex="shape_LengthInLetters", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Compute the mean of LengthInLetters
+
+# Compute the median of LengthInLetters
+
+# Draw a qqplot of LengthInLetters
+
+# Does the data look normally distributed? You will find the correct answer on the Solution tab
+
+```
+
+```{r ex="shape_LengthInLetters", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Compute the mean of LengthInLetters
+mean(dataSet$LengthInLetters)
+# Compute the median of LengthInLetters
+median(dataSet$LengthInLetters)
+# Draw a qqplot of LengthInLetters
+qqnorm(dataSet$LengthInLetters)
+qqline(dataSet$LengthInLetters)
+
+# Does the data look normally distributed? You will find the correct answer on the Solution tab
+# - The data do not follow the normal distribution completely, but they are pretty close
+# - However, the mean and the median are not really far apart, so this will not cause many issues here
+
+```
+
+```{r ex="shape_LengthInLetters", type="sct"}
+test_output_contains("mean(dataSet$LengthInLetters)",   incorrect_msg = "Make sure to compute the mean of the LengthInLetters variable!")
+test_output_contains("median(dataSet$LengthInLetters)",   incorrect_msg = "Make sure to compute the median of the LengthInLetters variable!")
+success_msg("I can't evaluate your plot, but I think you did great!")
+```
+
+### 7.2 Dispersion
+```{r ex="dispersion_LengthInLetters", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class7_Baayen_et_al_2006.csv")
+```
+
+```{r ex="dispersion_LengthInLetters", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Compute the standard deviation of LengthInLetters
+
+# Compute a summary of LengthInLetters
+
+# Load the ggplot2 package
+
+# Draw a boxplot of the LengthInLetters variable
+
+# Is the data highly dispersed and/or are there any outliers? You will find the correct answer on the Solution tab
+
+```
+
+```{r ex="dispersion_LengthInLetters", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Compute the standard deviation of LengthInLetters
+sd(dataSet$LengthInLetters)
+# Compute a summary of LengthInLetters
+summary(dataSet$LengthInLetters)
+# Load the ggplot2 package
+library(ggplot2)
+# Draw a boxplot of the LengthInLetters variable
+ggplot(dataSet, aes(x=1, y=LengthInLetters)) + geom_boxplot()
+# Is the data highly dispersed and/or are there any outliers? 
+# - The standard deviation is low (< 1)
+# - If we substract the standard deviation from the mean,  we add the standard deviation to the mean and we compare these numbers to the 1st and the 3rd quartile we can see that more than 50% of the values are clustered within one standard deviation from the mean
+# - This points to a low level of dispersion and a distribution that comes close to being normal
+#- The boxplot reveals one outlier in each of the tails of the distribution 
+```
+
+```{r ex="dispersion_LengthInLetters", type="sct"}
+test_output_contains("sd(dataSet$LengthInLetters)",   incorrect_msg = "Make sure to compute the standard deviation of the LengthInLetters variable!")
+test_output_contains("median(dataSet$LengthInLetters)",   incorrect_msg = "Make sure to compute the median of the LengthInLetters variable!")
+success_msg("I can't evaluate your plot, but I think you did great!")
+```
+
+## 8. Getting to know the data: `FrequencyInitialDiphoneWord`
+### 8.1 Central tendency
+```{r ex="shape_FrequencyInitialDiphoneWord", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class7_Baayen_et_al_2006.csv")
+```
+
+```{r ex="shape_FrequencyInitialDiphoneWord", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Compute the mean of FrequencyInitialDiphoneWord
+
+# Compute the median of FrequencyInitialDiphoneWord
+
+# Draw a qqplot of FrequencyInitialDiphoneWord
+
+# Does the data look normally distributed? You will find the correct answer on the Solution tab
+
+```
+
+```{r ex="shape_FrequencyInitialDiphoneWord", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Compute the mean of FrequencyInitialDiphoneWord
+mean(dataSet$FrequencyInitialDiphoneWord)
+
+# Compute the median of FrequencyInitialDiphoneWord
+median(dataSet$FrequencyInitialDiphoneWord)
+
+# Draw a qqplot of FrequencyInitialDiphoneWord
+qqnorm(dataSet$FrequencyInitialDiphoneWord)
+qqline(dataSet$FrequencyInitialDiphoneWord)
+
+# Does the data look normally distributed? You will find the correct answer on the Solution tab
+# - The data do not follow the normal distribution completely, but they are pretty close
+# - However, the mean and the median are not really far apart, so this will not cause many issues here
+
+```
+
+```{r ex="shape_FrequencyInitialDiphoneWord", type="sct"}
+test_output_contains("mean(dataSet$FrequencyInitialDiphoneWord)",   incorrect_msg = "Make sure to compute the mean of the FrequencyInitialDiphoneWord variable!")
+test_output_contains("median(dataSet$FrequencyInitialDiphoneWord)",   incorrect_msg = "Make sure to compute the median of the FrequencyInitialDiphoneWord variable!")
+success_msg("I can't evaluate your plot, but I think you did great!")
+```
+
+###  8.2 Dispersion
+```{r ex="dispersion_FrequencyInitialDiphoneWord", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class7_Baayen_et_al_2006.csv")
+```
+
+```{r ex="dispersion_FrequencyInitialDiphoneWord", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Compute the standard deviation of FrequencyInitialDiphoneWord
+
+# Compute a summary of FrequencyInitialDiphoneWord
+
+# Load the ggplot2 package
+
+# Draw a boxplot of the FrequencyInitialDiphoneWord variable
+
+# Is the data highly dispersed and/or are there any outliers? You will find the correct answer on the Solution tab
+
+```
+
+```{r ex="dispersion_FrequencyInitialDiphoneWord", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Compute the standard deviation of FrequencyInitialDiphoneWord
+sd(dataSet$FrequencyInitialDiphoneWord)
+# Compute a summary of FrequencyInitialDiphoneWord
+summary(dataSet$FrequencyInitialDiphoneWord)
+# Load the ggplot2 package
+library(ggplot2)
+# Draw a boxplot of the FrequencyInitialDiphoneWord variable
+ggplot(dataSet, aes(x=1, y=FrequencyInitialDiphoneWord)) + geom_boxplot()
+# Is the data highly dispersed and/or are there any outliers? 
+# - The standard deviation is high (> 1)
+# - If we substract the standard deviation from the mean,  we add the standard deviation to the mean and we compare these numbers to the 1st and the 3rd quartile we can see that more than 50% of the values are clustered within one standard deviation from the mean
+# - This points to a higher level of dispersion, but the distribution still comes close to being normal
+# - The boxplot reveals a series of outliers in the left tail of the distribution
+```
+
+```{r ex="dispersion_FrequencyInitialDiphoneWord", type="sct"}
+test_output_contains("sd(dataSet$FrequencyInitialDiphoneWord)",   incorrect_msg = "Make sure to compute the standard deviation of the FrequencyInitialDiphoneWord variable!")
+test_output_contains("median(dataSet$FrequencyInitialDiphoneWord)",   incorrect_msg = "Make sure to compute the median of the FrequencyInitialDiphoneWord variable!")
+success_msg("I can't evaluate your plot, but I think you did great!")
+```
+
+## 9. Removing outliers
+- Our previous exercises have shown that there are outliers in many of the variables. We should remove them before we continue
+
+```{r ex="outliers", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class7_Baayen_et_al_2006.csv")
+```
+
+```{r ex="outliers", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Remove outliers from RTlexdec
+
+# Remove outliers from Familiarity
+
+# Remove outliers from WrittenFrequency
+
+# Remove outliers from  LengthInLetters
+
+# Remove outliers from FrequencyInitialDiphoneWord
+
+# Print a summary of the dataSet
+
+```
+
+```{r ex="outliers", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Remove outliers from RTlexdec
+dataSet<- dataSet[abs(scale(dataSet$RTlexdec))<= 2, ]
+# Remove outliers from Familiarity
+dataSet<- dataSet[abs(scale(dataSet$Familiarity))<= 2, ]
+# Remove outliers from WrittenFrequency
+dataSet<- dataSet[abs(scale(dataSet$WrittenFrequency))<= 2, ]
+# Remove outliers from  LengthInLetters
+dataSet<- dataSet[abs(scale(dataSet$LengthInLetters))<= 2, ]
+# Remove outliers fromFrequencyInitialDiphoneWord
+dataSet<- dataSet[abs(scale(dataSet$FrequencyInitialDiphoneWord))<= 2, ]
+
+# Print a summary of the dataSet
+summary(dataSet)
+```
+
+```{r ex="outliers", type="sct"}
+test_output_contains("summary(dataSet)",   incorrect_msg = "Make sure to remove the outliers from the data and to print the summary!")
+success_msg("Great work!")
+```
+
+## 10. Exploring the relationships between the dependent variable and the independent variables
+- We should perform pairwise plotting and correlation tests to see if the numeric independent variables are linearly related to the dependent variable and how strong their correlations are.
+
+### 10.1 `Familiarity` vs `RTlexdec`
+```{r ex="rel_Familiarity", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class7_Baayen_et_al_2006.csv")
+# Remove outliers from RTlexdec
+dataSet<- dataSet[abs(scale(dataSet$RTlexdec))<= 2, ]
+# Remove outliers from Familiarity
+dataSet<- dataSet[abs(scale(dataSet$Familiarity))<= 2, ]
+# Remove outliers from WrittenFrequency
+dataSet<- dataSet[abs(scale(dataSet$WrittenFrequency))<= 2, ]
+# Remove outliers from  LengthInLetters
+dataSet<- dataSet[abs(scale(dataSet$LengthInLetters))<= 2, ]
+# Remove outliers fromFrequencyInitialDiphoneWord
+dataSet<- dataSet[abs(scale(dataSet$fromFrequencyInitialDiphoneWord))<= 2, ]
+
+```
+
+```{r ex="rel_Familiarity", type="sample-code"}
+# The modified data.frame dataSet is already in your workspace
+
+# Load the ggplot2 package
+
+# Draw a scatter plot of `Familiarity` vs `RTlexdec`. Add a regression line (geom_smooth(method="lm")) to help you interpret the plot 
+
+# Calculate the correlation coefficient and the significance of the correlation of `Familiarity` vs `RTlexdec`
+
+# Is the relationship linear? Is the correlation strong? Is it significant? You will find the correct answers on the Solutions tab
+```
+
+```{r ex="rel_Familiarity", type="solution"}
+# The modified data.frame dataSet is already in your workspace
+
+# Load the ggplot2 package
+library(ggplot2)
+# Draw a scatter plot of `Familiarity` vs `RTlexdec`. Add a regression line (geom_smooth(method="lm")) to help you interpret the plot 
+ggplot(dataSet, aes(x=Familiarity, y=RTlexdec)) + geom_point() + geom_smooth(method="lm")
+# Calculate the correlation coefficient and the significance of the correlation of `Familiarity` vs `RTlexdec`
+cor.test(dataSet$Familiarity, dataSet$RTlexdec)
+# - Is the relationship linear? 
+# Yes the relationship appears to be linear 
+# - Is the correlation strong? 
+# With r= -0.38, the correlation is moderate
+# - Is it significant? 
+# Yes, p<0.05
+```
+
+```{r ex="rel_Familiarity", type="sct"}
+test_library_function("ggplot2")
+test_ggplot(1)
+test_output_contains("cor.test(dataSet$Familiarity, dataSet$RTlexdec)", "Don't forget to calculate the correlation coefficient and the significance of the correlation!")
+success_msg("Great work!")
+```
+
+### 10.2 `WrittenFrequency` vs `RTlexdec`
+```{r ex="rel_WrittenFrequency", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class7_Baayen_et_al_2006.csv")
+# Remove outliers from RTlexdec
+dataSet<- dataSet[abs(scale(dataSet$RTlexdec))<= 2, ]
+# Remove outliers from Familiarity
+dataSet<- dataSet[abs(scale(dataSet$Familiarity))<= 2, ]
+# Remove outliers from WrittenFrequency
+dataSet<- dataSet[abs(scale(dataSet$WrittenFrequency))<= 2, ]
+# Remove outliers from  LengthInLetters
+dataSet<- dataSet[abs(scale(dataSet$LengthInLetters))<= 2, ]
+# Remove outliers fromFrequencyInitialDiphoneWord
+dataSet<- dataSet[abs(scale(dataSet$fromFrequencyInitialDiphoneWord))<= 2, ]
+```
+
+```{r ex="rel_WrittenFrequency", type="sample-code"}
+# The modified data.frame dataSet is already in your workspace
+
+# Load the ggplot2 package
+
+# Draw a scatter plot of `WrittenFrequency` vs `RTlexdec`. Add a regression line (geom_smooth(method="lm")) to help you interpret the plot 
+
+# Calculate the correlation coefficient and the significance of the correlation of `WrittenFrequency` vs `RTlexdec`
+
+# Is the relationship linear? Is the correlation strong? Is it significant? You will find the correct answers on the Solutions tab
+```
+
+```{r ex="rel_WrittenFrequency", type="solution"}
+# The modified data.frame dataSet is already in your workspace
+
+# Load the ggplot2 package
+library(ggplot2)
+# Draw a scatter plot of `WrittenFrequency` vs `RTlexdec`. Add a regression line (geom_smooth(method="lm")) to help you interpret the plot 
+ggplot(dataSet, aes(x=WrittenFrequency, y=RTlexdec)) + geom_point() + geom_smooth(method="lm")
+# Calculate the correlation coefficient and the significance of the correlation of `WrittenFrequency` vs `RTlexdec`
+cor.test(dataSet$WrittenFrequency, dataSet$RTlexdec)
+# - Is the relationship linear? 
+# Yes the relationship appears to be linear 
+# - Is the correlation strong? 
+# With r= -0.38, the correlation is moderate
+# - Is it significant? 
+# Yes, p<0.05
+```
+
+```{r ex="rel_WrittenFrequency", type="sct"}
+test_library_function("ggplot2")
+test_ggplot(1)
+test_output_contains("cor.test(dataSet$WrittenFrequency, dataSet$RTlexdec)", "Don't forget to calculate the correlation coefficient and the significance of the correlation!")
+success_msg("Great work!")
+```
+
+
+### 10.3 `LengthInLetters` vs `RTlexdec`
+```{r ex="rel_LengthInLetters", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class7_Baayen_et_al_2006.csv")
+# Remove outliers from RTlexdec
+dataSet<- dataSet[abs(scale(dataSet$RTlexdec))<= 2, ]
+# Remove outliers from Familiarity
+dataSet<- dataSet[abs(scale(dataSet$Familiarity))<= 2, ]
+# Remove outliers from WrittenFrequency
+dataSet<- dataSet[abs(scale(dataSet$WrittenFrequency))<= 2, ]
+# Remove outliers from  LengthInLetters
+dataSet<- dataSet[abs(scale(dataSet$LengthInLetters))<= 2, ]
+# Remove outliers fromFrequencyInitialDiphoneWord
+dataSet<- dataSet[abs(scale(dataSet$fromFrequencyInitialDiphoneWord))<= 2, ]
+
+```
+
+```{r ex="rel_LengthInLetters", type="sample-code"}
+# The modified data.frame dataSet is already in your workspace
+
+# Load the ggplot2 package
+
+# Draw a scatter plot of `LengthInLetters` vs `RTlexdec`. Add a regression line (geom_smooth(method="lm")) to help you interpret the plot 
+
+# Calculate the correlation coefficient and the significance of the correlation of `LengthInLetters` vs `RTlexdec`
+
+# Is the relationship linear? Is the correlation strong? Is it significant? You will find the correct answers on the Solutions tab
+```
+
+```{r ex="rel_LengthInLetters", type="solution"}
+# The modified data.frame dataSet is already in your workspace
+
+# Load the ggplot2 package
+library(ggplot2)
+# Draw a scatter plot of `LengthInLetters` vs `RTlexdec`. Add a regression line (geom_smooth(method="lm")) to help you interpret the plot 
+ggplot(dataSet, aes(x=LengthInLetters, y=RTlexdec)) + geom_point() + geom_smooth(method="lm")
+# Calculate the correlation coefficient and the significance of the correlation of `LengthInLetters` vs `RTlexdec`
+cor.test(dataSet$LengthInLetters, dataSet$RTlexdec)
+# - Is the relationship linear? 
+# Yes the relationship appears to be linear, but weak
+# - Is the correlation strong? 
+# With r= 0.013, the correlation is weak
+# - Is it significant? 
+# Yes, p<0.05
+```
+
+```{r ex="rel_LengthInLetters", type="sct"}
+test_library_function("ggplot2")
+test_ggplot(1)
+test_output_contains("cor.test(dataSet$LengthInLetters, dataSet$RTlexdec)", "Don't forget to calculate the correlation coefficient and the significance of the correlation!")
+success_msg("Great work!")
+```
+
+
+### 10.4 `FrequencyInitialDiphoneWord` vs `RTlexdec`
+```{r ex="rel_FrequencyInitialDiphoneWord", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class7_Baayen_et_al_2006.csv")
+# Remove outliers from RTlexdec
+dataSet<- dataSet[abs(scale(dataSet$RTlexdec))<= 2, ]
+# Remove outliers from Familiarity
+dataSet<- dataSet[abs(scale(dataSet$Familiarity))<= 2, ]
+# Remove outliers from WrittenFrequency
+dataSet<- dataSet[abs(scale(dataSet$WrittenFrequency))<= 2, ]
+# Remove outliers from  LengthInLetters
+dataSet<- dataSet[abs(scale(dataSet$LengthInLetters))<= 2, ]
+# Remove outliers fromFrequencyInitialDiphoneWord
+dataSet<- dataSet[abs(scale(dataSet$FrequencyInitialDiphoneWord))<= 2, ]
+
+```
+
+```{r ex="rel_FrequencyInitialDiphoneWord", type="sample-code"}
+# The modified data.frame dataSet is already in your workspace
+
+# Load the ggplot2 package
+
+# Draw a scatter plot of `FrequencyInitialDiphoneWord` vs `RTlexdec`. Add a regression line (geom_smooth(method="lm")) to help you interpret the plot 
+
+# Calculate the correlation coefficient and the significance of the correlation of `FrequencyInitialDiphoneWord` vs `RTlexdec`
+
+# Is the relationship linear? Is the correlation strong? Is it significant? You will find the correct answers on the Solutions tab
+```
+
+```{r ex="rel_FrequencyInitialDiphoneWord", type="solution"}
+# The modified data.frame dataSet is already in your workspace
+
+# Load the ggplot2 package
+library(ggplot2)
+# Draw a scatter plot of `FrequencyInitialDiphoneWord` vs `RTlexdec`. Add a regression line (geom_smooth(method="lm")) to help you interpret the plot 
+ggplot(dataSet, aes(x=FrequencyInitialDiphoneWord, y=RTlexdec)) + geom_point() + geom_smooth(method="lm")
+# Calculate the correlation coefficient and the significance of the correlation of `FrequencyInitialDiphoneWord` vs `RTlexdec`
+cor.test(dataSet$FrequencyInitialDiphoneWord, dataSet$RTlexdec)
+# - Is the relationship linear? 
+# No, the may be linear, but it is hard to tell. In any case, the funnel-like shape of the scatter suggests that heteroskedasticity is an issue here
+# - Is the correlation strong? 
+# With r= 0.025, the correlation is weak
+# - Is it significant? 
+# No, p > 0.05
+```
+
+```{r ex="rel_FrequencyInitialDiphoneWord", type="sct"}
+test_library_function("ggplot2")
+test_ggplot(1)
+test_output_contains("cor.test(dataSet$FrequencyInitialDiphoneWord, dataSet$RTlexdec)", "Don't forget to calculate the correlation coefficient and the significance of the correlation!")
+success_msg("Great work!")
+```
+
+
+## 11. Exploring the relationships between the independent variables 
+- To make sure that our independent variables are not too correlated, we should explore their correlations too.
+
+```{r ex="rel_familiarityvsfrequency", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class7_Baayen_et_al_2006.csv")
+# Remove outliers from RTlexdec
+dataSet<- dataSet[abs(scale(dataSet$RTlexdec))<= 2, ]
+# Remove outliers from Familiarity
+dataSet<- dataSet[abs(scale(dataSet$Familiarity))<= 2, ]
+# Remove outliers from WrittenFrequency
+dataSet<- dataSet[abs(scale(dataSet$WrittenFrequency))<= 2, ]
+# Remove outliers from  LengthInLetters
+dataSet<- dataSet[abs(scale(dataSet$LengthInLetters))<= 2, ]
+# Remove outliers from FrequencyInitialDiphoneWord
+dataSet<- dataSet[abs(scale(dataSet$FrequencyInitialDiphoneWord))<= 2, ]
+
+```
+
+```{r ex="rel_familiarityvsfrequency", type="sample-code"}
+# The modified data.frame dataSet is already in your workspace
+
+# Perform a cor.test for Familiarity vs WrittenFrequency
+
+# Perform a cor.test for Familiarity vs LengthInLetters
+
+# Perform a cor.test for Familiarity vs FrequencyInitialDiphoneWord
+
+# Perform a cor.test for WrittenFrequency vs LengthInLetters
+
+# Perform a cor.test for WrittenFrequency vs FrequencyInitialDiphoneWord
+
+# Perform a cor.test for LengthInLetters vs FrequencyInitialDiphoneWord
+
+# - Are any of the variables strongly correlated? You will find the correct answer on the Solution tab
+```
+
+```{r ex="rel_familiarityvsfrequency", type="solution"}
+# The modified data.frame dataSet is already in your workspace
+
+# Perform a cor.test for Familiarity vs WrittenFrequency
+cor.test(dataSet$Familiarity, dataSet$WrittenFrequency)
+
+# Perform a cor.test for Familiarity vs LengthInLetters
+cor.test(dataSet$Familiarity, dataSet$LengthInLetters)
+
+# Perform a cor.test for Familiarity vs FrequencyInitialDiphoneWord
+cor.test(dataSet$Familiarity, dataSet$FrequencyInitialDiphoneWord)
+
+# Perform a cor.test for WrittenFrequency vs LengthInLetters
+cor.test(dataSet$WrittenFrequency, dataSet$LengthInLetters)
+
+# Perform a cor.test for WrittenFrequency vs FrequencyInitialDiphoneWord
+cor.test(dataSet$WrittenFrequency, dataSet$FrequencyInitialDiphoneWord)
+
+# Perform a cor.test for LengthInLetters vs FrequencyInitialDiphoneWord
+cor.test(dataSet$LengthInLetters, dataSet$FrequencyInitialDiphoneWord)
+
+# - Are any of the variables strongly correlated? 
+# Yes, Familiarity is strongly correlated with WrittenFrequency. This correlation is statistically significant. This means we will have to keep an eye on these two and check our Variance Inflation Factors
+```
+
+```{r ex="rel_familiarityvsfrequency", type="sct"}
+test_output_contains("cor.test(dataSet$Familiarity, dataSet$WrittenFrequency)", "Don't forget to calculate all correlation coefficients!")
+test_output_contains("cor.test(dataSet$Familiarity, dataSet$LengthInLetters)", "Don't forget to calculate all correlation coefficients!")
+test_output_contains("cor.test(dataSet$Familiarity, dataSet$FrequencyInitialDiphoneWord)", "Don't forget to calculate all correlation coefficients!")
+test_output_contains("cor.test(dataSet$WrittenFrequency, dataSet$LengthInLetters)", "Don't forget to calculate all correlation coefficients!")
+test_output_contains("cor.test(dataSet$LengthInLetters, dataSet$FrequencyInitialDiphoneWord)", "Don't forget to calculate all correlation coefficients!")
+test_output_contains("cor.test(dataSet$LengthInLetters, dataSet$FrequencyInitialDiphoneWord)", "Don't forget to calculate all correlation coefficients!")
+success_msg("Great work!")
+```
+
+
+## 12. Fitting an initial model to validate the assumptions
+- We know our data in and out
+- We have checked for outliers and excluded them
+- We have established correlations with the dependent variable
+- We have checked for correlations between variables
+- Now it is time to define a first model to check the model assumptions further 
+
+```{r ex="firstmodel", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class7_Baayen_et_al_2006.csv")
+# Remove outliers from RTlexdec
+dataSet<- dataSet[abs(scale(dataSet$RTlexdec))<= 2, ]
+# Remove outliers from Familiarity
+dataSet<- dataSet[abs(scale(dataSet$Familiarity))<= 2, ]
+# Remove outliers from WrittenFrequency
+dataSet<- dataSet[abs(scale(dataSet$WrittenFrequency))<= 2, ]
+# Remove outliers from  LengthInLetters
+dataSet<- dataSet[abs(scale(dataSet$LengthInLetters))<= 2, ]
+# Remove outliers from FrequencyInitialDiphoneWord
+dataSet<- dataSet[abs(scale(dataSet$FrequencyInitialDiphoneWord))<= 2, ]
+
+```
+
+```{r ex="firstmodel", type="sample-code"}
+# The modified data.frame dataSet is already in your workspace
+
+# Specify a lm model that regresses RTlexdec on  Familiarity, AgeSubject, WrittenFrequency, WordCategory, LengthInLetters, and FrequencyInitialDiphoneWord
+# Assign this model to the variable `mod`
+```
+
+```{r ex="firstmodel", type="solution"}
+# The modified data.frame dataSet is already in your workspace
+
+# Specify a lm model that regresses RTlexdec on  Familiarity, AgeSubject, WrittenFrequency, WordCategory, LengthInLetters, and FrequencyInitialDiphoneWord
+# Assign this model to the variable `mod`
+mod <- lm(RTlexdec ~ Familiarity + AgeSubject + WrittenFrequency + WordCategory + LengthInLetters + FrequencyInitialDiphoneWord, data=dataSet)
+
+```
+
+```{r ex="firstmodel", type="sct"}
+test_object("mod", "Don't forget to specify the regression model!")
+success_msg("Great work!")
+```
+
+
+## 13. Fitting an initial model to validate the assumptions
+- Recall that these are our assumptions:
+    - There are no outliers/overly influential observations
+    - The relationships are linear
+    - There is no multicollinearity
+    - The observations are independent from one another (there is no `autocorrelation`)
+    - The residuals are not autocorrelated
+    - The variability of the residuals does not increase or decrease with the explanatory variables or the response (i.e., there is no `heteroskedasticity`)
+    - The residuals follow the normal distribution. This is less important if the sample size is large 
+    
+### 13.1 There are no overly influential observations
+```{r ex="influence", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class7_Baayen_et_al_2006.csv")
+# Remove outliers from RTlexdec
+dataSet<- dataSet[abs(scale(dataSet$RTlexdec))<= 2, ]
+# Remove outliers from Familiarity
+dataSet<- dataSet[abs(scale(dataSet$Familiarity))<= 2, ]
+# Remove outliers from WrittenFrequency
+dataSet<- dataSet[abs(scale(dataSet$WrittenFrequency))<= 2, ]
+# Remove outliers from  LengthInLetters
+dataSet<- dataSet[abs(scale(dataSet$LengthInLetters))<= 2, ]
+# Remove outliers fromFrequencyInitialDiphoneWord
+dataSet<- dataSet[abs(scale(dataSet$FrequencyInitialDiphoneWord))<= 2, ]
+mod <- lm(RTlexdec ~ Familiarity + AgeSubject + WrittenFrequency + WordCategory + LengthInLetters + FrequencyInitialDiphoneWord, data=dataSet)
+```
+
+```{r ex="influence", type="sample-code"}
+# The modified data.frame dataSet is already in your workspace
+# The model "mod" is alreay in your workspace. 
+
+# Load the car package
+
+# Draw an influencePlot of "mod". Store the output data.frame in the variable outliers
+
+# Print "outliers"
+
+# Extract the indices of the observations should be excluded from the variable 'outliers'. Store them in the variable 'indices'
+
+# Print 'indices'
+
+# Remove the outliers
+
+```
+
+```{r ex="influence", type="solution"}
+# The modified data.frame dataSet is already in your workspace
+# The model "mod" is alreay in your workspace.
+
+# Load the car package
+library(car)
+# Draw an influencePlot of "mod". Store the output data.frame in the variable "outliers"
+outliers<-influencePlot(mod)
+# Print "outliers"
+outliers
+# Extract the indices of the observations should be excluded from the variable 'outliers'. Store them in the variable 'indices'
+indices<-as.numeric(rownames(outliers))
+# Print indices
+indices
+# Remove the outliers
+dataSet <- dataSet[-indices,]
+```
+
+```{r ex="influence", type="sct"}
+test_library_function("car")
+test_object("outliers")
+test_object("indices")
+success_msg("Great work!")
+```
+
+### 13.2 The relationships are linear
+
+```{r ex="linearity", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class7_Baayen_et_al_2006.csv")
+# Remove outliers from RTlexdec
+dataSet<- dataSet[abs(scale(dataSet$RTlexdec))<= 2, ]
+# Remove outliers from Familiarity
+dataSet<- dataSet[abs(scale(dataSet$Familiarity))<= 2, ]
+# Remove outliers from WrittenFrequency
+dataSet<- dataSet[abs(scale(dataSet$WrittenFrequency))<= 2, ]
+# Remove outliers from  LengthInLetters
+dataSet<- dataSet[abs(scale(dataSet$LengthInLetters))<= 2, ]
+# Remove outliers fromFrequencyInitialDiphoneWord
+dataSet<- dataSet[abs(scale(dataSet$FrequencyInitialDiphoneWord))<= 2, ]
+dataSet<- dataSet[-c(224, 2743, 2807), ]
+
+mod <- lm(RTlexdec ~ Familiarity + AgeSubject + WrittenFrequency + WordCategory + LengthInLetters + FrequencyInitialDiphoneWord, data=dataSet)
+
+
+```
+
+```{r ex="linearity", type="sample-code"}
+# The modified data.frame dataSet is already in your workspace
+# The model "mod" is alreay in your workspace. 
+
+# Load the car package
+
+# Draw a crPlot of Familiarity
+
+# Draw a crPlot of WrittenFrequency
+
+# Draw a crPlot of LengthInLetters
+
+# Draw a crPlot of FrequencyInitialDiphoneWord
+
+
+# Which one of the variables do not have a strictly linear relationship to the RTlexdec variable? You will find the correct answer on the Solution tab
+
+```
+
+```{r ex="linearity", type="solution"}
+# The modified data.frame dataSet is already in your workspace
+# The model "mod" is alreay in your workspace. 
+
+# Load the car package
+library(car)
+# Draw a crPlot of Familiarity
+crPlot(mod, "Familiarity")
+# Draw a crPlot of WrittenFrequency
+crPlot(mod, "WrittenFrequency")
+# Draw a crPlot of LengthInLetters
+crPlot(mod, "LengthInLetters")
+# Draw a crPlot of FrequencyInitialDiphoneWord
+crPlot(mod, "FrequencyInitialDiphoneWord")
+
+# - Which one of the variables do not have a strictly linear relationship to the RTlexdec variable? 
+# Only FrequencyInitialDiphoneWord is strictly linearly related to RTlexdec. If we ignore this, our model will not have an optimal fit (even though it accounts for about 70% of the variance). Unfortunately, a tranformation won't help us much here. To truly capture the relationships, we would need polynomials
+```
+
+```{r ex="linearity", type="sct"}
+test_library_function("car")
+success_msg("I can't test your plots, but I hope you did everything as you should!")
+```
+
+
+### 13.3 There is no multicollinearity
+```{r ex="multicollinearity", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class7_Baayen_et_al_2006.csv")
+# Remove outliers from RTlexdec
+dataSet<- dataSet[abs(scale(dataSet$RTlexdec))<= 2, ]
+# Remove outliers from Familiarity
+dataSet<- dataSet[abs(scale(dataSet$Familiarity))<= 2, ]
+# Remove outliers from WrittenFrequency
+dataSet<- dataSet[abs(scale(dataSet$WrittenFrequency))<= 2, ]
+# Remove outliers from  LengthInLetters
+dataSet<- dataSet[abs(scale(dataSet$LengthInLetters))<= 2, ]
+# Remove outliers fromFrequencyInitialDiphoneWord
+dataSet<- dataSet[abs(scale(dataSet$FrequencyInitialDiphoneWord))<= 2, ]
+dataSet<- dataSet[-c(224, 2743, 2807), ]
+
+mod <- lm(RTlexdec ~ Familiarity + AgeSubject + WrittenFrequency + WordCategory + LengthInLetters + FrequencyInitialDiphoneWord, data=dataSet)
+```
+
+```{r ex="multicollinearity", type="sample-code"}
+# The modified data.frame dataSet is already in your workspace
+# The model "mod" is alreay in your workspace
+
+# Load the car package
+
+# Compute the variance inflation factors for our model (vif)
+
+# What do you see? Is multicollinearity an issue here? You will find the correct answer on the Solution tab
+
+```
+
+```{r ex="multicollinearity", type="solution"}
+# The modified data.frame dataSet is already in your workspace
+# The model "mod" is alreay in your workspace
+
+# Load the car package
+library(car)
+
+# Compute the variance inflation factors for our model 'mod' (vif)
+vif(mod)
+
+# - What do you see? Is multicollinearity an issue here?
+# All variance inflation factors are below 5. As a rule of thumb, VIF < 5 means that we can rest assured that multicollinearity is not an issue
+
+```
+
+```{r ex="multicollinearity", type="sct"}
+test_output_contains("vif(mod)", "Don't forget to compute the variance inflation factors!")
+success_msg("Great work!")
+test_library_function("car")
+
+```
+
+### 13.4 The residuals and the observations are not autocorrelated
+
+```{r ex="autocorrelation", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class7_Baayen_et_al_2006.csv")
+# Remove outliers from RTlexdec
+dataSet<- dataSet[abs(scale(dataSet$RTlexdec))<= 2, ]
+# Remove outliers from Familiarity
+dataSet<- dataSet[abs(scale(dataSet$Familiarity))<= 2, ]
+# Remove outliers from WrittenFrequency
+dataSet<- dataSet[abs(scale(dataSet$WrittenFrequency))<= 2, ]
+# Remove outliers from  LengthInLetters
+dataSet<- dataSet[abs(scale(dataSet$LengthInLetters))<= 2, ]
+# Remove outliers fromFrequencyInitialDiphoneWord
+dataSet<- dataSet[abs(scale(dataSet$FrequencyInitialDiphoneWord))<= 2, ]
+dataSet<- dataSet[-c(224, 2743, 2807), ]
+
+mod <- lm(RTlexdec ~ Familiarity + AgeSubject + WrittenFrequency + WordCategory + LengthInLetters + FrequencyInitialDiphoneWord, data=dataSet)
+
+
+```
+
+```{r ex="autocorrelation", type="sample-code"}
+# The modified data.frame dataSet is already in your workspace
+# The model "mod" is alreay in your workspace. The heteroskedasticity is fixed
+
+# Load the car package
+
+# Perform a durbinWatsonTest
+
+# What do you see, are the residuals autocorrelated?
+
+
+```
+
+```{r ex="autocorrelation", type="solution"}
+# The modified data.frame dataSet is already in your workspace
+# The model "mod" is alreay in your workspace. The heteroskedasticity is fixed
+
+# Load the car package
+library(car)
+# Perform a durbinWatsonTest
+durbinWatsonTest(mod)
+# - What do you see, are the residuals autocorrelated?
+# Yes, unfortunately, the residuals appear to be autocorrelated (p < 0.05). This suggests that our model misses some important information. This may be due to the fact that we are only looking at a subset of the predictors and that we have attempted to model the non-linear relationships in the data with straight lines. Adding or deleting variables may solve the issue here. It should not affect the inferences we can draw from the coefficients.
+
+```
+
+```{r ex="autocorrelation", type="sct"}
+test_output_contains("durbinWatsonTest(mod)", "Don't forget to perform the test!")
+test_object("power")
+test_library_function("car")
+
+success_msg("Great work!")
+```
+
+
+### 13.5 There is no heteroskedasticity (1/2)
+```{r ex="heteroskedasticity", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class7_Baayen_et_al_2006.csv")
+# Remove outliers from RTlexdec
+dataSet<- dataSet[abs(scale(dataSet$RTlexdec))<= 2, ]
+# Remove outliers from Familiarity
+dataSet<- dataSet[abs(scale(dataSet$Familiarity))<= 2, ]
+# Remove outliers from WrittenFrequency
+dataSet<- dataSet[abs(scale(dataSet$WrittenFrequency))<= 2, ]
+# Remove outliers from  LengthInLetters
+dataSet<- dataSet[abs(scale(dataSet$LengthInLetters))<= 2, ]
+# Remove outliers fromFrequencyInitialDiphoneWord
+dataSet<- dataSet[abs(scale(dataSet$FrequencyInitialDiphoneWord))<= 2, ]
+dataSet<- dataSet[-c(224, 2743, 2807), ]
+
+
+mod <- lm(RTlexdec ~ Familiarity + AgeSubject + WrittenFrequency + WordCategory + LengthInLetters + FrequencyInitialDiphoneWord, data=dataSet)
+
+
+```
+
+```{r ex="heteroskedasticity", type="sample-code"}
+# The modified data.frame dataSet is already in your workspace
+# The model "mod" is alreay in your workspace
+
+# Load the car package
+
+# Compute an ncvTest for our model
+
+# Compute an ncvTest for Familiarity
+
+# Compute an ncvTest for WrittenFrequency
+
+# Compute an ncvTest for LengthInLetters
+
+# Compute an ncvTest for FrequencyInitialDiphoneWord
+
+# What do you see? Does our model suffer from heteroskedasticity? Which variable(s) appear to be the culprits?
+
+```
+
+```{r ex="heteroskedasticity", type="solution"}
+# The modified data.frame dataSet is already in your workspace
+# The model "mod" is alreay in your workspace
+
+# Load the car package
+library(car)
+
+# Compute an ncvTest for our model
+ncvTest(mod)
+# Compute an ncvTest for Familiarity
+ncvTest(mod, ~Familiarity)
+# Compute an ncvTest for WrittenFrequency
+ncvTest(mod, ~WrittenFrequency)
+# Compute an ncvTest for LengthInLetters
+ncvTest(mod, ~LengthInLetters)
+# Compute an ncvTest for FrequencyInitialDiphoneWord
+ncvTest(mod, ~FrequencyInitialDiphoneWord)
+# - What do you see? Does our model suffer from heteroskedasticity? 
+# Yes, the p-value is lower than 0.05
+# - Which variable(s) appear to be the culprits?
+# All variables except FrequencyInitialDiphoneWord appear to introduce the heteroskedasticity
+```
+
+```{r ex="heteroskedasticity", type="sct"}
+test_output_contains("ncvTest(mod)", "Don't forget to compute the ncvTest!")
+test_output_contains("ncvTest(mod, ~Familiarity)", "Don't forget to compute the ncvTest for Familiarity!")
+test_output_contains("ncvTest(mod, ~WrittenFrequency)",  "Don't forget to compute the ncvTest for WrittenFrequency!")
+test_output_contains("ncvTest(mod, ~LengthInLetters)",  "Don't forget to compute the ncvTest for LengthInLetters!")
+test_output_contains("ncvTest(mod, ~FrequencyInitialDiphoneWord)",  "Don't forget to compute the ncvTest for FrequencyInitialDiphoneWord!")
+test_library_function("car")
+
+success_msg("Great work!")
+```
+### 13.5 There is no heteroskedasticity (2/2)
+
+```{r ex="heteroskedasticity2", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class7_Baayen_et_al_2006.csv")
+# Remove outliers from RTlexdec
+dataSet<- dataSet[abs(scale(dataSet$RTlexdec))<= 2, ]
+# Remove outliers from Familiarity
+dataSet<- dataSet[abs(scale(dataSet$Familiarity))<= 2, ]
+# Remove outliers from WrittenFrequency
+dataSet<- dataSet[abs(scale(dataSet$WrittenFrequency))<= 2, ]
+# Remove outliers from  LengthInLetters
+dataSet<- dataSet[abs(scale(dataSet$LengthInLetters))<= 2, ]
+# Remove outliers fromFrequencyInitialDiphoneWord
+dataSet<- dataSet[abs(scale(dataSet$FrequencyInitialDiphoneWord))<= 2, ]
+mod <- lm(RTlexdec ~ Familiarity + AgeSubject + WrittenFrequency + WordCategory + LengthInLetters + FrequencyInitialDiphoneWord, data=dataSet)
+
+```
+
+```{r ex="heteroskedasticity2", type="sample-code"}
+# The modified data.frame dataSet is already in your workspace
+# The model "mod" is alreay in your workspace
+
+# Load the car package
+
+# Knowing that our model suffers from heteroskedasticity is one thing, but fixing it is another
+
+# Compute a boxCox plot and assign it to the variable 'box'
+
+# Extract the power to which we have to raise RTlexdec to fix the heteroskedasticity and store it in the variable "power"
+
+# Print power
+
+# Raise RTlexdec to the power of 'power' 
+
+# Recompute the model
+
+# Re-run the ncvTest
+
+```
+
+```{r ex="heteroskedasticity2", type="solution"}
+# The modified data.frame dataSet is already in your workspace
+# The model "mod" is alreay in your workspace
+
+# Load the car package
+library(car)
+
+# Knowing that our model suffers from heteroskedasticity is one thing, but fixing it is another
+
+# Compute a boxCox plot and assign it to the variable 'box'
+box<-boxCox(mod)
+
+# Extract the power to which we have to raise RTlexdec to fix the heteroskedasticity and store it in the variable "power"
+power<-box$x[which.max(box$y)]
+
+# Print "power"
+power
+
+# Raise RTlexdec to the power of 'power' 
+dataSet$RTlexdec<-dataSet$RTlexdec^power
+
+# Recompute the model
+mod <- lm(RTlexdec ~ Familiarity + AgeSubject + WrittenFrequency + WordCategory + LengthInLetters + FrequencyInitialDiphoneWord, data=dataSet)
+
+# Re-run the ncvTest
+ncvTest(mod)
+```
+
+```{r ex="heteroskedasticity2", type="sct"}
+test_output_contains("box$x[which.max(box$y)]", "Don't forget to print the power!")
+test_output_contains("ncvTest(mod)", "Don't forget to perform the ncvTest again!")
+test_object("power")
+test_object("mod")
+test_library_function("car")
+
+success_msg("Great work!")
+```
+
+
+### 13.6 The residuals are normally distributed
+```{r ex="distr", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class7_Baayen_et_al_2006.csv")
+# Remove outliers from RTlexdec
+dataSet<- dataSet[abs(scale(dataSet$RTlexdec))<= 2, ]
+# Remove outliers from Familiarity
+dataSet<- dataSet[abs(scale(dataSet$Familiarity))<= 2, ]
+# Remove outliers from WrittenFrequency
+dataSet<- dataSet[abs(scale(dataSet$WrittenFrequency))<= 2, ]
+# Remove outliers from  LengthInLetters
+dataSet<- dataSet[abs(scale(dataSet$LengthInLetters))<= 2, ]
+# Remove outliers fromFrequencyInitialDiphoneWord
+dataSet<- dataSet[abs(scale(dataSet$FrequencyInitialDiphoneWord))<= 2, ]
+dataSet$RTlexdec<-dataSet$RTlexdec^-2
+mod <- lm(RTlexdec ~ Familiarity + AgeSubject + WrittenFrequency + WordCategory + LengthInLetters + FrequencyInitialDiphoneWord, data=dataSet)
+
+
+```
+
+```{r ex="distr", type="sample-code"}
+# The modified data.frame dataSet is already in your workspace
+# The model "mod" is alreay in your workspace. The heteroskedasticity is fixed
+
+# Load the car package
+
+# Draw a qqplot of the residuals
+
+# What do you see, are the residuals distributed normally?
+```
+
+```{r ex="distr", type="solution"}
+# The modified data.frame dataSet is already in your workspace
+# The model "mod" is alreay in your workspace. The heteroskedasticity is fixed
+
+# Load the car package
+library(car)
+# Draw a qqplot of the residuals
+qqnorm(resid(mod))
+qqline(resid(mod))
+
+# What do you see, are the residuals distributed normally?
+# Yes, the residuals appear to come close to a normal distribution
+```
+
+```{r ex="distr", type="sct"}
+test_library_function("car")
+
+success_msg("Great work!")
+```
+
+## References
+- Balota, D., Cortese, M., Sergent-Marshall, S., Spieler, D. and Yap, M. (2004) Visual word recognition for single-syllable words, *Journal of Experimental Psychology:General*, 133, 283-316.
+- Baayen, R.H., Feldman, L. and Schreuder, R. (2006) Morphological influences on the recognition of monosyllabic monomorphemic words, *Journal of Memory and Language*, 53, 496-512.
+- Baayen, R. H. (2013). *languageR: Data sets and functions with "Analyzing Linguistic Data: A practical introduction to statistics*. https://CRAN.R-project.org/package=languageR .

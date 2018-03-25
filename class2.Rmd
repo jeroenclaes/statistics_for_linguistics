@@ -1,5 +1,6 @@
 ---
-title: "Topic 2: Data frames, measures of central tendency, measures of dispersion, and distributions"
+title: 'Topic 2: Data frames, measures of central tendency, measures of dispersion,
+  and distributions'
 author: "Jeroen Claes | <jeroen.claes@kuleuven.be> | <jeroen@cropland.be>"
 ---
 ## 1. Working with data.frames
