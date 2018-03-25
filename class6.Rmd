@@ -71,6 +71,11 @@ success_msg("Great!")
 ```
 
 ## 2. The social stratification of /r/ in New York City: Store vs /r/
+- Research question:
+    - *Is the use of  full and elided postvocalic /r/ socially stratified?*
+- Hypothesis:
+    - *Shop assistants at Saks will have the greatest proportion of full /r/'s, followed by Macy's. The shop assistants at Klein's will have the smallest proportion of full /r/'s*
+    
 ### 2.1 Frequency of /r/ by store
 ```{r ex="Labov_store_freq", type="pre-exercise-code"}
 library(readr)
@@ -171,18 +176,46 @@ success_msg("Excellent work!")
 ```
 
 ### 2.3 Significance test and effect size
-
 ```{r ex="Labov_store_significanceEffect", type="pre-exercise-code"}
 library(readr)
 dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class6_Labov_1966.csv")
+
+# assocstats function, copied from the 'vcd' package, which was unavailable at DataCamp at the time of writing
+assocstats <- function (x) 
+{
+  if (!is.matrix(x)) {
+    l <- length(dim(x))
+    str <- apply(x, 3:l, FUN = assocstats)
+    if (l == 3) {
+      names(str) <- paste(names(dimnames(x))[3], names(str), 
+                          sep = ":")
+    }
+    else {
+      dn <- dimnames(str)
+      dim(str) <- NULL
+      names(str) <- apply(expand.grid(dn), 1, function(x) paste(names(dn), 
+                                                                x, sep = ":", collapse = "|"))
+    }
+    return(str)
+  }
+  tab <- summary(MASS::loglm(~1 + 2, x))$tests
+  phi <- sqrt(tab[2, 1]/sum(x))
+  cont <- sqrt(phi^2/(1 + phi^2))
+  cramer <- sqrt(phi^2/min(dim(x) - 1))
+  structure(list(table = x, chisq_tests = tab, phi = ifelse(all(dim(x) == 
+                                                                  2L), phi, NA), contingency = cont, cramer = cramer), 
+            class = "assocstats")
+}
+
+
+
+
 ```
 
 ```{r ex="Labov_store_significanceEffect", type="sample-code"}
-# The data.frame dataSet is already in your workspace
+# The data.frame dataSet is already in your workspace. The 'vcd' package is already loaded
 
 # Compute the chisq.test again to evaluate the association between store and /r/
-
-# Load the 'vcd' library
 
 # Compute the effect sizes for store vs /r/
 
@@ -193,12 +226,10 @@ dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datase
 ```
 
 ```{r ex="Labov_store_significanceEffect", type="solution"}
-# The data.frame dataSet is already in your workspace
+# The data.frame dataSet is already in your workspace. The 'vcd' package is already loaded
 
 # Compute the chisq.test again to evaluate the association between store and /r/
 chisq.test(dataSet$store, dataSet$r)
-# Load the 'vcd' library
-library(vcd)
 # Compute the effect sizes for store vs /r/
 assocstats(table(dataSet$store, dataSet$r))
 # What can we conclude? 
@@ -209,7 +240,6 @@ assocstats(table(dataSet$store, dataSet$r))
 ```
 
 ```{r ex="Labov_store_significanceEffect", type="sct"}
-test_library_function("vcd", "Make sure to call the 'car' package!")
 test_output_contains('chisq.test(dataSet$store, dataSet$r)', "Make sure you perform the chisq.test!")
 test_output_contains('assocstats(table(dataSet$store, dataSet$r))', "Don't forget to calculate the effect size measures")
 success_msg("Great!")
@@ -280,9 +310,12 @@ success_msg("Great!")
 ```
 
 
-
-
 ## 3. The phonological conditioning of /r/ in New York City: the role of emphasis
+- Research question:
+    - *Do New Yorkers use the full /r/ more often in careful, emphatic speech?*
+- Hypothesis:
+    - *In emphatic speech, the full /r/ will occur more often*
+
 ### 3.1 Frequency of /r/ by emphasis
 ```{r ex="Labov_emphasis_freq", type="pre-exercise-code"}
 library(readr)
@@ -382,18 +415,44 @@ success_msg("Fantastic work!")
 ```
 
 ### 3.3 Significance test and effect size
-
 ```{r ex="Labov_emphasis_significanceEffect", type="pre-exercise-code"}
 library(readr)
 dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class6_Labov_1966.csv")
+# assocstats function, copied from the 'vcd' package, which was unavailable at DataCamp at the time of writing
+assocstats <- function (x) 
+{
+  if (!is.matrix(x)) {
+    l <- length(dim(x))
+    str <- apply(x, 3:l, FUN = assocstats)
+    if (l == 3) {
+      names(str) <- paste(names(dimnames(x))[3], names(str), 
+                          sep = ":")
+    }
+    else {
+      dn <- dimnames(str)
+      dim(str) <- NULL
+      names(str) <- apply(expand.grid(dn), 1, function(x) paste(names(dn), 
+                                                                x, sep = ":", collapse = "|"))
+    }
+    return(str)
+  }
+  tab <- summary(MASS::loglm(~1 + 2, x))$tests
+  phi <- sqrt(tab[2, 1]/sum(x))
+  cont <- sqrt(phi^2/(1 + phi^2))
+  cramer <- sqrt(phi^2/min(dim(x) - 1))
+  structure(list(table = x, chisq_tests = tab, phi = ifelse(all(dim(x) == 
+                                                                  2L), phi, NA), contingency = cont, cramer = cramer), 
+            class = "assocstats")
+}
+
+
+
 ```
 
 ```{r ex="Labov_emphasis_significanceEffect", type="sample-code"}
-# The data.frame dataSet is already in your workspace
+# The data.frame dataSet is already in your workspace. The 'vcd' package is already loaded
 
 # Compute the chisq.test again to evaluate the association between emphasis and /r/
-
-# Load the 'vcd' library
 
 # Compute the effect sizes for emphasis vs /r/
 
@@ -404,12 +463,10 @@ dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datase
 ```
 
 ```{r ex="Labov_emphasis_significanceEffect", type="solution"}
-# The data.frame dataSet is already in your workspace
+# The data.frame dataSet is already in your workspace.The 'vcd' package is already loaded
 
 # Compute the chisq.test again to evaluate the association between emphasis and /r/
 chisq.test(dataSet$emphasis, dataSet$r)
-# Load the 'vcd' library
-library(vcd)
 # Compute the effect sizes for emphasis vs /r/
 assocstats(table(dataSet$emphasis, dataSet$r))
 # What can we conclude? 
@@ -421,7 +478,6 @@ assocstats(table(dataSet$emphasis, dataSet$r))
 ```
 
 ```{r ex="Labov_emphasis_significanceEffect", type="sct"}
-test_library_function("vcd", "Make sure to call the 'car' package!")
 test_output_contains('chisq.test(dataSet$emphasis, dataSet$r)', "Make sure you perform the chisq.test!")
 test_output_contains('assocstats(table(dataSet$emphasis, dataSet$r))', "Don't forget to calculate the effect size measures")
 success_msg("Great!")
@@ -497,6 +553,10 @@ success_msg("Great!")
 ## 4. The phonological conditioning of /r/ in New York City: The role of word-final vs preconsonantal position
 - The difference between *fourth* and *floor* consists in that the postvocalic /r/ in *fourth* is followed by a consonant, whereas the one in *floor* is word-final
 - Any differences between these two words may point to an effect of these two phonetic conditions
+- Research question:
+    - *Do New Yorkers use full and elided postvocalic /r/ at different rates in the final and preconsonantic contexts?*
+- Hypothesis:
+    - *In word-final position, the elided variant will occur more often.*
 
 ### 4.1 Frequency of /r/ by word
 ```{r ex="Labov_word_freq", type="pre-exercise-code"}
@@ -535,7 +595,7 @@ prop.table(table(dataSet$word, dataSet$r), 1)
 # - Which word provided the largest proportion of full examples?
 # "Floor" provides about 62% of the full /r/ tokens
 # - Which word has the highest ocurrence rate of the "full" /r/?
-# Again, "floor" has the highest occurance rate of the 'full' /r/, with 41%
+# Again, "floor" has the highest occurance rate of the 'full' /r/, with 41%. It looks like our hypothesis got it wrong!
 ```
 
 ```{r ex="Labov_word_freq", type="sct"}
@@ -601,14 +661,41 @@ success_msg("Excellent work!")
 ```{r ex="Labov_word_significanceEffect", type="pre-exercise-code"}
 library(readr)
 dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class6_Labov_1966.csv")
+# assocstats function, copied from the 'vcd' package, which was unavailable at DataCamp at the time of writing
+assocstats <- function (x) 
+{
+  if (!is.matrix(x)) {
+    l <- length(dim(x))
+    str <- apply(x, 3:l, FUN = assocstats)
+    if (l == 3) {
+      names(str) <- paste(names(dimnames(x))[3], names(str), 
+                          sep = ":")
+    }
+    else {
+      dn <- dimnames(str)
+      dim(str) <- NULL
+      names(str) <- apply(expand.grid(dn), 1, function(x) paste(names(dn), 
+                                                                x, sep = ":", collapse = "|"))
+    }
+    return(str)
+  }
+  tab <- summary(MASS::loglm(~1 + 2, x))$tests
+  phi <- sqrt(tab[2, 1]/sum(x))
+  cont <- sqrt(phi^2/(1 + phi^2))
+  cramer <- sqrt(phi^2/min(dim(x) - 1))
+  structure(list(table = x, chisq_tests = tab, phi = ifelse(all(dim(x) == 
+                                                                  2L), phi, NA), contingency = cont, cramer = cramer), 
+            class = "assocstats")
+}
+
+
+
 ```
 
 ```{r ex="Labov_word_significanceEffect", type="sample-code"}
-# The data.frame dataSet is already in your workspace
+# The data.frame dataSet is already in your workspace. The 'vcd' package is already loaded
 
 # Compute the chisq.test again to evaluate the association between word and /r/
-
-# Load the 'vcd' library
 
 # Compute the effect sizes for word vs /r/
 
@@ -619,23 +706,20 @@ dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datase
 ```
 
 ```{r ex="Labov_word_significanceEffect", type="solution"}
-# The data.frame dataSet is already in your workspace
+# The data.frame dataSet is already in your workspace. The 'vcd' package is already loaded
 
 # Compute the chisq.test again to evaluate the association between word and /r/
 chisq.test(dataSet$word, dataSet$r)
-# Load the 'vcd' library
-library(vcd)
 # Compute the effect sizes for word vs /r/
 assocstats(table(dataSet$word, dataSet$r))
 # What can we conclude? 
 # - Is the difference between the words significant?
 # p < 0.05, so it is generally considered to be significant
 # -  Is the effect large?
-# Cramer's V is estimated to be 1.94, so the effect is small
+# Cramer's V is estimated to be 0.20, so the effect is small
 ```
 
 ```{r ex="Labov_word_significanceEffect", type="sct"}
-test_library_function("vcd", "Make sure to call the 'car' package!")
 test_output_contains('chisq.test(dataSet$word, dataSet$r)', "Make sure you perform the chisq.test!")
 test_output_contains('assocstats(table(dataSet$word, dataSet$r))', "Don't forget to calculate the effect size measures")
 success_msg("Great!")
@@ -701,7 +785,6 @@ ggplot(dataSet, aes(x=word, fill=r, color=r)) + geom_bar(position="fill") + scal
 test_library_function("ggplot2", "Make sure to call the 'ggplot2' package!")
 test_library_function("scales", "Make sure to call the 'scales' package!")
 test_ggplot()
-success_msg("Great!")
 success_msg("Great!")
 ```
 
