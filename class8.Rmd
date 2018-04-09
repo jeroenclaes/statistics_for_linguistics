@@ -1,0 +1,2276 @@
+---
+title: 'Topic 8: The science (or art?) of fitting linear regression models'
+author: "Jeroen Claes | <jeroen.claes@kuleuven.be> | <jeroen@cropland.be>"
+---
+  
+```{r, include=FALSE}
+#library(testwhat)
+tutorial::go_interactive()
+library(car)
+options(contr=c("contr.Sum", "contr.Poly"))
+```
+
+
+## Cognitive control and the degree to which bilingual speakers participate in ongoing sound changes
+- Berry (2018) studied the bilingual Puerto Rican community of Philadelphia, PA. The goal was to gain insight into the degree to which Spanish-English bilingual speakers participate in ongoing sound changes in English and how *cognitive control* contributes to this
+- *Cognitive control* is a concept proposed by Braver (2012) in his *dual-mechanisms* framework:
+    - *Cognitive control* is defined as: "the ability to regulate thoughts and actions in accordance with internally represented behavioral goals" (Braver, 2012)
+    - It is composed of two mechanisms:
+        - *Proactive control* is defined as: "the sustained and anticipatory maintenance of goal-relevant information [...] to enable optimal cognitive performance." (Braver, 2012)
+        - *Reactive control* is defined as: "Transient, stimulus-driven goal reactivation [...] based on interference demands or episodic associations." (Braver, 2012)
+- Here we will only consider Berry's (2018) dataset on a phonological phenomenon called [Canadian Raising](https://en.wikipedia.org/wiki/Canadian_raising)(e.g., *about* is pronounced somewhat like *aboot*)
+- The dataset contains a selection of the following columns:
+    - `norm_F1`: The frequency value of the `F1 vowel formant`, the frequency created by resonance in the laryngeal cavity. Lower values indicate a higher level of vowel raising (Woolums, 2012)
+    - `Proactive`: Did the situation require weaker or stronger Proactive control?
+    - `Reactive`: Did the situation require weaker or stronger reactive control?
+    - `Style`: `Read` (reading experiment) or `Conversational` (Sociolinguistic interview)
+    - `BirthYear`: Year of birth of the participant
+    - `Sex`: Sex of the participant
+    - `PartnerEthnicity`: Ethnicity of the participant's partner
+    - `PhillyLiveTime`: Amount of time the participant has lived in Philadelphia
+    - `HighSchoolType`: The type of high school the participant attended
+    - `Occupation_Group`: The particpant's occupational category
+    - `wordLength`: The length of the word, in characters
+  
+## 1. Loading and exploring the data
+```{r ex="Berry_load_explore_associations", type="sample-code"}
+# Load the readr package
+
+# Load the course data from the course website to the object 'dataSet':
+# http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv
+
+# Load the dplyr package
+
+# Print a 'glimpse' of the dataSet
+
+```
+
+```{r ex="Berry_load_explore_associations", type="solution"}
+# Load the readr package
+library(readr)
+# Load the course data from the course website to the object 'dataSet':
+# http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+# Load the dplyr package
+library(dplyr)
+# Print a 'glimpse' of the dataSet
+glimpse(dataSet)
+```
+
+```{r ex="Berry_load_explore_associations", type="sct"}
+test_object("dataSet")
+test_library_function("readr", "Make sure to call the 'readr' package!")
+test_library_function("dplyr", "Make sure to call the 'dplyr' package!")
+test_output_contains("glimpse(dataSet)",   incorrect_msg = "Make sure to print a 'glimpse' of the data!")
+success_msg("Great!")
+```
+
+## 2. Getting to know the data: the dependent variable `norm_F1`
+### 2.1 Central tendency
+```{r ex="shape_norm_F1", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+```
+
+```{r ex="shape_norm_F1", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Compute the mean of norm_F1
+
+# Compute the median of norm_F1
+
+# Draw a qqplot of norm_F1
+
+# Does the data look normally distributed? You will find the correct answer on the Solution tab
+
+```
+
+```{r ex="shape_norm_F1", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Compute the mean of norm_F1
+mean(dataSet$norm_F1)
+
+# Compute the median of norm_F1
+median(dataSet$norm_F1)
+
+# Draw a qqplot of norm_F1
+qqnorm(dataSet$norm_F1)
+qqline(dataSet$norm_F1)
+
+# Does the data look normally distributed? You will find the correct answer on the Solution tab
+# - The data do not follow the normal distribution completely, but they are pretty close
+# - The mean and the median are not really far apart, but there appear to be some atypical values in the right tail of the distribution
+
+```
+
+```{r ex="shape_norm_F1", type="sct"}
+test_output_contains("mean(dataSet$norm_F1)",   incorrect_msg = "Make sure to compute the mean of the norm_F1 variable!")
+test_output_contains("median(dataSet$norm_F1)",   incorrect_msg = "Make sure to compute the median of the norm_F1 variable!")
+success_msg("I can't evaluate your plot, but I think you did great!")
+```
+
+### 2.2 Dispersion
+```{r ex="dispersion_norm_F1", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+```
+
+```{r ex="dispersion_norm_F1", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Compute the standard deviation of norm_F1
+
+# Compute a summary of norm_F1
+
+# Load the ggplot2 package
+
+# Draw a boxplot of the norm_F1 variable
+
+# Is the data highly dispersed and/or are there any outliers? You will find the correct answer on the Solution tab
+
+```
+
+```{r ex="dispersion_norm_F1", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Compute the standard deviation of norm_F1
+sd(dataSet$norm_F1)
+# Compute a summary of norm_F1
+summary(dataSet$norm_F1)
+# Load the ggplot2 package
+library(ggplot2)
+# Draw a boxplot of the norm_F1 variable
+ggplot(dataSet, aes(x=1, y=norm_F1)) + geom_boxplot()
+# Is the data highly dispersed and/or are there any outliers? 
+# - The standard deviation is very high,  suggesting a high degree of dispersion
+# - However, if we substract the standard deviation from the mean,  we add the standard deviation to the mean and we compare these numbers to the 1st and the 3rd quartile we can see that more than 50% of the values are clustered within one standard deviation from the mean
+# - This points to a low level of dispersion and a distribution that comes close to being normal, but there appear to be some very atypical values in the tails
+# - The boxplot reveals that this is indeed the case (there are quite a few dots on both ends of the plot)
+```
+
+```{r ex="dispersion_norm_F1", type="sct"}
+test_output_contains("sd(dataSet$norm_F1)",   incorrect_msg = "Make sure to compute the standard deviation of the norm_F1 variable!")
+test_output_contains("summary(dataSet$norm_F1)",   incorrect_msg = "Make sure to compute a summary of the norm_F1 variable!")
+test_library_function("ggplot2")
+test_ggplot(1)
+success_msg("Good work!")
+```
+
+
+## 3. Getting to know the data: `Proactive`
+### 3.1 Counts
+```{r ex="shape_Proactive", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+```
+
+```{r ex="shape_Proactive", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Compute a table of Proactive
+
+# Compute proportions for the table
+
+# Are the categories distributed evenly? You will find the correct answer on the Solution tab
+
+```
+
+```{r ex="shape_Proactive", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Compute a table of Proactive
+table(dataSet$Proactive)
+
+# Compute proportions for the table
+prop.table(table(dataSet$Proactive))
+
+# Are the categories distributed evenly? 
+# - Almost, the Stronger Proactive Control has about 5% more occurrences than the other condition
+```
+
+```{r ex="shape_Proactive", type="sct"}
+test_output_contains("table(dataSet$Proactive)",   incorrect_msg = "Make sure to compute a table for the Proactive variable!")
+test_output_contains("prop.table(table(dataSet$Proactive))",   incorrect_msg = "Make sure to compute proportions for the Proactive variable!")
+success_msg("Well done!")
+```
+
+## 4. Getting to know the data: `Reactive`
+### 4.1 Counts
+```{r ex="shape_Reactive", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+```
+
+```{r ex="shape_Reactive", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Compute a table of Reactive
+
+# Compute proportions for the table
+
+# Are the categories distributed evenly? You will find the correct answer on the Solution tab
+
+```
+
+```{r ex="shape_Reactive", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Compute a table of Reactive
+table(dataSet$Reactive)
+
+# Compute proportions for the table
+prop.table(table(dataSet$Reactive))
+
+# Are the categories distributed evenly? 
+# - No, the 'Stronger reactive control' condition has far more occurrences than the other condition
+```
+
+```{r ex="shape_Reactive", type="sct"}
+test_output_contains("table(dataSet$Reactive)",   incorrect_msg = "Make sure to compute a table for the Reactive variable!")
+test_output_contains("prop.table(table(dataSet$Reactive))",   incorrect_msg = "Make sure to compute proportions for the Reactive variable!")
+success_msg("Well done!")
+```
+
+
+## 5. Getting to know the data: `Style`
+### 5.1 Counts
+```{r ex="shape_Style", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+```
+
+```{r ex="shape_Style", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Compute a table of Style
+
+# Compute proportions for the table
+
+# Are the categories distributed evenly? You will find the correct answer on the Solution tab
+
+```
+
+```{r ex="shape_Style", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Compute a table of Style
+table(dataSet$Style)
+
+# Compute proportions for the table
+prop.table(table(dataSet$Style))
+
+# Are the categories distributed evenly? 
+# - No, the 'Conversational' style has far more occurrences than the other condition
+```
+
+```{r ex="shape_Style", type="sct"}
+test_output_contains("table(dataSet$Style)",   incorrect_msg = "Make sure to compute a table for the Style variable!")
+test_output_contains("prop.table(table(dataSet$Style))",   incorrect_msg = "Make sure to compute proportions for the Style variable!")
+success_msg("Well done!")
+```
+
+
+## 6. Getting to know the data: `BirthYear`
+### 6.1 Central tendency
+```{r ex="shape_BirthYear", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+```
+
+```{r ex="shape_BirthYear", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Compute the mean of BirthYear
+
+# Compute the median of BirthYear
+
+# Load the ggplot2 package
+
+# Draw a density plot of BirthYear
+
+# Does the data look normally distributed? You will find the correct answer on the Solution tab
+
+```
+
+```{r ex="shape_BirthYear", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Compute the mean of BirthYear
+mean(dataSet$BirthYear)
+
+# Compute the median of BirthYear
+median(dataSet$BirthYear)
+
+# Load the ggplot2 package
+library(ggplot2)
+
+# Draw a density plot of BirthYear
+ggplot(dataSet, aes(x=BirthYear)) + geom_line(stat="density")
+
+# Does the data look normally distributed? You will find the correct answer on the Solution tab
+# - The data do not follow the normal distribution at all, as is evident from the density plot and the fact that the mean and the median are 5 units apart
+
+```
+
+```{r ex="shape_BirthYear", type="sct"}
+test_output_contains("mean(dataSet$BirthYear)",   incorrect_msg = "Make sure to compute the mean of the BirthYear variable!")
+test_output_contains("median(dataSet$BirthYear)",   incorrect_msg = "Make sure to compute the median of the BirthYear variable!")
+test_ggplot(1)
+test_library_function("ggplot2")
+success_msg("You did great!")
+```
+
+### 6.2 Dispersion
+```{r ex="dispersion_BirthYear", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+```
+
+```{r ex="dispersion_BirthYear", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Compute the standard deviation of BirthYear
+
+# Compute a summary of BirthYear
+
+# Load the ggplot2 package
+
+# Draw a boxplot of the BirthYear variable
+
+# Is the data highly dispersed and/or are there any outliers? You will find the correct answer on the Solution tab
+
+```
+
+```{r ex="dispersion_BirthYear", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Compute the standard deviation of BirthYear
+sd(dataSet$BirthYear)
+# Compute a summary of BirthYear
+summary(dataSet$BirthYear)
+# Load the ggplot2 package
+library(ggplot2)
+# Draw a boxplot of the BirthYear variable
+ggplot(dataSet, aes(x=1, y=BirthYear)) + geom_boxplot()
+
+# Is the data highly dispersed and/or are there any outliers? 
+# - The standard deviation is high (> 1)
+# - The 3rd quartile coincides with the maximum value. Still, the great majority of the values are clustered within one standard deviation from the mean. The odd shape of this variable will not cause too much trouble
+```
+
+```{r ex="dispersion_BirthYear", type="sct"}
+test_output_contains("sd(dataSet$BirthYear)",   incorrect_msg = "Make sure to compute the standard deviation of the BirthYear variable!")
+test_output_contains("summary(dataSet$BirthYear)",   incorrect_msg = "Make sure to compute a summary of the BirthYear variable!")
+test_library_function("ggplot2")
+test_ggplot(1)
+success_msg("Good job!")
+```
+
+
+## 7. Getting to know the data: `Sex`
+### 7.1 Counts
+```{r ex="shape_Sex", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+```
+
+```{r ex="shape_Sex", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Compute a table of Sex
+
+# Compute proportions for the table
+
+# Are the categories distributed evenly? You will find the correct answer on the Solution tab
+
+```
+
+```{r ex="shape_Sex", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Compute a table of Sex
+table(dataSet$Sex)
+
+# Compute proportions for the table
+prop.table(table(dataSet$Sex))
+
+# Are the categories distributed evenly? 
+# - No, the great majority of the participants are women. 
+```
+
+```{r ex="shape_Sex", type="sct"}
+test_output_contains("table(dataSet$Sex)",   incorrect_msg = "Make sure to compute a table for the Sex variable!")
+test_output_contains("prop.table(table(dataSet$Sex))",   incorrect_msg = "Make sure to compute proportions for the Sex variable!")
+success_msg("Well done!")
+```
+
+
+## 8. Getting to know the data: `PartnerEthnicity`
+### 8.1 Counts
+```{r ex="shape_PartnerEthnicity", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+```
+
+```{r ex="shape_PartnerEthnicity", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Compute a table of PartnerEthnicity
+
+# Compute proportions for the table
+
+# Are the categories distributed evenly? You will find the correct answer on the Solution tab
+
+```
+
+```{r ex="shape_PartnerEthnicity", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Compute a table of PartnerEthnicity
+table(dataSet$PartnerEthnicity)
+
+# Compute proportions for the table
+prop.table(table(dataSet$PartnerEthnicity))
+
+# Are the categories distributed evenly? 
+# - No, the largest group of participants have a partner that is Puerto Rican too. The second-largest group is single
+```
+
+```{r ex="shape_PartnerEthnicity", type="sct"}
+test_output_contains("table(dataSet$PartnerEthnicity)",   incorrect_msg = "Make sure to compute a table for the PartnerEthnicity variable!")
+test_output_contains("prop.table(table(dataSet$PartnerEthnicity))",   incorrect_msg = "Make sure to compute proportions for the PartnerEthnicity variable!")
+success_msg("Well done!")
+```
+
+
+## 9. Getting to know the data: `PhillyLiveTime`
+### 9.1 Counts
+```{r ex="shape_PhillyLiveTime", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+```
+
+```{r ex="shape_PhillyLiveTime", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Compute a table of PhillyLiveTime
+
+# Compute proportions for the table
+
+# Are the categories distributed evenly? You will find the correct answer on the Solution tab
+
+```
+
+```{r ex="shape_PhillyLiveTime", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Compute a table of PhillyLiveTime
+table(dataSet$PhillyLiveTime)
+
+# Compute proportions for the table
+prop.table(table(dataSet$PhillyLiveTime))
+
+# Are the categories distributed evenly? 
+# - No, the largest group of participants have lived in Philadelphia their entire lives. The second-largest group has moved to Philadelphia in their early childhood. 
+```
+
+```{r ex="shape_PhillyLiveTime", type="sct"}
+test_output_contains("table(dataSet$PhillyLiveTime)",   incorrect_msg = "Make sure to compute a table for the PhillyLiveTime variable!")
+test_output_contains("prop.table(table(dataSet$PhillyLiveTime))",   incorrect_msg = "Make sure to compute proportions for the PhillyLiveTime variable!")
+success_msg("Well done!")
+```
+
+
+## 10. Getting to know the data: `HighSchoolType`
+### 10.1 Counts
+```{r ex="shape_HighSchoolType", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+```
+
+```{r ex="shape_HighSchoolType", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Compute a table of HighSchoolType
+
+# Compute proportions for the table
+
+# Are the categories distributed evenly? You will find the correct answer on the Solution tab
+
+```
+
+```{r ex="shape_HighSchoolType", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Compute a table of HighSchoolType
+table(dataSet$HighSchoolType)
+
+# Compute proportions for the table
+prop.table(table(dataSet$HighSchoolType))
+
+# Are the categories distributed evenly? 
+# - No, the largest group of participants attended public (state-sponsored and state-operated) or charter (state-sponsored private) schools
+```
+
+```{r ex="shape_HighSchoolType", type="sct"}
+test_output_contains("table(dataSet$HighSchoolType)",   incorrect_msg = "Make sure to compute a table for the HighSchoolType variable!")
+test_output_contains("prop.table(table(dataSet$HighSchoolType))",   incorrect_msg = "Make sure to compute proportions for the HighSchoolType variable!")
+success_msg("Well done!")
+```
+
+## 11. Getting to know the data: `Occupation_Group`
+### 11.1 Counts
+```{r ex="shape_Occupation_Group", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+```
+
+```{r ex="shape_Occupation_Group", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Compute a table of Occupation_Group
+
+# Compute proportions for the table
+
+# Are the categories distributed evenly? You will find the correct answer on the Solution tab
+
+```
+
+```{r ex="shape_Occupation_Group", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Compute a table of Occupation_Group
+table(dataSet$Occupation_Group)
+
+# Compute proportions for the table
+prop.table(table(dataSet$Occupation_Group))
+
+# Are the categories distributed evenly? 
+# - No, the largest group of participants are still in school or work in the services sector
+```
+
+```{r ex="shape_Occupation_Group", type="sct"}
+test_output_contains("table(dataSet$Occupation_Group)",   incorrect_msg = "Make sure to compute a table for the Occupation_Group variable!")
+test_output_contains("prop.table(table(dataSet$Occupation_Group))",   incorrect_msg = "Make sure to compute proportions for the Occupation_Group variable!")
+success_msg("Well done!")
+```
+
+
+## 12. Getting to know the data: `wordLength`
+### 12.1 Central tendency
+```{r ex="shape_wordLength", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+```
+
+```{r ex="shape_wordLength", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Compute the mean of wordLength
+
+# Compute the median of wordLength
+
+# Draw a qqplot of wordLength
+
+# Does the data look normally distributed? You will find the correct answer on the Solution tab
+
+```
+
+```{r ex="shape_wordLength", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Compute the mean of wordLength
+mean(dataSet$wordLength)
+
+# Compute the median of wordLength
+median(dataSet$wordLength)
+
+# Load the ggplot2 package
+library(ggplot2)
+
+# Draw a density plot of wordLength
+ggplot(dataSet, aes(x=wordLength)) + geom_line(stat="density")
+
+# Does the data look normally distributed? You will find the correct answer on the Solution tab
+# - The data do not look normally distributed. Still, the distribution appears to be quite symmetric, as is evident from the density plot and the fact that the mean and the median are less than one unit apart from each other.
+
+```
+
+```{r ex="shape_wordLength", type="sct"}
+test_output_contains("mean(dataSet$wordLength)",   incorrect_msg = "Make sure to compute the mean of the wordLength variable!")
+test_output_contains("median(dataSet$wordLength)",   incorrect_msg = "Make sure to compute the median of the wordLength variable!")
+success_msg("You did great!")
+```
+
+### 12.2 Dispersion
+```{r ex="dispersion_wordLength", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+```
+
+```{r ex="dispersion_wordLength", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Compute the standard deviation of wordLength
+
+# Compute a summary of wordLength
+
+# Load the ggplot2 package
+
+# Draw a boxplot of the wordLength variable
+
+# Is the data highly dispersed and/or are there any outliers? You will find the correct answer on the Solution tab
+
+```
+
+```{r ex="dispersion_wordLength", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Compute the standard deviation of wordLength
+sd(dataSet$wordLength)
+# Compute a summary of wordLength
+summary(dataSet$wordLength)
+# Load the ggplot2 package
+library(ggplot2)
+# Draw a boxplot of the wordLength variable
+ggplot(dataSet, aes(x=1, y=wordLength)) + geom_boxplot()
+
+# Is the data highly dispersed and/or are there any outliers? 
+# - The standard deviation is high (> 1)
+# - The first quartile coincides with the minimum value, still more than 50% of the values are clustered within one standard deviation from the mean. The odd shape of this variable will not cause too much trouble
+# - There do not appear to be any outliers
+```
+
+```{r ex="dispersion_wordLength", type="sct"}
+test_output_contains("sd(dataSet$wordLength)",   incorrect_msg = "Make sure to compute the standard deviation of the wordLength variable!")
+test_output_contains("summary(dataSet$wordLength)",   incorrect_msg = "Make sure to compute a summary of the wordLength variable!")
+test_library_function("ggplot2")
+test_ggplot(1)
+success_msg("Good job!")
+```
+
+
+## 13. Removing outliers
+- Our previous exercises have shown that there are outliers in our dependent `norm_F1` variable. Let's remove them!
+
+```{r ex="outliers", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+```
+
+```{r ex="outliers", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Remove outliers from norm_F1
+
+# Print a summary of the dataSet
+
+```
+
+```{r ex="outliers", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Remove outliers from norm_F1
+dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
+
+# Print a summary of the dataSet
+summary(dataSet)
+```
+
+```{r ex="outliers", type="sct"}
+test_output_contains("summary(dataSet)",   incorrect_msg = "Make sure to remove the outliers from the data and to print the summary!")
+success_msg("Great work!")
+```
+
+## 14. Exploring the relationships between the dependent variable and the independent variables
+- We should perform pairwise plotting and correlation tests to see if the numeric independent variables are linearly related to the dependent variable and how strong their correlations are.
+
+### 14.1 `BirthYear` vs `norm_F1`
+```{r ex="rel_BirthYear", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+# Remove outliers from norm_F1
+dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
+
+```
+
+```{r ex="rel_BirthYear", type="sample-code"}
+# The modified data.frame dataSet is already in your workspace
+
+# Load the ggplot2 package
+
+# Draw a scatter plot of `BirthYear` vs `norm_F1`. Add a regression line (geom_smooth(method="lm")) to help you interpret the plot 
+
+# Calculate the correlation coefficient and the significance of the correlation of `BirthYear` vs `norm_F1`
+
+# Is the relationship linear? Is the correlation strong? Is it significant? You will find the correct answers on the Solutions tab
+```
+
+```{r ex="rel_BirthYear", type="solution"}
+# The modified data.frame dataSet is already in your workspace
+
+# Load the ggplot2 package
+library(ggplot2)
+# Draw a scatter plot of `BirthYear` vs `norm_F1`. Add a regression line (geom_smooth(method="lm")) to help you interpret the plot 
+ggplot(dataSet, aes(x=BirthYear, y=norm_F1)) + geom_point() + geom_smooth(method="lm")
+# Calculate the correlation coefficient and the significance of the correlation of `BirthYear` vs `norm_F1`
+cor.test(dataSet$BirthYear, dataSet$norm_F1)
+# - Is the relationship linear? 
+# No the relationship does not appear to be linear. As a matter of fact, it is hard to see any correlation whatsoever
+# - Is the correlation strong? 
+# With r= -0.0224, the correlation is weak
+# - Is it significant? 
+# Yes, p<0.05
+```
+
+```{r ex="rel_BirthYear", type="sct"}
+test_library_function("ggplot2")
+test_ggplot(1)
+test_output_contains("cor.test(dataSet$BirthYear, dataSet$norm_F1)", "Don't forget to calculate the correlation coefficient and the significance of the correlation!")
+success_msg("Great work!")
+```
+
+### 14.2 `wordLength` vs `norm_F1`
+```{r ex="rel_wordLength", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+# Remove outliers from norm_F1
+dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
+
+```
+
+```{r ex="rel_wordLength", type="sample-code"}
+# The modified data.frame dataSet is already in your workspace
+
+# Load the ggplot2 package
+
+# Draw a scatter plot of `wordLength` vs `norm_F1`. Add a regression line (geom_smooth(method="lm")) to help you interpret the plot 
+
+# Calculate the correlation coefficient and the significance of the correlation of `wordLength` vs `norm_F1`
+
+# Is the relationship linear? Is the correlation strong? Is it significant? You will find the correct answers on the Solutions tab
+```
+
+```{r ex="rel_wordLength", type="solution"}
+# The modified data.frame dataSet is already in your workspace
+
+# Load the ggplot2 package
+library(ggplot2)
+# Draw a scatter plot of `wordLength` vs `norm_F1`. Add a regression line (geom_smooth(method="lm")) to help you interpret the plot 
+ggplot(dataSet, aes(x=wordLength, y=norm_F1)) + geom_point() + geom_smooth(method="lm")
+# Calculate the correlation coefficient and the significance of the correlation of `wordLength` vs `norm_F1`
+cor.test(dataSet$wordLength, dataSet$norm_F1)
+# - Is the relationship linear? 
+# Yes, but the plot appears to suggest some heteroskedasticity (there are far fewer observations on the right-hand side)
+# - Is the correlation strong? 
+# With r= -0.387, the correlation is moderate
+# - Is it significant? 
+# Yes, p<0.05
+```
+
+```{r ex="rel_wordLength", type="sct"}
+test_library_function("ggplot2")
+test_ggplot(1)
+test_output_contains("cor.test(dataSet$wordLength, dataSet$norm_F1)", "Don't forget to calculate the correlation coefficient and the significance of the correlation!")
+success_msg("Great work!")
+```
+
+## 15. Exploring the relationships between the independent variables 
+- At this point we should  perform pairwise `cor.test`, `chisq.test` and `assocstats` tests to search for correlations and associations between our independent variables. 
+- In previous classes, we have done this all by hand, but this takes a horrible lot of time!
+- With some programming, we can automate the tests so we only have to interpret them
+
+```{r ex="corsearch", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+# Remove outliers from norm_F1
+dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
+```
+
+
+```{r ex="corsearch", type="sample-code"}
+# The modified data.frame dataSet is already in your workspace
+
+# Load the vcd package
+
+# Convert dataSet to a normal data.frame with as.data.frame; Don't forget to assign dataSet to itself!
+  
+# Extract column names from the dataSet by calling colnames on the dataSet and store them in the variable `nms`
+  
+# Exclude the column names norm_F1, BirthYear, and wordLength 
+  
+# Use expand.grid(nms, nms) to find all possible combinations between the column names. Store this in this variable `vars`
+  
+  
+# Filter `vars`, so that we don't have the same column name in the Var1 and Var2 columns
+  
+  
+# Next, we can use the multivariate loop function `mapply` to loop over the two columns and perform the tests for us
+# The syntax reads as follows:
+# - The first two arguments are the columns over which we loop
+# - On the values of the two columns, we apply the function in the argument FUN. The `x` argument of this function is the first argument of mapply, the `y` argument is the second argument of mapply
+# - We set SIMPLIFY to FALSE to make sure that we get a list output
+# - The operation will generate double tests (x, y; y, x) but going over these is far more time-efficient than performing every test by hand
+
+mapply(vars$Var1, vars$Var2, SIMPLIFY=FALSE, FUN=function(x, y) {
+  
+  # A function in R can only output one object, so we have to store out two tests in a list
+  list(variables=paste(x, y, sep=" - "),
+       chisq=chisq.test(dataSet[,x], dataSet[,y]),
+       assoc=assocstats(table(dataSet[,x], dataSet[,y]))
+  )
+})
+
+# What do you see? Which variables are strongly (Cramer's V) and significantly (p-value) associated?
+
+```
+
+
+```{r ex="corsearch", type="solution"}
+# The modified data.frame dataSet is already in your workspace
+
+# Load the vcd package
+library(vcd)
+# Convert dataSet to a normal data.frame with as.data.frame; Don't forget to assign dataSet to itself!
+
+dataSet<-as.data.frame(dataSet)
+
+# Extract column names from the dataSet by calling colnames on the dataSet and store them in the variable `nms`
+nms<-colnames(dataSet)
+
+# Exclude the column names norm_F1, BirthYear, and wordLength 
+nms<-nms[!nms %in% c("norm_F1",  "BirthYear" , "wordLength" )]
+# Use expand.grid(nms, nms) to find all possible combinations between the column names. Store this in this variable `vars`
+vars<-expand.grid(nms, nms)
+
+# Filter `vars`, so that we don't have the same column name in the Var1 and Var2 columns
+vars<-vars[vars$Var1!=vars$Var2, ]
+
+# Next, we can use the multivariate loop function `mapply` to loop over the two columns and perform the tests for us
+# The syntax reads as follows:
+# The first two arguments are the columns over which we loop
+# On the values of the two columns, we apply the function in the argument FUN. The `x` argument of this function is the first argument of mapply, the `y` argument is the second argument of mapply
+# We set SIMPLIFY to FALSE to make sure that we get a list output
+# The operation will generate double tests (x, y; y, x) but going over these is far more time-efficient than performing every test by hand
+
+mapply(vars$Var1, vars$Var2, SIMPLIFY=FALSE, FUN=function(x, y) {
+  
+  # A function in R can only output one object, so we have to store out two tests in a list
+  list(variables=paste(x, y, sep=" - "),
+       chisq=chisq.test(dataSet[,x], dataSet[,y]),
+       assoc=assocstats(table(dataSet[,x], dataSet[,y]))
+  )
+})
+
+# What do you see? Which variables are strongly (Cramer's V) and significantly (p-value) associated?
+# - There are quite a few variables that are strongly associated. We will have to check our VIF carefully. Maybe we need to incorporate some interactions too. 
+# - PartnerEthnicity - Reactive
+# - PartnerEthnicity - Style
+# - HighSchoolType - Style
+# - PhillyLiveTime - PartnerEthnicity
+# - HighSchoolType - PartnerEthnicity
+# - Occupation_Group - PartnerEthnicity
+```
+
+```{r ex="corsearch", type="sct"}
+success_msg("Great work!")
+```
+
+## 16. Scouting for interactions: `BirthYear` vs `norm_F1`, by the other variables
+
+```{r ex="interactions_BirthYear", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+# Remove outliers from norm_F1
+dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
+```
+
+
+```{r ex="interactions_BirthYear", type="sample-code"}
+# The modified data.frame dataSet is already in your workspace
+
+# Load the ggplot2 package
+
+# Draw a by-Proactive plot of BirthYear vs norm_F1
+
+# Draw a by-Reactive plot of BirthYear vs norm_F1
+
+# Draw a by-Style plot of BirthYear vs norm_F1
+
+# Draw a by-Sex plot of BirthYear vs norm_F1
+
+# Draw a by-PartnerEthnicity plot of BirthYear vs norm_F1
+
+# Draw a by-PhillyLiveTime plot of BirthYear vs norm_F1
+
+# Draw a by-HighSchoolType plot of BirthYear vs norm_F1
+
+# Draw a by-Occupation_Group plot of BirthYear vs norm_F1
+
+# Do you spot any interactions (intersecting/non-parallel lines)? Recall that you should not specify interaction terms when you don't have data on each combination of the two terms. For a continous predictor like BirthYear, we can relax this assumption a little bit to cover that you have data for each "condition" for most of the values of the continuum
+
+```
+
+
+```{r ex="interactions_BirthYear", type="solution"}
+# The modified data.frame dataSet is already in your workspace
+
+# Load the ggplot2 package
+library(ggplot2)
+
+# Draw a by-Proactive plot of BirthYear vs norm_F1
+ggplot(dataSet, aes(x=BirthYear, y=norm_F1, group=Proactive, fill=Proactive, color=Proactive)) + geom_point() + geom_smooth(method="lm")
+# Draw a by-Reactive plot of BirthYear vs norm_F1
+ggplot(dataSet, aes(x=BirthYear, y=norm_F1, group=Reactive, fill=Reactive, color=Reactive)) + geom_point() + geom_smooth(method="lm")
+# Draw a by-Style plot of BirthYear vs norm_F1
+ggplot(dataSet, aes(x=BirthYear, y=norm_F1, group=Style, fill=Style, color=Style)) + geom_point() + geom_smooth(method="lm")
+# Draw a by-Sex plot of BirthYear vs norm_F1
+ggplot(dataSet, aes(x=BirthYear, y=norm_F1, group=Sex, fill=Sex, color=Sex)) + geom_point() + geom_smooth(method="lm")
+# Draw a by-PartnerEthnicity plot of BirthYear vs norm_F1
+ggplot(dataSet, aes(x=BirthYear, y=norm_F1, group=PartnerEthnicity, fill=PartnerEthnicity, color=PartnerEthnicity)) + geom_point() + geom_smooth(method="lm")
+# Draw a by-PhillyLiveTime plot of BirthYear vs norm_F1
+ggplot(dataSet, aes(x=BirthYear, y=norm_F1, group=PhillyLiveTime, fill=PhillyLiveTime, color=PhillyLiveTime)) + geom_point() + geom_smooth(method="lm")
+# Draw a by-HighSchoolType plot of BirthYear vs norm_F1
+ggplot(dataSet, aes(x=BirthYear, y=norm_F1, group=HighSchoolType, fill=HighSchoolType, color=HighSchoolType)) + geom_point() + geom_smooth(method="lm")
+# Draw a by-Occupation_Group plot of BirthYear vs norm_F1
+ggplot(dataSet, aes(x=BirthYear, y=norm_F1, group=Occupation_Group, fill=Occupation_Group, color=Occupation_Group)) + geom_point() + geom_smooth(method="lm")
+
+# Do you spot any interactions (intersecting/non-parallel lines)? 
+# - We should be able to evaluate the following interactions (others do not interact or there's not enough data):
+#  - Reactive * BirthYear
+
+```
+
+```{r ex="interactions_BirthYear", type="sct"}
+test_library_function("library(ggplot2)", "Don't forget to load the ggplot2 package!")
+test_ggplot(1)
+test_ggplot(2)
+test_ggplot(3)
+test_ggplot(4)
+test_ggplot(5)
+test_ggplot(6)
+test_ggplot(7)
+test_ggplot(8)
+success_msg("Great work!")
+```
+
+## 17. Scouting for interactions: `wordLength` vs `norm_F1`, by the other variables
+
+```{r ex="interactions_wordLength", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+# Remove outliers from norm_F1
+dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
+```
+
+
+```{r ex="interactions_wordLength", type="sample-code"}
+# The modified data.frame dataSet is already in your workspace
+
+# Load the ggplot2 package
+
+# Draw a by-Proactive plot of wordLength vs norm_F1
+
+# Draw a by-Reactive plot of wordLength vs norm_F1
+
+# Draw a by-Style plot of wordLength vs norm_F1
+
+# Draw a by-Sex plot of wordLength vs norm_F1
+
+# Draw a by-PartnerEthnicity plot of wordLength vs norm_F1
+
+# Draw a by-PhillyLiveTime plot of wordLength vs norm_F1
+
+# Draw a by-HighSchoolType plot of wordLength vs norm_F1
+
+# Draw a by-Occupation_Group plot of wordLength vs norm_F1
+
+# Do you spot any interactions (intersecting/non-parallel lines)? Recall that you should not specify interaction terms when you don't have data on each combination of the two terms. For a continous predictor like wordLength, we can relax this assumption a little bit to cover that you have data for each "condition" for most of the values of the continuum
+
+```
+
+
+```{r ex="interactions_wordLength",  type="solution"}
+# The modified data.frame dataSet is already in your workspace
+
+# Load the ggplot2 package
+library(ggplot2)
+
+# Draw a by-Proactive plot of wordLength vs norm_F1
+ggplot(dataSet, aes(x=wordLength, y=norm_F1, group=Proactive, fill=Proactive, color=Proactive)) + geom_point() + geom_smooth(method="lm")
+# Draw a by-Reactive plot of wordLength vs norm_F1
+ggplot(dataSet, aes(x=wordLength, y=norm_F1, group=Reactive, fill=Reactive, color=Reactive)) + geom_point() + geom_smooth(method="lm")
+# Draw a by-Style plot of wordLength vs norm_F1
+ggplot(dataSet, aes(x=wordLength, y=norm_F1, group=Style, fill=Style, color=Style)) + geom_point() + geom_smooth(method="lm")
+# Draw a by-Sex plot of wordLength vs norm_F1
+ggplot(dataSet, aes(x=wordLength, y=norm_F1, group=Sex, fill=Sex, color=Sex)) + geom_point() + geom_smooth(method="lm")
+# Draw a by-PartnerEthnicity plot of wordLength vs norm_F1
+ggplot(dataSet, aes(x=wordLength, y=norm_F1, group=PartnerEthnicity, fill=PartnerEthnicity, color=PartnerEthnicity)) + geom_point() + geom_smooth(method="lm")
+# Draw a by-PhillyLiveTime plot of wordLength vs norm_F1
+ggplot(dataSet, aes(x=wordLength, y=norm_F1, group=PhillyLiveTime, fill=PhillyLiveTime, color=PhillyLiveTime)) + geom_point() + geom_smooth(method="lm")
+# Draw a by-HighSchoolType plot of wordLength vs norm_F1
+ggplot(dataSet, aes(x=wordLength, y=norm_F1, group=HighSchoolType, fill=HighSchoolType, color=HighSchoolType)) + geom_point() + geom_smooth(method="lm")
+# Draw a by-Occupation_Group plot of wordLength vs norm_F1
+ggplot(dataSet, aes(x=wordLength, y=norm_F1, group=Occupation_Group, fill=Occupation_Group, color=Occupation_Group)) + geom_point() + geom_smooth(method="lm")
+
+# Do you spot any interactions (intersecting/non-parallel lines)? 
+# - We should be able to evaluate the following interactions (others do not interact or there's not enough data):
+#  - Reactive * wordLength
+#  - Proactive * wordLength
+#  - Sex * wordLength
+#  - PhillyLiveTime * wordLength
+#  - HighSchoolType * wordLength
+#  - Occupation_Group * wordLength 
+```
+
+```{r ex="interactions_wordLength", type="sct"}
+test_library_function("library(ggplot2)", "Don't forget to load the ggplot2 package!")
+test_ggplot(1)
+test_ggplot(2)
+test_ggplot(3)
+test_ggplot(4)
+test_ggplot(5)
+test_ggplot(6)
+test_ggplot(7)
+test_ggplot(8)
+success_msg("Great work!")
+```
+
+## 18. Scouting for interactions: `Proactive` vs `norm_F1`, by the other variables
+
+```{r ex="interactions_Proactive", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+# Remove outliers from norm_F1
+dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
+```
+
+
+```{r ex="interactions_Proactive", type="sample-code"}
+# The modified data.frame dataSet is already in your workspace
+
+# Load the ggplot2 package
+
+# Draw a by-Reactive plot of Proactive vs norm_F1. Use facet_wrap
+
+# Draw a by-Style plot of Proactive vs norm_F1. Use facet_wrap
+
+# Draw a by-Sex plot of Proactive vs norm_F1. Use facet_wrap
+
+# Draw a by-PartnerEthnicity plot of Proactive vs norm_F1. Use facet_wrap
+
+# Draw a by-PhillyLiveTime plot of Proactive vs norm_F1. Use facet_wrap
+
+# Draw a by-HighSchoolType plot of Proactive vs norm_F1. Use facet_wrap
+
+# Draw a by-Occupation_Group plot of Proactive vs norm_F1. Use facet_wrap
+
+# Do you spot any interactions (intersecting/non-parallel lines)? Recall that you should not specify interaction terms when you don't have data on each combination of the two terms. 
+
+```
+
+
+```{r ex="interactions_Proactive",  type="solution"}
+# The modified data.frame dataSet is already in your workspace
+
+# Load the ggplot2 package
+library(ggplot2)
+
+# Draw a by-Reactive plot of Proactive vs norm_F1. Use facet_wrap
+ggplot(dataSet, aes(x=Proactive, y=norm_F1)) + geom_boxplot() + facet_wrap(~Reactive)
+# Draw a by-Style plot of Proactive vs norm_F1. Use facet_wrap
+ggplot(dataSet, aes(x=Proactive, y=norm_F1)) + geom_boxplot() + facet_wrap(~Style)
+# Draw a by-Sex plot of Proactive vs norm_F1. Use facet_wrap
+ggplot(dataSet, aes(x=Proactive, y=norm_F1)) + geom_boxplot() + facet_wrap(~Sex)
+# Draw a by-PartnerEthnicity plot of Proactive vs norm_F1. Use facet_wrap
+ggplot(dataSet, aes(x=Proactive, y=norm_F1)) + geom_boxplot() + facet_wrap(~PartnerEthnicity)
+# Draw a by-PhillyLiveTime plot of Proactive vs norm_F1. Use facet_wrap
+ggplot(dataSet, aes(x=Proactive, y=norm_F1)) + geom_boxplot() + facet_wrap(~PhillyLiveTime)
+# Draw a by-HighSchoolType plot of Proactive vs norm_F1. Use facet_wrap
+ggplot(dataSet, aes(x=Proactive, y=norm_F1)) + geom_boxplot() + facet_wrap(~HighSchoolType)
+# Draw a by-Occupation_Group plot of Proactive vs norm_F1. Use facet_wrap
+ggplot(dataSet, aes(x=Proactive, y=norm_F1)) + geom_boxplot() + facet_wrap(~Occupation_Group)
+
+#We should be able to evaluate the following interactions (others do not interact or there's not enough data):
+# - The following interactions seem to be in place:
+#  - Reactive * Proactive
+#  - Sex * Proactive
+#  - HighSchoolType * Proactive
+```
+
+```{r ex="interactions_Proactive", type="sct"}
+test_library_function("library(ggplot2)", "Don't forget to load the ggplot2 package!")
+test_ggplot(1)
+test_ggplot(2)
+test_ggplot(3)
+test_ggplot(4)
+test_ggplot(5)
+test_ggplot(6)
+test_ggplot(7)
+
+success_msg("Great work!")
+```
+
+
+## 19. Scouting for interactions: `Reactive` vs `norm_F1`, by the other variables
+
+```{r ex="interactions_Reactive", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+# Remove outliers from norm_F1
+dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
+```
+
+
+```{r ex="interactions_Reactive", type="sample-code"}
+# The modified data.frame dataSet is already in your workspace
+
+# Load the ggplot2 package
+
+# Draw a by-Style plot of Reactive vs norm_F1. Use facet_wrap
+
+# Draw a by-Sex plot of Reactive vs norm_F1. Use facet_wrap
+
+# Draw a by-PartnerEthnicity plot of Reactive vs norm_F1. Use facet_wrap
+
+# Draw a by-PhillyLiveTime plot of Reactive vs norm_F1. Use facet_wrap
+
+# Draw a by-HighSchoolType plot of Reactive vs norm_F1. Use facet_wrap
+
+# Draw a by-Occupation_Group plot of Reactive vs norm_F1. Use facet_wrap
+
+# Do you spot any interactions (intersecting/non-parallel lines)? Recall that you should not specify interaction terms when you don't have data on each combination of the two terms. 
+
+```
+
+
+```{r ex="interactions_Reactive",  type="solution"}
+# The modified data.frame dataSet is already in your workspace
+
+# Load the ggplot2 package
+library(ggplot2)
+
+# Draw a by-Style plot of Reactive vs norm_F1. Use facet_wrap
+ggplot(dataSet, aes(x=Reactive, y=norm_F1)) + geom_boxplot() + facet_wrap(~Style)
+# Draw a by-Sex plot of Reactive vs norm_F1. Use facet_wrap
+ggplot(dataSet, aes(x=Reactive, y=norm_F1)) + geom_boxplot() + facet_wrap(~Sex)
+# Draw a by-PartnerEthnicity plot of Reactive vs norm_F1. Use facet_wrap
+ggplot(dataSet, aes(x=Reactive, y=norm_F1)) + geom_boxplot() + facet_wrap(~PartnerEthnicity)
+# Draw a by-PhillyLiveTime plot of Reactive vs norm_F1. Use facet_wrap
+ggplot(dataSet, aes(x=Reactive, y=norm_F1)) + geom_boxplot() + facet_wrap(~PhillyLiveTime)
+# Draw a by-HighSchoolType plot of Reactive vs norm_F1. Use facet_wrap
+ggplot(dataSet, aes(x=Reactive, y=norm_F1)) + geom_boxplot() + facet_wrap(~HighSchoolType)
+# Draw a by-Occupation_Group plot of Reactive vs norm_F1. Use facet_wrap
+ggplot(dataSet, aes(x=Reactive, y=norm_F1)) + geom_boxplot() + facet_wrap(~Occupation_Group)
+
+# Do you spot any interactions (intersecting/non-parallel lines)? 
+# We should be able to evaluate the following interactions (others do not interact or there's not enough data):
+# - Reactive * Sex
+# - Reactive * HighSchoolType
+
+```
+
+```{r ex="interactions_Reactive", type="sct"}
+test_library_function("library(ggplot2)", "Don't forget to load the ggplot2 package!")
+test_ggplot(1)
+test_ggplot(2)
+test_ggplot(3)
+test_ggplot(4)
+test_ggplot(5)
+test_ggplot(6)
+test_ggplot(7)
+
+success_msg("Great work!")
+```
+
+## 20. Scouting for interactions: `Style` vs `norm_F1`, by the other variables
+
+```{r ex="interactions_Style", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+# Remove outliers from norm_F1
+dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
+```
+
+
+```{r ex="interactions_Style", type="sample-code"}
+# The modified data.frame dataSet is already in your workspace
+
+# Load the ggplot2 package
+
+# Draw a by-Sex plot of Style vs norm_F1. Use facet_wrap
+
+# Draw a by-PartnerEthnicity plot of Style vs norm_F1. Use facet_wrap
+
+# Draw a by-PhillyLiveTime plot of Style vs norm_F1. Use facet_wrap
+
+# Draw a by-HighSchoolType plot of Style vs norm_F1. Use facet_wrap
+
+# Draw a by-Occupation_Group plot of Style vs norm_F1. Use facet_wrap
+
+# Do you spot any interactions? Recall that you should not specify interaction terms when you don't have data on each combination of the two terms. 
+
+```
+
+
+```{r ex="interactions_Style",  type="solution"}
+# The modified data.frame dataSet is already in your workspace
+
+# Load the ggplot2 package
+library(ggplot2)
+
+# Draw a by-Sex plot of Style vs norm_F1. Use facet_wrap
+ggplot(dataSet, aes(x=Style, y=norm_F1)) + geom_boxplot() + facet_wrap(~Sex)
+# Draw a by-PartnerEthnicity plot of Style vs norm_F1. Use facet_wrap
+ggplot(dataSet, aes(x=Style, y=norm_F1)) + geom_boxplot() + facet_wrap(~PartnerEthnicity)
+# Draw a by-PhillyLiveTime plot of Style vs norm_F1. Use facet_wrap
+ggplot(dataSet, aes(x=Style, y=norm_F1)) + geom_boxplot() + facet_wrap(~PhillyLiveTime)
+# Draw a by-HighSchoolType plot of Style vs norm_F1. Use facet_wrap
+ggplot(dataSet, aes(x=Style, y=norm_F1)) + geom_boxplot() + facet_wrap(~HighSchoolType)
+# Draw a by-Occupation_Group plot of Style vs norm_F1. Use facet_wrap
+ggplot(dataSet, aes(x=Style, y=norm_F1)) + geom_boxplot() + facet_wrap(~Occupation_Group)
+
+# Do you spot any interactions? 
+# No interactions seem to be in place
+
+```
+
+```{r ex="interactions_Style", type="sct"}
+test_library_function("library(ggplot2)", "Don't forget to load the ggplot2 package!")
+test_ggplot(1)
+test_ggplot(2)
+test_ggplot(3)
+test_ggplot(4)
+test_ggplot(5)
+
+
+success_msg("Great work!")
+```
+
+
+## 21. Scouting for interactions: `Sex` vs `norm_F1`, by the other variables
+
+```{r ex="interactions_Sex", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+# Remove outliers from norm_F1
+dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
+```
+
+
+```{r ex="interactions_Sex", type="sample-code"}
+# The modified data.frame dataSet is already in your workspace
+
+# Load the ggplot2 package
+
+# Draw a by-PartnerEthnicity plot of Sex vs norm_F1. Use facet_wrap
+
+# Draw a by-PhillyLiveTime plot of Sex vs norm_F1. Use facet_wrap
+
+# Draw a by-HighSchoolType plot of Sex vs norm_F1. Use facet_wrap
+
+# Draw a by-Occupation_Group plot of Sex vs norm_F1. Use facet_wrap
+
+# Do you spot any interactions (intersecting/non-parallel lines)? Recall that you should not specify interaction terms when you don't have data on each combination of the two terms. 
+
+```
+
+
+```{r ex="interactions_Sex",  type="solution"}
+# The modified data.frame dataSet is already in your workspace
+
+# Load the ggplot2 package
+library(ggplot2)
+
+# Draw a by-PartnerEthnicity plot of Sex vs norm_F1. Use facet_wrap
+ggplot(dataSet, aes(x=Sex, y=norm_F1)) + geom_boxplot() + facet_wrap(~PartnerEthnicity)
+# Draw a by-PhillyLiveTime plot of Sex vs norm_F1. Use facet_wrap
+ggplot(dataSet, aes(x=Sex, y=norm_F1)) + geom_boxplot() + facet_wrap(~PhillyLiveTime)
+# Draw a by-HighSchoolType plot of Sex vs norm_F1. Use facet_wrap
+ggplot(dataSet, aes(x=Sex, y=norm_F1)) + geom_boxplot() + facet_wrap(~HighSchoolType)
+# Draw a by-Occupation_Group plot of Sex vs norm_F1. Use facet_wrap
+ggplot(dataSet, aes(x=Sex, y=norm_F1)) + geom_boxplot() + facet_wrap(~Occupation_Group)
+
+# Do you spot any interactions (intersecting/non-parallel lines)? 
+# No interactions seem to be in place
+
+```
+
+```{r ex="interactions_Sex", type="sct"}
+test_library_function("library(ggplot2)", "Don't forget to load the ggplot2 package!")
+test_ggplot(1)
+test_ggplot(2)
+test_ggplot(3)
+test_ggplot(4)
+
+
+
+success_msg("Great work!")
+```
+
+## 22. Scouting for interactions: `PartnerEthnicity` vs `norm_F1`, by the other variables
+
+```{r ex="interactions_PartnerEthnicity", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+# Remove outliers from norm_F1
+dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
+```
+
+
+```{r ex="interactions_PartnerEthnicity", type="sample-code"}
+# The modified data.frame dataSet is already in your workspace
+
+# Load the ggplot2 package
+
+# Draw a by-PhillyLiveTime plot of PartnerEthnicity vs norm_F1. Use facet_wrap
+
+# Draw a by-HighSchoolType plot of PartnerEthnicity vs norm_F1. Use facet_wrap
+
+# Draw a by-Occupation_Group plot of PartnerEthnicity vs norm_F1. Use facet_wrap
+
+# Do you spot any interactions (intersecting/non-parallel lines)? Recall that you should not specify interaction terms when you don't have data on each combination of the two terms. 
+
+```
+
+
+```{r ex="interactions_PartnerEthnicity", type="solution"}
+# The modified data.frame dataSet is already in your workspace
+
+# Load the ggplot2 package
+library(ggplot2)
+
+# Draw a by-PhillyLiveTime plot of PartnerEthnicity vs norm_F1. Use facet_wrap
+ggplot(dataSet, aes(x=PartnerEthnicity, y=norm_F1)) + geom_boxplot() + facet_wrap(~PhillyLiveTime)
+# Draw a by-HighSchoolType plot of PartnerEthnicity vs norm_F1. Use facet_wrap
+ggplot(dataSet, aes(x=PartnerEthnicity, y=norm_F1)) + geom_boxplot() + facet_wrap(~HighSchoolType)
+# Draw a by-Occupation_Group plot of PartnerEthnicity vs norm_F1. Use facet_wrap
+ggplot(dataSet, aes(x=PartnerEthnicity, y=norm_F1)) + geom_boxplot() + facet_wrap(~Occupation_Group)
+
+# Do you spot any interactions (intersecting/non-parallel lines)? 
+# No interactions seem to be in place
+
+```
+
+```{r ex="interactions_PartnerEthnicity", type="sct"}
+test_library_function("library(ggplot2)", "Don't forget to load the ggplot2 package!")
+test_ggplot(1)
+test_ggplot(2)
+test_ggplot(3)
+
+
+success_msg("Great work!")
+```
+
+
+## 23. Scouting for interactions: `PhillyLiveTime` vs `norm_F1`, by the other variables
+
+```{r ex="interactions_PhillyLiveTime", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+# Remove outliers from norm_F1
+dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
+```
+
+
+```{r ex="interactions_PhillyLiveTime", type="sample-code"}
+# The modified data.frame dataSet is already in your workspace
+
+# Load the ggplot2 package
+
+# Draw a by-HighSchoolType plot of PhillyLiveTime vs norm_F1. Use facet_wrap
+
+# Draw a by-Occupation_Group plot of PhillyLiveTime vs norm_F1. Use facet_wrap
+
+# Do you spot any interactions (intersecting/non-parallel lines)? Recall that you should not specify interaction terms when you don't have data on each combination of the two terms. 
+
+```
+
+
+```{r ex="interactions_PhillyLiveTime",  type="solution"}
+# The modified data.frame dataSet is already in your workspace
+
+# Load the ggplot2 package
+library(ggplot2)
+
+# Draw a by-HighSchoolType plot of PhillyLiveTime vs norm_F1. Use facet_wrap
+ggplot(dataSet, aes(x=PhillyLiveTime, y=norm_F1)) + geom_boxplot() + facet_wrap(~HighSchoolType)
+# Draw a by-Occupation_Group plot of PhillyLiveTime vs norm_F1. Use facet_wrap
+ggplot(dataSet, aes(x=PhillyLiveTime, y=norm_F1)) + geom_boxplot() + facet_wrap(~Occupation_Group)
+
+# Do you spot any interactions (intersecting/non-parallel lines)? 
+# No interactions seem to be in place
+
+```
+
+```{r ex="interactions_PhillyLiveTime", type="sct"}
+test_library_function("library(ggplot2)", "Don't forget to load the ggplot2 package!")
+test_ggplot(1)
+test_ggplot(2)
+test_ggplot(3)
+
+
+success_msg("Great work!")
+```
+
+
+## 24. Scouting for interactions: `HighSchoolType` vs `norm_F1`, by the other variables
+
+```{r ex="interactions_HighSchoolType", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+# Remove outliers from norm_F1
+dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
+```
+
+
+```{r ex="interactions_HighSchoolType",  type="sample-code"}
+# The modified data.frame dataSet is already in your workspace
+
+# Load the ggplot2 package
+
+# Draw a by-Occupation_Group plot of HighSchoolType vs norm_F1. Use facet_wrap
+
+# Do you spot any interactions (intersecting/non-parallel lines)? Recall that you should not specify interaction terms when you don't have data on each combination of the two terms. 
+
+```
+
+
+```{r ex="interactions_HighSchoolType", type="solution"}
+# The modified data.frame dataSet is already in your workspace
+
+# Load the ggplot2 package
+library(ggplot2)
+
+# Draw a by-Occupation_Group plot of HighSchoolType vs norm_F1. Use facet_wrap
+ggplot(dataSet, aes(x=HighSchoolType, y=norm_F1)) + geom_boxplot() + facet_wrap(~Occupation_Group)
+
+# Do you spot any interactions (intersecting/non-parallel lines)? 
+# No interactions seem to be in place
+
+```
+
+```{r ex="interactions_HighSchoolType", type="sct"}
+test_library_function("library(ggplot2)", "Don't forget to load the ggplot2 package!")
+test_ggplot(1)
+
+
+success_msg("Great work!")
+```
+
+## 25. Deciding on our contrasts
+- Our work here is corpus-based, so `sum` constrasts make more sense than `treatment` contrast. Let's go ahead and specify sum contrasts.
+```{r ex="contrasts", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+# Remove outliers from norm_F1
+dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
+
+```
+
+```{r ex="contrasts", type="sample-code"}
+# The modified data.frame dataSet is already in your workspace
+
+# Load the car package
+
+# Set global Sum contrasts
+
+```
+
+```{r ex="contrasts", type="solution"}
+# The modified data.frame dataSet is already in your workspace
+
+# Load the car package
+library(car)
+
+# Set global Sum contrasts
+options(contr = c("contr.Sum","contr.Poly"))
+
+```
+
+```{r ex="contrasts", type="sct"}
+success_msg("Great work!")
+```
+
+
+## 26. Fitting an initial model to validate the assumptions
+- Recall that these are our assumptions:
+- There are no outliers/overly influential observations
+- The relationships are linear
+- There is no multicollinearity
+- The observations are independent from one another (there is no `autocorrelation`)
+- The residuals are not autocorrelated
+- The variability of the residuals does not increase or decrease with the explanatory variables or the response (i.e., there is no `heteroskedasticity`)
+- The residuals follow the normal distribution. This is less important if the sample size is large 
+
+
+### 26.1 There is no multicollinearity
+- With so many interactions in our model and given that there were quite a few strongly correlated variables, the first thing we should check for is multicollinearity 
+
+```{r ex="multicollinearity", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+# Remove outliers from norm_F1
+dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
+
+```
+
+```{r ex="multicollinearity", type="sample-code"}
+# The modified data.frame dataSet is already in your workspace
+
+# Load the car package
+
+# Let's define a first model 'mod'. The model regresses norm_F1 on Proactive + Reactive + Style + BirthYear + Sex + PartnerEthnicity + PhillyLiveTime + HighSchoolType + Occupation_Group +wordLength. 
+# It also includes the interactions we identified earlier:  Reactive * BirthYear  + Reactive * wordLength + Proactive * wordLength + Sex * wordLength  + PartnerEthnicity * wordLength + PhillyLiveTime * wordLength +  HighSchoolType * wordLength +Occupation_Group * wordLength + Reactive * Proactive + Sex * Proactive   + HighSchoolType * Proactive + Reactive * Sex + Reactive * HighSchoolType
+
+# Compute the variance inflation factors for our model (vif)
+
+# What do you see? Is multicollinearity an issue here? You will find the correct answer on the Solution tab
+
+```
+
+```{r ex="multicollinearity", type="solution"}
+# The modified data.frame dataSet is already in your workspace
+
+# Load the car package
+library(car)
+
+# Let's define a first model 'mod'. The model regresses norm_F1 on Proactive + Reactive + Style + BirthYear + Sex + PartnerEthnicity + PhillyLiveTime + HighSchoolType + Occupation_Group +wordLength. 
+# It also includes the interactions we identified earlier:  Reactive * BirthYear  + Reactive * wordLength + Proactive * wordLength + Sex * wordLength  + PartnerEthnicity * wordLength + PhillyLiveTime * wordLength +  HighSchoolType * wordLength +Occupation_Group * wordLength + Reactive * Proactive + Sex * Proactive   + HighSchoolType * Proactive + Reactive * Sex + Reactive * HighSchoolType
+mod<-lm(norm_F1 ~ Proactive + Reactive + Style + BirthYear + Sex + PartnerEthnicity + PhillyLiveTime + HighSchoolType + Occupation_Group +wordLength + Reactive * BirthYear  + Reactive * wordLength + Proactive * wordLength + Sex * wordLength  + PartnerEthnicity * wordLength + PhillyLiveTime * wordLength +  HighSchoolType * wordLength +Occupation_Group * wordLength + Reactive * Proactive + Sex * Proactive   + HighSchoolType * Proactive + Reactive * Sex + Reactive * HighSchoolType, dataSet )
+
+# Compute the variance inflation factors for our model 'mod' (vif)
+vif(mod)
+
+# - What do you see? Is multicollinearity an issue here?
+# There's massive multicollinearity (GVIF^(1/(2*Df))> 5), which affects:
+# - Proactive
+# - Reactive
+# - wordLength
+# - Reactive:BirthYear  
+# - Proactive:Reactive
+# - This suggests that we cannot evaluate the wordLength, Reactive, and Proactive interactions in one model. 
+# At this point, we should formulate candidate models that include one series of interactions each. Then, we should use our subject matter knowledge and the AIC values of the model to see which model finds the most support in the data
+# Here, I have done this for you. It turns out that a model that includes the Proactive interactions (but not the wordLength and Reactive interactions) provides a better fit. We will use this model to test the assumptions further.
+```
+
+```{r ex="multicollinearity", type="sct"}
+test_output_contains("vif(mod)", "Don't forget to compute the variance inflation factors!")
+success_msg("Great work!")
+test_library_function("car")
+
+```
+
+### 26.2 There are no overly influential observations
+```{r ex="influence", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+# Remove outliers from norm_F1
+dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
+```
+
+```{r ex="influence", type="sample-code"}
+# The modified data.frame dataSet is already in your workspace
+
+# Define a new model, which you store in 'mod'. The model should regress norm_F1 on Proactive + Reactive + Style + BirthYear + Sex + PartnerEthnicity + PhillyLiveTime + HighSchoolType + Occupation_Group +wordLength  
+# It should include the following interactions: Reactive * Proactive + Sex * Proactive   + HighSchoolType * Proactive
+
+# Load the car package
+
+# Draw an influencePlot of "mod". Store the output data.frame in the variable "outliers"
+
+# Print "outliers"
+
+# Extract the indices of the observations should be excluded from the variable 'outliers'. Store them in the variable 'indices'
+
+# Print indices
+
+# Remove the outliers
+
+```
+
+```{r ex="influence", type="solution"}
+# The modified data.frame dataSet is already in your workspace
+
+# Load the car package
+library(car)
+# Define a new model, which you store in 'mod'. The model should regress norm_F1 on Proactive + Reactive + Style + BirthYear + Sex + PartnerEthnicity + PhillyLiveTime + HighSchoolType + Occupation_Group +wordLength 
+# It should include the following interactions: Reactive * Proactive + Sex * Proactive   + HighSchoolType * Proactive
+mod<-lm(norm_F1 ~ Proactive + Reactive + Style + BirthYear + Sex + PartnerEthnicity + PhillyLiveTime + HighSchoolType + Occupation_Group +wordLength +  Reactive * Proactive + Sex * Proactive   + HighSchoolType * Proactive, dataSet )
+# Draw an influencePlot of "mod". Store the output data.frame in the variable "outliers"
+outliers<-influencePlot(mod)
+# Print "outliers"
+outliers
+# Extract the indices of the observations should be excluded from the variable 'outliers'. Store them in the variable 'indices'
+indices<-as.numeric(rownames(outliers))
+# Print indices
+indices
+# Remove the outliers
+dataSet <- dataSet[-indices,]
+```
+
+```{r ex="influence", type="sct"}
+test_library_function("car")
+test_object("outliers")
+test_object("indices")
+success_msg("Great work!")
+```
+
+
+### 26.3 There is no heteroskedasticity 
+
+```{r ex="heteroskedasticity", type="sample-code"}
+library(readr)
+
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+# Remove outliers from norm_F1
+dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
+
+mod<-lm(norm_F1 ~ Proactive + Reactive + Style + BirthYear + Sex + PartnerEthnicity + PhillyLiveTime + HighSchoolType + Occupation_Group +wordLength +  Reactive * Proactive + Sex * Proactive + HighSchoolType * Proactive, data=dataSet)
+
+# Load the car package
+
+# Draw a Residuals vs. Fitted plot of the model (plot(mod, which=1))
+
+# Compute an ncvTest for our model
+
+# What do you see? Does our model suffer from heteroskedasticity? 
+
+# Extract the power to which we have to raise norm_F1 to fix the heteroskedasticity and store it in the variable "power"
+
+# Print power
+
+# Raise norm_F1 to the power of 'power' 
+
+# Recompute the model
+
+# Re-run the ncvTest
+
+```
+
+```{r ex="heteroskedasticity", type="solution"}
+library(readr)
+
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+# Remove outliers from norm_F1
+dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
+
+mod<-lm(norm_F1 ~ Proactive + Reactive + Style + BirthYear + Sex + PartnerEthnicity + PhillyLiveTime + HighSchoolType + Occupation_Group +wordLength +  Reactive * Proactive + Sex * Proactive + HighSchoolType * Proactive, data=dataSet)
+
+# Load the car package
+library(car)
+
+# Draw a Residuals vs. Fitted plot of the model (plot(mod, which=1))
+plot(mod, which=1)
+# Compute an ncvTest for our model
+ncvTest(mod)
+
+# - What do you see? Does our model suffer from heteroskedasticity? 
+# Yes, the p-value is lower than 0.05 and there's a clear funnel-shape pattern in the residuals vs. fitted plot
+
+# Compute a boxCox plot and assign it to the variable 'box'
+box<-boxCox(mod)
+
+# Extract the exponent to which we have to raise norm_F1 to fix the heteroskedasticity and store it in the variable "exponent"
+exponent<-box$x[which.max(box$y)]
+
+# Print "exponent"
+exponent
+
+# Raise norm_F1 to the power of 'exponent' 
+dataSet$norm_F1<-dataSet$norm_F1^exponent
+
+# Recompute the model
+mod<-lm(norm_F1 ~ Proactive + Reactive + Style + BirthYear + Sex + PartnerEthnicity + PhillyLiveTime + HighSchoolType + Occupation_Group +wordLength +  Reactive * Proactive + Sex * Proactive   + HighSchoolType * Proactive, dataSet)
+
+# Re-run the ncvTest
+ncvTest(mod)
+```
+
+```{r ex="heteroskedasticity", type="sct"}
+test_output_contains("ncvTest(mod)", "Don't forget to compute the ncvTest!")
+test_library_function("car")
+test_output_contains("box$x[which.max(box$y)]", "Don't forget to print the exponent!")
+test_output_contains("ncvTest(mod)", "Don't forget to perform the ncvTest again!")
+test_object("exponent")
+test_object("mod")
+
+success_msg("Great work!")
+```
+
+
+### 26.5 The relationships are linear
+- To find out if the relationships are linear, we have to simplify our model a little bit as the `crPlot` in the `car` package does not work when there's interactions. 
+
+```{r ex="linearity", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+# Remove outliers from norm_F1
+dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
+# Remove outliers from Familiarity
+indices<-c(1983, 2088)
+dataSet<- dataSet[-indices, ]
+dataSet$norm_F1<-dataSet$norm_F1^0.6666667
+
+```
+
+```{r ex="linearity", type="sample-code"}
+# The modified data.frame dataSet is already in your workspace
+
+# Simplify 'mod' so it regresses norm_F1 on Proactive + Reactive + Style + Sex + PartnerEthnicity + PhillyLiveTime + HighSchoolType + Occupation_Group +wordLength + BirthYear 
+
+# Load the car package
+
+# Draw a crPlot of wordLength
+
+# Draw a crPlot of BirthYear
+
+# Which one of the variables do not have a strictly linear relationship to the norm_F1 variable? You will find the correct answer on the Solution tab
+
+```
+
+```{r ex="linearity", type="solution"}
+# The modified data.frame dataSet is already in your workspace
+# Simplify 'mod' so it regresses norm_F1 on Proactive + Reactive + Style + Sex + PartnerEthnicity + PhillyLiveTime + HighSchoolType + Occupation_Group +wordLength + BirthYear 
+mod<-lm(norm_F1 ~ Proactive + Reactive + Style + Sex + PartnerEthnicity + PhillyLiveTime + HighSchoolType + Occupation_Group +wordLength + BirthYear, dataSet)
+# Load the car package
+library(car)
+# Draw a crPlot of wordLength
+crPlot(mod, "wordLength")
+# Draw a crPlot of BirthYear
+crPlot(mod, "BirthYear")
+
+# - Which one of the variables do not have a strictly linear relationship to the norm_F1 variable? 
+# BirthYear does not seem to have any strong relationship to norm_F1. But, the green curve follows the red line closely so there's no non-linearity here
+# wordLength has a non-linear effect. A log-transformation will reduce the amplitude of the wiggliness, but adding a polynomial term would probably be more adequate here
+```
+
+```{r ex="linearity", type="sct"}
+test_library_function("car")
+success_msg("I can't test your plots, but I hope you did everything as you should!")
+```
+
+
+
+### 26.6 The residuals and the observations are not autocorrelated
+
+```{r ex="autocorrelation", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+# Remove outliers from norm_F1
+dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
+# Remove outliers from Familiarity
+indices<-c(1983, 2088)
+dataSet<- dataSet[-indices, ]
+dataSet$norm_F1<-dataSet$norm_F1^0.6666667
+# Hack, durbin-watson takes way too long to compute
+durbinWatsonTest<-function(mod) {
+ read_rds(gzcon(url("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_durbinWatson.rds")))
+} 
+
+```
+
+```{r ex="autocorrelation", type="sample-code"}
+# The modified data.frame dataSet is already in your workspace
+# The car package is already loaded 
+
+# We know from the previous exercise that wordLength could be turned into a more linear effect with a log-transformation. Let's go ahead and do that
+
+
+# Redefine mod with all of the relevant interactions: norm_F1 ~ Proactive + Reactive + Style + Sex + PartnerEthnicity + PhillyLiveTime + HighSchoolType + Occupation_Group +wordLength +  Reactive * Proactive + Sex * Proactive   + HighSchoolType * Proactive + BirthYear
+
+# Perform a durbinWatsonTest
+
+# What do you see, are the residuals autocorrelated?
+
+
+```
+
+```{r ex="autocorrelation", type="solution"}
+# The modified data.frame dataSet is already in your workspace
+# We know from the previous exercise that wordLength could be turned into a more linear effect with a log-transformation. Let's go ahead and do that
+dataSet$wordLength<-log(dataSet$wordLength)
+
+# Redefine mod with all of the relevant interactions: norm_F1 ~ Proactive + Reactive + Style + Sex + PartnerEthnicity + PhillyLiveTime + HighSchoolType + Occupation_Group +wordLength +  Reactive * Proactive + Sex * Proactive   + HighSchoolType * Proactive + BirthYear
+mod<-lm(norm_F1 ~ Proactive + Reactive + Style + Sex + PartnerEthnicity + PhillyLiveTime + HighSchoolType + Occupation_Group +wordLength +  Reactive * Proactive + Sex * Proactive   + HighSchoolType * Proactive + BirthYear, dataSet)
+
+# Perform a durbinWatsonTest
+durbinWatsonTest(mod)
+# - What do you see, are the residuals autocorrelated?
+# Yes, unfortunately, the residuals appear to be autocorrelated (p < 0.05). 
+# This suggests that our model misses some important information. However, observe that the correlation is weak: 0.04. 
+# The autocorrelation may be due to the fact that we are looking at multiple observations per speaker without informing the model of which observation was provided by which speaker. Another possible reason for this result is that we have attempted to model the non-linear relationships in the data with straight lines. Adding this information may solve the issue here. 
+# It should not affect the inferences we can draw from the coefficients.
+
+```
+
+```{r ex="autocorrelation", type="sct"}
+test_output_contains("durbinWatsonTest(mod)", "Don't forget to perform the test!")
+success_msg("Great work!")
+```
+
+
+### 26.7 The residuals are normally distributed
+```{r ex="distr", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+# Remove outliers from norm_F1
+dataSet$wordLength<-log(dataSet$wordLength)
+
+dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
+# Remove outliers from Familiarity
+indices<-c(1983, 2088)
+dataSet<- dataSet[-indices, ]
+dataSet$norm_F1<-dataSet$norm_F1^0.6666667
+mod<-lm(norm_F1 ~ Proactive + Reactive + Style + Sex + PartnerEthnicity + PhillyLiveTime + HighSchoolType + Occupation_Group +wordLength +  Reactive * Proactive + Sex * Proactive   + HighSchoolType * Proactive + BirthYear, dataSet)
+```
+
+```{r ex="distr", type="sample-code"}
+# The modified data.frame dataSet is already in your workspace
+# The model "mod" is alreay in your workspace. The heteroskedasticity is fixed
+
+# Draw a qqplot of the residuals
+
+# What do you see, are the residuals distributed normally?
+```
+
+```{r ex="distr", type="solution"}
+# The modified data.frame dataSet is already in your workspace
+# The model "mod" is alreay in your workspace. The heteroskedasticity is fixed
+
+# Draw a qqplot of the residuals
+qqnorm(resid(mod))
+qqline(resid(mod))
+
+# What do you see, are the residuals distributed normally?
+# Yes, the residuals appear to come close to a normal distribution
+```
+
+```{r ex="distr", type="sct"}
+success_msg("Great work!")
+```
+
+## 27. Towards a parsimonious model
+- At this point, we have checked all of our model assumptions. This has shown that our model meets all of these, except the one that refers to the autocorrelation of the residuals
+- Now it is time to apply Occam's razor to the model to see if there are any superfluous predictors in there
+- Recall that we should look for predictors that have tiny effect sizes and are not significant
+- We should start with interactions and then move on to the main effects if necessary
+
+```{r ex="occam", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+# Remove outliers from norm_F1
+dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
+dataSet$wordLength<-log(dataSet$wordLength)
+
+# Remove outliers from Familiarity
+indices<-c(1983, 2088)
+dataSet<- dataSet[-indices, ]
+dataSet$norm_F1<-dataSet$norm_F1^0.6666667
+mod<-lm(norm_F1 ~ Proactive + Reactive + Style + Sex + PartnerEthnicity + PhillyLiveTime + HighSchoolType + Occupation_Group +wordLength +  Reactive * Proactive + Sex * Proactive   + HighSchoolType * Proactive + BirthYear, dataSet)
+```
+
+```{r ex="occam", type="sample-code"}
+# The modified data.frame dataSet is already in your workspace
+# The model "mod" is alreay in your workspace.
+
+# Print a summary of the model 
+
+# Which coefficients have small estimates and/or high p-values?
+
+```
+
+```{r ex="occam", type="solution"}
+# The modified data.frame dataSet is already in your workspace
+# The model "mod" is alreay in your workspace. 
+
+# Print a summary of the model 
+summary(mod)
+# -  Which coefficients have small estimates and/or high p-values?
+# Occupation_Group
+# BirthYear
+# Proactive * Reactive
+# Proactive * Sex
+# Proactive * HighSchoolType
+```
+
+```{r ex="occam", type="sct"}
+test_output_contains("summary(mod)")
+success_msg("Great work!")
+```
+
+
+### 27.1 Towards a parsimonious model: Dropping `Proactive * Reactive`
+
+```{r ex="occam_proactivereactive", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+# Remove outliers from norm_F1
+dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
+dataSet$wordLength<-log(dataSet$wordLength)
+
+# Remove outliers from Familiarity
+indices<-c(1983, 2088)
+dataSet<- dataSet[-indices, ]
+dataSet$norm_F1<-dataSet$norm_F1^0.6666667
+
+```
+
+```{r ex="occam_proactivereactive", type="sample-code"}
+# The modified data.frame dataSet is already in your workspace
+# Specify the model mod to regress norm_F1 on Proactive + Reactive + Style + Sex + PartnerEthnicity + PhillyLiveTime + HighSchoolType + Occupation_Group +wordLength +  Reactive * Proactive + Sex * Proactive   + HighSchoolType * Proactive + BirthYear
+
+# Compute an alternative model without `Proactive * Reactive`
+
+# Compare the AIC of mod to the AIC of mod1
+
+# Is there evidence that supports that dropping Proactive * Reactive is justified? You will find the correct answer on the Solution tab
+
+```
+
+```{r ex="occam_proactivereactive", type="solution"}
+# The modified data.frame dataSet is already in your workspace
+# Specify the model mod to regress norm_F1 on Proactive + Reactive + Style + Sex + PartnerEthnicity + PhillyLiveTime + HighSchoolType + Occupation_Group +wordLength +  Reactive * Proactive + Sex * Proactive   + HighSchoolType * Proactive + BirthYear
+mod<-lm(norm_F1 ~ Proactive + Reactive + Style + Sex + PartnerEthnicity + PhillyLiveTime + HighSchoolType + Occupation_Group +wordLength +  Reactive * Proactive + Sex * Proactive   + HighSchoolType * Proactive + BirthYear, dataSet)
+# Compute an alternative model without `Proactive * Reactive`
+mod1<-lm(norm_F1 ~ Proactive + Reactive + Style + Sex + PartnerEthnicity + PhillyLiveTime + HighSchoolType + Occupation_Group +wordLength + Sex * Proactive   + HighSchoolType * Proactive + BirthYear, dataSet)
+# Compare the AIC of mod to the AIC of mod1
+AIC(mod)-AIC(mod1)
+# Is there evidence that supports that dropping Proactive * Reactive is justified? 
+# No, dropping the interaction actually raises the AIC value
+```
+
+```{r ex="occam_proactivereactive", type="sct"}
+test_output_contains("AIC(mod)-AIC(mod1)", "Don't forget to compare the AIC values!")
+success_msg("Great work!")
+```
+
+
+
+
+### 27.2 Towards a parsimonious model: Dropping `Proactive * Sex`
+
+```{r ex="proactivesex", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+# Remove outliers from norm_F1
+dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
+dataSet$wordLength<-log(dataSet$wordLength)
+
+# Remove outliers from Familiarity
+indices<-c(1983, 2088)
+dataSet<- dataSet[-indices, ]
+dataSet$norm_F1<-dataSet$norm_F1^0.6666667
+
+```
+
+```{r ex="proactivesex", type="sample-code"}
+# The modified data.frame dataSet is already in your workspace
+# Specify the model mod to regress norm_F1 on Proactive + Reactive + Style + Sex + PartnerEthnicity + PhillyLiveTime + HighSchoolType + Occupation_Group +wordLength +  Reactive * Proactive + Sex * Proactive   + HighSchoolType * Proactive + BirthYear
+
+# Compute an alternative model without `Proactive * Sex`
+
+# Compare the AIC of mod to the AIC of mod1
+
+# Is there evidence that supports that dropping Proactive * Sex is justified? You will find the correct answer on the Solution tab
+
+```
+
+```{r ex="proactivesex", type="solution"}
+# The modified data.frame dataSet is already in your workspace
+# Specify the model mod to regress norm_F1 on Proactive + Reactive + Style + Sex + PartnerEthnicity + PhillyLiveTime + HighSchoolType + Occupation_Group +wordLength +  Reactive * Proactive + Sex * Proactive   + HighSchoolType * Proactive + BirthYear
+mod<-lm(norm_F1 ~ Proactive + Reactive + Style + Sex + PartnerEthnicity + PhillyLiveTime + HighSchoolType + Occupation_Group +wordLength +  Reactive * Proactive + Sex * Proactive   + HighSchoolType * Proactive + BirthYear, dataSet)
+# Compute an alternative model without `Proactive * Sex`
+mod1<-lm(norm_F1 ~ Proactive + Reactive + Style + Sex + PartnerEthnicity + PhillyLiveTime + HighSchoolType + Occupation_Group +wordLength +  Reactive * Proactive  + HighSchoolType * Proactive + BirthYear, dataSet)
+# Compare the AIC of mod to the AIC of mod1
+AIC(mod)-AIC(mod1)
+# Is there evidence that supports that dropping Proactive * Sex is justified? 
+# No, dropping the interaction raises the AIC value
+```
+
+```{r ex="proactivesex", type="sct"}
+test_output_contains("AIC(mod)-AIC(mod1)", "Don't forget to compare the AIC values!")
+success_msg("Great work!")
+```
+
+
+
+### 27.3 Towards a parsimonious model: Dropping `Proactive * HighSchoolType`
+
+```{r ex="proactiveHighSchoolType", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+# Remove outliers from norm_F1
+dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
+dataSet$wordLength<-log(dataSet$wordLength)
+
+# Remove outliers from Familiarity
+indices<-c(1983, 2088)
+dataSet<- dataSet[-indices, ]
+dataSet$norm_F1<-dataSet$norm_F1^0.6666667
+
+```
+
+```{r ex="proactiveHighSchoolType", type="sample-code"}
+# The modified data.frame dataSet is already in your workspace
+# Specify the model mod to regress norm_F1 on Proactive + Reactive + Style + Sex + PartnerEthnicity + PhillyLiveTime + HighSchoolType + Occupation_Group +wordLength +  Reactive * Proactive + Sex * Proactive   + HighSchoolType * Proactive + BirthYear
+
+# Compute an alternative model without `Proactive * HighSchoolType`
+
+# Compare the AIC of mod to the AIC of mod1
+
+# Is there evidence that supports that dropping Proactive * HighSchoolType is justified? You will find the correct answer on the Solution tab
+
+```
+
+```{r ex="proactiveHighSchoolType", type="solution"}
+# The modified data.frame dataSet is already in your workspace
+# Specify the model mod to regress norm_F1 on Proactive + Reactive + Style + Sex + PartnerEthnicity + PhillyLiveTime + HighSchoolType + Occupation_Group +wordLength +  Reactive * Proactive + Sex * Proactive   + HighSchoolType * Proactive + BirthYear
+mod<-lm(norm_F1 ~ Proactive + Reactive + Style + Sex + PartnerEthnicity + PhillyLiveTime + HighSchoolType + Occupation_Group +wordLength +  Reactive * Proactive + Sex * Proactive   + HighSchoolType * Proactive + BirthYear, dataSet)
+# Compute an alternative model without `Proactive * HighSchoolType`
+mod1<-lm(norm_F1 ~ Proactive + Reactive + Style + Sex + PartnerEthnicity + PhillyLiveTime + HighSchoolType + Occupation_Group +wordLength +  Reactive * Proactive + Sex * Proactive + BirthYear, dataSet)
+# Compare the AIC of mod to the AIC of mod1
+AIC(mod)-AIC(mod1)
+# Is there evidence that supports that dropping Proactive * HighSchoolType is justified? 
+# No, dropping the interaction actually raises the AIC value by more than two units, suggesting that there is substantially more evidence in favor of the model with the interaction
+```
+
+```{r ex="proactiveHighSchoolType", type="sct"}
+
+test_output_contains("AIC(mod)-AIC(mod1)", "Don't forget to compare the AIC values!")
+success_msg("Great work!")
+```
+
+### 27.4 Towards a parsimonious model: Dropping `Occupation_Group`
+
+```{r ex="Occupation_Group", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+# Remove outliers from norm_F1
+dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
+dataSet$wordLength<-log(dataSet$wordLength)
+
+# Remove outliers from Familiarity
+indices<-c(1983, 2088)
+dataSet<- dataSet[-indices, ]
+dataSet$norm_F1<-dataSet$norm_F1^0.6666667
+
+```
+
+```{r ex="Occupation_Group", type="sample-code"}
+# The modified data.frame dataSet is already in your workspace
+# Specify the model mod to regress norm_F1 on Proactive + Reactive + Style + Sex + PartnerEthnicity + PhillyLiveTime + HighSchoolType + Occupation_Group +wordLength +  Reactive * Proactive + Sex * Proactive   + HighSchoolType * Proactive + BirthYear
+
+# Compute an alternative model without Occupation_Group
+
+# Compare the AIC of mod to the AIC of mod1
+
+# Is there evidence that supports that dropping Occupation_Group is justified? You will find the correct answer on the Solution tab
+
+```
+
+```{r ex="Occupation_Group", type="solution"}
+# The modified data.frame dataSet is already in your workspace
+# Specify the model mod to regress norm_F1 on Proactive + Reactive + Style + Sex + PartnerEthnicity + PhillyLiveTime + HighSchoolType + Occupation_Group +wordLength +  Reactive * Proactive + Sex * Proactive   + HighSchoolType * Proactive + BirthYear
+mod<-lm(norm_F1 ~ Proactive + Reactive + Style + Sex + PartnerEthnicity + PhillyLiveTime + HighSchoolType + Occupation_Group +wordLength +  Reactive * Proactive + Sex * Proactive   + HighSchoolType * Proactive + BirthYear, dataSet)
+# Compute an alternative model without `Occupation_Group`
+mod1<-lm(norm_F1 ~ Proactive + Reactive + Style + Sex + PartnerEthnicity + PhillyLiveTime + HighSchoolType + wordLength +  Reactive * Proactive + Sex * Proactive + HighSchoolType * Proactive + BirthYear, dataSet)
+# Compare the AIC of mod to the AIC of mod1
+AIC(mod)-AIC(mod1)
+# Is there evidence that supports that dropping Occupation_Group is justified? 
+# No, dropping Occupation_Group actually raises the AIC value by more than two units, suggesting that there is substantially more evidence in favor of the model with Occupation_Group
+```
+
+```{r ex="Occupation_Group", type="sct"}
+test_output_contains("AIC(mod)-AIC(mod1)", "Don't forget to compare the AIC values!")
+success_msg("Great work!")
+```
+
+
+### 27.5 Towards a parsimonious model: Dropping `BirthYear`
+
+```{r ex="BirthYear", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+# Remove outliers from norm_F1
+dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
+dataSet$wordLength<-log(dataSet$wordLength)
+
+# Remove outliers from Familiarity
+indices<-c(1983, 2088)
+dataSet<- dataSet[-indices, ]
+dataSet$norm_F1<-dataSet$norm_F1^0.6666667
+
+```
+
+```{r ex="BirthYear", type="sample-code"}
+# The modified data.frame dataSet is already in your workspace
+# Specify the model mod to regress norm_F1 on Proactive + Reactive + Style + Sex + PartnerEthnicity + PhillyLiveTime + HighSchoolType + Occupation_Group +wordLength +  Reactive * Proactive + Sex * Proactive   + HighSchoolType * Proactive + BirthYear
+
+# Compute an alternative model without BirthYear
+
+# Compare the AIC of mod to the AIC of mod1
+
+# Is there evidence that supports that dropping BirthYear is justified? You will find the correct answer on the Solution tab
+
+```
+
+```{r ex="BirthYear", type="solution"}
+# The modified data.frame dataSet is already in your workspace
+# Specify the model mod to regress norm_F1 on Proactive + Reactive + Style + Sex + PartnerEthnicity + PhillyLiveTime + HighSchoolType + Occupation_Group +wordLength +  Reactive * Proactive + Sex * Proactive   + HighSchoolType * Proactive + BirthYear
+mod<-lm(norm_F1 ~ Proactive + Reactive + Style + Sex + PartnerEthnicity + PhillyLiveTime + HighSchoolType + Occupation_Group +wordLength +  Reactive * Proactive + Sex * Proactive   + HighSchoolType * Proactive + BirthYear, dataSet)
+# Compute an alternative model without `BirthYear`
+mod1<-lm(norm_F1 ~ Proactive + Reactive + Style + Sex + PartnerEthnicity + PhillyLiveTime + HighSchoolType + Occupation_Group +wordLength +  Reactive * Proactive + Sex * Proactive   + HighSchoolType * Proactive , dataSet)
+# Compare the AIC of mod to the AIC of mod1
+AIC(mod)-AIC(mod1)
+# Is there evidence that supports that dropping BirthYear is justified? 
+# Dropping BirthYear lowers the AIC value by almost two units, suggesting that there is quite some evidence in favor of the model without BirthYear. But, the drop in AIC is not greater than or equal to two, so we keep BirthYear in the model
+```
+
+```{r ex="BirthYear", type="sct"}
+test_output_contains("AIC(mod)-AIC(mod1)", "Don't forget to compare the AIC values!")
+success_msg("Great work!")
+```
+
+## 28. Bootstrap validation
+- We have validated our assumptions and we have checked to see if we could exclude some predictors that may be superfluous
+- Now it is time to check if our coefficients are numerically stable and generalize to the population beyond the sample
+- If we find coefficients with large confidence intervals, it may be a good idea to delete the predictors associated with those coefficients
+```{r ex="bootstrap", type="pre-exercise-code"}
+library(readr)
+#This is a hack, it reads pre-defined bootstrap data from the server, to avoid that (1) the scripts runs longer than 80 seconds, the datacamp light limit and (2) that students have to wait a long time for their results
+bootstrap <- function(model) {
+boots<-suppressMessages(as.data.frame(read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_bootstraps.csv")))
+return(boots)
+}
+mod<-"mod"
+```
+
+```{r ex="bootstrap", type="sample-code"}
+# The modified data.frame dataSet is already in your workspace
+# The bootstrap function from the slides is already in your workspace
+# The model mod is already in your workspace
+
+# Compute bootstrap confidence intervals with the `bootstrap` function. Assign the confidence intervals to the variable 'boots'
+
+# View(boots)
+
+# Which coefficients appear to be numerically unstable? You will find the correct answer on the Solution tab
+
+```
+
+```{r ex="bootstrap", type="solution"}
+# The modified data.frame dataSet is already in your workspace
+# The bootstrap function from the slides is already in your workspace
+# The model mod is already in your workspace
+
+# Compute bootstrap confidence intervals with the `bootstrap` function.  Assign the confidence intervals to the variable 'boots'
+boots<-bootstrap(mod)
+
+# Print boots
+boots
+
+# Which coefficients appear to be numerically unstable?
+# The coefficients we wanted to delete in the first place appear to be very unstable. It is best to remove those, because their effects are unlikely to generalize to the population 
+# - Occupation_Group
+# - BirthYear
+# - Proactive * Reactive
+# - Proactive * Sex
+# - Proactive * HighSchoolType
+
+```
+
+```{r ex="bootstrap", type="sct"}
+test_object("boots")
+success_msg("Great work!")
+```
+
+## 29. Interpreting the model
+- Now it is time to remove the coefficients that did not turn out to be stable under bootstrap validation
+- Afterwards, we can interpret our model
+
+```{r ex="interpretation", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+# Remove outliers from norm_F1
+dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
+# Remove outliers from Familiarity
+indices<-c(1983, 2088)
+dataSet<- dataSet[-indices, ]
+dataSet$norm_F1<-dataSet$norm_F1^0.6666667
+dataSet$wordLength<-log(dataSet$wordLength)
+#This is a hack, it reads pre-defined bootstrap data from the server, to avoid that (1) the scripts runs longer than 80 seconds, the datacamp light limit and (2) that students have to wait a long time for their results
+bootstrap <- function(model) {
+boots<-read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_bootstraps.csv")
+return(boots)
+}
+mod<-lm(norm_F1 ~ Proactive + Reactive + Style + Sex + PartnerEthnicity + PhillyLiveTime + HighSchoolType + wordLength, dataSet)
+```
+
+```{r ex="interpretation", type="sample-code"}
+# The modified data.frame dataSet is already in your workspace
+# The model mod is already in your workspace
+# Print a summary of mod
+
+# Take a good look at the coefficients. What do they tell you? 
+
+# The levels of PartnerEthnicity are "African American", "Caucasian (White)" "I am single", "Other Hispanic" and  "Puerto Rican". 
+# Which PartnerEthnicity has the strongest positive effect on norm_F1? Assign your answer (the exact variable level) to the variable "answer1" 
+
+# Which PartnerEthnicity has the strongest negative effect on norm_F1? Assign your answer (the exact variable level) to the variable "answer2" 
+
+# True or false? Males have lower norm_F1 values than females. Assign your answer ('true' or 'false') to the variable "answer3" 
+
+# True or false? People who have lived in Philadelphia their entire lives have the highest norm_F1 values. Assign your answer ('true' or 'false') to the variable "answer4" 
+
+
+# You will find the correct answers on the Solution tab
+
+```
+
+```{r ex="interpretation", type="solution"}
+# The modified data.frame dataSet is already in your workspace
+# The model mod is already in your workspace
+# Print a summary of mod
+summary(mod)
+# Take a good look at the coefficients. What do they tell you? 
+
+# The levels of PartnerEthnicity are "African American", "Caucasian (White)" "I am single", "Other Hispanic" and  "Puerto Rican". 
+# Which PartnerEthnicity has the strongest positive effect on norm_F1? Assign your answer (the exact variable level) to the variable "answer1" 
+# The effect for Caucasian (White) is  2.51214
+answer1<-"Caucasian (White)"
+
+# Which PartnerEthnicity has the strongest negative effect on norm_F1? Assign your answer (the exact variable level) to the variable "answer2" 
+# Recall that, since we specified sum contrasts, the coefficient of the first level can be found by subtracting the sum of all other coefficients from 0. 
+# 0-sum(2.51214, 0.76099 , 1.66790, 1.81832 ) = -6.75935
+answer2<-"African American"
+
+# True or false? Males have lower norm_F1 values than females. Assign your answer ('true' or 'false') to the variable "answer3" 
+# The effect for Males is -1.51782. Since all coefficients sum zero, the effect for females is +1.51782
+
+answer3<-"true"
+# True or false? People who have lived in Philadelphia their entire lives have the highest norm_F1 values. Assign your answer ('true' or 'false') to the variable "answer4" 
+# Recall that, since we specified sum contrasts, the coefficient of the first level can be found by subtracting the sum of all other coefficients from 0. 
+# 0-sum(0.23730, -4.04028 , -0.66201 , -2.05924 ) = 6.52423
+answer4<-"true"
+```
+
+```{r ex="interpretation", type="sct"}
+test_object("answer1")
+test_object("answer2")
+test_object("answer3")
+test_object("answer4")
+
+test_output_contains("summary(mod)", "Don't forget to call a summary of the model!")
+success_msg("Great work!")
+```
+
+
+## Acknowledgements
+A **Big Thank You!** goes to [Grant M. Berry](http://www.grantberry.info) (Penn State), who generously provided the data for this exercise
+
+## References
+- Berry, G. M. (2018). *Liminal voices, central constraints: Minority adoption of majority sound change*. State College: Penn State University PhD Dissertation.
+- Braver, T. S. (2012). The variable nature of cognitive control: A dual-mechanisms framework. *Trends in Cognitive Science*, 16(2). 106–113. 
+- Woolums, N. (2012). Phonetic manifestations of /ai/ raising. *Linguistic Portfolios*. Article 19. 

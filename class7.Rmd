@@ -10,7 +10,7 @@ tutorial::go_interactive()
 
 
 ## A multivariate approach to lexical decision latencies
-- Baayen et al. (2006) used data provided by Balota et al. (2004) to investigate the contributions of several additional predictor variables to subjects' mean reaction times in lexical decision experiments
+- Baayen et al. (2006) used data provided by Balota et al. (2004) to investigate the contributions of several additional predictor variables to subjects' mean reaction times in lexical decision experiments. Baayen (2013) provided the data
 - Here we will consider the following of their predictors:
     - `Familiarity`: subjective familiarity ratings
     - `AgeSubject`: young or older speakers
@@ -138,7 +138,7 @@ ggplot(dataSet, aes(x=1, y=RTlexdec)) + geom_boxplot()
 
 ```{r ex="dispersion_RTlexdec", type="sct"}
 test_output_contains("sd(dataSet$RTlexdec)",   incorrect_msg = "Make sure to compute the standard deviation of the RTlexdec variable!")
-test_output_contains("median(dataSet$RTlexdec)",   incorrect_msg = "Make sure to compute the median of the RTlexdec variable!")
+test_output_contains("summary(dataSet$RTlexdec)",   incorrect_msg = "Make sure to compute a summary of the RTlexdec variable!")
 test_library_function("ggplot2")
 test_ggplot(1)
 success_msg("Good work!")
@@ -231,7 +231,7 @@ ggplot(dataSet, aes(x=1, y=Familiarity)) + geom_boxplot()
 
 ```{r ex="dispersion_Familiarity", type="sct"}
 test_output_contains("sd(dataSet$Familiarity)",   incorrect_msg = "Make sure to compute the standard deviation of the Familiarity variable!")
-test_output_contains("median(dataSet$Familiarity)",   incorrect_msg = "Make sure to compute the median of the Familiarity variable!")
+test_output_contains("summary(dataSet$Familiarity)",   incorrect_msg = "Make sure to compute a summary of the Familiarity variable!")
 test_library_function("ggplot2")
 test_ggplot(1)
 success_msg("Good job!")
@@ -359,7 +359,7 @@ ggplot(dataSet, aes(x=1, y=WrittenFrequency)) + geom_boxplot()
 
 ```{r ex="dispersion_WrittenFrequency", type="sct"}
 test_output_contains("sd(dataSet$WrittenFrequency)",   incorrect_msg = "Make sure to compute the standard deviation of the WrittenFrequency variable!")
-test_output_contains("median(dataSet$WrittenFrequency)",   incorrect_msg = "Make sure to compute the median of the WrittenFrequency variable!")
+test_output_contains("summary(dataSet$WrittenFrequency)",   incorrect_msg = "Make sure to compute a sumary of the WrittenFrequency variable!")
 success_msg("I can't evaluate your plot, but I think you did great!")
 ```
 
@@ -484,7 +484,7 @@ ggplot(dataSet, aes(x=1, y=LengthInLetters)) + geom_boxplot()
 
 ```{r ex="dispersion_LengthInLetters", type="sct"}
 test_output_contains("sd(dataSet$LengthInLetters)",   incorrect_msg = "Make sure to compute the standard deviation of the LengthInLetters variable!")
-test_output_contains("median(dataSet$LengthInLetters)",   incorrect_msg = "Make sure to compute the median of the LengthInLetters variable!")
+test_output_contains("summary(dataSet$LengthInLetters)",   incorrect_msg = "Make sure to compute a summary of the LengthInLetters variable!")
 success_msg("I can't evaluate your plot, but I think you did great!")
 ```
 
@@ -574,7 +574,7 @@ ggplot(dataSet, aes(x=1, y=FrequencyInitialDiphoneWord)) + geom_boxplot()
 
 ```{r ex="dispersion_FrequencyInitialDiphoneWord", type="sct"}
 test_output_contains("sd(dataSet$FrequencyInitialDiphoneWord)",   incorrect_msg = "Make sure to compute the standard deviation of the FrequencyInitialDiphoneWord variable!")
-test_output_contains("median(dataSet$FrequencyInitialDiphoneWord)",   incorrect_msg = "Make sure to compute the median of the FrequencyInitialDiphoneWord variable!")
+test_output_contains("summary(dataSet$FrequencyInitialDiphoneWord)",   incorrect_msg = "Make sure to compute a summary of the FrequencyInitialDiphoneWord variable!")
 success_msg("I can't evaluate your plot, but I think you did great!")
 ```
 
@@ -1174,7 +1174,7 @@ mod <- lm(RTlexdec ~ Familiarity + AgeSubject + WrittenFrequency + WordCategory 
 
 ```{r ex="autocorrelation", type="sample-code"}
 # The modified data.frame dataSet is already in your workspace
-# The model "mod" is alreay in your workspace. The heteroskedasticity is fixed
+# The model "mod" is alreay in your workspace
 
 # Load the car package
 
@@ -1187,7 +1187,7 @@ mod <- lm(RTlexdec ~ Familiarity + AgeSubject + WrittenFrequency + WordCategory 
 
 ```{r ex="autocorrelation", type="solution"}
 # The modified data.frame dataSet is already in your workspace
-# The model "mod" is alreay in your workspace. The heteroskedasticity is fixed
+# The model "mod" is alreay in your workspace
 
 # Load the car package
 library(car)
@@ -1416,4 +1416,4 @@ success_msg("Great work!")
 ## References
 - Balota, D., Cortese, M., Sergent-Marshall, S., Spieler, D. and Yap, M. (2004) Visual word recognition for single-syllable words, *Journal of Experimental Psychology:General*, 133, 283-316.
 - Baayen, R.H., Feldman, L. and Schreuder, R. (2006) Morphological influences on the recognition of monosyllabic monomorphemic words, *Journal of Memory and Language*, 53, 496-512.
-- Baayen, R. H. (2013). *languageR: Data sets and functions with "Analyzing Linguistic Data: A practical introduction to statistics*. https://CRAN.R-project.org/package=languageR .
+- Baayen, R. H. (2013). *languageR: Data sets and functions with:* Analyzing Linguistic Data: A practical introduction to statistics. https://CRAN.R-project.org/package=languageR .
