@@ -20,6 +20,8 @@ navbar:
     href: class7.html
   - text: 'Lab 8'
     href: class8.html
+  - text: 'Lab 9'
+    href: class9.html
 output_dir: _site
 output:
   html_document:

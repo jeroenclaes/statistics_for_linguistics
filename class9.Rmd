@@ -1,0 +1,999 @@
+---
+title: 'Topic 9: Analysis of Variance'
+author: "Jeroen Claes | <jeroen.claes@kuleuven.be> | <jeroen@cropland.be>"
+---
+  
+```{r, include=FALSE}
+#library(testwhat)
+tutorial::go_interactive()
+library(car)
+options(contr=c("contr.Sum", "contr.Poly"))
+```
+
+## Mean speech rate across Age, Frequency, and Sex groups
+- The data for this exercise were gathered by Pluymaekers, Ernestus & Baayen (2005), who investigated the duration of the Dutch past participle prefix *ge*:
+    - Infinitive *zetten* ("to put")
+    - Past participle: **ge***zet*
+- Here we will compare the `SpeechRate` (measured in syllables per second) of four age cohorts (`ageCohort`):
+    - Speakers born 1900-1925 
+    - Speakers born 1926-1950
+    - Speakers born 1951-1975
+    - Speakers born 1976-2000
+- We will look at a discretized version of word `Frequency`, which clusters words in quartile groups in function of their frequency:
+    - 1st frequency quartile
+    - 2nd frequency quartile
+    - 3rd frequency quartile
+    - 4th frequency quartile
+- We will also take into account the influence of gender (`Sex`):
+    - Male
+    - Female
+
+## 1. Mean speech rate across `ageCohort`
+### 1.1 Loading and exploring the data
+```{r ex="load", type="sample-code"}
+# Load the readr package
+
+# Load the course data from the course website to the object 'dataSet':
+# http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class9_Pluymaekers_et_al_2005.csv
+
+# Load the dplyr package
+
+# Convert all character values to Factor with `mutate_if`
+
+# Print a 'summary' of the dataSet
+
+```
+
+```{r ex="load", type="solution"}
+# Load the readr package
+library(readr)
+# Load the course data from the course website to the object 'dataSet':
+# http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class9_Pluymaekers_et_al_2005.csv
+dataSet<-read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class9_Pluymaekers_et_al_2005.csv")
+# Load the dplyr package
+library(dplyr)
+# Convert all character values to Factor with `mutate_if`
+dataSet <- mutate_if(dataSet, is.character, as.factor)
+# Print a 'summary' of the dataSet
+summary(dataSet)
+```
+
+```{r ex="load", type="sct"}
+test_object("dataSet")
+test_library_function("readr", "Make sure to call the 'readr' package!")
+test_library_function("dplyr", "Make sure to call the 'dplyr' package!")
+test_output_contains("summary(dataSet)",   incorrect_msg = "Make sure to print a 'glimpse' of the data!")
+success_msg("Great!")
+```
+
+### 1.2 Computing and plotting group means
+
+```{r ex="ageCohort_means", type="pre-exercise-code"}
+library(readr)
+library(dplyr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class9_Pluymaekers_et_al_2005.csv")
+dataSet <- mutate_if(dataSet, is.character, as.factor)
+
+```
+
+```{r ex="ageCohort_means", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Compute the grand mean of SpeechRate
+
+# Load the dplyr package
+
+# Use the group_by and summarise functions to compute the mean of SpeechRate by ageCohort
+
+# Load the ggplot2 package
+
+# Draw a boxplot of the SpeechRates by ageCohort
+
+# Are there large differences between the ageCohort groups in terms of their SpeechRates? Are there any outliers? You will find the correct answer on the Solution tab
+
+```
+
+```{r ex="ageCohort_means", type="solution"}
+# The data.frame dataSet is already in your workspace
+# Compute the grand mean of SpeechRate
+mean(dataSet$SpeechRate)
+# Load the dplyr package
+library(dplyr)
+# Use the group_by and summarise functions to compute the mean of SpeechRate by ageCohort
+dataSet %>% 
+  group_by(ageCohort) %>%
+  summarise(mean(SpeechRate))
+# Load the ggplot2 package
+library(ggplot2)
+# Draw a boxplot of the SpeechRates by ageCohort
+ggplot(dataSet, aes(x=ageCohort, y=SpeechRate)) + 
+  geom_boxplot()
+# - Are there large differences between the ageCohort groups in terms of their SpeechRates? 
+# The differences between the ageCohort groups in terms of their speech rate are very small.  
+# - Are there any outliers
+# Yes, there appear to be quite some outliers, which may distort our overall picture of the differences between the mean speech rates of the groups. This is especially true since the mean of the 'fastest-speaking' groups is pulled down by outliers in the left tail of their SpeechRate distributions, whereas for the oldest group the mean is pulled up by an outlier in the right tail
+```
+
+```{r ex="ageCohort_means", type="sct"}
+test_output_contains("mean(dataSet$SpeechRate)",  incorrect_msg = "Make sure to compute the grand mean of the SpeechRate variable!")
+test_output_contains("dataSet %>% group_by(ageCohort) %>% summarise(mean(SpeechRate))",   incorrect_msg = "Make sure to compute the mean of the SpeechRate variable by ageCohort!")
+test_ggplot(1)
+test_library_function("ggplot2")
+test_library_function("dplyr")
+success_msg("I think you did great!")
+```
+### 1.3 Removing outliers
+```{r ex="ageCohort_out", type="pre-exercise-code"}
+library(readr)
+library(dplyr)
+
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class9_Pluymaekers_et_al_2005.csv")
+dataSet <- mutate_if(dataSet, is.character, as.factor)
+
+```
+
+```{r ex="ageCohort_out", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Perform a shapiro.test on SpeechRate to see if it is normally distributed
+
+# Since we see that SpeechRate is normally distributed, we can remove outliers using Z-scores
+
+# Use the group_by and summarise functions to compute the mean of SpeechRate by ageCohort again
+
+# Load the ggplot2 package
+
+# Draw a boxplot of the SpeechRates by ageCohort
+
+# Are there large differences between the ageCohort groups in terms of their SpeechRates?  You will find the correct answer on the Solution tab
+
+```
+
+```{r ex="ageCohort_out", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Perform a shapiro.test on SpeechRate to see if it is normally distributed
+shapiro.test(dataSet$SpeechRate)
+# Since we see that SpeechRate is normally distributed, we can remove outliers using Z-scores
+dataSet<-dataSet[abs(scale(dataSet$SpeechRate))<=2, ]
+# Use the group_by and summarise functions to compute the mean of SpeechRate by ageCohort again
+dataSet %>% 
+  group_by(ageCohort) %>%
+  summarise(mean(SpeechRate))
+# Load the ggplot2 package
+library(ggplot2)
+# Draw a boxplot of the SpeechRates by ageCohort
+ggplot(dataSet, aes(x=ageCohort, y=SpeechRate)) + 
+  geom_boxplot()
+# Are there large differences between the ageCohort groups in terms of their SpeechRates?  
+# - Yes, by removing the outliers, the differences between the ageCohort groups become much more pronounced. 
+
+```
+
+```{r ex="ageCohort_out", type="sct"}
+test_output_contains("shapiro.test(dataSet$SpeechRate)",  incorrect_msg = "Make sure to compute the shapiro.test of the SpeechRate variable!")
+test_output_contains("dataSet %>% group_by(ageCohort) %>% summarise(mean(SpeechRate))",   incorrect_msg = "Make sure to compute the mean of the SpeechRate variable by ageCohort!")
+test_ggplot(1)
+test_library_function("ggplot2")
+test_library_function("dplyr")
+success_msg("I think you did great!")
+```
+
+### 1.4 Checking the assumptions of a one-way ANOVA 
+- Recall that the assumptions of a one-way ANOVA are the following:
+  - The observations are independent
+  - The response variable is ratio- or interval-scaled
+  - The scores in the groups are normally distributed
+  - The variance is homogeneous, i.e., the variances of the different groups should be equal
+
+
+```{r ex="ageCohort_anova_assumptions", type="pre-exercise-code"}
+library(readr)
+library(dplyr)
+
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class9_Pluymaekers_et_al_2005.csv")
+dataSet <- mutate_if(dataSet, is.character, as.factor)
+dataSet<-dataSet[abs(scale(dataSet$SpeechRate))<=2, ]
+
+```
+
+```{r ex="ageCohort_anova_assumptions", type="sample-code"}
+# The modified data.frame dataSet is already in your workspace
+
+# Load the dplyr package
+
+# Perform a shapiro.test on SpeechRate by ageCohort to see if the data of in the groups is normally distributed
+
+# Load the car package
+
+# Perform a leveneTest to see if the variances are homogeneous 
+
+# What do you see? Are the scores distributed normally? Do they have homogeneous variances? You will find the correct answers on the Solution tab
+
+```
+
+```{r ex="ageCohort_anova_assumptions", type="solution"}
+# The modified data.frame dataSet is already in your workspace
+
+# Load the dplyr package
+library(dplyr)
+
+# Perform a shapiro.test on SpeechRate by ageCohort to see if the data of in the groups is normally distributed. Use the dplyr functions group_by and summarise
+dataSet %>% 
+  group_by(ageCohort) %>%
+  summarise(shapiro.test(SpeechRate)$p.value)
+
+# Load the car package
+library(car)
+# Perform a leveneTest to see if the variances are homogeneous 
+leveneTest(SpeechRate ~ ageCohort, dataSet)
+
+# What do you see? Are the scores distributed normally? Do they have homogeneous variances? You will find the correct answers on the Solution tab
+# - The scores in the groups are normally distributed
+# - The groups have homogeneous variances. We are good to go to perform a one-way ANOVA!
+```
+
+```{r ex="ageCohort_anova_assumptions", type="sct"}
+test_output_contains("dataSet %>%  group_by(ageCohort) %>%  summarise(shapiro.test(SpeechRate)$p.value)",  incorrect_msg = "Make sure to compute the shapiro.test of the SpeechRate variable!")
+test_output_contains("leveneTest(SpeechRate ~ ageCohort, dataSet)", "Don't forget to perform the leveneTest!")
+test_library_function("car")
+test_library_function("dplyr")
+success_msg("I think you did great!")
+```
+
+### 1.5 Performing a one-way ANOVA 
+
+```{r ex="ageCohort_anova_test", type="pre-exercise-code"}
+library(readr)
+library(dplyr)
+
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class9_Pluymaekers_et_al_2005.csv")
+dataSet <- mutate_if(dataSet, is.character, as.factor)
+dataSet<-dataSet[abs(scale(dataSet$SpeechRate))<=2, ]
+
+```
+
+```{r ex="ageCohort_anova_test", type="sample-code"}
+# The modified data.frame dataSet is already in your workspace
+
+# Specify an ANOVA model of SpeechRate ~ ageCohort. Store the model in the variable 'model'
+
+# Compute a summary of the model object
+
+# Use TukeyHSD (Tukey Honest Significant Difference) test to establish which groups are significantly different from each other
+
+# What do you see? Are the differences between the ageCohort groups significant? Which groups contribute to this? You will find the correct answer on the Solution tab
+
+```
+
+```{r ex="ageCohort_anova_test", type="solution"}
+# The modified data.frame dataSet is already in your workspace
+
+# Specify an ANOVA model (with `aov`) of SpeechRate ~ ageCohort. Store the model in the variable 'model'
+model<-aov(SpeechRate ~ ageCohort, dataSet)
+# Compute a summary of the model object
+summary(model)
+# Use TukeyHSD (Tukey Honest Significant Difference) test to establish which groups are significantly different from each other
+TukeyHSD(model)
+# What do you see? Are the differences between the ageCohort groups significant? Which groups contribute to this? You will find the correct answer on the Solution tab
+# - The factor is significant. 
+# - However, upon closer inspection of the TukeyHSD output, we see that only the differences between the extremes of the age continuum are significant:
+# - 1976-2000 vs 1926-1950 
+# - 1976-2000 vs 1900-1925
+# Even then, the sizes of the differences amount to less than one syllable per second and the confidence intervals of the differences are rather wide
+```
+
+```{r ex="ageCohort_anova_test", type="sct"}
+test_output_contains("summary(model)",  incorrect_msg = "Make sure to compute a summary of the aov model!")
+test_output_contains("TukeyHSD(model)", "Don't forget to perform the TukeyHSD!")
+
+success_msg("I think you did great!")
+```
+ 
+
+## 2. Mean speech rate across `Frequency`
+### 2.1 Computing and plotting group means
+
+```{r ex="Frequency_means", type="pre-exercise-code"}
+library(readr)
+library(dplyr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class9_Pluymaekers_et_al_2005.csv")
+dataSet <- mutate_if(dataSet, is.character, as.factor)
+dataSet<-dataSet[abs(scale(dataSet$SpeechRate))<=2, ]
+
+
+```
+
+```{r ex="Frequency_means", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Compute the grand mean of SpeechRate
+
+# Load the dplyr package
+
+# Use the group_by and summarise functions to compute the mean of SpeechRate by Frequency
+
+# Load the ggplot2 package
+
+# Draw a boxplot of the SpeechRates by Frequency
+
+# Are there large differences between the Frequency groups in terms of their SpeechRates? Are there any outliers? You will find the correct answer on the Solution tab
+
+```
+
+```{r ex="Frequency_means", type="solution"}
+# The data.frame dataSet is already in your workspace
+# Compute the grand mean of SpeechRate
+mean(dataSet$SpeechRate)
+# Load the dplyr package
+library(dplyr)
+# Use the group_by and summarise functions to compute the mean of SpeechRate by Frequency
+dataSet %>% 
+  group_by(Frequency) %>%
+  summarise(mean(SpeechRate))
+# Load the ggplot2 package
+library(ggplot2)
+# Draw a boxplot of the SpeechRates by Frequency
+ggplot(dataSet, aes(x=Frequency, y=SpeechRate)) + 
+  geom_boxplot()
+# - Are there large differences between the Frequency groups in terms of their SpeechRates? 
+# The differences between the Frequency groups in terms of their speech rate are very small. The largest difference (between 3rd frequency quartile and 2nd frequency quartil) amounts to only 0.69 syllables/second.
+# - Are there any outliers?
+# There do not appear to be many outliers. 
+```
+
+```{r ex="Frequency_means", type="sct"}
+test_output_contains("mean(dataSet$SpeechRate)",  incorrect_msg = "Make sure to compute the grand mean of the SpeechRate variable!")
+test_output_contains("dataSet %>% group_by(Frequency) %>% summarise(mean(SpeechRate))",   incorrect_msg = "Make sure to compute the mean of the SpeechRate variable by Frequency!")
+test_ggplot(1)
+test_library_function("ggplot2")
+test_library_function("dplyr")
+success_msg("I think you did great!")
+```
+
+### 2.2 Checking the assumptions of a one-way ANOVA 
+- Recall that the assumptions of a one-way ANOVA are the following:
+  - The observations are independent
+  - The response variable is ratio- or interval-scaled
+  - The scores in the groups are normally distributed
+  - The variance is homogeneous, i.e., the variances of the different groups should be equal
+
+
+```{r ex="Frequency_anova_assumptions", type="pre-exercise-code"}
+library(readr)
+library(dplyr)
+
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class9_Pluymaekers_et_al_2005.csv")
+dataSet <- mutate_if(dataSet, is.character, as.factor)
+dataSet<-dataSet[abs(scale(dataSet$SpeechRate))<=2, ]
+
+```
+
+```{r ex="Frequency_anova_assumptions", type="sample-code"}
+# The modified data.frame dataSet is already in your workspace
+
+# Load the dplyr package
+
+# Perform a shapiro.test on SpeechRate by Frequency to see if the data of in the groups is normally distributed
+
+# Load the car package
+
+# Perform a leveneTest to see if the variances are homogeneous 
+
+# What do you see? Are the scores distributed normally? Do they have homogeneous variances? You will find the correct answers on the Solution tab
+
+```
+
+```{r ex="Frequency_anova_assumptions", type="solution"}
+# The modified data.frame dataSet is already in your workspace
+
+# Load the dplyr package
+library(dplyr)
+
+
+# Perform a shapiro.test on SpeechRate by Frequency to see if the data of in the groups is normally distributed. Use the dplyr functions group_by and summarise
+dataSet %>% 
+  group_by(Frequency) %>%
+  summarise(shapiro.test(SpeechRate)$p.value)
+
+# Load the car package
+library(car)
+# Perform a leveneTest to see if the variances are homogeneous 
+leveneTest(SpeechRate ~ Frequency, dataSet)
+
+# What do you see? Are the scores distributed normally? Do they have homogeneous variances? You will find the correct answers on the Solution tab
+# - The scores in the groups are normally distributed
+# - The groups have homogeneous variances. We are good to go to perform a one-way ANOVA!
+```
+
+```{r ex="Frequency_anova_assumptions", type="sct"}
+test_output_contains("dataSet %>%  group_by(Frequency) %>%  summarise(shapiro.test(SpeechRate)$p.value)",  incorrect_msg = "Make sure to compute the shapiro.test of the SpeechRate variable!")
+test_output_contains("leveneTest(SpeechRate ~ Frequency, dataSet)", "Don't forget to perform the leveneTest!")
+test_library_function("car")
+test_library_function("dplyr")
+success_msg("I think you did great!")
+```
+
+### 2.3 Performing a one-way ANOVA 
+
+```{r ex="Frequency_anova_test", type="pre-exercise-code"}
+library(readr)
+library(dplyr)
+
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class9_Pluymaekers_et_al_2005.csv")
+dataSet <- mutate_if(dataSet, is.character, as.factor)
+dataSet<-dataSet[abs(scale(dataSet$SpeechRate))<=2, ]
+
+```
+
+```{r ex="Frequency_anova_test", type="sample-code"}
+# The modified data.frame dataSet is already in your workspace
+
+# Specify an ANOVA model of SpeechRate ~ Frequency. Store the model in the variable 'model'
+
+# Compute a summary of the model object
+
+# Use TukeyHSD (Tukey Honest Significant Difference) test to establish which groups are significantly different from each other
+
+# What do you see? Are the differences between the Frequency groups significant? Which groups contribute to this? You will find the correct answer on the Solution tab
+
+```
+
+```{r ex="Frequency_anova_test", type="solution"}
+# The modified data.frame dataSet is already in your workspace
+
+# Specify an ANOVA model (with `aov`) of SpeechRate ~ Frequency. Store the model in the variable 'model'
+model<-aov(SpeechRate ~ Frequency, dataSet)
+# Compute a summary of the model object
+summary(model)
+# Use TukeyHSD (Tukey Honest Significant Difference) test to establish which groups are significantly different from each other
+TukeyHSD(model)
+# What do you see? Are the differences between the Frequency groups significant? Which groups contribute to this? You will find the correct answer on the Solution tab
+# - The factor is not significant. 
+# - Closer inspection of the pairwise group differences confirms the results we obtained by comparing the by-group means: there is not much difference between the Frequency groups  
+```
+
+```{r ex="Frequency_anova_test", type="sct"}
+test_output_contains("summary(model)",  incorrect_msg = "Make sure to compute a summary of the aov model!")
+test_output_contains("TukeyHSD(model)", "Don't forget to perform the TukeyHSD!")
+
+success_msg("I think you did great!")
+```
+
+## 3. Mean speech rate across `Sex`
+### 3.1 Computing and plotting group means
+
+```{r ex="Sex_means", type="pre-exercise-code"}
+library(readr)
+library(dplyr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class9_Pluymaekers_et_al_2005.csv")
+dataSet <- mutate_if(dataSet, is.character, as.factor)
+dataSet<-dataSet[abs(scale(dataSet$SpeechRate))<=2, ]
+
+
+```
+
+```{r ex="Sex_means", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Compute the grand mean of SpeechRate
+
+# Load the dplyr package
+
+# Use the group_by and summarise functions to compute the mean of SpeechRate by Sex
+
+# Load the ggplot2 package
+
+# Draw a boxplot of the SpeechRates by Sex
+
+# Are there large differences between the Sex groups in terms of their SpeechRates? Are there any outliers? You will find the correct answer on the Solution tab
+
+```
+
+```{r ex="Sex_means", type="solution"}
+# The data.frame dataSet is already in your workspace
+# Compute the grand mean of SpeechRate
+mean(dataSet$SpeechRate)
+# Load the dplyr package
+library(dplyr)
+# Use the group_by and summarise functions to compute the mean of SpeechRate by Sex
+dataSet %>% 
+  group_by(Sex) %>%
+  summarise(mean(SpeechRate))
+# Load the ggplot2 package
+library(ggplot2)
+# Draw a boxplot of the SpeechRates by Sex
+ggplot(dataSet, aes(x=Sex, y=SpeechRate)) + 
+  geom_boxplot()
+# - Are there large differences between the Sex groups in terms of their SpeechRates? 
+# The differences between the Sex groups in terms of their speech rate are very small. Still, males appear to speak faster than females
+# - Are there any outliers?
+# There do not appear to be many outliers. 
+```
+
+```{r ex="Sex_means", type="sct"}
+test_output_contains("mean(dataSet$SpeechRate)",  incorrect_msg = "Make sure to compute the grand mean of the SpeechRate variable!")
+test_output_contains("dataSet %>% group_by(Sex) %>% summarise(mean(SpeechRate))",   incorrect_msg = "Make sure to compute the mean of the SpeechRate variable by Sex!")
+test_ggplot(1)
+test_library_function("ggplot2")
+test_library_function("dplyr")
+success_msg("I think you did great!")
+```
+
+### 3.2 Checking the assumptions of a one-way ANOVA 
+- Recall that the assumptions of a one-way ANOVA are the following:
+  - The observations are independent
+  - The response variable is ratio- or interval-scaled
+  - The scores in the groups are normally distributed
+  - The variance is homogeneous, i.e., the variances of the different groups should be equal
+
+
+```{r ex="Sex_anova_assumptions", type="pre-exercise-code"}
+library(readr)
+library(dplyr)
+
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class9_Pluymaekers_et_al_2005.csv")
+dataSet <- mutate_if(dataSet, is.character, as.factor)
+dataSet<-dataSet[abs(scale(dataSet$SpeechRate))<=2, ]
+
+```
+
+```{r ex="Sex_anova_assumptions", type="sample-code"}
+# The modified data.frame dataSet is already in your workspace
+
+# Load the dplyr package
+
+# Perform a shapiro.test on SpeechRate by Sex to see if the data of in the groups is normally distributed
+
+# Load the car package
+
+# Perform a leveneTest to see if the variances are homogeneous 
+
+# What do you see? Are the scores distributed normally? Do they have homogeneous variances? You will find the correct answers on the Solution tab
+
+```
+
+```{r ex="Sex_anova_assumptions", type="solution"}
+# The modified data.frame dataSet is already in your workspace
+
+# Load the dplyr package
+library(dplyr)
+
+# Perform a shapiro.test on SpeechRate by Sex to see if the data of in the groups is normally distributed. Use the dplyr functions group_by and summarise
+dataSet %>% 
+  group_by(Sex) %>%
+  summarise(shapiro.test(SpeechRate)$p.value)
+
+# Load the car package
+library(car)
+# Perform a leveneTest to see if the variances are homogeneous 
+leveneTest(SpeechRate ~ Sex, dataSet)
+
+# What do you see? Are the scores distributed normally? Do they have homogeneous variances? You will find the correct answers on the Solution tab
+# - The scores in the female groups are not normally distributed. However, since we have a lot of data, this does not matter too much
+# - The groups have homogeneous variances. We are good to go to perform a one-way ANOVA!
+```
+
+```{r ex="Sex_anova_assumptions", type="sct"}
+test_output_contains("dataSet %>%  group_by(Sex) %>%  summarise(shapiro.test(SpeechRate)$p.value)",  incorrect_msg = "Make sure to compute the shapiro.test of the SpeechRate variable!")
+test_output_contains("leveneTest(SpeechRate ~ Sex, dataSet)", "Don't forget to perform the leveneTest!")
+test_library_function("car")
+test_library_function("dplyr")
+success_msg("I think you did great!")
+```
+
+### 3.3 Performing a one-way ANOVA 
+
+```{r ex="Sex_anova_test", type="pre-exercise-code"}
+library(readr)
+library(dplyr)
+
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class9_Pluymaekers_et_al_2005.csv")
+dataSet <- mutate_if(dataSet, is.character, as.factor)
+dataSet<-dataSet[abs(scale(dataSet$SpeechRate))<=2, ]
+
+```
+
+```{r ex="Sex_anova_test", type="sample-code"}
+# The modified data.frame dataSet is already in your workspace
+
+# Specify an ANOVA model of SpeechRate ~ Sex. Store the model in the variable 'model'
+
+# Compute a summary of the model object
+
+# Use TukeyHSD (Tukey Honest Significant Difference) test to establish which groups are significantly different from each other
+
+# What do you see? Are the differences between the Sex groups significant? Which groups contribute to this? You will find the correct answer on the Solution tab
+
+```
+
+```{r ex="Sex_anova_test", type="solution"}
+# The modified data.frame dataSet is already in your workspace
+
+# Specify an ANOVA model (with `aov`) of SpeechRate ~ Sex. Store the model in the variable 'model'
+model<-aov(SpeechRate ~ Sex, dataSet)
+# Compute a summary of the model object
+summary(model)
+# Use TukeyHSD (Tukey Honest Significant Difference) test to establish which groups are significantly different from each other
+TukeyHSD(model)
+# What do you see? Are the differences between the Sex groups significant? Which groups contribute to this? You will find the correct answer on the Solution tab
+# - The factor is not significant. 
+# - Closer inspection of the pairwise group differences confirms the results we obtained by comparing the by-group means: there is not much difference between the Sex groups and the confidence interval includes zero
+```
+
+```{r ex="Sex_anova_test", type="sct"}
+test_output_contains("summary(model)",  incorrect_msg = "Make sure to compute a summary of the aov model!")
+test_output_contains("TukeyHSD(model)", "Don't forget to perform the TukeyHSD!")
+
+success_msg("I think you did great!")
+```
+
+
+## 4. Two-way anova: the influence of `ageCohort` and `Frequency` on SpeechRate
+### 4.1 Computing and plotting group means
+
+```{r ex="combi_means", type="pre-exercise-code"}
+library(readr)
+library(dplyr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class9_Pluymaekers_et_al_2005.csv")
+dataSet <- mutate_if(dataSet, is.character, as.factor)
+dataSet<-dataSet[abs(scale(dataSet$SpeechRate))<=2, ]
+
+
+```
+
+```{r ex="combi_means", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Compute the grand mean of SpeechRate
+
+# Load the dplyr package
+
+# Use the group_by and summarise functions to compute the mean of SpeechRate by `ageCohort` and `Frequency` 
+
+# Are there large differences between the groups in terms of their SpeechRates? You will find the correct answer on the Solution tab
+
+```
+
+```{r ex="combi_means", type="solution"}
+# The data.frame dataSet is already in your workspace
+# Compute the grand mean of SpeechRate
+mean(dataSet$SpeechRate)
+# Load the dplyr package
+library(dplyr)
+# Use the group_by and summarise functions to compute the mean of SpeechRate by ageCohort and Frequency 
+dataSet %>% 
+  group_by(ageCohort, Frequency) %>%
+  summarise(mean(SpeechRate))
+
+# - Are there large differences between the groups in terms of their SpeechRates? 
+# There are sizeable differences between the groups created by crossing the variables, which amount to almost 2 syllables/second
+
+```
+
+```{r ex="combi_means", type="sct"}
+test_output_contains("mean(dataSet$SpeechRate)",  incorrect_msg = "Make sure to compute the grand mean of the SpeechRate variable!")
+test_output_contains("dataSet %>% group_by(ageCohort, Frequency) %>% summarise(mean(SpeechRate))",   incorrect_msg = "Make sure to compute the mean of the SpeechRate variable by `ageCohort` and `Frequency`!")
+test_library_function("dplyr")
+success_msg("I think you did great!")
+```
+
+### 4.2 Checking the assumptions of a two-way ANOVA 
+- Recall that the assumptions of a two-way ANOVA are the following:
+  - The observations are independent
+  - The response variable is ratio- or interval-scaled
+  - The scores in the groups are normally distributed
+  - The variance is homogeneous, i.e., the variances of the different groups should be equal
+
+
+```{r ex="combi_anova_assumptions", type="pre-exercise-code"}
+library(readr)
+library(dplyr)
+
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class9_Pluymaekers_et_al_2005.csv")
+dataSet <- mutate_if(dataSet, is.character, as.factor)
+dataSet<-dataSet[abs(scale(dataSet$SpeechRate))<=2, ]
+
+```
+
+```{r ex="combi_anova_assumptions", type="sample-code"}
+# The modified data.frame dataSet is already in your workspace
+
+# Load the dplyr package
+
+# Perform a shapiro.test on SpeechRate by `ageCohort` and `Frequency`  to see if the data of in the groups is normally distributed
+
+# Load the car package
+
+# Perform a leveneTest for Frequency to see if the variances are homogeneous 
+
+# Perform a leveneTest for ageCohort to see if the variances are homogeneous 
+
+# What do you see? Are the scores distributed normally? Do they have homogeneous variances? You will find the correct answers on the Solution tab
+
+```
+
+```{r ex="combi_anova_assumptions", type="solution"}
+# The modified data.frame dataSet is already in your workspace
+
+# Load the dplyr package
+library(dplyr)
+
+# Perform a shapiro.test on SpeechRate by Sex to see if the data of in the groups is normally distributed. Use the dplyr functions group_by and summarise
+dataSet %>% 
+  group_by(ageCohort, Frequency) %>%
+  summarise(shapiro.test(SpeechRate)$p.value)
+
+# Load the car package
+library(car)
+# Perform a leveneTest for Frequency to see if the variances are homogeneous 
+leveneTest(SpeechRate ~ Frequency, dataSet)
+# Perform a leveneTest for ageCohort to see if the variances are homogeneous 
+leveneTest(SpeechRate ~ ageCohort, dataSet)
+
+# What do you see? Are the scores distributed normally? Do they have homogeneous variances? You will find the correct answers on the Solution tab
+# - The scores in the groups are  normally distributed.
+# - The groups have homogeneous variances. We are good to go to perform a two-way ANOVA!
+```
+
+```{r ex="combi_anova_assumptions", type="sct"}
+test_output_contains("dataSet %>%  group_by(ageCohort, Frequency) %>%  summarise(shapiro.test(SpeechRate)$p.value)",  incorrect_msg = "Make sure to compute the shapiro.test of the SpeechRate variable!")
+test_output_contains("leveneTest(SpeechRate ~ ageCohort, dataSet)", "Don't forget to perform the leveneTest for ageCohort!")
+test_output_contains("leveneTest(SpeechRate ~ Frequency, dataSet)", "Don't forget to perform the leveneTest for Frequency!")
+
+test_library_function("car")
+test_library_function("dplyr")
+success_msg("I think you did great!")
+```
+
+### 4.3 Performing a two-way ANOVA 
+
+```{r ex="combi_anova_test", type="pre-exercise-code"}
+library(readr)
+library(dplyr)
+
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class9_Pluymaekers_et_al_2005.csv")
+dataSet <- mutate_if(dataSet, is.character, as.factor)
+dataSet<-dataSet[abs(scale(dataSet$SpeechRate))<=2, ]
+
+```
+
+```{r ex="combi_anova_test", type="sample-code"}
+# The modified data.frame dataSet is already in your workspace
+
+# Load the car package
+
+# Specify Sum constrasts
+
+# Specify an ANOVA model of SpeechRate ~ ageCohort + Frequency and their interaction. Store the model in the variable 'model'
+
+# Compute an Anova table of the model with Type III sum of squares
+
+# Use TukeyHSD (Tukey Honest Significant Difference) test to establish which groups are significantly different from each other
+# Compute the test for ageCohort
+
+# Compute the test for Frequency
+
+# What do you see? Are the differences between the groups significant? Is their interaction significant? Which groups contribute to this? You will find the correct answer on the Solution tab
+
+```
+
+```{r ex="combi_anova_test", type="solution"}
+# The modified data.frame dataSet is already in your workspace
+
+# Load the car package
+library(car)
+# Specify Sum constrasts
+options(contr=c("contr.Sum"))
+# Specify an ANOVA model of SpeechRate ~ ageCohort + Frequency and their interaction. Store the model in the variable 'model'
+model<-aov(SpeechRate ~ ageCohort + Frequency + ageCohort *Frequency, dataSet)
+
+# Compute an Anova table of the model with Type III sum of squares
+Anova(model, type="III")
+# Use TukeyHSD (Tukey Honest Significant Difference) test to establish which groups are significantly different from each other
+# Compute the test for ageCohort
+TukeyHSD(model, "ageCohort")
+# Compute the test for Frequency
+TukeyHSD(model, "Frequency")
+
+# - What do you see? Are the differences between the groups significant? 
+# The differences between the groups are not significant once we factor in the effect of other predictors. 
+# - Is their interaction significant? 
+# Their interaction is not significant either 
+# - Which groups contribute to this? 
+# - Since the overall result is not significant, none of the groups contributes to the significance of the result. Note that the TukeyHSD uses a different type of sum of squares (type I), so the p-values you get will not correspond with the p-values you compute with the Anova function
+```
+
+```{r ex="combi_anova_test", type="sct"}
+test_output_contains("TukeyHSD(model, 'ageCohort')", "Don't forget to perform the TukeyHSD for ageCohort!")
+test_output_contains("TukeyHSD(model, 'Frequency')", "Don't forget to perform the TukeyHSD for Frequency!")
+test_output_contains('Anova(model, type="III")', "Don't forget to compute the Anova!")
+test_library_function("car", "Don't forget to load the car package!")
+
+success_msg("I think you did great!")
+```
+
+## 5. Two-way anova: the influence of `ageCohort` and `Sex` on SpeechRate
+### 5.1 Computing and plotting group means
+
+```{r ex="combi_means1", type="pre-exercise-code"}
+library(readr)
+library(dplyr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class9_Pluymaekers_et_al_2005.csv")
+dataSet <- mutate_if(dataSet, is.character, as.factor)
+dataSet<-dataSet[abs(scale(dataSet$SpeechRate))<=2, ]
+
+
+```
+
+```{r ex="combi_means1", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Compute the grand mean of SpeechRate
+
+# Load the dplyr package
+
+# Use the group_by and summarise functions to compute the mean of SpeechRate by `ageCohort` and `Sex` 
+
+# Are there large differences between the groups in terms of their SpeechRates? You will find the correct answer on the Solution tab
+
+```
+
+```{r ex="combi_means1", type="solution"}
+# The data.frame dataSet is already in your workspace
+# Compute the grand mean of SpeechRate
+mean(dataSet$SpeechRate)
+# Load the dplyr package
+library(dplyr)
+# Use the group_by and summarise functions to compute the mean of SpeechRate by ageCohort and Sex 
+dataSet %>% 
+  group_by(ageCohort, Sex) %>%
+  summarise(mean(SpeechRate))
+
+# - Are there large differences between the groups in terms of their SpeechRates? 
+# There are sizeable differences between the groups created by crossing the variables, which amount to almost 2 syllables/second
+
+```
+
+```{r ex="combi_means1", type="sct"}
+test_output_contains("mean(dataSet$SpeechRate)",  incorrect_msg = "Make sure to compute the grand mean of the SpeechRate variable!")
+test_output_contains("dataSet %>% group_by(ageCohort, Sex) %>% summarise(mean(SpeechRate))",   incorrect_msg = "Make sure to compute the mean of the SpeechRate variable by `ageCohort` and `Sex`!")
+test_library_function("dplyr")
+success_msg("I think you did great!")
+```
+
+### 5.2 Checking the assumptions of a two-way ANOVA 
+- Recall that the assumptions of a two-way ANOVA are the following:
+  - The observations are independent
+  - The response variable is ratio- or interval-scaled
+  - The scores in the groups are normally distributed
+  - The variance is homogeneous, i.e., the variances of the different groups should be equal
+
+
+```{r ex="combi_anova_assumptions1", type="pre-exercise-code"}
+library(readr)
+library(dplyr)
+
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class9_Pluymaekers_et_al_2005.csv")
+dataSet <- mutate_if(dataSet, is.character, as.factor)
+dataSet<-dataSet[abs(scale(dataSet$SpeechRate))<=2, ]
+
+```
+
+```{r ex="combi_anova_assumptions1", type="sample-code"}
+# The modified data.frame dataSet is already in your workspace
+
+# Load the dplyr package
+
+# Perform a shapiro.test on SpeechRate by `ageCohort` and `Sex`  to see if the data of in the groups is normally distributed
+
+# Load the car package
+
+# Perform a leveneTest for Sex to see if the variances are homogeneous 
+
+# Perform a leveneTest for ageCohort to see if the variances are homogeneous 
+
+# What do you see? Are the scores distributed normally? Do they have homogeneous variances? You will find the correct answers on the Solution tab
+
+```
+
+```{r ex="combi_anova_assumptions1", type="solution"}
+# The modified data.frame dataSet is already in your workspace
+
+# Load the dplyr package
+library(dplyr)
+
+# Perform a shapiro.test on SpeechRate by Sex to see if the data of in the groups is normally distributed. Use the dplyr functions group_by and summarise
+dataSet %>% 
+  group_by(ageCohort, Sex) %>%
+  summarise(shapiro.test(SpeechRate)$p.value)
+
+# Load the car package
+library(car)
+# Perform a leveneTest for Sex to see if the variances are homogeneous 
+leveneTest(SpeechRate ~ Sex, dataSet)
+# Perform a leveneTest for ageCohort to see if the variances are homogeneous 
+leveneTest(SpeechRate ~ ageCohort, dataSet)
+
+# What do you see? Are the scores distributed normally? Do they have homogeneous variances? You will find the correct answers on the Solution tab
+# - The scores in the groups are  normally distributed.
+# - The groups have homogeneous variances. We are good to go to perform a two-way ANOVA!
+```
+
+```{r ex="combi_anova_assumptions1", type="sct"}
+test_output_contains("dataSet %>%  group_by(ageCohort, Sex) %>%  summarise(shapiro.test(SpeechRate)$p.value)",  incorrect_msg = "Make sure to compute the shapiro.test of the SpeechRate variable!")
+test_output_contains("leveneTest(SpeechRate ~ ageCohort, dataSet)", "Don't forget to perform the leveneTest for ageCohort!")
+test_output_contains("leveneTest(SpeechRate ~ Sex, dataSet)", "Don't forget to perform the leveneTest for Sex!")
+test_library_function("car")
+test_library_function("dplyr")
+success_msg("I think you did great!")
+```
+
+### 5.3 Performing a two-way ANOVA 
+
+```{r ex="combi_anova_test1", type="pre-exercise-code"}
+library(readr)
+library(dplyr)
+
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class9_Pluymaekers_et_al_2005.csv")
+dataSet <- mutate_if(dataSet, is.character, as.factor)
+dataSet<-dataSet[abs(scale(dataSet$SpeechRate))<=2, ]
+
+```
+
+```{r ex="combi_anova_test1", type="sample-code"}
+# The modified data.frame dataSet is already in your workspace
+
+# Load the car package
+
+# Specify Sum constrasts
+
+# Specify an ANOVA model of SpeechRate ~ ageCohort + Sex and their interaction. Store the model in the variable 'model'
+
+# Compute an Anova table of the model with Type III sum of squares
+
+# Use TukeyHSD (Tukey Honest Significant Difference) test to establish which groups are significantly different from each other
+# Compute the test for ageCohort
+
+# Compute the test for Sex
+
+# What do you see? Are the differences between the groups significant? Is their interaction significant? Which groups contribute to this? You will find the correct answer on the Solution tab
+
+```
+
+```{r ex="combi_anova_test1", type="solution"}
+# The modified data.frame dataSet is already in your workspace
+
+# Load the car package
+library(car)
+# Specify Sum constrasts
+options(contr=c("contr.Sum"))
+# Specify an ANOVA model of SpeechRate ~ ageCohort + Sex and their interaction. Store the model in the variable 'model'
+model<-aov(SpeechRate ~ ageCohort + Sex + ageCohort *Sex, dataSet)
+# Compute an Anova table of the model with Type III sum of squares
+Anova(model, type="III")
+# Use TukeyHSD (Tukey Honest Significant Difference) test to establish which groups are significantly different from each other
+# Compute the test for ageCohort
+TukeyHSD(model, "ageCohort")
+# Compute the test for Sex
+TukeyHSD(model, "Sex")
+
+# - What do you see? Are the differences between the groups significant? 
+# The differences between the groups are not significant once we factor in the effect of other predictors. 
+# - Is their interaction significant? 
+# Their interaction is not significant either 
+# - Which groups contribute to this? 
+# - Since the overall result is not significant, none of the groups contributes to the significance of the result. Note that the TukeyHSD uses a different type of sum of squares (type I), so the p-values you get will not correspond with the p-values you compute with the Anova function
+```
+
+```{r ex="combi_anova_test1", type="sct"}
+test_output_contains("TukeyHSD(model, 'ageCohort')", "Don't forget to perform the TukeyHSD for ageCohort!")
+test_output_contains("TukeyHSD(model, 'Sex')", "Don't forget to perform the TukeyHSD for Sex!")
+test_output_contains('Anova(model, type="III")', "Don't forget to compute the Anova!")
+test_library_function("car", "Don't forget to load the car package!")
+success_msg("I think you did great!")
+```
+
+
+## References
+Pluymaekers, M., Ernestus, M. and Baayen, R. H. (2005) Frequency and acoustic length: the case of derivational affixes in Dutch, *Journal of the Acoustical Society of America*, 118, 2561-2569.

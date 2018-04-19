@@ -6,7 +6,7 @@ output:
     theme: lumen
 ---
 
-Welcome to the companion site for the course *LFIAL2260 - Statistics for linguistics*. 
+Welcome to the companion site for the course *LFIAL2260 - Statistics for linguistics*. All materials on this website are released under the terms of the [CC BY-NC-SA 4.0 license](https://creativecommons.org/licenses/by-nc-sa/4.0/). 
 
 ## Slides
 The slides for the classes are available for download here: 
@@ -19,7 +19,7 @@ The slides for the classes are available for download here:
 - [Topic 6: Associations between qualitative variables](http://www.jeroenclaes.be/statistics_for_linguistics/slides/Class6.html)
 - [Topic 7: Linear regression: Theory and assumptions](http://www.jeroenclaes.be/statistics_for_linguistics/slides/Class7.html)
 - [Topic 8: The science (or art?) of fitting linear regression models](http://www.jeroenclaes.be/statistics_for_linguistics/slides/Class8.html)
-- Topic 9: Analysis of Variance
+- [Topic 9: Analysis of Variance](http://www.jeroenclaes.be/statistics_for_linguistics/slides/Class9.html)
 - Topic 10: Logistic regression: Theory, assumptions and model fitting (with elements of Poisson and Negative Binomial regression)
 - Topic 11: Mixed-effects regression  
 - Topic 12: When things aren't quite linear: Polynomial regression and Generalized Additive Modeling
@@ -34,6 +34,7 @@ A version of the slides rendered as Word documents can be found here so can you 
 - [Topic 6: Associations between qualitative variables](http://www.jeroenclaes.be/statistics_for_linguistics/syllabus/Class6.docx)
 - [Topic 7: Linear regression: Theory and assumptions](http://www.jeroenclaes.be/statistics_for_linguistics/syllabus/Class7.docx)
 - [Topic 8: The science (or art?) of fitting linear regression models](http://www.jeroenclaes.be/statistics_for_linguistics/syllabus/Class8.docx)
+- [Topic 9: Analysis of Variance](http://www.jeroenclaes.be/statistics_for_linguistics/syllabus/Class9.docx)
 
 ## Labs
 - [Lab 1: Objects, vectors, and basic mathematics](http://www.jeroenclaes.be/statistics_for_linguistics/class1.html)
@@ -43,7 +44,8 @@ A version of the slides rendered as Word documents can be found here so can you 
 - [Lab 5: Correlations](http://www.jeroenclaes.be/statistics_for_linguistics/class5.html)
 - [Lab 6: Associations between qualitative variables](http://www.jeroenclaes.be/statistics_for_linguistics/class6.html)
 - [Lab 7: Linear regression: Theory and assumptions](http://www.jeroenclaes.be/statistics_for_linguistics/class7.html)
-- [Topic 8: The science (or art?) of fitting linear regression models](http://www.jeroenclaes.be/statistics_for_linguistics/class8.html)
+- [Lab 8: The science (or art?) of fitting linear regression models](http://www.jeroenclaes.be/statistics_for_linguistics/class8.html)
+- [Lab 9: Analysis of Variance](http://www.jeroenclaes.be/statistics_for_linguistics/class9.html)
 
 ## R and RStudio cheat sheets (provided by RStudio)
 - [Basic R](http://www.jeroenclaes.be/statistics_for_linguistics/cheatsheets/baseR.pdf)
@@ -54,6 +56,7 @@ A version of the slides rendered as Word documents can be found here so can you 
 ## Recommended literature (available upon request)
 - Baayen, R. H. (2008). *Analyzing Linguistic Data: A Practical Introduction to Statistics Using R.* Cambridge: Cambridge University Press.	
 - Burnham, K., & Anderson, D. (2002). *Model selection and multi-model inference: A practical information-theoretic approach*. New York, NY: Springer.
+- Field, A., Miles, J., & Field, Z. (2012). *Discovering statistics using R*. New York, NY/London: SAGE.
 - Fox, J. & Weisberg, S. (2011). *An R companion to applied regression*. Los Angeles, LA: Sage.
 - Hosmer, D., Lemeshow, S., & Sturdivant, R. (2013). *Applied logistic regression*. Oxford: Wiley. 
 - Gries, S. Th. (2009). *Quantitative corpus linguistics with R.* Berlin/Boston, MA: De Gruyter.	
