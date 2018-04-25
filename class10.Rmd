@@ -1,0 +1,932 @@
+---
+title: "Topic 10:  Logistic regression"
+author: "Jeroen Claes | <jeroen.claes@kuleuven.be> | <jeroen@cropland.be>"
+output: 
+ html_document:
+  self_contained: false 
+---
+
+```{r, include=FALSE}
+#library(testwhat)
+tutorial::go_interactive()
+```
+
+
+## The dative alternation in four varieties of English
+- In a recent effort, Bresnan, Rosenbach, Szmrecsanyi, Tagliamonte, & Todd (2017) applied a common coding scheme to their datasets of the dative alternation (e.g., *I gave him the book* vs *I gave the book to him*)
+- The resulting database is annotated consistently and covers four varieties of English: Canada, New Zealand, United Kingdom, and United States
+- Here we will work with a subset of their predictors:
+    - `Response.variable`: D(ative) vs. P(repositional dative)
+    - `Variety`
+    - `Speaker`
+    - `Speaker.sex`
+    - `Speaker.YOB`: Year of birth
+    - `Semantics`: use of *to give* to indicate T(ransfer), C(ommunication), or A(bstract) 
+    - `Recipient.type`:N(oun phrase), P(ersonal pronoun), D(emonstrative pronoun), I(mpersonal pronoun)
+    - `Recipient.animacy`: A(nimate), C(ollective), T(emporal), L(ocative), I(nanimate)
+    - `Recipient.definiteness`
+    - `Theme.type`: N(oun phrase), P(ersonal pronoun), D(emonstrative pronoun), I(mpersonal pronoun)
+    - `Theme.animacy`: A(nimate), C(ollective), T(emporal), L(ocative), I(nanimate)
+
+## 1. Loading the data
+```{r ex="load", type="sample-code"}
+# Load the readr package
+
+# Load the course data from the course website to the object 'dataSet':
+# http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv
+
+# Load the dplyr package
+
+# Convert all character values to Factor with `mutate_if`
+
+# Print a 'summary' of the dataSet
+
+```
+
+```{r ex="load", type="solution"}
+# Load the readr package
+library(readr)
+# Load the course data from the course website to the object 'dataSet':
+#http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv
+dataSet<-read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv")
+# Load the dplyr package
+library(dplyr)
+# Convert all character values to Factor with `mutate_if`
+dataSet <- mutate_if(dataSet, is.character, as.factor)
+# Print a 'summary' of the dataSet
+summary(dataSet)
+```
+
+```{r ex="load", type="sct"}
+test_object("dataSet")
+test_library_function("readr", "Make sure to call the 'readr' package!")
+test_library_function("dplyr", "Make sure to call the 'dplyr' package!")
+test_output_contains("summary(dataSet)",   incorrect_msg = "Make sure to print a 'summary' of the data!")
+success_msg("Great!")
+```
+
+## 2. Getting to know the predictors
+### 2.1 `Response.variable`
+
+```{r ex="shape_Response.variable", type="pre-exercise-code"}
+library(readr)
+library(dplyr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv") %>% mutate_if(is.character, as.factor)
+```
+
+```{r ex="shape_Response.variable", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Compute a table of Response.variable
+
+# Compute proportions for the table
+
+# Are the categories distributed evenly? You will find the correct answer on the Solution tab
+
+```
+
+```{r ex="shape_Response.variable", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Compute a table of Response.variable
+table(dataSet$Response.variable)
+
+# Compute proportions for the table
+prop.table(table(dataSet$Response.variable))
+
+# Are the categories distributed evenly? 
+# - No, not at all, the prepositional dative occurs far less often than the dative construction
+```
+
+```{r ex="shape_Response.variable", type="sct"}
+test_output_contains("table(dataSet$Response.variable)",   incorrect_msg = "Make sure to compute a table for the Response.variable variable!")
+test_output_contains("prop.table(table(dataSet$Response.variable))",   incorrect_msg = "Make sure to compute proportions for the Response.variable variable!")
+success_msg("Well done!")
+```
+
+### 2.2 `Variety`
+
+```{r ex="shape_Variety", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv")
+```
+
+```{r ex="shape_Variety", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Compute a table of Variety
+
+# Compute proportions for the table
+
+# Are the categories distributed evenly? You will find the correct answer on the Solution tab
+
+```
+
+```{r ex="shape_Variety", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Compute a table of Variety
+table(dataSet$Variety)
+
+# Compute proportions for the table
+prop.table(table(dataSet$Variety))
+
+# Are the categories distributed evenly? 
+# - Not quite. NZ contributes about 10% less tokens than the US.
+```
+
+```{r ex="shape_Variety", type="sct"}
+test_output_contains("table(dataSet$Variety)",   incorrect_msg = "Make sure to compute a table for the Variety variable!")
+test_output_contains("prop.table(table(dataSet$Variety))",   incorrect_msg = "Make sure to compute proportions for the Variety variable!")
+success_msg("Well done!")
+```
+
+### 2.3 `Speaker.sex`
+
+```{r ex="shape_Speaker.sex", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv")
+```
+
+```{r ex="shape_Speaker.sex", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Compute a table of Speaker.sex
+
+# Compute proportions for the table
+
+# Are the categories distributed evenly? You will find the correct answer on the Solution tab
+
+```
+
+```{r ex="shape_Speaker.sex", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Compute a table of Speaker.sex
+table(dataSet$Speaker.sex)
+
+# Compute proportions for the table
+prop.table(table(dataSet$Speaker.sex))
+
+# Are the categories distributed evenly? 
+# - Yes, there are about as many tokens for males as there are for females
+```
+
+```{r ex="shape_Speaker.sex", type="sct"}
+test_output_contains("table(dataSet$Speaker.sex)",   incorrect_msg = "Make sure to compute a table for the Speaker.sex variable!")
+test_output_contains("prop.table(table(dataSet$Speaker.sex))",   incorrect_msg = "Make sure to compute proportions for the Speaker.sex variable!")
+success_msg("Well done!")
+```
+
+
+### 2.4 `Speaker.YOB`
+#### 2.4.1 Central tendency
+```{r ex="shape_Speaker.YOB", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv")
+```
+
+```{r ex="shape_Speaker.YOB", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Compute the mean of Speaker.YOB
+
+# Compute the median of Speaker.YOB
+
+# Draw a qqplot of Speaker.YOB
+
+# Does the data look normally distributed? You will find the correct answer on the Solution tab
+
+```
+
+```{r ex="shape_Speaker.YOB", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Compute the mean of Speaker.YOB
+mean(dataSet$Speaker.YOB)
+
+# Compute the median of Speaker.YOB
+median(dataSet$Speaker.YOB)
+
+# Draw a qqplot of Speaker.YOB
+qqnorm(dataSet$Speaker.YOB)
+qqline(dataSet$Speaker.YOB)
+
+# Does the data look normally distributed? You will find the correct answer on the Solution tab
+# - The data do not follow the normal distribution 
+# - The mean and the median are some three years apart
+
+```
+
+```{r ex="shape_Speaker.YOB", type="sct"}
+test_output_contains("mean(dataSet$Speaker.YOB)",   incorrect_msg = "Make sure to compute the mean of the Speaker.YOB variable!")
+test_output_contains("median(dataSet$Speaker.YOB)",   incorrect_msg = "Make sure to compute the median of the Speaker.YOB variable!")
+success_msg("I can't evaluate your plot, but I think you did great!")
+```
+
+#### 2.4.2 Dispersion
+```{r ex="dispersion_Speaker.YOB", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv")
+```
+
+```{r ex="dispersion_Speaker.YOB", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Compute the standard deviation of Speaker.YOB
+
+# Compute a summary of Speaker.YOB
+
+# Load the ggplot2 package
+
+# Draw a boxplot of the Speaker.YOB variable
+
+# Is the data highly dispersed and/or are there any outliers? You will find the correct answer on the Solution tab
+
+```
+
+```{r ex="dispersion_Speaker.YOB", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Compute the standard deviation of Speaker.YOB
+sd(dataSet$Speaker.YOB)
+# Compute a summary of Speaker.YOB
+summary(dataSet$Speaker.YOB)
+# Load the ggplot2 package
+library(ggplot2)
+# Draw a boxplot of the Speaker.YOB variable
+ggplot(dataSet, aes(x=1, y=Speaker.YOB)) + geom_boxplot()
+# Is the data highly dispersed and/or are there any outliers? 
+# - The standard deviation is very high,  suggesting a high degree of dispersion
+# - However, if we substract the standard deviation from the mean,  we add the standard deviation to the mean and we compare these numbers to the 1st and the 3rd quartile we can see that more than 50% of the values are clustered within one standard deviation from the mean
+# - This points to a low level of dispersion and a distribution that comes close to being normal, but there appear to be some very atypical values in the left tail
+# - The boxplot reveals that this is indeed the case (there are quite a few dots on the bottom end of the plot)
+```
+
+```{r ex="dispersion_Speaker.YOB", type="sct"}
+test_output_contains("sd(dataSet$Speaker.YOB)",   incorrect_msg = "Make sure to compute the standard deviation of the Speaker.YOB variable!")
+test_output_contains("summary(dataSet$Speaker.YOB)",   incorrect_msg = "Make sure to compute a summary of the Speaker.YOB variable!")
+test_library_function("ggplot2")
+test_ggplot(1)
+success_msg("Good work!")
+```
+
+### 2.5 `Semantics`
+
+```{r ex="shape_Semantics", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv")
+```
+
+```{r ex="shape_Semantics", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Compute a table of Semantics
+
+# Compute proportions for the table
+
+# Are the categories distributed evenly? You will find the correct answer on the Solution tab
+
+```
+
+```{r ex="shape_Semantics", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Compute a table of Semantics
+table(dataSet$Semantics)
+
+# Compute proportions for the table
+prop.table(table(dataSet$Semantics))
+
+# Are the categories distributed evenly? 
+# - No, the C(ommunication) category provides only 10% of the occurrences
+```
+
+```{r ex="shape_Semantics", type="sct"}
+test_output_contains("table(dataSet$Semantics)",   incorrect_msg = "Make sure to compute a table for the Semantics variable!")
+test_output_contains("prop.table(table(dataSet$Semantics))",   incorrect_msg = "Make sure to compute proportions for the Semantics variable!")
+success_msg("Well done!")
+```
+
+
+### 2.6 `Recipient.type`
+
+```{r ex="shape_Recipient.type", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv")
+```
+
+```{r ex="shape_Recipient.type", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Compute a table of Recipient.type
+
+# Compute proportions for the table
+
+# Are the categories distributed evenly? You will find the correct answer on the Solution tab
+
+```
+
+```{r ex="shape_Recipient.type", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Compute a table of Recipient.type
+table(dataSet$Recipient.type)
+
+# Compute proportions for the table
+prop.table(table(dataSet$Recipient.type))
+
+# Are the categories distributed evenly? 
+# - No, the D(emonstrative pronoun) and I(mpersonal pronoun) categories  only provide a handful of ocurrences. We will have to collapse or exclude these two further into a coding of Pronouns vs. Others
+```
+
+```{r ex="shape_Recipient.type", type="sct"}
+test_output_contains("table(dataSet$Recipient.type)",   incorrect_msg = "Make sure to compute a table for the Recipient.type variable!")
+test_output_contains("prop.table(table(dataSet$Recipient.type))",   incorrect_msg = "Make sure to compute proportions for the Recipient.type variable!")
+success_msg("Well done!")
+```
+
+### 2.7 `Recipient.animacy`
+
+```{r ex="shape_Recipient.animacy", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv")
+```
+
+```{r ex="shape_Recipient.animacy", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Compute a table of Recipient.animacy
+
+# Compute proportions for the table
+
+# Are the categories distributed evenly? You will find the correct answer on the Solution tab
+
+```
+
+```{r ex="shape_Recipient.animacy", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Compute a table of Recipient.animacy
+table(dataSet$Recipient.animacy)
+
+# Compute proportions for the table
+prop.table(table(dataSet$Recipient.animacy))
+
+# Are the categories distributed evenly? 
+# - No, A(nimates) are by far the most frequent category. Looking at the proportions, it seems a good idea to recode this factor to a Animates vs. Others coding
+```
+
+```{r ex="shape_Recipient.animacy", type="sct"}
+test_output_contains("table(dataSet$Recipient.animacy)",   incorrect_msg = "Make sure to compute a table for the Recipient.animacy variable!")
+test_output_contains("prop.table(table(dataSet$Recipient.animacy))",   incorrect_msg = "Make sure to compute proportions for the Recipient.animacy variable!")
+success_msg("Well done!")
+```
+
+### 2.8 `Recipient.definiteness`
+
+```{r ex="shape_Recipient.definiteness", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv")
+```
+
+```{r ex="shape_Recipient.definiteness", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Compute a table of Recipient.definiteness
+
+# Compute proportions for the table
+
+# Are the categories distributed evenly? You will find the correct answer on the Solution tab
+
+```
+
+```{r ex="shape_Recipient.definiteness", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Compute a table of Recipient.definiteness
+table(dataSet$Recipient.definiteness)
+
+# Compute proportions for the table
+prop.table(table(dataSet$Recipient.definiteness))
+
+# Are the categories distributed evenly? 
+# - No, Definite is by far the most frequent group. 
+```
+
+```{r ex="shape_Recipient.definiteness", type="sct"}
+test_output_contains("table(dataSet$Recipient.definiteness)",   incorrect_msg = "Make sure to compute a table for the Recipient.definiteness variable!")
+test_output_contains("prop.table(table(dataSet$Recipient.definiteness))",   incorrect_msg = "Make sure to compute proportions for the Recipient.definiteness variable!")
+success_msg("Well done!")
+```
+
+### 2.9 `Theme.type`
+
+```{r ex="shape_Theme.type", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv")
+```
+
+```{r ex="shape_Theme.type", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Compute a table of Theme.type
+
+# Compute proportions for the table
+
+# Are the categories distributed evenly? You will find the correct answer on the Solution tab
+
+```
+
+```{r ex="shape_Theme.type", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Compute a table of Theme.type
+table(dataSet$Theme.type)
+
+# Compute proportions for the table
+prop.table(table(dataSet$Theme.type))
+
+# Are the categories distributed evenly? 
+# - No, Nouns are by far the most frequently occuring group. It will be a good idea to recode this factor into Nouns vs. others
+```
+
+```{r ex="shape_Theme.type", type="sct"}
+test_output_contains("table(dataSet$Theme.type)",   incorrect_msg = "Make sure to compute a table for the Theme.type variable!")
+test_output_contains("prop.table(table(dataSet$Theme.type))",   incorrect_msg = "Make sure to compute proportions for the Theme.type variable!")
+success_msg("Well done!")
+```
+
+### 2.10 `Theme.animacy`
+
+```{r ex="shape_Theme.animacy", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv")
+```
+
+```{r ex="shape_Theme.animacy", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Compute a table of Theme.animacy
+
+# Compute proportions for the table
+
+# Are the categories distributed evenly? You will find the correct answer on the Solution tab
+
+```
+
+```{r ex="shape_Theme.animacy", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Compute a table of Theme.animacy
+table(dataSet$Theme.animacy)
+
+# Compute proportions for the table
+prop.table(table(dataSet$Theme.animacy))
+
+# Are the categories distributed evenly? 
+# - No, I(nanimates) occur in the vast majority of the cases. It may be a good idea to recode this factor to Inanimate vs. others
+```
+
+```{r ex="shape_Theme.animacy", type="sct"}
+test_output_contains("table(dataSet$Theme.animacy)",   incorrect_msg = "Make sure to compute a table for the Theme.animacy variable!")
+test_output_contains("prop.table(table(dataSet$Theme.animacy))",   incorrect_msg = "Make sure to compute proportions for the Theme.animacy variable!")
+success_msg("Well done!")
+```
+
+
+## 4. Recoding unbalanced categories
+
+```{r ex="recoding", type="pre-exercise-code"}
+library(readr)
+library(dplyr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv") %>% mutate_if(is.character, as.factor)
+```
+
+```{r ex="recoding", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Load the dplyr package
+
+# Recode Recipient.type so that its D, I, and N categories are collapsed in a new 'O' category
+
+# Recode Recipient.animacy so that its C, I, and L categories are collapsed in a new 'O' category
+
+# Recode Theme.type so that its P, I, and D categories are collapsed in a new 'O' category
+
+# Recode Theme.animacy so that its C, A, L,  and T categories are collapsed in a new 'O' category
+
+# Print a summary of the dataSet
+```
+
+```{r ex="recoding", type="solution"}
+# The data.frame dataSet is already in your workspace
+# Load the dplyr package
+library(dplyr)
+# Recode Recipient.type so that its D, I, and N categories are collapsed in a new 'O' category
+dataSet$Recipient.type<-recode(dataSet$Recipient.type, D="O", I="O", N="O")
+# Recode Recipient.animacy so that its C, I, and L categories are collapsed in a new 'O' category
+dataSet$Recipient.animacy<-recode(dataSet$Recipient.animacy, C="O", I="O", L="O")
+# Recode Theme.type so that its P, I, and D categories are collapsed in a new 'O' category
+dataSet$Theme.type<-recode(dataSet$Theme.type, P="O", I="O", D="O")
+# Recode Theme.animacy so that its C, A, L,  and T categories are collapsed in a new 'O' category
+dataSet$Theme.animacy<-recode(dataSet$Theme.animacy, C="O", A="O", L="O", T="O")
+
+# Print a summary of the dataSet
+summary(dataSet)
+```
+
+```{r ex="recoding", type="sct"}
+test_output_contains("summary(dataSet)",   incorrect_msg = "Make sure to print a summary of the recoded dataset!")
+test_library_function("dplyr", "Don't forget to load the dplyr package!")
+success_msg("Well done!")
+```
+
+## 5. Fitting a first logistic regression model
+- In the interest of time, we are going to skip a few steps here:
+    - Normally would draw tables and plots for the univariate effects of your independent variables on the dependent variable
+    - You would also draw pairwise faceted plots to scout for interactions
+
+```{r ex="firstmodel", type="pre-exercise-code"}
+library(readr)
+library(dplyr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv") %>% mutate_if(is.character, as.factor)
+dataSet$Recipient.type<-recode(dataSet$Recipient.type, D="O", I="O", N="O")
+# Recode Recipient.animacy so that its C, I, and L categories are collapsed in a new 'O' category
+dataSet$Recipient.animacy<-recode(dataSet$Recipient.animacy, C="O", I="O", L="O")
+# Recode Theme.type so that its P, I, and D categories are collapsed in a new 'O' category
+dataSet$Theme.type<-recode(dataSet$Theme.type, P="O", I="O", D="O")
+# Recode Theme.animacy so that its C, A, L,  and T categories are collapsed in a new 'O' category
+dataSet$Theme.animacy<-recode(dataSet$Theme.animacy, C="O", A="O", L="O", T="O")
+```
+
+```{r ex="firstmodel", type="sample-code"}
+# The recoded data.frame dataSet is already in your workspace
+
+# Load the car package
+
+# Specify Sum contrasts 
+
+# Fit a logistic regression model "mod" that regresses Response.variable on Variety + Speaker.sex + Speaker.YOB + Semantics + Recipient.type + Recipient.animacy + Recipient.definiteness + Theme.type + Theme.animacy
+
+# Print a summary of the model
+```
+
+```{r ex="firstmodel", type="solution"}
+# The recoded data.frame dataSet is already in your workspace
+
+# Load the car package
+library(car)
+# Specify Sum contrasts 
+options(contr=c("contr.Sum", "contr.Poly"))
+# Fit a logistic regression model "mod" that regresses Response.variable on Variety + Speaker.sex + Speaker.YOB + Semantics + Recipient.type + Recipient.animacy + Recipient.definiteness + Theme.type + Theme.animacy
+mod <- glm(Response.variable ~ Variety + Speaker.sex + Speaker.YOB + Semantics + Recipient.type + Recipient.animacy + Recipient.definiteness + Theme.type + Theme.animacy, family="binomial", data = dataSet)
+# Print a summary of the model
+summary(mod)
+```
+
+```{r ex="firstmodel", type="sct"}
+test_output_contains("summary(mod)",   incorrect_msg = "Make sure to print a summary of the model!")
+test_library_function("car", "Don't forget to load the car package!")
+success_msg("Well done!")
+```
+
+
+## 6. Checking the model assumptions
+```{r ex="assumptions", type="pre-exercise-code"}
+library(readr)
+library(dplyr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv") %>% mutate_if(is.character, as.factor)
+dataSet$Recipient.type<-recode(dataSet$Recipient.type, D="O", I="O", N="O")
+# Recode Recipient.animacy so that its C, I, and L categories are collapsed in a new 'O' category
+dataSet$Recipient.animacy<-recode(dataSet$Recipient.animacy, C="O", I="O", L="O")
+# Recode Theme.type so that its P, I, and D categories are collapsed in a new 'O' category
+dataSet$Theme.type<-recode(dataSet$Theme.type, P="O", I="O", D="O")
+# Recode Theme.animacy so that its C, A, L,  and T categories are collapsed in a new 'O' category
+dataSet$Theme.animacy<-recode(dataSet$Theme.animacy, C="O", A="O", L="O", T="O")
+library(car)
+options(contr=c("contr.Sum", "contr.Poly"))
+mod <- glm(Response.variable ~ Variety + Speaker.sex + Speaker.YOB + Semantics + Recipient.type + Recipient.animacy + Recipient.definiteness + Theme.type + Theme.animacy, family="binomial", data = dataSet)
+
+```
+
+```{r ex="assumptions", type="sample-code"}
+# The recoded data.frame dataSet is already in your workspace
+# The model mod is already in your workspace
+
+# Load the car package
+
+# Check for multicollinearity by calculating the VIF of the model
+
+# Check for overdispersion by comparing the Residual deviance to the residual degrees of freedom
+
+# Check if Speaker.YOB is linearly related to the logit of Response.variable. Define a model mod2 that includes the interaction Speaker.YOB*log(Speaker.YOB)
+
+# Print a summary of mod2
+
+# Draw an influence plot. 
+
+# Remove the observations that are too influential 
+
+# What do you find? Is multicollinearity an issue? Is overdispersion an issue? Is Speaker.YOB linearly related to the logit of Response.variable.? Are there overly influential observations? You will find the correct answer on the Solution tab
+```
+
+```{r ex="assumptions", type="solution"}
+# The recoded data.frame dataSet is already in your workspace
+# The model mod is already in your workspace
+
+# Load the car package
+library(car)
+# Check for multicollinearity by calculating the VIF of the model
+vif(mod)
+# Check for overdispersion by comparing the Residual deviance to the residual degrees of freedom
+mod$deviance >  mod$df.residual
+# Check if Speaker.YOB is linearly related to the logit of Response.variable. Define a model mod2 that includes the interaction Speaker.YOB*log(Speaker.YOB)
+mod2 <- glm(Response.variable ~ Variety + Speaker.sex + Speaker.YOB + Semantics + Recipient.type + Recipient.animacy + Recipient.definiteness + Theme.type + Theme.animacy + Speaker.YOB*log(Speaker.YOB), family="binomial", data = dataSet)
+# Print a summary of mod2
+summary(mod2)
+# Draw an influence plot and store its output in the variable obsToRemove 
+obsToRemove<-influencePlot(mod)
+# Remove the observations that are too influential 
+dataSet <- dataSet[-as.numeric(rownames(obsToRemove)),]
+# What do you find? Is multicollinearity an issue? 
+# No, all VIF are below 5
+# Is overdispersion an issue? 
+# - No, the residual deviance is smaller than the residual degrees of freedom. 
+# Is Speaker.YOB linearly related to the logit of Response.variable.? 
+# - No, the interaction Speaker.YOB*log(Speaker.YOB) did not turn out to be significant
+# Are there overly influential observations? 
+# - Yes.
+```
+
+```{r ex="assumptions", type="sct"}
+test_library_function("car", "Don't forget to load the car package!")
+
+test_output_contains("mod$deviance >  mod$df.residual",   incorrect_msg = "Make sure to compare the model's residual deviance to the model's residual degrees of freedom!")
+
+test_output_contains("vif(mod)",   incorrect_msg = "Make sure to compute the variance inflation factors!")
+test_output_contains("summary(mod2)", incorrect_msg = "Make sure you print a summary of mod2 so you can inspect the significance of the Speaker.YOB*log(Speaker.YOB) interaction!")
+success_msg("Well done!")
+```
+
+## 7. Occam's razor
+
+```{r ex="occam", type="pre-exercise-code"}
+library(readr)
+library(dplyr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv") %>% mutate_if(is.character, as.factor)
+dataSet$Recipient.type<-recode(dataSet$Recipient.type, D="O", I="O", N="O")
+# Recode Recipient.animacy so that its C, I, and L categories are collapsed in a new 'O' category
+dataSet$Recipient.animacy<-recode(dataSet$Recipient.animacy, C="O", I="O", L="O")
+# Recode Theme.type so that its P, I, and D categories are collapsed in a new 'O' category
+dataSet$Theme.type<-recode(dataSet$Theme.type, P="O", I="O", D="O")
+# Recode Theme.animacy so that its C, A, L,  and T categories are collapsed in a new 'O' category
+dataSet$Theme.animacy<-recode(dataSet$Theme.animacy, C="O", A="O", L="O", T="O")
+library(car)
+options(contr=c("contr.Sum", "contr.Poly"))
+dataSet<-dataSet[-c(3703,3943 ),]
+mod <- glm(Response.variable ~ Variety + Speaker.sex + Speaker.YOB + Semantics + Recipient.type + Recipient.animacy + Recipient.definiteness + Theme.type + Theme.animacy, family="binomial", data = dataSet)
+
+```
+
+```{r ex="occam", type="sample-code"}
+# The recoded data.frame dataSet is already in your workspace
+# The model mod is already in your workspace
+
+# Print a summary of mod
+
+# You will see that Speaker.YOB, Recipient.definiteness, and Theme.animacy have small effect estimates and/or large values. We should try to remove them one by one
+
+# Specify a model mod2 without Speaker.YOB
+
+# Compare the AIC of mod to that of mod2
+
+# Specify a model mod3 without Recipient.definiteness
+
+# Compare the AIC of mod to that of mod3
+
+# Specify a model mod4 without Theme.animacy
+
+# Compare the AIC of mod3 to that of mod4
+
+# What do you find? Which single term deletion appears to be warranted? 
+```
+
+```{r ex="occam", type="solution"}
+# The recoded data.frame dataSet is already in your workspace
+# The model mod is already in your workspace
+
+# Print a summary of mod
+summary(mod)
+# You will see that Speaker.YOB, Recipient.definiteness, and Theme.animacy have small effect estimates and/or large values. We should try to remove them one by one
+
+# Specify a model mod2 without Speaker.YOB
+mod2 <- glm(Response.variable ~ Variety + Speaker.sex +  Semantics + Recipient.type + Recipient.animacy + Recipient.definiteness + Theme.type + Theme.animacy, family="binomial", data = dataSet)
+# Compare the AIC of mod to that of mod2
+AIC(mod)-AIC(mod2)
+# Specify a model mod3 without Recipient.definiteness
+mod3 <- glm(Response.variable ~ Variety + Speaker.sex +  Semantics + Recipient.type + Recipient.animacy + Speaker.YOB + Theme.type + Theme.animacy, family="binomial", data = dataSet)
+# Compare the AIC of mod to that of mod3
+AIC(mod)-AIC(mod3)
+# Specify a model mod4 without Theme.animacy
+mod4 <- glm(Response.variable ~ Variety + Speaker.sex +  Semantics + Recipient.type + Recipient.animacy + Speaker.YOB + Theme.type, family="binomial", data = dataSet)
+# Compare the AIC of mod3 to that of mod4
+AIC(mod3)-AIC(mod4)
+# What do you find? Which single term deletion appears to be warranted? 
+# Deleting Recipient.definiteness decreases the AIC value with more than two units, so we can safely delete this regressor. Deleting either one of the other two causes a decrease of less than 2 AIC units. 
+```
+
+```{r ex="occam", type="sct"}
+test_output_contains("summary(mod)", incorrect_msg = "Make sure you print a summary of mod!")
+test_output_contains("AIC(mod)-AIC(mod2)", incorrect_msg = "Make sure to compare the AIC value of mod to those of mod2!")
+test_output_contains("AIC(mod)-AIC(mod3)", incorrect_msg = "Make sure to compare the AIC value of mod to that of mod3!")
+test_output_contains("AIC(mod3)-AIC(mod4)", incorrect_msg = "Make sure to compare the AIC value of mod3 to that of mod4!")
+success_msg("Well done!")
+```
+
+## 8. Bootstrapping the model
+```{r ex="bootstrap", type="pre-exercise-code"}
+library(readr)
+library(dplyr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv") %>% mutate_if(is.character, as.factor)
+dataSet$Recipient.type<-recode(dataSet$Recipient.type, D="O", I="O", N="O")
+# Recode Recipient.animacy so that its C, I, and L categories are collapsed in a new 'O' category
+dataSet$Recipient.animacy<-recode(dataSet$Recipient.animacy, C="O", I="O", L="O")
+# Recode Theme.type so that its P, I, and D categories are collapsed in a new 'O' category
+dataSet$Theme.type<-recode(dataSet$Theme.type, P="O", I="O", D="O")
+# Recode Theme.animacy so that its C, A, L,  and T categories are collapsed in a new 'O' category
+dataSet$Theme.animacy<-recode(dataSet$Theme.animacy, C="O", A="O", L="O", T="O")
+library(car)
+options(contr=c("contr.Sum", "contr.Poly"))
+dataSet<-dataSet[-c(3703,3943 ),]
+
+# Hack to make sure that students see always the same intervals, plus this is much faster 
+bootstrap <- function(model, replicates=1000) {
+  suppressWarnings(suppressMessages( read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class1O_Bresnan_et_al_2017_confints.csv")))
+  
+}
+
+```
+
+
+```{r ex="bootstrap", type="sample-code"}
+# The recoded data.frame dataSet is already in your workspace
+# The model mod is already in your workspace
+# The bootstrap function from the slides is already in your workspace
+
+# Calculate bootstrap confidence intervals for mod with 1000 replicates
+
+# What do you see? Which effect estimates appear to be numerically unstable? You will find the correct answer on the Solution tab
+```
+
+```{r ex="bootstrap", type="solution"}
+# The recoded data.frame dataSet is already in your workspace
+# The model mod is already in your workspace
+# The bootstrap function from the slides is already in your workspace
+
+# Calculate bootstrap confidence intervals for mod with 1000 replicates
+bootstrap(mod, 1000)
+# What do you see? Which effect estimates appear to be numerically unstable? 
+# - Speaker.YOB
+# - Theme.animacy
+# These are the same effect estimates that almost implied a reduction of two AIC units when we deleted them earlier. We will want to exclude them from our final model
+```
+
+```{r ex="bootstrap", type="sct"}
+test_output_contains("bootstrap(mod, 1000)", incorrect_msg = "Make sure you print the bootstrap confidence intervals!")
+success_msg("Well done!")
+```
+
+## 9. Assessing the fit
+```{r ex="assessfit", type="pre-exercise-code"}
+library(readr)
+library(dplyr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv") %>% mutate_if(is.character, as.factor)
+dataSet$Recipient.type<-recode(dataSet$Recipient.type, D="O", I="O", N="O")
+# Recode Recipient.animacy so that its C, I, and L categories are collapsed in a new 'O' category
+dataSet$Recipient.animacy<-recode(dataSet$Recipient.animacy, C="O", I="O", L="O")
+# Recode Theme.type so that its P, I, and D categories are collapsed in a new 'O' category
+dataSet$Theme.type<-recode(dataSet$Theme.type, P="O", I="O", D="O")
+# Recode Theme.animacy so that its C, A, L,  and T categories are collapsed in a new 'O' category
+dataSet$Theme.animacy<-recode(dataSet$Theme.animacy, C="O", A="O", L="O", T="O")
+library(car)
+options(contr=c("contr.Sum", "contr.Poly"))
+dataSet<-dataSet[-c(3703,3943 ),]
+source("https://raw.githubusercontent.com/cran/MuMIn/master/R/r.squaredGLMM.R")
+```
+
+
+```{r ex="assessfit", type="sample-code"}
+# The recoded data.frame dataSet is already in your workspace
+# The r.squaredGLMM function of the MuMIn package is already in your workspace
+
+# Fit a logistic regression model "mod" without Speaker.YOB and Theme.animacy
+
+# Calculate the pseudo-R-squared of your model mod
+
+# Load the Hmisc package
+
+# Calculate the C-index of concordance for our model
+
+# What do you see? How well does our model perform at predicting the dative alternation? You will find the correct answer on the Solution tab
+
+```
+
+```{r ex="assessfit", type="solution"}
+# The recoded data.frame dataSet is already in your workspace
+# The r.squaredGLMM function of the MuMIn package is already in your workspace
+
+# Fit a logistic regression model "mod" without Speaker.YOB and Theme.animacy
+mod <- glm(Response.variable ~ Variety + Speaker.sex  + Semantics + Recipient.type + Recipient.animacy  + Theme.type, family="binomial", data = dataSet)
+
+# Calculate the pseudo-R-squared of your model mod
+r.squaredGLMM(mod)
+# Load the Hmisc package
+library(Hmisc)
+# Calculate the C-index of concordance for our model
+somers2(fitted(mod), as.numeric(dataSet$Response.variable)-1)
+# What do you see? How well does our model perform at predicting the dative alternation? You will find the correct answer on the Solution tab
+# - Our model performs extremely well at predicting the dative alternation. Our c-index is about 0.95, suggesting outstanding discriminative ability. Along the same lines, we obtain a high pseudo-R-squared of 0.65
+```
+
+```{r ex="assessfit", type="sct"}
+test_library_function("Hmisc", "Don't forget to load the Hmisc package!")
+test_output_contains("r.squaredGLMM(mod)",  incorrect_msg = "Make sure you calculate the pseudo-R-squared!")
+test_output_contains("somers2(fitted(mod), as.numeric(dataSet$Response.variable)-1)", incorrect_msg = "Make sure you calculate the c-index of concordance")
+success_msg("Well done!")
+```
+
+## 10. Interpreting the analysis
+```{r ex="interpetation", type="pre-exercise-code"}
+library(readr)
+library(dplyr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv") %>% mutate_if(is.character, as.factor)
+dataSet$Recipient.type<-recode(dataSet$Recipient.type, D="O", I="O", N="O")
+# Recode Recipient.animacy so that its C, I, and L categories are collapsed in a new 'O' category
+dataSet$Recipient.animacy<-recode(dataSet$Recipient.animacy, C="O", I="O", L="O")
+# Recode Theme.type so that its P, I, and D categories are collapsed in a new 'O' category
+dataSet$Theme.type<-recode(dataSet$Theme.type, P="O", I="O", D="O")
+# Recode Theme.animacy so that its C, A, L,  and T categories are collapsed in a new 'O' category
+dataSet$Theme.animacy<-recode(dataSet$Theme.animacy, C="O", A="O", L="O", T="O")
+library(car)
+options(contr=c("contr.Sum", "contr.Poly"))
+dataSet<-dataSet[-c(3703,3943 ),]
+mod <- glm(Response.variable ~ Variety + Speaker.sex  + Semantics + Recipient.type + Recipient.animacy  + Theme.type, family="binomial", data = dataSet)
+```
+
+
+```{r ex="interpetation", type="sample-code"}
+# The recoded data.frame dataSet is already in your workspace
+# The model mod is already in your workspace
+
+# Print a summary of mod
+
+# Which variety has the highest probability of use of the prepositional dative (CAN NZ  UK  US)? Assign your answer (the exact variable level) to the variable 'answer1'
+
+# Print answer1
+
+# True or false? "Females are less likely to use the prepositional dative than males" Assign your answer ('true' or 'false') to the variable 'answer2'
+
+# Print answer2
+
+# Which of the predictors has the strongest effect on the alternation? (i.e., the largest effect size). Assign your answer (The exact name of the predictor) to the variable 'answer3'
+
+# Print answer3
+
+```
+
+```{r ex="interpetation", type="solution"}
+# The recoded data.frame dataSet is already in your workspace
+# The model mod is already in your workspace
+
+# Print a summary of mod
+summary(mod)
+# Which variety has the highest probability of use of the prepositional dative (CAN NZ  UK  US)? Assign your answer (the exact variable level) to the variable 'answer1'
+answer1<-"CAN"
+# Print answer1
+answer1
+# True or false? "Females are less likely to use the prepositional dative than males" Assign your answer ('true' or 'false') to the variable 'answer2'
+answer2<-"false"
+# Print answer2
+answer2
+# Which of the predictors has the strongest effect on the alternation? (i.e., the largest effect size). Assign your answer (The exact name of the predictor) to the variable 'answer3'
+answer3<-"Theme.type"
+# Print answer3
+answer3
+```
+
+```{r ex="interpetation", type="sct"}
+test_output_contains("summary(mod)", incorrect_msg = "Make sure you print a summary of mod!")
+test_output_contains("answer1", incorrect_msg = "Make sure you print your answer1!")
+test_output_contains("answer2", incorrect_msg = "Make sure you print your answer2!")
+test_output_contains("answer3", incorrect_msg = "Make sure you print your answer3!")
+success_msg("Well done!")
+```
+
+## 11. Acknowledgements
+- A warm thank you goes to **Benedikt Szmerecsanyi**, for making the data available through his website!
+
+## 12. References
+- Bresnan, J., Rosenbach, A., Szmerecsanyi, B., Tagliamonte, S. A. & Todd, S. (2017). Syntactic alternations data: datives and genitives in four varieties of English. Stanford Digital Repository. Available at: http://purl.stanford.edu/qj187zs3852. 
+- Szmrecsanyi, B., Grafmiller, J., Bresnan, J., Rosenbach, A., Tagliamonte, S., & Todd, S. (2017). Spoken syntax in a comparative perspective: The dative and genitive alternation in varieties of English. *Glossa: a journal of general linguistics* 2(1), 86. DOI: http://doi.org/10.5334/gjgl.310.
+

@@ -20,7 +20,7 @@ The slides for the classes are available for download here:
 - [Topic 7: Linear regression: Theory and assumptions](http://www.jeroenclaes.be/statistics_for_linguistics/slides/Class7.html)
 - [Topic 8: The science (or art?) of fitting linear regression models](http://www.jeroenclaes.be/statistics_for_linguistics/slides/Class8.html)
 - [Topic 9: Analysis of Variance](http://www.jeroenclaes.be/statistics_for_linguistics/slides/Class9.html)
-- Topic 10: Logistic regression: Theory, assumptions and model fitting (with elements of Poisson and Negative Binomial regression)
+- [Topic 10: Logistic regression](http://www.jeroenclaes.be/statistics_for_linguistics/slides/Class10.html)
 - Topic 11: Mixed-effects regression  
 - Topic 12: When things aren't quite linear: Polynomial regression and Generalized Additive Modeling
 
@@ -35,6 +35,7 @@ A version of the slides rendered as Word documents can be found here so can you 
 - [Topic 7: Linear regression: Theory and assumptions](http://www.jeroenclaes.be/statistics_for_linguistics/syllabus/Class7.docx)
 - [Topic 8: The science (or art?) of fitting linear regression models](http://www.jeroenclaes.be/statistics_for_linguistics/syllabus/Class8.docx)
 - [Topic 9: Analysis of Variance](http://www.jeroenclaes.be/statistics_for_linguistics/syllabus/Class9.docx)
+- [Topic 10: Logistic regression](http://www.jeroenclaes.be/statistics_for_linguistics/syllabus/Class10.docx)
 
 ## Labs
 - [Lab 1: Objects, vectors, and basic mathematics](http://www.jeroenclaes.be/statistics_for_linguistics/class1.html)
@@ -46,6 +47,7 @@ A version of the slides rendered as Word documents can be found here so can you 
 - [Lab 7: Linear regression: Theory and assumptions](http://www.jeroenclaes.be/statistics_for_linguistics/class7.html)
 - [Lab 8: The science (or art?) of fitting linear regression models](http://www.jeroenclaes.be/statistics_for_linguistics/class8.html)
 - [Lab 9: Analysis of Variance](http://www.jeroenclaes.be/statistics_for_linguistics/class9.html)
+- [Topic 10: Logistic regression](http://www.jeroenclaes.be/statistics_for_linguistics/class10.html)
 
 ## R and RStudio cheat sheets (provided by RStudio)
 - [Basic R](http://www.jeroenclaes.be/statistics_for_linguistics/cheatsheets/baseR.pdf)
