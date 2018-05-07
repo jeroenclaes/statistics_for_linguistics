@@ -1,0 +1,1375 @@
+---
+title: "Topic 11:  Mixed-effects regression"
+author: "Jeroen Claes | <jeroen.claes@kuleuven.be> | <jeroen@cropland.be>"
+output: 
+ html_document:
+  self_contained: false 
+---
+  
+```{r, include=FALSE}
+#library(testwhat)
+tutorial::go_interactive()
+library(car)
+library(dplyr)
+library(readr)
+dataSet<-read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv")
+
+options(contr=c("contr.Sum", "contr.Poly"))
+```
+
+
+## 1. Linear mixed-effects models: Cognitive control and the degree to which bilingual speakers participate in ongoing sound changes revisited
+- For this exercise we will attempt to generate a more elaborate analysis of the Berry (2018) data we modeled in Lab 8
+- We already explored this dataset, so we can skip a few steps here. 
+- Recall that Berry (2018) studied the bilingual Puerto Rican community of Philadelphia, PA. The goal was to gain insight into the degree to which Spanish-English bilingual speakers participate in ongoing sound changes in English and how *cognitive control* contributes to this
+- *Cognitive control* is a concept proposed by Braver (2012) in his *dual-mechanisms* framework:
+    - *Cognitive control* is defined as: "the ability to regulate thoughts and actions in accordance with internally represented behavioral goals" (Braver, 2012)
+    - It is composed of two mechanisms:
+        - *Proactive control* is defined as: "the sustained and anticipatory maintenance of goal-relevant information [...] to enable optimal cognitive performance." (Braver, 2012)
+        - *Reactive control* is defined as: "Transient, stimulus-driven goal reactivation [...] based on interference demands or episodic associations." (Braver, 2012)
+- Here we will only consider Berry's (2018) dataset on a phonological phenomenon called [Canadian Raising](https://en.wikipedia.org/wiki/Canadian_raising)(e.g., *about* is pronounced somewhat like *aboot*)
+- The dataset contains a selection of the following columns:
+    - `norm_F1`: The frequency value of the `F1 vowel formant`, the frequency created by resonance in the laryngeal cavity. Lower values indicate a higher level of vowel raising (Woolums, 2012)
+    - `Proactive`: Did the situation require weaker or stronger Proactive control?
+    - `Reactive`: Did the situation require weaker or stronger reactive control?
+    - `Style`: `Read` (reading experiment) or `Conversational` (Sociolinguistic interview)
+    - `BirthYear`: Year of birth of the participant
+    - `Sex`: Sex of the participant
+    - `PartnerEthnicity`: Ethnicity of the participant's partner
+    - `PhillyLiveTime`: Amount of time the participant has lived in Philadelphia
+    - `HighSchoolType`: The type of high school the participant attended
+    - `Occupation_Group`: The particpant's occupational category
+    - `wordLength`: The length of the word, in characters
+  
+### 1.1. Loading and exploring the data
+```{r ex="Berry_load_explore_associations", type="sample-code"}
+# Load the readr package
+
+# Load the course data from the course website to the object 'dataSet':
+# http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class11_Berry_2018.csv
+
+# Load the dplyr package
+
+# Convert all character values to factor
+
+# In Lab 8 we found that there were some outliers in norm_F1, which is otherwise normally distributed. Remove the outliers from norm_F1
+
+
+# In Lab 8 we found that the wordLength variable needs a log transformation. Apply this transformation
+
+# In Lab 8 we found that the dependent variable needs a power transformation to fix heteroskedasticity. Raise norm_F1 to the exponent 0.6666667 
+
+# In Lab 8 we found that the observations 1983, 2088 were to influential. Remove them.
+
+# Print a 'glimpse' of the dataSet
+
+```
+
+```{r ex="Berry_load_explore_associations", type="solution"}
+# Load the readr package
+library(readr)
+# Load the course data from the course website to the object 'dataSet':
+# http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class11_Berry_2018.csv
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class11_Berry_2018.csv")
+# Load the dplyr package
+library(dplyr)
+# Convert all character values to factor
+dataSet <- dataSet %>% 
+  mutate_if(is.character, as.factor)
+# In Lab 8 we found that there were some outliers in norm_F1, which is otherwise normally distributed. Remove the outliers from norm_F1
+dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
+# In Lab 8 we found that the wordLength variable needs a log transformation. Apply this transformation
+dataSet$wordLength<-log(dataSet$wordLength)
+# In Lab 8 we found that the dependent variable needs a power transformation to fix heteroskedasticity. Raise norm_F1 to the exponent 0.6666667 
+dataSet$norm_F1<-dataSet$norm_F1^0.6666667
+# In Lab 8 we found that the observations 1983, 2088 were to influential. Remove them.
+dataSet<- dataSet[-c(1983, 2088), ]
+
+# Print a 'glimpse' of the dataSet
+glimpse(dataSet)
+```
+
+```{r ex="Berry_load_explore_associations", type="sct"}
+test_object("dataSet")
+test_library_function("readr", "Make sure to call the 'readr' package!")
+test_library_function("dplyr", "Make sure to call the 'dplyr' package!")
+test_output_contains("glimpse(dataSet)",   incorrect_msg = "Make sure to print a 'glimpse' of the data!")
+success_msg("Great!")
+```
+
+### 1.2 Looking for by-Speaker random slopes
+- In Lab 8, the model we settled upon had the following form: `norm_F1 ~ Proactive + Reactive + Style + Sex + PartnerEthnicity + PhillyLiveTime + HighSchoolType + wordLength`
+- Including a Speaker and a word random intercept will greatly improve the precision of the model, but what about random slopes?
+- We can of course only evaluate random slopes when the fixed effects are not inherently tied to e.g., the speaker. This excludes Speaker random slopes for e.g. Sex, BirthYear, etc.
+- `word` has so many levels that it is highly unlikely that random slopes will converge, so in the interest of time we will not investigate this option here. But know that you should!
+
+#### 1.2.1 `Proactive | Speaker`
+```{r ex="ProactiveSpeaker", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class11_Berry_2018.csv")
+# Remove outliers from norm_F1
+dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
+# Remove outliers from Familiarity
+indices<-c(1983, 2088)
+dataSet<- dataSet[-indices, ]
+dataSet$norm_F1<-dataSet$norm_F1^0.6666667
+dataSet$wordLength<-log(dataSet$wordLength)
+```
+
+```{r ex="ProactiveSpeaker", type="sample-code"}
+# The modified data.frame dataSet is already in your workspace
+
+# Load the ggplot package 
+
+# Draw a boxplot of norm_F1 vs Proactive. Facet the plot by Speaker
+
+# What do you see? Is a by-Speaker random slope warranted for Proactive? You will find the correct answer on the Solution tab
+```
+
+```{r ex="ProactiveSpeaker", type="solution"}
+# The modified data.frame dataSet is already in your workspace
+
+# Load the ggplot package 
+library(ggplot2)
+# Draw a boxplot of norm_F1 vs Proactive. Facet the plot by Speaker
+ggplot(dataSet, aes(x=Proactive, y=norm_F1)) + 
+  geom_boxplot() +
+  facet_wrap(~Speaker)
+# What do you see? Is a by-Speaker random slope warranted for Proactive? 
+# No, we don't even have the necessary data, as Proactive control is a characteristic tied to the speaker
+```
+
+```{r ex="ProactiveSpeaker", type="sct"}
+test_library_function("ggplot2")
+test_ggplot(1)
+success_msg("Great work!")
+```
+
+#### 1.2.2 `Reactive | Speaker`
+```{r ex="ReactiveSpeaker", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class11_Berry_2018.csv")
+# Remove outliers from norm_F1
+dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
+# Remove outliers from Familiarity
+indices<-c(1983, 2088)
+dataSet<- dataSet[-indices, ]
+dataSet$norm_F1<-dataSet$norm_F1^0.6666667
+dataSet$wordLength<-log(dataSet$wordLength)
+```
+
+```{r ex="ReactiveSpeaker", type="sample-code"}
+# The modified data.frame dataSet is already in your workspace
+
+# Load the ggplot package 
+
+# Draw a boxplot of norm_F1 vs Reactive. Facet the plot by Speaker
+
+# What do you see? Is a by-Speaker random slope warranted for Reactive? You will find the correct answer on the Solution tab
+```
+
+```{r ex="ReactiveSpeaker", type="solution"}
+# The modified data.frame dataSet is already in your workspace
+
+# Load the ggplot package 
+library(ggplot2)
+# Draw a boxplot of norm_F1 vs Reactive. Facet the plot by Speaker
+ggplot(dataSet, aes(x=Reactive, y=norm_F1)) + 
+  geom_boxplot() +
+  facet_wrap(~Speaker)
+# What do you see? Is a by-Speaker random slope warranted for Reactive? 
+# No, we don't even have the necessary data, as Reactive control is a characteristic tied to the Speaker
+```
+
+```{r ex="ReactiveSpeaker", type="sct"}
+test_library_function("ggplot2")
+test_ggplot(1)
+success_msg("Great work!")
+```
+
+
+#### 1.2.3 `Style | Speaker`
+```{r ex="StyleSpeaker", type="pre-exercise-code"}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class11_Berry_2018.csv")
+# Remove outliers from norm_F1
+dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
+# Remove outliers from Familiarity
+indices<-c(1983, 2088)
+dataSet<- dataSet[-indices, ]
+dataSet$norm_F1<-dataSet$norm_F1^0.6666667
+dataSet$wordLength<-log(dataSet$wordLength)
+```
+
+```{r ex="StyleSpeaker", type="sample-code"}
+# The modified data.frame dataSet is already in your workspace
+
+# Load the ggplot package 
+
+# Draw a boxplot of norm_F1 vs Style. Facet the plot by Speaker
+
+# What do you see? Is a by-Speaker random slope warranted for Style? You will find the correct answer on the Solution tab
+```
+
+```{r ex="StyleSpeaker", type="solution"}
+# The modified data.frame dataSet is already in your workspace
+
+# Load the ggplot package 
+library(ggplot2)
+# Draw a boxplot of norm_F1 vs Style. Facet the plot by Speaker
+ggplot(dataSet, aes(x=Style, y=norm_F1)) + 
+  geom_boxplot() +
+  facet_wrap(~Speaker)
+# What do you see? Is a by-Speaker random slope warranted for Style? 
+# At first, sight, yes. The tendency for all speakers appears to be the same, but there are quite some differences in the sizes of the effects of Style. This is an ideal use case for a random slope
+```
+
+```{r ex="StyleSpeaker", type="sct"}
+test_library_function("ggplot2")
+test_ggplot(1)
+success_msg("Great work!")
+```
+
+#### 1.2.4 `wordLength | Speaker`
+```{r ex="wordLengthSpeaker", type="pre-exercise-code"}
+library(readr)
+library(dplyr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class11_Berry_2018.csv") %>%
+  mutate_if(is.character, as.factor)
+# Remove outliers from norm_F1
+dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
+# Remove outliers from Familiarity
+indices<-c(1983, 2088)
+dataSet<- dataSet[-indices, ]
+dataSet$norm_F1<-dataSet$norm_F1^0.6666667
+dataSet$wordLength<-log(dataSet$wordLength)
+```
+
+```{r ex="wordLengthSpeaker", type="sample-code"}
+# The modified data.frame dataSet is already in your workspace
+
+# Load the ggplot package 
+
+# Draw a scatterplot of norm_F1 vs wordLength. Add a lm regression line to the scatterplot, but disable the standard errors (se=FALSE). Color and fill the plot by Speaker
+
+# What do you see? Is a by-Speaker random slope warranted for wordLength? You will find the correct answer on the Solution tab
+```
+
+```{r ex="wordLengthSpeaker", type="solution"}
+# The modified data.frame dataSet is already in your workspace
+
+# Load the ggplot package 
+library(ggplot2)
+# Draw a scatterplot of norm_F1 vs wordLength. Add a lm regression line to the scatterplot, but disable the standard errors (se=FALSE). Color and fill the plot by Speaker
+ggplot(dataSet, aes(x=wordLength, y=norm_F1, color=Speaker, fill=Speaker)) + 
+  geom_point() +
+  geom_smooth(method="lm", se=FALSE) 
+# What do you see? Is a by-Speaker random slope warranted for wordLength? 
+# Yes, a random slope may be appropriate here, as the regression lines for the different speakers intersect (i.e., have different slopes)
+```
+
+```{r ex="wordLengthSpeaker", type="sct"}
+test_library_function("ggplot2")
+test_ggplot(1)
+success_msg("Great work!")
+```
+
+
+## 1.3 Fitting a random slope model
+```{r ex="randslopespeaker", type="pre-exercise-code"}
+library(readr)
+library(dplyr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class11_Berry_2018.csv") %>%
+  mutate_if(is.character, as.factor)
+# Remove outliers from norm_F1
+dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
+# Remove outliers from Familiarity
+indices<-c(1983, 2088)
+dataSet<- dataSet[-indices, ]
+dataSet$norm_F1<-dataSet$norm_F1^0.6666667
+dataSet$wordLength<-log(dataSet$wordLength)
+```
+
+```{r ex="randslopespeaker", type="sample-code"}
+# The modified data.frame dataSet is already in your workspace
+
+# Load the lme4 package
+
+# Specify a first random slope model mod, which regresses norm_F1 on Proactive + Reactive + Style + Sex + PartnerEthnicity + PhillyLiveTime + HighSchoolType + wordLength, includes by-Speaker random slopes for wordLength and Style, and includes a random intercept for word
+
+# Print a summary of the random slopes model
+
+# What do you see? Is the variation between speakers stronger or less strong than the variation between words? Do the random slopes appear to be necessary, judging from their variances and standard deviations? 
+```
+
+```{r ex="randslopespeaker", type="solution"}
+# The modified data.frame dataSet is already in your workspace
+
+# Load the lme4 package
+library(lme4)
+# Specify a first random slope model mod, which regresses norm_F1 on Proactive + Reactive + Style + Sex + PartnerEthnicity + PhillyLiveTime + HighSchoolType + wordLength, includes by-Speaker random slopes for wordLength and Style, and includes a random intercept for word
+mod<-lmer(norm_F1 ~ Proactive + Reactive + Style + Sex + PartnerEthnicity + PhillyLiveTime + HighSchoolType + wordLength + (1+ wordLength + Style | Speaker) + (1|word), dataSet)
+# Print a summary of the random slopes model
+summary(mod)
+# - What do you see? Is the variation between speakers stronger or less strong than the variation between words? Do the random slopes appear to be necessary, judging from their variances and standard deviations?
+# The variation between words is much more pronounced than the variation etween speakers. Still, the random slopes appear to contribute useful information. 
+```
+
+```{r ex="randslopespeaker", type="sct"}
+test_library_function("lme4")
+test_output_contains("summary(mod)", incorrect_msg="Don't forget to call a summary of the model 'mod'!") 
+success_msg("Great work!")
+```
+
+## 1.4 Applying Occam's Razor to the random effects
+- We have seen that the model converges with random slopes and the slopes appear to contribute useful information for modeling `norm_F1`
+- Let's now evaluate in a more formal manner if the data provide support for the random slopes and the random intercepts
+```{r ex="occamrand", type="pre-exercise-code"}
+library(readr)
+library(dplyr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class11_Berry_2018.csv") %>%
+  mutate_if(is.character, as.factor)
+# Remove outliers from norm_F1
+dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
+# Remove outliers from Familiarity
+indices<-c(1983, 2088)
+dataSet<- dataSet[-indices, ]
+dataSet$norm_F1<-dataSet$norm_F1^0.6666667
+dataSet$wordLength<-log(dataSet$wordLength)
+```
+
+```{r ex="occamrand", type="sample-code"}
+# The modified data.frame dataSet is already in your workspace
+
+# Load the lme4 package
+
+# Specify a first random slope model mod, which regresses norm_F1 on Proactive + Reactive + Style + Sex + PartnerEthnicity + PhillyLiveTime + HighSchoolType + wordLength, includes by-Speaker random slopes for wordLength and Style, and includes a random intercept for word
+
+# Specify a second random slope model mod2, which does not include the by-Speaker random slope for wordLength
+
+# Compare the AIC score of mod2 to that of mod
+
+# Specify a third random slope model mod3, which does not include the by-Speaker random slope for Style
+
+# Compare the AIC score of mod3 to that of mod
+
+# Specify a fourth random slope model mod4, which includes the by-Speaker random slopes for Style and wordLength, but does not include the random intercept for word
+
+# Compare the AIC score of mod4 to that of mod
+
+# What do you see? Which random slopes appear to be supported by the data? You will find the correct answer on the Solution tab
+```
+
+```{r ex="occamrand", type="solution"}
+# The modified data.frame dataSet is already in your workspace
+
+# Load the lme4 package
+library(lme4)
+# Specify a first random slope model mod, which regresses norm_F1 on Proactive + Reactive + Style + Sex + PartnerEthnicity + PhillyLiveTime + HighSchoolType + wordLength, includes by-Speaker random slopes for wordLength and Style, and includes a random intercept for word
+mod<-lmer(norm_F1 ~ Proactive + Reactive + Style + Sex + PartnerEthnicity + PhillyLiveTime + HighSchoolType + wordLength + (1+ wordLength + Style | Speaker) + (1|word), dataSet)
+# Specify a second random slope model mod2, which does not include the by-Speaker random slope for wordLength
+mod2<-lmer(norm_F1 ~ Proactive + Reactive + Style + Sex + PartnerEthnicity + PhillyLiveTime + HighSchoolType + wordLength + (1 + Style | Speaker) + (1|word), dataSet)
+# Compare the AIC score of mod2 to that of mod
+AIC(mod)-AIC(mod2)
+# Specify a third random slope model mod3, which does not include the by-Speaker random slope for Style
+mod3<-lmer(norm_F1 ~ Proactive + Reactive + Style + Sex + PartnerEthnicity + PhillyLiveTime + HighSchoolType + wordLength + (1 + wordLength | Speaker) + (1|word), dataSet)
+# Compare the AIC score of mod3 to that of mod
+AIC(mod)-AIC(mod3)
+# Specify a fourth random slope model mod4, which includes the by-Speaker random slopes for Style and wordLength, but does not include the random intercept for word
+mod4<-lmer(norm_F1 ~ Proactive + Reactive + Style + Sex + PartnerEthnicity + PhillyLiveTime + HighSchoolType + wordLength + (1+ wordLength + Style | Speaker), dataSet)
+# Compare the AIC score of mod4 to that of mod
+AIC(mod)-AIC(mod4)
+# What do you see? Which random slopes appear to be supported by the data? 
+# Removing either one of the random effects causes a drastic increase in the AIC value
+```
+
+```{r ex="occamrand", type="sct"}
+test_library_function("lme4")
+test_output_contains("AIC(mod)-AIC(mod2)", incorrect_msg="Don't forget to compare the AIC values!") 
+test_output_contains("AIC(mod)-AIC(mod3)", incorrect_msg="Don't forget to compare the AIC values!") 
+test_output_contains("AIC(mod)-AIC(mod4)", incorrect_msg="Don't forget to compare the AIC values!") 
+success_msg("Great work!")
+```
+
+## 1.5 Evaluating the fit
+```{r ex="linearfit", type="pre-exercise-code"}
+library(readr)
+library(dplyr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class11_Berry_2018.csv") %>%
+  mutate_if(is.character, as.factor)
+# Remove outliers from norm_F1
+dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
+# Remove outliers from Familiarity
+indices<-c(1983, 2088)
+dataSet<- dataSet[-indices, ]
+dataSet$norm_F1<-dataSet$norm_F1^0.6666667
+dataSet$wordLength<-log(dataSet$wordLength)
+source("http://jeroenclaes.be/statistics_for_linguistics/supporting_code/class11_r.squaredGLMM.R")
+```
+
+```{r ex="linearfit", type="sample-code"}
+# The modified data.frame dataSet is already in your workspace
+# The r.squaredGLMM function from the MuMIn package is already in your workspace
+
+# Load the lme4 package
+
+
+# Specify the random slope model mod, which regresses norm_F1 on Proactive + Reactive + Style + Sex + PartnerEthnicity + PhillyLiveTime + HighSchoolType + wordLength, includes by-Speaker random slopes for wordLength and Style, and includes a random intercept for word
+
+# Calculate the r squared for mod
+
+# What do you see? How close is the fit with random effects? How good is the fit without? You will find the correct answer on the Solution tab
+```
+
+```{r ex="linearfit", type="solution"}
+# The modified data.frame dataSet is already in your workspace
+# The r.squaredGLMM function from the MuMIn package is already in your workspace
+
+# Load the lme4 package
+library(lme4)
+# Specify the random slope model mod, which regresses norm_F1 on Proactive + Reactive + Style + Sex + PartnerEthnicity + PhillyLiveTime + HighSchoolType + wordLength, includes by-Speaker random slopes for wordLength and Style, and includes a random intercept for word
+mod<-lmer(norm_F1 ~ Proactive + Reactive + Style + Sex + PartnerEthnicity + PhillyLiveTime + HighSchoolType + wordLength + (1+ wordLength + Style | Speaker) + (1|word), dataSet)
+
+# Calculate the r squared for mod
+r.squaredGLMM(mod)
+# What do you see? How close is the fit with random effects? How good is the fit without?
+# The model has a poor fit without random effects (R2m). However, by adding the random effects structure (R2c), the r-squared value increases drastically, but it remains on the low end of things. The fact that nearly half of the r-squared is represented by the random effects suggests that we might miss important explanatory variables in our analysis, such as e.g., word frequency
+```
+
+```{r ex="linearfit", type="sct"}
+test_library_function("lme4")
+test_output_contains("r.squaredGLMM(mod)", incorrect_msg="Don't forget to compute the R-squared!") 
+success_msg("Great work!")
+```
+
+## 1.6 Checking for numerical stability and overfitting with bootstrap confidence intervals
+```{r ex="linarboot", type="pre-exercise-code"}
+library(readr)
+library(dplyr)
+library(lme4)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class11_Berry_2018.csv") %>%
+  mutate_if(is.character, as.factor)
+# Remove outliers from norm_F1
+dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
+# Remove outliers from Familiarity
+indices<-c(1983, 2088)
+dataSet<- dataSet[-indices, ]
+dataSet$norm_F1<-dataSet$norm_F1^0.6666667
+dataSet$wordLength<-log(dataSet$wordLength)
+
+confint<-function(model, method, boot.type, nsim, parallel, ncpus) {
+  suppressWarnings(suppressMessages(as.data.frame(read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class11_Berry_2018_confints_model_1.csv"))))
+}
+```
+
+```{r ex="linarboot", type="sample-code"}
+# The modified data.frame dataSet is already in your workspace
+# The lme4 package is already in your workspace
+
+# Specify the random slope model mod, which regresses norm_F1 on Proactive + Reactive + Style + Sex + PartnerEthnicity + PhillyLiveTime + HighSchoolType + wordLength, includes by-Speaker random slopes for wordLength and Style, and includes a random intercept for word
+
+# Calculate bootstrap confidence intervals for your model. This is a linux system, so you should specify "multicore" as parallel backend. ncpus should be 4
+
+# Print a summary of the model
+
+# What do you see? Which random and fixed effects are stable under bootstrap? Which ones aren't? Are there any fixed effects you should remove, judging from their t-values and confidence intervals?
+```
+
+```{r ex="linarboot", type="solution"}
+# The modified data.frame dataSet is already in your workspace
+# The lme4 package is already in your workspace
+
+# Specify the random slope model mod, which regresses norm_F1 on Proactive + Reactive + Style + Sex + PartnerEthnicity + PhillyLiveTime + HighSchoolType + wordLength, includes by-Speaker random slopes for wordLength and Style, and includes a random intercept for word
+ mod<-lmer(norm_F1 ~ Proactive + Reactive + Style + Sex + PartnerEthnicity + PhillyLiveTime + HighSchoolType + wordLength + (1+ wordLength + Style | Speaker) + (1|word), dataSet)
+# Calculate bootstrap confidence intervals for your model. This is a linux system, so you should specify "multicore" as parallel backend. ncpus should be 4
+confint(mod, method="boot", boot.type="perc", nsim=1000, parallel="multicore", ncpus=4)
+# Print a summary of the model
+summary(mod)
+# What do you see? Which random and fixed effects are stable under bootstrap? Which ones aren't? Are there any fixed effects you should remove for being insignificant/for failing to generalize, judging from their t-values and confidence intervals?
+# Random effects: 
+# - The correlation between Style and Speaker appears to be unstable, as the interval for the coefficient includes zero   
+# Fixed effects:
+# - The Number of obs in the summary shows us that we have more than 10,000 observations. This means that we can accept as statistically significant at p < 0.05 t-values of 2 or more
+# - The following fixed effects have less extreme t-values. Quite unsurprisingly these effects also have wide confidence intervals that include zero:
+# * Proactive
+# * Reactive
+# * PartnerEthnicity
+# * PhillyLiveTime
+# * HighSchoolType
+# * wordLength
+```
+
+```{r ex="linarboot", type="sct"}
+test_output_contains("summary(mod)", incorrect_msg="Don't forget to print a summary of mod!") 
+test_output_contains('confint(mod, method="boot", boot.type="perc", nsim=1000, parallel="multicore", ncpus=4)', incorrect_msg="Don't forget to compute the bootstrap confidence intervals!") 
+success_msg("Great work!")
+```
+
+## 1.7 Applying Occam's Razor to the fixed effects
+- We are going to apply Occam's Razor to the fixed effects that looked as if they could be removed:
+    - `Proactive`
+    - `Reactive`
+    - `PartnerEthnicity`
+    - `PhillyLiveTime`
+    - `HighSchoolType`
+- We will not touch `wordLength` or `style` as our previous tests on the random effects have shown that their random slopes  improve the model drastically
+
+```{r ex="linearoccamfixed", type="pre-exercise-code"}
+library(readr)
+library(dplyr)
+library(lme4)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class11_Berry_2018.csv") %>%
+  mutate_if(is.character, as.factor)
+# Remove outliers from norm_F1
+dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
+# Remove outliers from Familiarity
+indices<-c(1983, 2088)
+dataSet<- dataSet[-indices, ]
+dataSet$norm_F1<-dataSet$norm_F1^0.6666667
+dataSet$wordLength<-log(dataSet$wordLength)
+
+confint<-function(model, method, boot.type, nsim, parallel, ncpus) {
+  suppressWarnings(suppressMessages(as.data.frame(read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class11_Berry_2018_confints_model_2.csv"))))
+}
+```
+
+```{r ex="linearoccamfixed", type="sample-code"}
+# The modified data.frame dataSet is already in your workspace
+# The lme4 package is already in your workspace
+
+# Specify the random slope model mod, which regresses norm_F1 on Proactive + Reactive + Style + Sex + PartnerEthnicity + PhillyLiveTime + HighSchoolType + wordLength, includes by-Speaker random slopes for wordLength and Style, and includes a random intercept for word
+
+# Specify a model mod2 from which you omit Proactive
+
+# Compare the AIC of mod2 to that of mod
+
+# Specify a model mod3 from which you omit Reactive
+
+# Compare the AIC of mod3 to that of mod
+
+# Specify a model mod4 from which you omit PartnerEthnicity
+
+# Compare the AIC of mod4 to that of mod
+
+# Specify a model mod5 from which you omit PhillyLiveTime
+
+# Compare the AIC of mod5 to that of mod
+
+# Specify a model mod6 from which you omit HighSchoolType
+
+# Compare the AIC of mod6 to that of mod
+
+# Specify a model mod7 from which you exclude all of the fixed effects for which the AIC statistic suggests there is not enough evidence to keep them in the model
+
+# Print a summary of mod7
+
+# Calculate new bootstrap confidence intervals for your mod7 This is a linux system, so you should specify "multicore" as parallel backend. ncpus should be 4
+
+# What do you see? Are the remaining effects stable under bootstrap? You will find the correct answer on the Solution tab
+
+```
+
+```{r ex="linearoccamfixed", type="solution"}
+# The modified data.frame dataSet is already in your workspace
+# The lme4 package is already in your workspace
+
+# Specify the random slope model mod, which regresses norm_F1 on Proactive + Reactive + Style + Sex + PartnerEthnicity + PhillyLiveTime + HighSchoolType + wordLength, includes by-Speaker random slopes for wordLength and Style, and includes a random intercept for word
+mod<-lmer(norm_F1 ~ Proactive + Reactive + Style + Sex + PartnerEthnicity + PhillyLiveTime + HighSchoolType + wordLength + (1+ wordLength + Style | Speaker) + (1|word), dataSet)
+# Specify a model mod2 from which you omit Proactive
+mod2<-lmer(norm_F1 ~  Reactive + Style + Sex + PartnerEthnicity + PhillyLiveTime + HighSchoolType + wordLength + (1+ wordLength + Style | Speaker) + (1|word), dataSet)
+# Compare the AIC of mod2 to that of mod
+AIC(mod)-AIC(mod2)
+# Specify a model mod3 from which you omit Reactive
+mod3<-lmer(norm_F1 ~ Proactive +  Style + Sex + PartnerEthnicity + PhillyLiveTime + HighSchoolType + wordLength + (1+ wordLength + Style | Speaker) + (1|word), dataSet)
+# Compare the AIC of mod3 to that of mod
+AIC(mod)-AIC(mod3)
+# Specify a model mod4 from which you omit PartnerEthnicity
+mod4<-lmer(norm_F1 ~ Proactive + Reactive + Style + Sex + PhillyLiveTime + HighSchoolType + wordLength + (1+ wordLength + Style | Speaker) + (1|word), dataSet)
+# Compare the AIC of mod4 to that of mod
+AIC(mod)-AIC(mod4)
+# Specify a model mod5 from which you omit PhillyLiveTime
+mod5<-lmer(norm_F1 ~ Proactive + Reactive + Style + Sex + PartnerEthnicity  + HighSchoolType + wordLength + (1+ wordLength + Style | Speaker) + (1|word), dataSet)
+# Compare the AIC of mod5 to that of mod
+AIC(mod)-AIC(mod5)
+# Specify a model mod6 from which you omit HighSchoolType
+mod6<-lmer(norm_F1 ~ Proactive + Reactive + Style + Sex + PartnerEthnicity + PhillyLiveTime  + wordLength + (1+ wordLength + Style | Speaker) + (1|word), dataSet)
+# Compare the AIC of mod6 to that of mod
+AIC(mod)-AIC(mod6)
+# Specify a model mod7 from which you exclude all of the fixed effects for which the AIC statistic suggests there is not enough evidence to keep them in the model
+mod7<-lmer(norm_F1 ~ Proactive + Reactive + Style + Sex + PartnerEthnicity + PhillyLiveTime  + wordLength + (1+ wordLength + Style | Speaker) + (1|word), dataSet)
+# Print a summary of mod7
+summary(mod7)
+# Calculate new bootstrap confidence intervals for your mod7 This is a linux system, so you should specify "multicore" as parallel backend. ncpus should be 4
+confint(mod7, method="boot", boot.type="perc", nsim=1000, parallel="multicore", ncpus=4)
+# What do you see? Are the remaining effects stable under bootstrap? 
+# The significant effects are stable under bootstrap. The effects that are not significant, have wide intervals.
+# Still, we will want to keep those effects in our model, as they do improve the precision of the model, but we will want to be careful not to draw too strong inferences from their coefficients
+
+```
+
+```{r ex="linearoccamfixed", type="sct"}
+test_output_contains("summary(mod7)", incorrect_msg="Don't forget to print a summary of mod7!") 
+test_output_contains('confint(mod7, method="boot", boot.type="perc", nsim=1000, parallel="multicore", ncpus=4)', incorrect_msg="Don't forget to compute the bootstrap confidence intervals!") 
+test_output_contains("AIC(mod)-AIC(mod2)", incorrect_msg="Don't forget to compare the AIC of mod and mod2!") 
+test_output_contains("AIC(mod)-AIC(mod3)", incorrect_msg="Don't forget to compare the AIC of mod and mod3!") 
+test_output_contains("AIC(mod)-AIC(mod4)", incorrect_msg="Don't forget to compare the AIC of mod and mod4!") 
+test_output_contains("AIC(mod)-AIC(mod5)", incorrect_msg="Don't forget to compare the AIC of mod and mod5!") 
+test_output_contains("AIC(mod)-AIC(mod6)", incorrect_msg="Don't forget to compare the AIC of mod and mod6!") 
+success_msg("Great work!")
+```
+
+## 2. Logistic mixed-effects models: The dative alternation in four varieties of English revisited 
+- For this exercise we will attempt to elaborate on the analysis we performed in Lab 10 
+- In a recent effort, Bresnan et al. (2017) applied a common coding scheme to their datasets of the dative alternation (e.g., *I gave him the book* vs *I gave the book to him*) (e.g., Szmrecsanyi et al., 2017)
+- The resulting database is annotated consistently and covers four varieties of English: Canada, New Zealand, United Kingdom, and United States
+- Here we will work with a subset of their predictors:
+    - `Response.variable`: D(ative) vs. P(repositional dative)
+    - `Variety`
+    - `Speaker`
+    - `Speaker.sex`
+    - `Speaker.YOB`: Year of birth
+    - `Semantics`: use of *to give* to indicate T(ransfer), C(ommunication), or A(bstract) 
+    - `Recipient.type`:N(oun phrase), P(ersonal pronoun), D(emonstrative pronoun), I(mpersonal pronoun)
+    - `Recipient.animacy`: A(nimate), C(ollective), T(emporal), L(ocative), I(nanimate)
+    - `Recipient.definiteness`
+    - `Theme.type`: N(oun phrase), P(ersonal pronoun), D(emonstrative pronoun), I(mpersonal pronoun)
+    - `Theme.animacy`: A(nimate), C(ollective), T(emporal), L(ocative), I(nanimate)
+- We already know this data quite well, so we can skip the data exploration and recoding work, which we already did in Lab 10
+- But, recall that you should never fit a model without exploring your dataset first!
+
+### 2.1. Loading the data
+```{r ex="load", type="sample-code"}
+# Load the readr package
+
+# Load the course data from the course website to the object 'dataSet':
+# http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv
+
+# Load the dplyr package
+
+# Convert all character values to Factor with `mutate_if`
+
+# Print a 'summary' of the dataSet
+
+```
+
+```{r ex="load", type="solution"}
+# Load the readr package
+library(readr)
+# Load the course data from the course website to the object 'dataSet':
+#http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv
+dataSet<-read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv")
+# Load the dplyr package
+library(dplyr)
+# Convert all character values to Factor with `mutate_if`
+dataSet <- mutate_if(dataSet, is.character, as.factor)
+# Print a 'summary' of the dataSet
+summary(dataSet)
+```
+
+```{r ex="load", type="sct"}
+test_object("dataSet")
+test_library_function("readr", "Make sure to call the 'readr' package!")
+test_library_function("dplyr", "Make sure to call the 'dplyr' package!")
+test_output_contains("summary(dataSet)",   incorrect_msg = "Make sure to print a 'summary' of the data!")
+success_msg("Great!")
+```
+
+### 2.2. Looking for by-Speaker random slopes 
+- As we did for the linear mixed models, we can look for meaningful random slopes for our logistic models too
+- We can do this by drawing by-speaker barcharts. Obviously, we can only fit random slopes for variables that are not inherently tied to the speaker. This excludes by-speaker random slopes for variables such as, e.g.,  Year of Birth, Sex, etc.
+- With `r n_distinct(dataSet$Speaker)` speakers, however, we will not be able to consider all speakers at the same time
+- To solve this we will randomly draw 2x30 speakers from the data and explore their behavior
+
+#### 2.2.1 `Semantics | Speaker`
+```{r ex="SemanticsSpeaker_logistic", type="pre-exercise-code"}
+# Load the readr package
+library(readr)
+# Load the course data from the course website to the object 'dataSet':
+#http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv
+dataSet<-read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv")
+# Load the dplyr package
+library(dplyr)
+# Convert all character values to Factor with `mutate_if`
+dataSet <- mutate_if(dataSet, is.character, as.factor)
+# Print a 'summary' of the dataSet
+
+dataSet$Recipient.type<-dplyr::recode(dataSet$Recipient.type, D="O", I="O", N="O")
+# Recode Recipient.animacy so that its C, I, and L categories are collapsed in a new 'O' category
+dataSet$Recipient.animacy<-dplyr::recode(dataSet$Recipient.animacy, C="O", I="O", L="O")
+# Recode Theme.type so that its P, I, and D categories are collapsed in a new 'O' category
+dataSet$Theme.type<-dplyr::recode(dataSet$Theme.type, P="O", I="O", D="O")
+# Recode Theme.animacy so that its C, A, L,  and T categories are collapsed in a new 'O' category
+dataSet$Theme.animacy<-dplyr::recode(dataSet$Theme.animacy, C="O", A="O", L="O", T="O")
+
+```
+
+```{r ex="SemanticsSpeaker_logistic", type="sample-code"}
+# The modified data.frame dataSet is already in your workspace
+
+# Extract all unique Speaker values with the unique() function. Assign this to the variable speakers
+
+# Sample 30 random speakers from the speakers variable with the function sample. Assign this to the variable speakerSample
+
+# Filter the dataSet with the dplyr function filter. Keep only rows for which Speaker is in speakerSample. Assign this data to plotData
+
+# Load the ggplot package 
+
+# Draw a 100% filled barchart of Response.variable vs Semantics. Facet the plot by Speaker. Don't forget, you will want to do this for plotData, not dataSet!
+
+
+# Sample another 30 random speakers from the speakers variable with the function sample. Assign this to the variable speakerSample
+
+# Filter the dataSet with the dplyr function filter. Keep only rows for which Speaker is in speakerSample. Assign this data to plotData
+
+# Draw a 100% filled barchart of Response.variable vs Semantics. Facet the plot by Speaker. Don't forget, you will want to do this for plotData, not dataSet!
+
+
+# What do you see? Is a by-Speaker random slope warranted for Semantics? You will find the correct answer on the Solution tab
+```
+
+```{r ex="SemanticsSpeaker_logistic", type="solution"}
+# The modified data.frame dataSet is already in your workspace
+
+# Extract all unique Speaker values with the unique() function. Assign this to the variable speakers
+speakers<-unique(dataSet$Speaker)
+# Sample 30 random speakers from the speakers variable with the function sample. Assign this to the variable speakerSample
+speakerSample<-sample(speakers, 30)
+
+# Filter the dataSet with the dplyr function filter. Keep only rows for which Speaker is in speakerSample. Assign this data to plotData
+plotData<-dataSet %>% filter(Speaker %in% speakerSample)
+# Load the ggplot package 
+library(ggplot2)
+
+# Draw a 100% filled barchart of Response.variable vs Semantics. Facet the plot by Speaker. Don't forget, you will want to do this for plotData, not dataSet!
+ggplot(plotData, aes(x=Semantics, fill=Response.variable,color= Response.variable)) + geom_bar(position = "fill") + facet_wrap(~Speaker)
+
+# Sample another 30 random speakers from the speakers variable with the function sample. Assign this to the variable speakerSample
+speakerSample<-sample(speakers, 30)
+
+# Filter the dataSet with the dplyr function filter. Keep only rows for which Speaker is in speakerSample. Assign this data to plotData
+plotData<-dataSet %>% filter(Speaker %in% speakerSample)
+
+# Draw a 100% filled barchart of Response.variable vs Semantics. Facet the plot by Speaker. Don't forget, you will want to do this for plotData, not dataSet!
+ggplot(plotData, aes(x=Semantics, fill=Response.variable,color= Response.variable)) + geom_bar(position = "fill") + facet_wrap(~Speaker)
+
+
+# What do you see? Is a by-Speaker random slope warranted for Semantics? 
+# There appears to be some variation between Speakers, but most importantly, the plots show that there is not enough data to evaluate differences in the effects of Semantics by speaker
+```
+
+```{r ex="SemanticsSpeaker_logistic", type="sct"}
+test_library_function("ggplot2")
+test_ggplot(1)
+test_ggplot(2)
+success_msg("Great work!")
+```
+
+
+#### 2.2.2 `Recipient.type | Speaker`
+```{r ex="Recipient.typeSpeaker_logistic", type="pre-exercise-code"}
+# Load the readr package
+library(readr)
+# Load the course data from the course website to the object 'dataSet':
+#http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv
+dataSet<-read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv")
+# Load the dplyr package
+library(dplyr)
+# Convert all character values to Factor with `mutate_if`
+dataSet <- mutate_if(dataSet, is.character, as.factor)
+# Print a 'summary' of the dataSet
+dataSet$Recipient.type<-dplyr::recode(dataSet$Recipient.type, D="O", I="O", N="O")
+# Recode Recipient.definiteness so that its C, I, and L categories are collapsed in a new 'O' category
+dataSet$Recipient.animacy<-dplyr::recode(dataSet$Recipient.animacy, C="O", I="O", L="O")
+# Recode Theme.type so that its P, I, and D categories are collapsed in a new 'O' category
+dataSet$Theme.type<-dplyr::recode(dataSet$Theme.type, P="O", I="O", D="O")
+# Recode Theme.animacy so that its C, A, L,  and T categories are collapsed in a new 'O' category
+dataSet$Theme.animacy<-dplyr::recode(dataSet$Theme.animacy, C="O", A="O", L="O", T="O")
+```
+
+```{r ex="Recipient.typeSpeaker_logistic", type="sample-code"}
+# The modified data.frame dataSet is already in your workspace
+
+# Extract all unique Speaker values with the unique() function. Assign this to the variable speakers
+
+# Sample 30 random speakers from the speakers variable with the function sample. Assign this to the variable speakerSample
+
+# Filter the dataSet with the dplyr function filter. Keep only rows for which Speaker is in speakerSample. Assign this data to plotData
+
+# Load the ggplot package 
+
+# Draw a 100% filled barchart of Response.variable vs Recipient.type. Facet the plot by Speaker. Don't forget, you will want to do this for plotData, not dataSet!
+
+
+# Sample another 30 random speakers from the speakers variable with the function sample. Assign this to the variable speakerSample
+
+# Filter the dataSet with the dplyr function filter. Keep only rows for which Speaker is in speakerSample. Assign this data to plotData
+
+# Draw a 100% filled barchart of Response.variable vs Recipient.type. Facet the plot by Speaker. Don't forget, you will want to do this for plotData, not dataSet!
+
+
+# What do you see? Is a by-Speaker random slope warranted for Recipient.type? You will find the correct answer on the Solution tab
+```
+
+```{r ex="Recipient.typeSpeaker_logistic", type="solution"}
+# The modified data.frame dataSet is already in your workspace
+
+# Extract all unique Speaker values with the unique() function. Assign this to the variable speakers
+speakers<-unique(dataSet$Speaker)
+# Sample 30 random speakers from the speakers variable with the function sample. Assign this to the variable speakerSample
+speakerSample<-sample(speakers, 30)
+
+# Filter the dataSet with the dplyr function filter. Keep only rows for which Speaker is in speakerSample. Assign this data to plotData
+plotData<-dataSet %>% filter(Speaker %in% speakerSample)
+# Load the ggplot package 
+library(ggplot2)
+
+# Draw a 100% filled barchart of Response.variable vs Recipient.type. Facet the plot by Speaker. Don't forget, you will want to do this for plotData, not dataSet!
+ggplot(plotData, aes(x=Recipient.type, fill=Response.variable,color= Response.variable)) + geom_bar(position = "fill") + facet_wrap(~Speaker)
+
+# Sample another 30 random speakers from the speakers variable with the function sample. Assign this to the variable speakerSample
+speakerSample<-sample(speakers, 30)
+
+# Filter the dataSet with the dplyr function filter. Keep only rows for which Speaker is in speakerSample. Assign this data to plotData
+plotData<-dataSet %>% filter(Speaker %in% speakerSample)
+
+# Draw a 100% filled barchart of Response.variable vs Recipient.type. Facet the plot by Speaker. Don't forget, you will want to do this for plotData, not dataSet!
+ggplot(plotData, aes(x=Recipient.type, fill=Response.variable,color= Response.variable)) + geom_bar(position = "fill") + facet_wrap(~Speaker)
+
+
+# What do you see? Is a by-Speaker random slope warranted for Recipient.type? 
+# There appears to be some variation between Speakers, but most importantly, the plots show that there is not enough data to evaluate differences in the effects of Recipient.type by speaker
+```
+
+```{r ex="Recipient.typeSpeaker_logistic", type="sct"}
+test_library_function("ggplot2")
+test_ggplot(1)
+test_ggplot(2)
+success_msg("Great work!")
+```
+
+#### 2.2.3 `Recipient.animacy | Speaker`
+```{r ex="Recipient.animacySpeaker_logistic", type="pre-exercise-code"}
+# Load the readr package
+library(readr)
+# Load the course data from the course website to the object 'dataSet':
+#http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv
+dataSet<-read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv")
+# Load the dplyr package
+library(dplyr)
+# Convert all character values to Factor with `mutate_if`
+dataSet <- mutate_if(dataSet, is.character, as.factor)
+# Print a 'summary' of the dataSet
+dataSet$Recipient.type<-dplyr::recode(dataSet$Recipient.type, D="O", I="O", N="O")
+# Recode Recipient.definiteness so that its C, I, and L categories are collapsed in a new 'O' category
+dataSet$Recipient.animacy<-dplyr::recode(dataSet$Recipient.animacy, C="O", I="O", L="O")
+# Recode Theme.type so that its P, I, and D categories are collapsed in a new 'O' category
+dataSet$Theme.type<-dplyr::recode(dataSet$Theme.type, P="O", I="O", D="O")
+# Recode Theme.animacy so that its C, A, L,  and T categories are collapsed in a new 'O' category
+dataSet$Theme.animacy<-dplyr::recode(dataSet$Theme.animacy, C="O", A="O", L="O", T="O")
+```
+
+```{r ex="Recipient.animacySpeaker_logistic", type="sample-code"}
+# The modified data.frame dataSet is already in your workspace
+
+# Extract all unique Speaker values with the unique() function. Assign this to the variable speakers
+
+# Sample 30 random speakers from the speakers variable with the function sample. Assign this to the variable speakerSample
+
+# Filter the dataSet with the dplyr function filter. Keep only rows for which Speaker is in speakerSample. Assign this data to plotData
+
+# Load the ggplot package 
+
+# Draw a 100% filled barchart of Response.variable vs Recipient.animacy. Facet the plot by Speaker. Don't forget, you will want to do this for plotData, not dataSet!
+
+
+# Sample another 30 random speakers from the speakers variable with the function sample. Assign this to the variable speakerSample
+
+# Filter the dataSet with the dplyr function filter. Keep only rows for which Speaker is in speakerSample. Assign this data to plotData
+
+# Draw a 100% filled barchart of Response.variable vs Recipient.animacy. Facet the plot by Speaker. Don't forget, you will want to do this for plotData, not dataSet!
+
+
+# What do you see? Is a by-Speaker random slope warranted for Recipient.animacy? You will find the correct answer on the Solution tab
+```
+
+```{r ex="Recipient.animacySpeaker_logistic", type="solution"}
+# The modified data.frame dataSet is already in your workspace
+
+# Extract all unique Speaker values with the unique() function. Assign this to the variable speakers
+speakers<-unique(dataSet$Speaker)
+# Sample 30 random speakers from the speakers variable with the function sample. Assign this to the variable speakerSample
+speakerSample<-sample(speakers, 30)
+
+# Filter the dataSet with the dplyr function filter. Keep only rows for which Speaker is in speakerSample. Assign this data to plotData
+plotData<-dataSet %>% filter(Speaker %in% speakerSample)
+# Load the ggplot package 
+library(ggplot2)
+
+# Draw a 100% filled barchart of Response.variable vs Recipient.animacy. Facet the plot by Speaker. Don't forget, you will want to do this for plotData, not dataSet!
+ggplot(plotData, aes(x=Recipient.animacy, fill=Response.variable,color= Response.variable)) + geom_bar(position = "fill") + facet_wrap(~Speaker)
+
+# Sample another 30 random speakers from the speakers variable with the function sample. Assign this to the variable speakerSample
+speakerSample<-sample(speakers, 30)
+
+# Filter the dataSet with the dplyr function filter. Keep only rows for which Speaker is in speakerSample. Assign this data to plotData
+plotData<-dataSet %>% filter(Speaker %in% speakerSample)
+
+# Draw a 100% filled barchart of Response.variable vs Recipient.animacy. Facet the plot by Speaker. Don't forget, you will want to do this for plotData, not dataSet!
+ggplot(plotData, aes(x=Recipient.animacy, fill=Response.variable,color= Response.variable)) + geom_bar(position = "fill") + facet_wrap(~Speaker)
+
+
+# What do you see? Is a by-Speaker random slope warranted for Recipient.animacy? 
+# There appears to be some variation between Speakers, but most importantly, the plots show that there is not enough data to evaluate differences in the effects of Recipient.animacy by speaker
+```
+
+```{r ex="Recipient.animacySpeaker_logistic", type="sct"}
+test_library_function("ggplot2")
+test_ggplot(1)
+test_ggplot(2)
+success_msg("Great work!")
+```
+
+#### 2.2.4 `Recipient.definiteness | Speaker`
+```{r ex="Recipient.definitenessSpeaker_logistic", type="pre-exercise-code"}
+# Load the readr package
+library(readr)
+# Load the course data from the course website to the object 'dataSet':
+#http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv
+dataSet<-read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv")
+# Load the dplyr package
+library(dplyr)
+# Convert all character values to Factor with `mutate_if`
+dataSet <- mutate_if(dataSet, is.character, as.factor)
+# Print a 'summary' of the dataSet
+dataSet$Recipient.type<-dplyr::recode(dataSet$Recipient.type, D="O", I="O", N="O")
+# Recode Recipient.definiteness so that its C, I, and L categories are collapsed in a new 'O' category
+dataSet$Recipient.animacy<-dplyr::recode(dataSet$Recipient.animacy, C="O", I="O", L="O")
+# Recode Theme.type so that its P, I, and D categories are collapsed in a new 'O' category
+dataSet$Theme.type<-dplyr::recode(dataSet$Theme.type, P="O", I="O", D="O")
+# Recode Theme.animacy so that its C, A, L,  and T categories are collapsed in a new 'O' category
+dataSet$Theme.animacy<-dplyr::recode(dataSet$Theme.animacy, C="O", A="O", L="O", T="O")
+```
+
+```{r ex="Recipient.definitenessSpeaker_logistic", type="sample-code"}
+# The modified data.frame dataSet is already in your workspace
+
+# Extract all unique Speaker values with the unique() function. Assign this to the variable speakers
+
+# Sample 30 random speakers from the speakers variable with the function sample. Assign this to the variable speakerSample
+
+# Filter the dataSet with the dplyr function filter. Keep only rows for which Speaker is in speakerSample. Assign this data to plotData
+
+# Load the ggplot package 
+
+# Draw a 100% filled barchart of Response.variable vs Recipient.definiteness. Facet the plot by Speaker. Don't forget, you will want to do this for plotData, not dataSet!
+
+
+# Sample another 30 random speakers from the speakers variable with the function sample. Assign this to the variable speakerSample
+
+# Filter the dataSet with the dplyr function filter. Keep only rows for which Speaker is in speakerSample. Assign this data to plotData
+
+# Draw a 100% filled barchart of Response.variable vs Recipient.definiteness. Facet the plot by Speaker. Don't forget, you will want to do this for plotData, not dataSet!
+
+
+# What do you see? Is a by-Speaker random slope warranted for Recipient.definiteness? You will find the correct answer on the Solution tab
+```
+
+```{r ex="Recipient.definitenessSpeaker_logistic", type="solution"}
+# The modified data.frame dataSet is already in your workspace
+
+# Extract all unique Speaker values with the unique() function. Assign this to the variable speakers
+speakers<-unique(dataSet$Speaker)
+# Sample 30 random speakers from the speakers variable with the function sample. Assign this to the variable speakerSample
+speakerSample<-sample(speakers, 30)
+
+# Filter the dataSet with the dplyr function filter. Keep only rows for which Speaker is in speakerSample. Assign this data to plotData
+plotData<-dataSet %>% filter(Speaker %in% speakerSample)
+# Load the ggplot package 
+library(ggplot2)
+
+# Draw a 100% filled barchart of Response.variable vs Recipient.definiteness. Facet the plot by Speaker. Don't forget, you will want to do this for plotData, not dataSet!
+ggplot(plotData, aes(x=Recipient.definiteness, fill=Response.variable,color= Response.variable)) + geom_bar(position = "fill") + facet_wrap(~Speaker)
+
+# Sample another 30 random speakers from the speakers variable with the function sample. Assign this to the variable speakerSample
+speakerSample<-sample(speakers, 30)
+
+# Filter the dataSet with the dplyr function filter. Keep only rows for which Speaker is in speakerSample. Assign this data to plotData
+plotData<-dataSet %>% filter(Speaker %in% speakerSample)
+
+# Draw a 100% filled barchart of Response.variable vs Recipient.definiteness. Facet the plot by Speaker. Don't forget, you will want to do this for plotData, not dataSet!
+ggplot(plotData, aes(x=Recipient.definiteness, fill=Response.variable,color= Response.variable)) + geom_bar(position = "fill") + facet_wrap(~Speaker)
+
+
+# What do you see? Is a by-Speaker random slope warranted for Recipient.definiteness? 
+# There appears to be some variation between Speakers, but most importantly, the plots show that there is not enough data to evaluate differences in the effects of Recipient.definiteness by speaker
+```
+
+```{r ex="Recipient.definitenessSpeaker_logistic", type="sct"}
+test_library_function("ggplot2")
+test_ggplot(1)
+test_ggplot(2)
+success_msg("Great work!")
+```
+
+#### 2.2.5 `Theme.type | Speaker`
+```{r ex="Theme.typeSpeaker_logistic", type="pre-exercise-code"}
+# Load the readr package
+library(readr)
+# Load the course data from the course website to the object 'dataSet':
+#http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv
+dataSet<-read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv")
+# Load the dplyr package
+library(dplyr)
+# Convert all character values to Factor with `mutate_if`
+dataSet <- mutate_if(dataSet, is.character, as.factor)
+# Print a 'summary' of the dataSet
+dataSet$Recipient.type<-dplyr::recode(dataSet$Recipient.type, D="O", I="O", N="O")
+# Recode Recipient.definiteness so that its C, I, and L categories are collapsed in a new 'O' category
+dataSet$Recipient.animacy<-dplyr::recode(dataSet$Recipient.animacy, C="O", I="O", L="O")
+# Recode Theme.type so that its P, I, and D categories are collapsed in a new 'O' category
+dataSet$Theme.type<-dplyr::recode(dataSet$Theme.type, P="O", I="O", D="O")
+# Recode Theme.animacy so that its C, A, L,  and T categories are collapsed in a new 'O' category
+dataSet$Theme.animacy<-dplyr::recode(dataSet$Theme.animacy, C="O", A="O", L="O", T="O")
+```
+
+```{r ex="Theme.typeSpeaker_logistic", type="sample-code"}
+# The modified data.frame dataSet is already in your workspace
+
+# Extract all unique Speaker values with the unique() function. Assign this to the variable speakers
+
+# Sample 30 random speakers from the speakers variable with the function sample. Assign this to the variable speakerSample
+
+# Filter the dataSet with the dplyr function filter. Keep only rows for which Speaker is in speakerSample. Assign this data to plotData
+
+# Load the ggplot package 
+
+# Draw a 100% filled barchart of Response.variable vs Theme.type. Facet the plot by Speaker. Don't forget, you will want to do this for plotData, not dataSet!
+
+
+# Sample another 30 random speakers from the speakers variable with the function sample. Assign this to the variable speakerSample
+
+# Filter the dataSet with the dplyr function filter. Keep only rows for which Speaker is in speakerSample. Assign this data to plotData
+
+# Draw a 100% filled barchart of Response.variable vs Theme.type. Facet the plot by Speaker. Don't forget, you will want to do this for plotData, not dataSet!
+
+
+# What do you see? Is a by-Speaker random slope warranted for Theme.type? You will find the correct answer on the Solution tab
+```
+
+```{r ex="Theme.typeSpeaker_logistic", type="solution"}
+# The modified data.frame dataSet is already in your workspace
+
+# Extract all unique Speaker values with the unique() function. Assign this to the variable speakers
+speakers<-unique(dataSet$Speaker)
+# Sample 30 random speakers from the speakers variable with the function sample. Assign this to the variable speakerSample
+speakerSample<-sample(speakers, 30)
+
+# Filter the dataSet with the dplyr function filter. Keep only rows for which Speaker is in speakerSample. Assign this data to plotData
+plotData<-dataSet %>% filter(Speaker %in% speakerSample)
+# Load the ggplot package 
+library(ggplot2)
+
+# Draw a 100% filled barchart of Response.variable vs Theme.type. Facet the plot by Speaker. Don't forget, you will want to do this for plotData, not dataSet!
+ggplot(plotData, aes(x=Theme.type, fill=Response.variable,color= Response.variable)) + geom_bar(position = "fill") + facet_wrap(~Speaker)
+
+# Sample another 30 random speakers from the speakers variable with the function sample. Assign this to the variable speakerSample
+speakerSample<-sample(speakers, 30)
+
+# Filter the dataSet with the dplyr function filter. Keep only rows for which Speaker is in speakerSample. Assign this data to plotData
+plotData<-dataSet %>% filter(Speaker %in% speakerSample)
+
+# Draw a 100% filled barchart of Response.variable vs Theme.type. Facet the plot by Speaker. Don't forget, you will want to do this for plotData, not dataSet!
+ggplot(plotData, aes(x=Theme.type, fill=Response.variable,color= Response.variable)) + geom_bar(position = "fill") + facet_wrap(~Speaker)
+
+
+# What do you see? Is a by-Speaker random slope warranted for Theme.type? 
+# There appears to be some variation between Speakers, but most importantly, the plots show that there is not enough data to evaluate differences in the effects of Theme.type by speaker
+```
+
+```{r ex="Theme.typeSpeaker_logistic", type="sct"}
+test_library_function("ggplot2")
+test_ggplot(1)
+test_ggplot(2)
+success_msg("Great work!")
+```
+
+#### 2.2.6 `Theme.animacy | Speaker`
+```{r ex="Theme.animacySpeaker_logistic", type="pre-exercise-code"}
+# Load the readr package
+library(readr)
+# Load the course data from the course website to the object 'dataSet':
+#http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv
+dataSet<-read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv")
+# Load the dplyr package
+library(dplyr)
+# Convert all character values to Factor with `mutate_if`
+dataSet <- mutate_if(dataSet, is.character, as.factor)
+# Print a 'summary' of the dataSet
+dataSet$Recipient.type<-dplyr::recode(dataSet$Recipient.type, D="O", I="O", N="O")
+# Recode Recipient.definiteness so that its C, I, and L categories are collapsed in a new 'O' category
+dataSet$Recipient.animacy<-dplyr::recode(dataSet$Recipient.animacy, C="O", I="O", L="O")
+# Recode Theme.type so that its P, I, and D categories are collapsed in a new 'O' category
+dataSet$Theme.type<-dplyr::recode(dataSet$Theme.type, P="O", I="O", D="O")
+# Recode Theme.animacy so that its C, A, L,  and T categories are collapsed in a new 'O' category
+dataSet$Theme.animacy<-dplyr::recode(dataSet$Theme.animacy, C="O", A="O", L="O", T="O")
+```
+
+```{r ex="Theme.animacySpeaker_logistic", type="sample-code"}
+# The modified data.frame dataSet is already in your workspace
+
+# Extract all unique Speaker values with the unique() function. Assign this to the variable speakers
+
+# Sample 30 random speakers from the speakers variable with the function sample. Assign this to the variable speakerSample
+
+# Filter the dataSet with the dplyr function filter. Keep only rows for which Speaker is in speakerSample. Assign this data to plotData
+
+# Load the ggplot package 
+
+# Draw a 100% filled barchart of Response.variable vs Theme.animacy. Facet the plot by Speaker. Don't forget, you will want to do this for plotData, not dataSet!
+
+
+# Sample another 30 random speakers from the speakers variable with the function sample. Assign this to the variable speakerSample
+
+# Filter the dataSet with the dplyr function filter. Keep only rows for which Speaker is in speakerSample. Assign this data to plotData
+
+# Draw a 100% filled barchart of Response.variable vs Theme.animacy. Facet the plot by Speaker. Don't forget, you will want to do this for plotData, not dataSet!
+
+
+# What do you see? Is a by-Speaker random slope warranted for Theme.animacy? You will find the correct answer on the Solution tab
+```
+
+```{r ex="Theme.animacySpeaker_logistic", type="solution"}
+# The modified data.frame dataSet is already in your workspace
+
+# Extract all unique Speaker values with the unique() function. Assign this to the variable speakers
+speakers<-unique(dataSet$Speaker)
+# Sample 30 random speakers from the speakers variable with the function sample. Assign this to the variable speakerSample
+speakerSample<-sample(speakers, 30)
+
+# Filter the dataSet with the dplyr function filter. Keep only rows for which Speaker is in speakerSample. Assign this data to plotData
+plotData<-dataSet %>% filter(Speaker %in% speakerSample)
+# Load the ggplot package 
+library(ggplot2)
+
+# Draw a 100% filled barchart of Response.variable vs Theme.animacy. Facet the plot by Speaker. Don't forget, you will want to do this for plotData, not dataSet!
+ggplot(plotData, aes(x=Theme.animacy, fill=Response.variable,color= Response.variable)) + geom_bar(position = "fill") + facet_wrap(~Speaker)
+
+# Sample another 30 random speakers from the speakers variable with the function sample. Assign this to the variable speakerSample
+speakerSample<-sample(speakers, 30)
+
+# Filter the dataSet with the dplyr function filter. Keep only rows for which Speaker is in speakerSample. Assign this data to plotData
+plotData<-dataSet %>% filter(Speaker %in% speakerSample)
+
+# Draw a 100% filled barchart of Response.variable vs Theme.animacy. Facet the plot by Speaker. Don't forget, you will want to do this for plotData, not dataSet!
+ggplot(plotData, aes(x=Theme.animacy, fill=Response.variable,color= Response.variable)) + geom_bar(position = "fill") + facet_wrap(~Speaker)
+
+
+# What do you see? Is a by-Speaker random slope warranted for Theme.animacy? 
+# There appears to be some variation between Speakers, but most importantly, the plots show that there is not enough data to evaluate differences in the effects of Theme.animacy by speaker
+```
+
+```{r ex="Theme.animacySpeaker_logistic", type="sct"}
+test_library_function("ggplot2")
+test_ggplot(1)
+test_ggplot(2)
+success_msg("Great work!")
+```
+
+### 2.3 A first model
+- Our previous explorations suggested that we do not have enough data to evaluate by-subject random slopes for any of our fixed effects
+- We will fit a random intercept model
+
+```{r ex="firstmodellogistic", type="pre-exercise-code"}
+# Load the readr package
+library(readr)
+# Load the course data from the course website to the object 'dataSet':
+#http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv
+dataSet<-read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv")
+# Load the dplyr package
+library(dplyr)
+# Convert all character values to Factor with `mutate_if`
+dataSet <- mutate_if(dataSet, is.character, as.factor)
+# Print a 'summary' of the dataSet
+dataSet$Recipient.type<-dplyr::recode(dataSet$Recipient.type, D="O", I="O", N="O")
+# Recode Recipient.definiteness so that its C, I, and L categories are collapsed in a new 'O' category
+dataSet$Recipient.animacy<-dplyr::recode(dataSet$Recipient.animacy, C="O", I="O", L="O")
+# Recode Theme.type so that its P, I, and D categories are collapsed in a new 'O' category
+dataSet$Theme.type<-dplyr::recode(dataSet$Theme.type, P="O", I="O", D="O")
+# Recode Theme.animacy so that its C, A, L,  and T categories are collapsed in a new 'O' category
+dataSet$Theme.animacy<-dplyr::recode(dataSet$Theme.animacy, C="O", A="O", L="O", T="O")
+```
+
+```{r ex="firstmodellogistic", type="sample-code"}
+# The modified data.frame dataSet is already in your workspace
+
+# Load the lme4 package
+
+# Specify a logistic mixed-effects model 'mod' in which regresses Response.variable on Variety, Speaker.sex, Semantics, Recipient.type, Recipient.animacy, Recipient.definiteness, Theme.type, and Theme.animacy. Add a Speaker random intercept
+
+```
+
+```{r ex="firstmodellogistic", type="solution"}
+# The modified data.frame dataSet is already in your workspace
+
+# Load the lme4 package
+library(lme4)
+# Specify a logistic mixed-effects model 'mod' in which regresses Response.variable on Variety, Speaker.sex,  Semantics, Recipient.type, Recipient.animacy, Recipient.definiteness, Theme.type, and Theme.animacy. Add a Speaker random intercept
+mod <-glmer(Response.variable~ Variety + Speaker.sex +   Semantics + Recipient.type +  Recipient.animacy+  Recipient.definiteness +  Theme.type +  Theme.animacy + (1|Speaker), family="binomial", data=dataSet, control = glmerControl(optimizer="bobyqa"))
+# Print a summary of mod
+summary(mod)
+```
+
+```{r ex="firstmodellogistic", type="sct"}
+test_library_function("lme4")
+test_output_contains("summary(mod)", incorrect_msg="Don't forget to compute a summary of 'mod'!")
+success_msg("Great work!")
+```
+
+### 2.4 Occam's razor on the fixed effects
+- `Recipient.definiteness` and `Theme.animacy` have large p-values. Let's see if they contribute to the model fit
+
+```{r ex="occamlogistic", type="pre-exercise-code"}
+# Load the readr package
+library(readr)
+# Load the course data from the course website to the object 'dataSet':
+#http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv
+dataSet<-read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv")
+# Load the dplyr package
+library(dplyr)
+# Convert all character values to Factor with `mutate_if`
+# Print a 'summary' of the dataSet
+dataSet$Recipient.type<-dplyr::recode(dataSet$Recipient.type, D="O", I="O", N="O")
+# Recode Recipient.definiteness so that its C, I, and L categories are collapsed in a new 'O' category
+dataSet$Recipient.animacy<-dplyr::recode(dataSet$Recipient.animacy, C="O", I="O", L="O")
+# Recode Theme.type so that its P, I, and D categories are collapsed in a new 'O' category
+dataSet$Theme.type<-dplyr::recode(dataSet$Theme.type, P="O", I="O", D="O")
+# Recode Theme.animacy so that its C, A, L,  and T categories are collapsed in a new 'O' category
+dataSet$Theme.animacy<-dplyr::recode(dataSet$Theme.animacy, C="O", A="O", L="O", T="O")
+dataSet <- mutate_if(dataSet, is.character, as.factor)
+
+```
+
+```{r ex="occamlogistic", type="sample-code"}
+# The modified data.frame dataSet is already in your workspace
+
+# Load the lme4 package
+
+# Specify a logistic mixed-effects model 'mod' in which regresses Response.variable on Variety, Speaker.sex, Semantics, Recipient.type, Recipient.animacy, Recipient.definiteness, Theme.type, and Theme.animacy. Add a Speaker random intercept
+
+# Specify a logistic mixed-effects model 'mod2' from which you omit Recipient.definiteness
+
+# Compare the AIC of mod2 to that of mod
+
+# Specify a logistic mixed-effects model 'mod3' from which you omit Theme.animacy
+
+# Compare the AIC of mod3 to that of mod
+
+# What do you see? Is there more evidence in favor of the models without these fixed effects? You will find the correct answer on the Solution tab
+
+```
+
+```{r ex="occamlogistic", type="solution"}
+# The modified data.frame dataSet is already in your workspace
+
+# Load the lme4 package
+library(lme4)
+# Specify a logistic mixed-effects model 'mod' in which regresses Response.variable on Variety, Speaker.sex, Semantics, Recipient.type, Recipient.animacy, Recipient.definiteness, Theme.type, and Theme.animacy. Add a Speaker random intercept
+mod <-glmer(Response.variable~ Variety + Speaker.sex +   Semantics + Recipient.type +  Recipient.animacy+  Recipient.definiteness +  Theme.type +  Theme.animacy + (1|Speaker), family="binomial", data=dataSet, control = glmerControl(optimizer="bobyqa"))
+# Specify a logistic mixed-effects model 'mod2' from which you omit Recipient.definiteness
+mod2 <-glmer(Response.variable~ Variety + Speaker.sex +   Semantics + Recipient.type +  Recipient.animacy +  Theme.type +  Theme.animacy + (1|Speaker), family="binomial", data=dataSet, control = glmerControl(optimizer="bobyqa"))
+# Compare the AIC of mod2 to that of mod
+AIC(mod)-AIC(mod2)
+# Specify a logistic mixed-effects model 'mod3' from which you omit Theme.animacy
+mod3 <-glmer(Response.variable~ Variety + Speaker.sex +   Semantics + Recipient.type +  Recipient.animacy+  Recipient.definiteness +  Theme.type +  (1|Speaker), family="binomial", data=dataSet, control = glmerControl(optimizer="bobyqa"))
+# Compare the AIC of mod3 to that of mod
+AIC(mod)-AIC(mod3)
+# What do you see? Is there more evidence in favor of the models without these fixed effects? 
+# There is more evidence in favor of a model without Recipient.definiteness than there is for a model with Recipient.definiteness. The exclusion of Theme.animacy from the model receives some support, but not the 2 AIC units we use as a threshold to remove predictors from our models
+
+```
+
+```{r ex="occamlogistic", type="sct"}
+test_library_function("lme4")
+test_output_contains("AIC(mod)-AIC(mod2)", incorrect_msg="Don't forget to compare the AIC of mod that that of mod2!")
+test_output_contains("AIC(mod)-AIC(mod3)", incorrect_msg="Don't forget to compare the AIC of mod that that of mod3!")
+success_msg("Great work!")
+```
+
+### 2.5 Assessing the fit: Bootstrap and C-index
+
+```{r ex="logisticfit", type="pre-exercise-code"}
+# Load the readr package
+library(readr)
+# Load the course data from the course website to the object 'dataSet':
+#http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv
+dataSet<-read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv")
+# Load the dplyr package
+library(dplyr)
+# Convert all character values to Factor with `mutate_if`
+# Print a 'summary' of the dataSet
+dataSet$Recipient.type<-dplyr::recode(dataSet$Recipient.type, D="O", I="O", N="O")
+# Recode Recipient.definiteness so that its C, I, and L categories are collapsed in a new 'O' category
+dataSet$Recipient.animacy<-dplyr::recode(dataSet$Recipient.animacy, C="O", I="O", L="O")
+# Recode Theme.type so that its P, I, and D categories are collapsed in a new 'O' category
+dataSet$Theme.type<-dplyr::recode(dataSet$Theme.type, P="O", I="O", D="O")
+# Recode Theme.animacy so that its C, A, L,  and T categories are collapsed in a new 'O' category
+dataSet$Theme.animacy<-dplyr::recode(dataSet$Theme.animacy, C="O", A="O", L="O", T="O")
+dataSet <- mutate_if(dataSet, is.character, as.factor)
+library(lme4)
+confint<-function(model, method, boot.type, nsim, parallel, ncpus) {
+  suppressWarnings(suppressMessages(as.data.frame(read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class11_Bresnan_et_al_2017_confints_model.csv"))))
+}
+```
+
+```{r ex="logisticfit", type="sample-code"}
+# The modified data.frame dataSet is already in your workspace
+
+# The lme4 package is already in your workspace
+
+# Specify a logistic mixed-effects model 'mod' in which regresses Response.variable on Variety, Speaker.sex, Semantics, Recipient.type, Recipient.animacy, Theme.type, and Theme.animacy. Add a Speaker random intercept
+
+# Compute bootstrap confidence intervals for this model
+
+# Load the Hmisc package
+
+# Compute the c-index of concordance for the model
+
+# What do you see? Does the model appear to suffer from numerical instability? With which predictors should we be careful when drawing inferences? What about the c-index, does the model achieve good discrimination? 
+
+```
+
+```{r ex="logisticfit", type="solution"}
+# The modified data.frame dataSet is already in your workspace
+
+# Specify a logistic mixed-effects model 'mod' in which regresses Response.variable on Variety, Speaker.sex, Semantics, Recipient.type, Recipient.animacy, Theme.type, and Theme.animacy. Add a Speaker random intercept
+mod <-glmer(Response.variable~ Variety + Speaker.sex +   Semantics + Recipient.type +  Recipient.animacy +  Theme.type +  Theme.animacy + (1|Speaker), family="binomial", data=dataSet, control = glmerControl(optimizer="bobyqa"))
+# Compute bootstrap confidence intervals for this model
+confint(mod, method="boot", boot.type="perc", nsim=1000, parallel="multicore", ncpus=4)
+# Load the Hmisc package
+library(Hmisc)
+# Compute the c-index of concordance for the model
+somers2(fitted(mod), as.numeric(dataSet$Response.variable)-1)
+# What do you see? Does the model appear to suffer from numerical instability? With which predictors should we be careful when drawing inferences? What about the c-index, does the model achieve good discrimination? 
+# - Theme animacy is a bit unstable, which is not surprising given its lack of significance. We will not want to base strong claims on this effect
+# - The model achieves outstanding discrimination. With a C-index well above 90, this model offers an excellent representation of the forces that condition the dative alternation
+
+```
+
+```{r ex="logisticfit", type="sct"}
+test_library_function("Hmisc")
+test_output_contains("somers2(fitted(mod), as.numeric(dataSet$Response.variable)-1)", incorrect_msg="Don't forget to compute the C-index!")
+test_output_contains('confint(mod, method="boot", boot.type="perc", nsim=1000, parallel="multicore", ncpus=4)', incorrect_msg="Don't forget to compute the confints!")
+success_msg("Great work!")
+```
+
+## 3. Acknowledgements
+- A **warm thank you!** goes to [Benedikt Szmrecsanyi](https://sites.google.com/site/bszmrecsanyi) (KU Leuven), for making the data available through his website!
+- A **Big Thank You!** goes to [Grant M. Berry](http://www.grantberry.info) (Penn State), who generously provided the data for the second part of this exercise
+
+## 4.References
+- Berry, G. M. (2018). *Liminal voices, central constraints: Minority adoption of majority sound change*. State College: Penn State University PhD Dissertation.
+- Braver, T. S. (2012). The variable nature of cognitive control: A dual-mechanisms framework. *Trends in Cognitive Science*, 16(2). 106–113.
+- Bresnan, J., Rosenbach, A., Szmrecsanyi, B., Tagliamonte, S. A. & Todd, S. (2017). Syntactic alternations data: datives and genitives in four varieties of English. Stanford Digital Repository. Available at: http://purl.stanford.edu/qj187zs3852. 
+- Szmrecsanyi, B., Grafmiller, J., Bresnan, J., Rosenbach, A., Tagliamonte, S., & Todd, S. (2017). Spoken syntax in a comparative perspective: The dative and genitive alternation in varieties of English. *Glossa: a journal of general linguistics* 2(1), 86. DOI: http://doi.org/10.5334/gjgl.310.
+- Woolums, N. (2012). Phonetic manifestations of /ai/ raising. *Linguistic Portfolios*. Article 19. 
+

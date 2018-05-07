@@ -21,8 +21,8 @@ The slides for the classes are available for download here:
 - [Topic 8: The science (or art?) of fitting linear regression models](http://www.jeroenclaes.be/statistics_for_linguistics/slides/Class8.html)
 - [Topic 9: Analysis of Variance](http://www.jeroenclaes.be/statistics_for_linguistics/slides/Class9.html)
 - [Topic 10: Logistic regression](http://www.jeroenclaes.be/statistics_for_linguistics/slides/Class10.html)
-- Topic 11: Mixed-effects regression  
-- Topic 12: When things aren't quite linear: Polynomial regression and Generalized Additive Modeling
+- [Topic 11: Mixed-effects regression](http://www.jeroenclaes.be/statistics_for_linguistics/slides/Class11.html) 
+- [Topic 12: When things aren't quite linear: Polynomial regression and elements of Generalized Additive Modeling](http://www.jeroenclaes.be/statistics_for_linguistics/slides/Class12.html) 
 
 ## Syllabus
 A version of the slides rendered as Word documents can be found here so can you take notes more easily:
@@ -36,6 +36,8 @@ A version of the slides rendered as Word documents can be found here so can you 
 - [Topic 8: The science (or art?) of fitting linear regression models](http://www.jeroenclaes.be/statistics_for_linguistics/syllabus/Class8.docx)
 - [Topic 9: Analysis of Variance](http://www.jeroenclaes.be/statistics_for_linguistics/syllabus/Class9.docx)
 - [Topic 10: Logistic regression](http://www.jeroenclaes.be/statistics_for_linguistics/syllabus/Class10.docx)
+- [Topic 11: Mixed-effects regression](http://www.jeroenclaes.be/statistics_for_linguistics/syllabus/Class11.docx)
+- [Topic 12: When things aren't quite linear: Polynomial regression and elements of Generalized Additive Modeling](http://www.jeroenclaes.be/statistics_for_linguistics/syllabus/Class12.docx) 
 
 ## Labs
 - [Lab 1: Objects, vectors, and basic mathematics](http://www.jeroenclaes.be/statistics_for_linguistics/class1.html)
@@ -47,7 +49,10 @@ A version of the slides rendered as Word documents can be found here so can you 
 - [Lab 7: Linear regression: Theory and assumptions](http://www.jeroenclaes.be/statistics_for_linguistics/class7.html)
 - [Lab 8: The science (or art?) of fitting linear regression models](http://www.jeroenclaes.be/statistics_for_linguistics/class8.html)
 - [Lab 9: Analysis of Variance](http://www.jeroenclaes.be/statistics_for_linguistics/class9.html)
-- [Topic 10: Logistic regression](http://www.jeroenclaes.be/statistics_for_linguistics/class10.html)
+- [Lab 10: Logistic regression](http://www.jeroenclaes.be/statistics_for_linguistics/class10.html)
+- [Lab 11: Mixed-effects regression](http://www.jeroenclaes.be/statistics_for_linguistics/class11.html)
+- [Lab 12: When things aren't quite linear: Polynomial regression and elements of Generalized Additive Modeling](http://www.jeroenclaes.be/statistics_for_linguistics/class12.html) 
+
 
 ## R and RStudio cheat sheets (provided by RStudio)
 - [Basic R](http://www.jeroenclaes.be/statistics_for_linguistics/cheatsheets/baseR.pdf)
@@ -66,3 +71,4 @@ A version of the slides rendered as Word documents can be found here so can you 
 - Harrell, F. E. (2015). *Regression modeling strategies: With applications to linear models, logistic and ordinal Regression, and survival analysis*. New York, NY: Springer.
 - Levshina, N. (2015). *How to do linguistics with R.* Amsterdam/Philadelphia, PA: John Benjamins.	
 - Urdan, T. C. (2010). *Statistics in plain English.* New York, NY: Routledge.	
+- Zuur, A. F., Leno, E. L., Elphick, C. S. (2010). A protocol for data exploration to avoid common statistical problems. *Methods in Ecology and Evolution* 1, 3-14. 

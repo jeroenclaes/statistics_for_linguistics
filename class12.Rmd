@@ -1,0 +1,198 @@
+---
+title: "Topic 12: When things aren't quite linear: Polynomial regression and elements of Generalized Additive Modeling"
+author: "Jeroen Claes | <jeroen.claes@kuleuven.be> | <jeroen@cropland.be>"
+output: 
+ html_document:
+  self_contained: false 
+---
+
+```{r, include=FALSE}
+#library(testwhat)
+tutorial::go_interactive()
+```
+
+## Existential agreement variation in Peninsular Spanish: Twitter vs. COSER
+- Claes (2017) examined existential agreement variation in Peninsular Spanish using data drawn from *Twitter* and *Corpus Oral y Sonoro del Español Rural (COSER)*
+- Here we will model `type` as a function of:
+    - `Typical.Action.Chain.Pos`: Typical role of the referent of the noun in events. `Heads` refers to typical agents; `tails-settings` refers to typical patients and circumstantial elements
+    - `negation`: absence vs. presence of negation
+    - `broad.regions`: broad geographical regions
+    - `tense`: verb tense
+    - `corpus`: Twitter vs. COSER corpus
+    - `characters_before_noun`: number of characters between *haber* and the NP's head noun
+    - `long`: longitude
+    - `lat`: latitude
+- We have already explored this dataset in Class 2, so we can skip the data exploration phase
+
+## 1. Loading the data
+```{r ex="create_a", type="sample-code"}
+# Load the readr package
+
+# Load the course data from the coutrse website to the object 'dataSet':
+# http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv
+
+# Load the dplyr package
+
+# Convert all character values to factor with mutate_if
+
+# Print a 'glimpse' of the dataSet
+
+```
+
+```{r ex="create_a", type="solution"}
+# Load the readr package
+library(readr)
+# Load the course data from the course website to the object 'dataSet':
+# http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv")
+# Load the dplyr package
+library(dplyr)
+# Convert all character values to factor with mutate_if
+dataSet<-dataSet %>%
+  mutate_if(is.character, as.factor)
+# Print a 'glimpse' of the dataSet
+glimpse(dataSet)
+```
+
+```{r ex="create_a", type="sct"}
+test_object("dataSet")
+test_library_function("readr", "Make sure to call the 'readr' package!")
+test_library_function("dplyr", "Make sure to call the 'dplyr' package!")
+test_output_contains("glimpse(dataSet)",   incorrect_msg = "Make sure to print a 'glimpse' of the data!")
+success_msg("Great!")
+```
+
+## 2. A first model: fitting a simple `glm` model with a polynomial term for `characters_before_noun`
+
+```{r ex="firstmodel", type="pre-exercise-code"}
+library(readr)
+library(dplyr)
+
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv") %>% mutate_if(is.character, as.factor)
+```
+
+```{r ex="firstmodel", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Load the ggplot package
+
+# Fit a logistic glm model 'mod' regressing type on characters_before_noun
+
+# Create a data.frame 'dat'. In the column 'characters_before_noun' you store all values that occur between the minimum and the maximum of characters_before_noun
+
+# Generate predicted probabilities from mod for the data.frame 'dat'. Store the probabilities in the column 'predicted'
+
+# Plot a scatterplot of the predicted probabilities of 'mod' vs the values of characters_before_noun. Add a second-order polynomial regression line
+
+# Now fit a logistic regression model mod2, in which you regress type on the second-order polynomial of characters_before_noun 
+
+# Compare the AIC of mod2 to that of mod
+
+# Which model has the lowest AIC? Does the AIC statistic support that there is more evidence for the simpler model without polynomial? You will find the correct answer on the Solution tab
+
+
+```
+
+```{r ex="firstmodel", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Load the ggplot package
+library(ggplot2)
+
+# Fit a logistic glm model 'mod' regressing type on characters_before_noun
+mod <-glm(type ~ characters_before_noun, family="binomial", dataSet)
+# Create a data.frame 'dat'. In the column 'characters_before_noun' you store all values that occur between the minimum and the maximum of characters_before_noun
+dat<-data.frame(characters_before_noun=min(dataSet$characters_before_noun):max(dataSet$characters_before_noun))
+# Generate predicted probabilities from mod for the data.frame 'dat'. Store the probabilities in the column 'predicted'
+dat$predicted<-predict(mod, newdata=dat,type="response")
+# Plot a scatterplot of the predicted probabilities of 'mod' vs the values of characters_before_noun in dat. Add a second-order polynomial regression line
+ggplot(dat, aes(x=characters_before_noun, y=predicted)) +
+  geom_point() + 
+  geom_smooth(method="lm", formula="y ~ poly(x, 2)")
+# Now fit a logistic regression model mod2, in which you regress type on the second-order polynomial of characters_before_noun 
+mod2<-glm(type ~ poly(characters_before_noun,2), family="binomial", dataSet)
+# Compare the AIC of mod2 to that of mod
+AIC(mod2)-AIC(mod)
+# Which model has the lowest AIC? Does the AIC statistic support that there is more evidence for the simpler model without polynomial?
+# - The model without the polynomial term has the lowest AIC. However, the difference between the two models does not amount to two AIC units for which there is not more evidence in favor of the simpler model (the one without the polynomial) than there is in favor of the more complex model (the one with the polynomial)
+```
+
+```{r ex="firstmodel", type="sct"}
+test_library_function("ggplot2", "Make sure to call the 'ggplot2' package!")
+test_ggplot(1)
+test_output_contains("AIC(mod2)-AIC(mod)",   incorrect_msg = "Make sure to compare the AIC statistics of the two models!")
+success_msg("Great!")
+```
+
+## 3. The real thing model: fitting a GAM model
+```{r ex="gammodel", type="pre-exercise-code"}
+library(readr)
+library(dplyr)
+
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv") %>% mutate_if(is.character, as.factor)
+```
+
+```{r ex="gammodel", type="sample-code"}
+# The data.frame dataSet is already in your workspace
+
+# Load the mgcv package
+
+# Relevel type so that 'singular' becomes the reference level
+
+# Specify a generalized additive logistic model mod that regresses type on Typical.Action.Chain.Pos  + negation + tense +  corpus 
+# Add the following smoothing terms: long, lat
+# We won't be adding random intercepts or slopes, as our dataset is rather small
+
+# Print a summary of mod
+
+# Plot the effects of geography on 'haber' pluralization
+
+# Load the Hmisc package
+
+# Calculate the c-index of concordance for  mod
+
+# What do you see? 
+# - Are the two smoothing terms significant?
+# - Which parametric predictors are significant?
+# - In which regions of Spain is 'haber' pluralization more common? 
+# - Does the model provide a good fit for the data? Take a look at the R-squared and the c-index
+# You will find the correct answer on the Solution tab
+
+```
+
+```{r ex="gammodel", type="solution"}
+# The data.frame dataSet is already in your workspace
+
+# Load the mgcv package
+library(mgcv)
+# Relevel type so that 'singular' becomes the reference level
+dataSet$type<-relevel(dataSet$type, ref="singular")
+# Specify a generalized additive logistic model mod that regresses type on Typical.Action.Chain.Pos  + negation + tense +  corpus 
+# Add the following smoothing terms: long, lat
+# We won't be adding random intercepts or slopes, as our dataset is rather small
+mod<-bam(type ~ Typical.Action.Chain.Pos  + negation + tense +  corpus  +  s(long, lat), family="binomial", dataSet)
+# Print a summary of mod
+summary(mod)
+# Plot the effects of geography on 'haber' pluralization
+vis.gam(mod, plot.type="contour", color="terrain", too.far=0.05, view=c("long", "lat"))
+# Load the Hmisc package
+library(Hmisc)
+# Calculate the c-index of concordance for  mod
+somers2(fitted(mod), as.numeric(dataSet$type)-1)
+# What do you see? 
+# - Is thesmoothing term significant?
+# Yes, geography appears to have a significant effect on 'haber' pluralization
+# - Which parametric predictors are significant?
+# None except for negation. This is due to the limited sample size. With 50 plural tokens in the data we are reaching our limits by including 5 predictors in the model (remember the 1/10 rule of thumb we discussed in Topic 10)
+# - In which regions of Spain is 'haber' pluralization more common? 
+# Pluralized 'haber' is most common in the regions neighbooring the Mediterranean Sea. Its probability decreases when we move from east to west and from south to north
+# - Does the model provide a good fit for the data? Take a look at the R-squared and the c-index
+# The r-squared value of the model remains on the low end of things, as is often the case in logisic regression. Still, judging from the c-index, the model still reaches good descriminative ability. 
+```
+
+```{r ex="gammodel", type="sct"}
+test_library_function("mgcv", "Make sure to call the 'mgcv' package!")
+test_output_contains("summary(mod)",   incorrect_msg = "Make sure to print a summary of the GAM model!")
+success_msg("Great!")
+```
+

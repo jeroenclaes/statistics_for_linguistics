@@ -13,7 +13,7 @@ tutorial::go_interactive()
 
 
 ## The dative alternation in four varieties of English
-- In a recent effort, Bresnan, Rosenbach, Szmrecsanyi, Tagliamonte, & Todd (2017) applied a common coding scheme to their datasets of the dative alternation (e.g., *I gave him the book* vs *I gave the book to him*)
+- In a recent effort, Bresnan et al. (2017) applied a common coding scheme to their datasets of the dative alternation (e.g., *I gave him the book* vs *I gave the book to him*) (e.g., Szmrecsanyi et al., 2017)
 - The resulting database is annotated consistently and covers four varieties of English: Canada, New Zealand, United Kingdom, and United States
 - Here we will work with a subset of their predictors:
     - `Response.variable`: D(ative) vs. P(repositional dative)
@@ -924,9 +924,9 @@ success_msg("Well done!")
 ```
 
 ## 11. Acknowledgements
-- A warm thank you goes to **Benedikt Szmerecsanyi**, for making the data available through his website!
+- A warm **thank you!** goes to [Benedikt Szmrecsanyi](https://sites.google.com/site/bszmrecsanyi) (KU Leuven), for making the data available through his website!
 
 ## 12. References
-- Bresnan, J., Rosenbach, A., Szmerecsanyi, B., Tagliamonte, S. A. & Todd, S. (2017). Syntactic alternations data: datives and genitives in four varieties of English. Stanford Digital Repository. Available at: http://purl.stanford.edu/qj187zs3852. 
+- Bresnan, J., Rosenbach, A., Szmrecsanyi, B., Tagliamonte, S. A. & Todd, S. (2017). Syntactic alternations data: datives and genitives in four varieties of English. Stanford Digital Repository. Available at: http://purl.stanford.edu/qj187zs3852. 
 - Szmrecsanyi, B., Grafmiller, J., Bresnan, J., Rosenbach, A., Tagliamonte, S., & Todd, S. (2017). Spoken syntax in a comparative perspective: The dative and genitive alternation in varieties of English. *Glossa: a journal of general linguistics* 2(1), 86. DOI: http://doi.org/10.5334/gjgl.310.
 
