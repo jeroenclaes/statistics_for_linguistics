@@ -1,0 +1,21 @@
+TestSentence,condition,Mean_RT
+Sentence  1,only syntax,1751.0729
+Sentence  2,only syntax,1958.429444444
+Sentence  3,only syntax,1665.032352941
+Sentence  4,only syntax,1531.4164
+Sentence  5,only syntax,1598.0324
+Sentence  6,only syntax,1671.168888889
+Sentence  7,only syntax,1936.782666667
+Sentence  8,only syntax,1974.938125
+Sentence  9,only syntax,1623.1669
+Sentence  10,only syntax,1456.4817
+Sentence  1,syntax and semantics,1490.415
+Sentence  2,syntax and semantics,1840.248235294
+Sentence  3,syntax and semantics,1573.936666667
+Sentence  4,syntax and semantics,1517.1607
+Sentence  5,syntax and semantics,1404.0876
+Sentence  6,syntax and semantics,1625.5476
+Sentence  7,syntax and semantics,1891.8775
+Sentence  8,syntax and semantics,1313.7294
+Sentence  9,syntax and semantics,1313.7294
+Sentence  10,syntax and semantics,1391.3319

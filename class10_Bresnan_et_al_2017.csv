@@ -1,0 +1,4104 @@
+Response.variable,Variety,Speaker,Speaker.sex,Speaker.YOB,Semantics,Recipient.type,Recipient.animacy,Recipient.definiteness,Recipient.length,Theme.type,Theme.animacy,Theme.length
+D,CAN,can-2-99,M,1987,C,P,A,Definite,1,D,I,1
+D,CAN,can-2-99,M,1987,T,P,A,Definite,1,N,I,1
+D,CAN,can-2-99,M,1987,T,P,A,Definite,1,N,I,1
+D,CAN,can-2-100,M,1992,A,P,A,Definite,1,N,I,1
+D,CAN,can-2-101,F,1992,T,P,A,Definite,1,N,I,1
+D,CAN,can-2-101,F,1992,T,P,A,Definite,1,N,I,1
+D,CAN,can-2-105,F,1984,A,P,A,Definite,1,N,I,1
+D,CAN,can-2-110,F,1984,T,P,A,Definite,1,N,I,1
+D,CAN,can-2-110,F,1984,T,P,A,Definite,1,N,I,1
+D,CAN,can-2-110,F,1984,A,P,A,Definite,1,N,I,1
+D,CAN,can-2-110,F,1984,C,P,A,Definite,1,D,I,1
+D,CAN,can-2-112,M,1989,A,P,A,Definite,1,N,I,1
+D,CAN,can-3-65,M,1988,A,P,A,Definite,1,N,I,1
+D,CAN,can-3-66,M,1986,A,P,A,Definite,1,N,I,1
+D,CAN,can-3-66,M,1986,C,P,A,Definite,1,N,I,1
+D,CAN,can-3-67,M,1988,C,P,A,Definite,1,N,I,1
+D,CAN,can-3-67,M,1988,T,P,A,Definite,1,N,I,1
+D,CAN,can-3-72,M,1991,A,N,I,Definite,2,N,T,1
+D,CAN,can-3-73,F,1989,T,P,A,Definite,1,N,I,1
+D,CAN,can-3-77,F,1984,C,P,A,Definite,1,N,I,1
+D,CAN,can-3-80,F,1987,A,P,A,Definite,1,N,I,2
+D,CAN,can-3-82,F,1985,C,P,A,Definite,1,N,I,1
+D,CAN,can-3-82,F,1985,A,P,A,Definite,1,N,I,1
+D,CAN,can-3-82,F,1985,A,P,A,Definite,1,N,I,1
+D,CAN,can-3-82,F,1985,C,P,A,Definite,1,N,I,1
+D,CAN,can-3-84,F,1985,T,P,A,Definite,1,N,I,1
+D,CAN,can-3-85,F,1991,T,P,A,Definite,1,N,I,1
+D,CAN,can-3-87,M,1990,T,P,A,Definite,1,N,I,1
+D,CAN,can-4-97,F,1986,T,P,A,Definite,1,I,I,1
+D,CAN,can-4-98,F,1988,C,P,A,Definite,1,I,I,1
+D,CAN,can-4-99,M,1990,A,P,A,Definite,1,N,I,1
+D,CAN,can-4-100,M,1988,A,P,A,Definite,1,N,T,1
+D,CAN,can-4-104,M,1987,C,P,A,Definite,1,N,I,1
+D,CAN,can-4-104,M,1987,A,P,A,Definite,1,N,I,1
+D,CAN,can-4-81,F,1994,T,P,A,Definite,1,N,I,1
+D,CAN,can-5-97,F,1988,C,P,A,Definite,1,N,I,1
+D,CAN,can-5-97,F,1988,T,P,A,Definite,1,N,I,1
+D,CAN,can-5-98,M,1987,A,P,A,Definite,1,N,I,1
+D,CAN,can-5-100,F,1983,A,P,A,Definite,1,N,I,1
+D,CAN,can-5-104,M,1991,T,P,A,Definite,1,P,I,1
+D,CAN,can-5-105,F,1991,T,P,A,Definite,1,D,I,1
+D,CAN,can-5-107,M,1985,A,P,A,Definite,1,N,I,1
+D,CAN,can-5-111,M,1984,T,P,A,Definite,1,N,I,1
+D,CAN,can-5-111,M,1984,A,P,A,Definite,1,N,I,1
+D,CAN,can-5-111,M,1984,T,P,A,Definite,1,N,I,1
+D,CAN,can-5-111,M,1984,A,P,A,Definite,1,N,I,1
+D,CAN,can-5-112,F,1986,T,P,A,Definite,1,N,I,1
+D,CAN,can-7-64,F,1896,T,P,A,Definite,1,N,I,1
+D,CAN,can-7-64,F,1896,A,N,A,Definite,3,N,T,1
+D,CAN,can-7-70,F,1896,A,P,A,Definite,1,N,I,1
+D,CAN,can-7-70,F,1896,A,P,A,Definite,1,N,I,1
+D,CAN,can-7-70,F,1896,T,P,A,Definite,1,N,I,1
+D,CAN,can-7-71,M,1896,A,D,I,Definite,1,N,I,1
+D,CAN,can-7-75,M,1896,A,P,A,Definite,1,N,I,1
+D,CAN,can-7-88,M,1896,T,P,A,Definite,1,I,I,1
+D,CAN,can-7-89,F,1896,A,P,A,Definite,1,N,I,1
+D,CAN,can-7-122,F,1896,A,P,A,Definite,1,I,I,1
+D,CAN,can-b-97,M,1959,T,P,A,Definite,1,N,I,1
+D,CAN,can-b-98,F,1935,A,P,A,Definite,1,N,I,1
+D,CAN,can-b-99,F,1934,T,P,A,Definite,1,P,I,1
+D,CAN,can-b-100,M,1957,T,P,A,Definite,1,N,I,1
+D,CAN,can-b-102,M,1981,A,P,A,Definite,1,N,I,1
+D,CAN,can-b-80,M,1943,T,P,A,Definite,2,I,I,1
+D,CAN,can-b-85,F,1934,A,P,A,Definite,1,N,I,1
+D,CAN,can-b-87,F,1970,A,P,A,Definite,1,N,I,1
+D,CAN,can-f-97,F,1987,A,P,A,Definite,1,N,I,1
+D,CAN,can-f-97,F,1987,T,P,A,Definite,1,N,I,2
+D,CAN,can-f-102,F,1982,T,P,A,Definite,1,I,I,1
+D,CAN,can-f-103,F,1981,C,P,A,Definite,1,N,I,1
+D,CAN,can-f-103,F,1981,A,P,A,Definite,1,N,T,2
+D,CAN,can-h-97,F,1990,T,P,A,Definite,1,D,I,1
+D,CAN,can-h-97,F,1990,A,P,A,Definite,1,N,I,1
+D,CAN,can-h-72,M,1983,T,P,A,Definite,1,N,I,1
+D,CAN,can-h-108,M,1963,A,P,A,Definite,1,N,I,1
+D,CAN,can-I-49,M,1952,T,P,A,Definite,1,P,I,1
+D,CAN,can-I-54,F,1922,T,P,A,Definite,1,N,I,1
+D,CAN,can-k-70,M,1985,T,P,A,Definite,1,D,I,1
+D,CAN,can-k-74,F,1950,A,N,A,Definite,2,N,I,1
+D,CAN,can-l-70,F,1969,C,P,A,Definite,1,N,I,1
+D,CAN,can-l-72,F,1956,A,P,A,Definite,1,N,I,1
+D,CAN,can-l-76,M,1982,T,N,C,Indefinite,2,N,I,1
+D,CAN,can-N-50,F,1960,C,P,A,Definite,1,N,I,1
+D,CAN,can-N-54,F,1976,T,P,A,Definite,1,D,I,1
+D,CAN,can-N-38,M,1978,A,P,A,Definite,1,N,I,1
+D,CAN,can-N-97,F,1954,A,P,A,Definite,1,N,I,1
+D,CAN,can-N-99,F,1967,A,P,A,Definite,1,N,I,1
+D,CAN,can-N-69,M,1967,A,P,A,Definite,1,N,I,1
+D,CAN,can-N-103,F,1948,T,P,A,Definite,1,I,I,1
+D,CAN,can-N-104,F,1948,T,N,A,Definite,3,N,I,1
+D,CAN,can-N-72,F,1972,A,P,A,Definite,1,N,I,1
+D,CAN,can-N-104,F,1948,T,P,A,Definite,1,N,I,1
+D,CAN,can-N-105,F,1950,A,P,A,Definite,1,N,I,1
+D,CAN,can-N-73,M,1979,A,P,A,Definite,1,N,I,1
+D,CAN,can-N-107,F,1978,A,P,A,Definite,1,N,I,1
+D,CAN,can-N-76,F,1972,A,P,A,Definite,1,N,I,1
+D,CAN,can-N-109,M,1976,T,P,A,Definite,1,N,I,1
+D,CAN,can-N-80,M,1930,A,P,A,Definite,1,N,I,1
+D,CAN,can-N-80,M,1930,T,P,A,Definite,1,N,I,1
+D,CAN,can-N-113,F,1979,T,P,A,Definite,1,N,I,1
+D,CAN,can-N-114,F,1981,T,P,A,Definite,1,N,I,1
+D,CAN,can-N-115,F,1951,T,P,A,Definite,1,N,I,1
+D,CAN,can-N-83,F,1969,T,P,A,Definite,1,N,I,1
+D,CAN,can-N-83,F,1969,T,P,A,Definite,1,N,I,1
+D,CAN,can-N-116,F,1966,A,P,A,Definite,1,I,I,1
+D,CAN,can-N-85,F,1921,T,N,A,Indefinite,1,N,I,1
+D,CAN,can-N-85,F,1921,T,P,A,Definite,1,N,I,1
+D,CAN,can-N-85,F,1921,A,P,A,Definite,1,N,I,1
+D,CAN,can-N-118,F,1948,A,P,A,Definite,1,N,I,1
+D,CAN,can-N-118,F,1948,A,P,A,Definite,1,N,I,1
+D,CAN,can-N-119,M,1919,T,P,A,Definite,1,N,I,1
+D,CAN,can-N-121,F,1916,A,P,A,Definite,1,N,A,1
+D,CAN,can-N-122,M,1954,A,N,I,Definite,2,N,I,1
+D,CAN,can-Q-65,F,1983,T,P,A,Definite,1,N,I,1
+D,CAN,can-Q-65,F,1983,C,P,A,Definite,1,N,I,1
+D,CAN,can-Q-65,F,1983,T,P,A,Definite,1,N,I,1
+D,CAN,can-Q-70,M,1982,A,P,A,Definite,1,N,I,1
+D,CAN,can-Q-71,F,1985,T,P,A,Definite,1,N,I,1
+D,CAN,can-Q-71,F,1985,A,P,A,Definite,1,I,I,1
+D,CAN,can-Q-71,F,1985,A,P,A,Definite,1,N,I,1
+D,CAN,can-Q-71,F,1985,T,P,A,Definite,1,N,I,1
+D,CAN,can-Q-72,F,1985,T,N,A,Indefinite,1,N,I,1
+D,CAN,can-Q-72,F,1985,T,N,A,Indefinite,1,N,I,1
+D,CAN,can-r-69,F,1971,T,I,A,Indefinite,1,N,I,1
+D,CAN,can-r-76,F,1954,A,P,A,Definite,1,N,I,1
+D,CAN,can-r-77,F,1948,C,N,A,Definite,4,N,I,1
+D,CAN,can-r-78,F,1980,A,P,A,Definite,1,N,I,1
+D,CAN,can-W-51,M,1977,A,P,A,Definite,1,N,I,1
+D,CAN,can-W-51,M,1977,A,P,A,Definite,1,N,I,1
+D,CAN,can-W-57,M,1954,T,P,A,Definite,1,N,I,1
+D,CAN,can-W-95,F,1927,T,P,A,Definite,1,N,I,1
+D,CAN,can-W-33,M,1942,T,P,A,Definite,1,N,I,1
+D,CAN,can-W-43,M,1931,T,N,A,Indefinite,3,I,I,1
+D,CAN,can-W-43,M,1931,T,P,A,Definite,1,I,I,1
+D,CAN,can-W-43,M,1931,A,P,A,Definite,1,N,I,1
+D,CAN,can-W-43,M,1931,T,P,A,Definite,1,I,I,1
+D,CAN,can-W-61,M,1921,A,P,A,Definite,3,N,I,1
+D,CAN,can-W-61,M,1921,A,N,C,Definite,2,N,I,1
+D,CAN,can-W-124,M,1941,A,P,A,Definite,1,N,I,1
+D,CAN,can-W-124,M,1941,T,N,A,Definite,2,N,I,1
+D,CAN,can-W-124,M,1941,C,P,A,Definite,1,D,I,1
+D,CAN,can-W-124,M,1941,A,P,A,Definite,1,N,I,1
+D,CAN,can-W-124,M,1941,T,P,A,Definite,1,N,I,1
+D,CAN,can-W-98,F,1984,A,P,A,Definite,1,N,I,1
+D,CAN,can-W-98,F,1984,A,P,A,Definite,1,N,I,1
+D,CAN,can-W-99,F,1984,C,P,A,Definite,1,N,I,1
+D,CAN,can-W-101,M,1963,T,P,A,Definite,1,N,I,1
+D,CAN,can-W-76,F,1950,T,P,A,Definite,1,N,I,1
+D,CAN,can-W-109,F,1920,T,P,A,Definite,1,N,I,1
+D,CAN,can-W-112,F,1982,A,N,A,Indefinite,4,N,I,1
+D,CAN,can-W-115,F,1975,A,N,A,Definite,2,N,I,1
+D,CAN,can-W-83,M,1954,A,P,A,Definite,1,N,I,1
+D,CAN,can-W-116,M,1969,A,P,A,Definite,1,N,I,1
+D,CAN,can-W-84,F,1930,A,P,A,Definite,1,N,I,1
+D,CAN,can-W-119,F,1954,A,P,A,Definite,1,N,I,1
+D,CAN,can-W-119,F,1954,T,P,A,Definite,1,I,I,1
+D,CAN,can-y-66,F,1946,T,P,A,Definite,1,I,I,1
+D,CAN,can-y-69,F,1992,A,P,A,Definite,1,N,I,1
+D,CAN,can-y-77,M,1919,T,P,A,Definite,1,I,I,1
+D,CAN,can-y-79,F,1980,C,P,A,Definite,1,N,I,1
+D,CAN,can-y-79,F,1980,T,P,A,Definite,1,N,I,1
+D,CAN,can-y-85,M,1961,T,P,A,Definite,1,I,I,1
+D,CAN,can-y-85,M,1961,T,P,A,Definite,1,I,I,1
+D,CAN,can-y-85,M,1961,T,P,A,Definite,1,I,I,1
+D,CAN,can-y-85,M,1961,A,P,A,Definite,1,N,I,1
+D,CAN,can-2-98,F,1988,T,P,A,Definite,1,N,I,2
+D,CAN,can-2-98,F,1988,T,P,A,Definite,1,N,I,2
+D,CAN,can-2-98,F,1988,T,P,A,Definite,1,N,I,2
+D,CAN,can-2-98,F,1988,T,P,A,Definite,1,N,I,2
+D,CAN,can-2-99,M,1987,C,P,A,Definite,1,N,I,2
+D,CAN,can-2-99,M,1987,T,P,A,Definite,1,N,I,2
+D,CAN,can-2-99,M,1987,T,P,A,Definite,1,N,I,2
+D,CAN,can-2-103,M,1992,T,P,A,Definite,1,N,I,3
+D,CAN,can-2-106,M,1985,A,P,A,Definite,1,N,I,2
+D,CAN,can-2-106,M,1985,A,N,A,Indefinite,1,N,I,2
+D,CAN,can-2-107,M,1986,A,P,A,Definite,1,N,I,2
+D,CAN,can-2-109,F,1991,T,P,A,Definite,1,I,I,2
+D,CAN,can-2-109,F,1991,C,P,A,Definite,1,N,I,2
+D,CAN,can-2-109,F,1991,C,P,A,Definite,1,N,I,2
+D,CAN,can-2-109,F,1991,C,P,A,Definite,1,N,I,2
+D,CAN,can-2-109,F,1991,C,P,A,Definite,1,N,T,2
+D,CAN,can-2-110,F,1984,C,P,A,Definite,1,N,I,2
+D,CAN,can-2-110,F,1984,T,P,A,Definite,1,N,I,2
+D,CAN,can-2-112,M,1989,C,P,A,Definite,1,N,I,2
+D,CAN,can-2-113,M,1985,A,P,A,Definite,1,N,I,2
+D,CAN,can-2-115,F,1989,T,P,A,Definite,1,N,I,2
+D,CAN,can-2-115,F,1989,T,P,A,Definite,1,N,I,2
+D,CAN,can-3-65,M,1988,T,P,A,Definite,1,N,I,2
+D,CAN,can-3-66,M,1986,A,P,A,Definite,1,N,I,2
+D,CAN,can-3-67,M,1988,T,P,A,Definite,1,N,I,2
+D,CAN,can-3-68,M,1986,A,N,A,Indefinite,1,N,I,2
+D,CAN,can-3-70,F,1986,A,I,I,Definite,1,N,I,3
+D,CAN,can-3-70,F,1986,T,N,A,Definite,2,N,I,2
+D,CAN,can-3-72,M,1991,A,I,A,Indefinite,2,N,I,2
+D,CAN,can-3-73,F,1989,T,P,A,Definite,1,N,I,2
+D,CAN,can-3-73,F,1989,T,P,A,Definite,1,N,I,2
+D,CAN,can-3-73,F,1989,A,P,A,Definite,1,N,I,2
+D,CAN,can-3-75,F,1985,A,P,A,Definite,1,N,T,2
+D,CAN,can-3-75,F,1985,A,P,A,Definite,1,N,I,2
+D,CAN,can-3-79,M,1994,C,P,A,Definite,1,N,I,2
+D,CAN,can-3-79,M,1994,T,P,A,Definite,1,N,I,2
+D,CAN,can-3-79,M,1994,T,P,A,Definite,1,N,I,2
+D,CAN,can-3-79,M,1994,T,P,A,Definite,1,N,I,2
+D,CAN,can-3-80,F,1987,A,P,A,Definite,1,N,I,2
+D,CAN,can-3-80,F,1987,A,P,I,Definite,1,N,I,2
+D,CAN,can-3-80,F,1987,A,P,A,Definite,1,N,I,2
+D,CAN,can-3-80,F,1987,T,P,A,Definite,1,N,I,2
+D,CAN,can-3-81,F,1987,C,P,A,Definite,1,N,I,2
+D,CAN,can-3-81,F,1987,T,P,A,Definite,1,N,I,3
+D,CAN,can-3-81,F,1987,C,N,A,Definite,2,N,I,2
+D,CAN,can-3-82,F,1985,T,P,A,Definite,1,N,I,2
+D,CAN,can-3-82,F,1985,T,P,A,Definite,1,N,I,2
+D,CAN,can-3-82,F,1985,T,P,A,Definite,1,N,I,2
+D,CAN,can-3-84,F,1985,C,P,A,Definite,1,N,I,2
+D,CAN,can-3-85,F,1991,A,P,A,Definite,1,N,I,2
+D,CAN,can-3-87,M,1990,A,P,A,Definite,1,N,I,2
+D,CAN,can-3-87,M,1990,A,P,I,Definite,1,N,I,2
+D,CAN,can-3-87,M,1990,T,P,A,Definite,1,N,I,2
+D,CAN,can-3-87,M,1990,A,P,A,Definite,1,N,I,2
+D,CAN,can-3-87,M,1990,A,P,A,Definite,1,N,I,2
+D,CAN,can-3-87,M,1990,A,P,A,Definite,1,N,I,2
+D,CAN,can-4-97,F,1986,A,P,A,Definite,1,N,I,2
+D,CAN,can-4-101,F,1985,A,P,A,Definite,1,N,I,2
+D,CAN,can-4-102,M,1984,T,P,A,Definite,1,N,I,2
+D,CAN,can-4-102,M,1984,A,P,A,Definite,1,N,I,2
+D,CAN,can-4-103,M,1994,T,P,A,Definite,1,N,I,2
+D,CAN,can-4-104,M,1987,T,P,A,Definite,1,N,I,2
+D,CAN,can-4-74,M,1984,C,P,A,Definite,1,N,I,2
+D,CAN,can-4-77,M,1990,A,P,A,Definite,1,N,I,2
+D,CAN,can-4-78,M,1992,A,N,I,Indefinite,1,N,I,2
+D,CAN,can-4-79,M,1986,C,P,A,Definite,1,N,I,2
+D,CAN,can-4-81,F,1994,T,P,A,Definite,1,N,I,2
+D,CAN,can-5-97,F,1988,T,P,A,Definite,1,I,I,2
+D,CAN,can-5-97,F,1988,C,P,A,Definite,1,N,I,3
+D,CAN,can-5-98,M,1987,A,I,A,Definite,1,N,I,2
+D,CAN,can-5-98,M,1987,A,P,A,Definite,1,N,I,2
+D,CAN,can-5-98,M,1987,T,P,A,Definite,1,N,I,2
+D,CAN,can-5-102,F,1984,T,P,A,Definite,1,N,I,2
+D,CAN,can-5-103,M,1984,A,P,A,Definite,1,N,I,2
+D,CAN,can-5-103,M,1984,C,P,A,Definite,1,N,I,2
+D,CAN,can-5-103,M,1984,A,P,A,Definite,1,N,I,2
+D,CAN,can-5-103,M,1984,A,P,A,Definite,1,N,I,2
+D,CAN,can-5-103,M,1984,C,P,A,Definite,1,N,I,2
+D,CAN,can-5-104,M,1991,T,N,A,Definite,3,N,I,2
+D,CAN,can-5-105,F,1991,A,P,A,Definite,1,N,I,2
+D,CAN,can-5-105,F,1991,A,P,A,Definite,1,N,I,2
+D,CAN,can-5-106,F,1983,T,P,A,Definite,1,N,I,2
+D,CAN,can-5-106,F,1983,T,P,A,Definite,1,N,I,2
+D,CAN,can-5-107,M,1985,A,P,A,Definite,1,N,I,2
+D,CAN,can-5-107,M,1985,A,P,A,Definite,1,N,T,2
+D,CAN,can-5-107,M,1985,T,P,A,Definite,1,N,I,2
+D,CAN,can-5-107,M,1985,A,P,A,Definite,1,N,I,2
+D,CAN,can-5-107,M,1985,A,P,A,Definite,1,N,I,2
+D,CAN,can-5-108,F,1990,A,N,A,Definite-pn,1,N,I,2
+D,CAN,can-5-110,F,1985,T,P,A,Definite,1,N,I,2
+D,CAN,can-5-111,M,1984,A,P,A,Definite,1,N,T,2
+D,CAN,can-5-111,M,1984,T,P,A,Definite,1,N,I,2
+D,CAN,can-7-50,M,1896,A,P,A,Definite,1,N,I,2
+D,CAN,can-7-56,M,1896,T,P,A,Definite,1,N,I,2
+D,CAN,can-7-56,M,1896,T,P,A,Definite,1,N,I,2
+D,CAN,can-7-64,F,1896,T,P,A,Definite,1,N,I,2
+D,CAN,can-7-66,F,1896,T,P,A,Definite,1,N,I,2
+D,CAN,can-7-70,F,1896,T,P,A,Definite,1,N,I,2
+D,CAN,can-7-71,M,1896,C,P,A,Definite,1,N,I,2
+D,CAN,can-7-73,M,1896,T,P,A,Definite,1,N,I,2
+D,CAN,can-7-73,M,1896,A,P,A,Definite,1,N,T,2
+D,CAN,can-7-73,M,1896,T,N,A,Definite-pn,2,N,I,2
+D,CAN,can-7-110,M,1896,A,P,A,Definite,1,N,T,2
+D,CAN,can-7-81,M,1896,C,P,A,Definite,1,N,I,2
+D,CAN,can-7-81,M,1896,A,P,A,Definite,1,N,I,2
+D,CAN,can-7-83,M,1896,A,N,A,Definite,2,N,I,2
+D,CAN,can-7-83,M,1896,A,P,A,Definite,1,N,I,2
+D,CAN,can-7-84,F,1896,T,P,A,Definite,1,N,I,2
+D,CAN,can-b-98,F,1935,T,P,A,Definite,1,N,I,2
+D,CAN,can-b-67,F,1973,C,P,A,Definite,1,N,I,2
+D,CAN,can-b-99,F,1934,T,P,A,Definite,1,N,I,2
+D,CAN,can-b-99,F,1934,T,P,A,Definite,1,N,I,2
+D,CAN,can-b-67,F,1973,C,P,A,Definite,1,N,I,2
+D,CAN,can-b-68,F,1961,T,P,A,Definite,1,N,I,2
+D,CAN,can-b-71,F,1962,A,P,A,Definite,1,N,I,2
+D,CAN,can-b-73,M,1939,C,P,A,Definite,1,N,I,2
+D,CAN,can-b-75,M,1951,T,N,A,Definite,2,N,I,2
+D,CAN,can-b-75,M,1951,A,P,A,Definite,1,N,I,2
+D,CAN,can-b-76,F,1948,C,P,A,Definite,1,N,I,2
+D,CAN,can-b-77,M,1919,A,P,A,Definite,1,N,I,2
+D,CAN,can-b-80,M,1943,T,P,A,Definite,1,N,I,2
+D,CAN,can-b-80,M,1943,T,N,A,Definite,4,N,I,2
+D,CAN,can-b-85,F,1934,C,N,A,Definite-pn,1,N,I,2
+D,CAN,can-b-86,M,1952,T,P,A,Definite,1,N,I,2
+D,CAN,can-b-86,M,1952,T,P,A,Definite,1,N,I,2
+D,CAN,can-b-88,M,1918,T,P,A,Definite,1,N,I,2
+D,CAN,can-f-97,F,1987,T,P,A,Definite,1,N,I,2
+D,CAN,can-f-98,F,1986,C,P,A,Definite,1,N,I,2
+D,CAN,can-f-99,F,1985,A,P,A,Definite,1,N,I,2
+D,CAN,can-f-99,F,1985,T,P,A,Definite,1,N,I,2
+D,CAN,can-f-99,F,1985,A,P,A,Definite,1,N,I,2
+D,CAN,can-f-100,F,1984,T,P,A,Definite,1,N,I,2
+D,CAN,can-f-101,F,1983,T,N,A,Indefinite,3,N,I,2
+D,CAN,can-f-101,F,1983,C,P,A,Definite,1,N,I,2
+D,CAN,can-f-102,F,1982,T,P,A,Definite,1,N,I,2
+D,CAN,can-f-103,F,1981,A,P,A,Definite,1,N,I,2
+D,CAN,can-f-103,F,1981,A,P,A,Definite,1,N,I,2
+D,CAN,can-f-103,F,1981,A,P,A,Definite,1,N,I,2
+D,CAN,can-f-103,F,1981,A,P,A,Definite,1,N,I,2
+D,CAN,can-f-103,F,1981,T,P,A,Definite,1,N,A,2
+D,CAN,can-h-97,F,1990,C,P,A,Definite,1,N,I,2
+D,CAN,can-h-99,F,1991,A,P,A,Definite,1,N,I,2
+D,CAN,can-h-101,F,1989,A,P,A,Definite,1,N,I,2
+D,CAN,can-h-76,F,1943,A,P,A,Definite,1,N,I,2
+D,CAN,can-h-77,M,1944,A,P,A,Definite,1,N,I,2
+D,CAN,can-h-79,M,1915,A,P,A,Definite,1,N,I,2
+D,CAN,can-h-80,F,1972,A,P,A,Definite,1,N,A,2
+D,CAN,can-h-82,F,1953,T,P,A,Definite,1,N,I,2
+D,CAN,can-h-86,M,1944,T,P,A,Definite,1,N,I,2
+D,CAN,can-I-50,F,1949,T,P,A,Definite,1,N,I,2
+D,CAN,can-I-52,F,1978,A,P,A,Definite,1,N,I,2
+D,CAN,can-I-52,F,1978,C,P,A,Definite,1,N,I,2
+D,CAN,can-I-52,F,1978,C,P,A,Definite,1,N,I,2
+D,CAN,can-I-52,F,1978,A,P,A,Definite,1,N,I,2
+D,CAN,can-I-53,F,1979,A,N,A,Indefinite,1,N,I,2
+D,CAN,can-I-53,F,1979,A,P,A,Definite,1,N,I,2
+D,CAN,can-I-54,F,1922,T,P,A,Definite,1,N,I,2
+D,CAN,can-I-56,M,1971,A,P,A,Definite,1,N,I,2
+D,CAN,can-I-56,M,1971,C,P,A,Definite,1,N,I,2
+D,CAN,can-I-56,M,1971,C,P,A,Definite,1,N,I,2
+D,CAN,can-I-56,M,1971,C,P,A,Definite,1,N,I,2
+D,CAN,can-k-100,M,1967,T,P,A,Definite,1,N,I,2
+D,CAN,can-k-100,M,1967,T,P,A,Definite,1,N,I,2
+D,CAN,can-k-70,M,1985,A,P,A,Definite,1,N,I,2
+D,CAN,can-k-114,F,1912,T,P,A,Definite,1,N,I,2
+D,CAN,can-k-114,F,1912,A,P,A,Definite,1,N,I,2
+D,CAN,can-k-114,F,1912,T,P,A,Definite,1,N,I,2
+D,CAN,can-k-114,F,1912,A,P,A,Definite,1,N,I,2
+D,CAN,can-l-65,F,1970,T,P,A,Definite,1,I,I,2
+D,CAN,can-l-65,F,1970,T,P,A,Definite,1,N,I,2
+D,CAN,can-l-65,F,1970,T,N,A,Definite-pn,1,N,I,2
+D,CAN,can-l-67,M,1931,T,P,A,Definite,1,N,I,2
+D,CAN,can-l-67,M,1931,C,P,A,Definite,1,N,I,2
+D,CAN,can-l-68,F,1973,C,P,A,Definite,1,N,I,2
+D,CAN,can-l-68,F,1973,T,P,A,Definite,1,N,I,1
+D,CAN,can-l-70,F,1969,A,P,A,Definite,1,N,I,2
+D,CAN,can-l-70,F,1969,A,P,A,Definite,1,N,I,2
+D,CAN,can-l-71,M,1968,A,P,A,Definite,1,N,I,2
+D,CAN,can-l-72,F,1956,A,P,A,Definite,1,N,I,2
+D,CAN,can-l-76,M,1982,T,P,A,Definite,1,N,I,2
+D,CAN,can-l-76,M,1982,A,P,I,Definite,1,N,I,2
+D,CAN,can-l-76,M,1982,A,P,A,Definite,1,N,I,2
+D,CAN,can-l-76,M,1982,T,P,A,Definite,1,N,I,2
+D,CAN,can-N-49,M,1958,T,P,A,Definite,1,N,I,2
+D,CAN,can-N-52,M,1943,C,P,A,Definite,1,N,I,2
+D,CAN,can-N-52,M,1943,T,P,A,Definite,1,N,I,2
+D,CAN,can-N-52,M,1943,A,P,A,Definite,1,N,I,2
+D,CAN,can-N-52,M,1943,T,P,A,Definite,1,I,I,1
+D,CAN,can-N-53,F,1953,A,P,A,Definite,1,N,I,2
+D,CAN,can-N-53,F,1953,T,P,A,Definite,1,N,I,2
+D,CAN,can-N-54,F,1976,T,P,A,Definite,1,N,I,2
+D,CAN,can-N-54,F,1976,T,P,A,Definite,1,N,I,2
+D,CAN,can-N-94,F,1963,A,I,A,Definite,1,N,I,2
+D,CAN,can-N-38,M,1978,A,I,A,Definite,1,N,I,2
+D,CAN,can-N-38,M,1978,T,P,A,Definite,1,N,I,2
+D,CAN,can-N-38,M,1978,T,P,A,Definite,1,N,I,2
+D,CAN,can-N-36,M,1959,T,P,A,Definite,1,I,I,2
+D,CAN,can-N-36,M,1959,T,I,A,Indefinite,1,N,I,2
+D,CAN,can-N-65,F,1947,A,P,A,Definite,1,N,I,2
+D,CAN,can-N-98,F,1940,A,P,A,Definite,1,N,I,2
+D,CAN,can-N-67,F,1945,A,N,A,Definite,2,N,T,2
+D,CAN,can-N-68,M,1951,A,N,A,Indefinite,2,N,I,2
+D,CAN,can-N-68,M,1951,T,P,A,Definite,1,N,I,2
+D,CAN,can-N-68,M,1951,T,P,A,Definite,2,N,I,2
+D,CAN,can-N-72,F,1972,A,P,A,Definite,1,N,I,2
+D,CAN,can-N-104,F,1948,T,P,A,Definite,1,N,I,2
+D,CAN,can-N-73,M,1979,A,P,A,Definite,1,N,I,2
+D,CAN,can-N-73,M,1979,A,P,A,Definite,1,N,I,2
+D,CAN,can-N-106,M,1956,A,P,A,Definite,1,N,I,2
+D,CAN,can-N-106,M,1956,A,P,A,Definite,1,N,I,2
+D,CAN,can-N-108,M,1950,A,P,A,Definite,1,N,I,2
+D,CAN,can-N-109,M,1976,C,P,A,Definite,1,N,I,2
+D,CAN,can-N-110,F,1950,T,N,A,Definite,2,N,I,2
+D,CAN,can-N-110,F,1950,A,N,A,Definite-pn,2,N,I,2
+D,CAN,can-N-110,F,1950,T,P,A,Definite,1,N,I,2
+D,CAN,can-N-111,M,1978,C,P,A,Definite,1,N,I,2
+D,CAN,can-N-112,M,1983,T,P,A,Definite,1,N,I,2
+D,CAN,can-N-112,M,1983,T,P,A,Definite,1,N,I,2
+D,CAN,can-N-81,F,1931,A,P,A,Definite,1,N,I,2
+D,CAN,can-N-114,F,1981,A,P,A,Definite,1,N,I,2
+D,CAN,can-N-114,F,1981,A,P,A,Definite,1,N,I,2
+D,CAN,can-N-114,F,1981,A,P,A,Definite,1,N,I,2
+D,CAN,can-N-114,F,1981,T,N,A,Definite,2,N,I,2
+D,CAN,can-N-114,F,1981,T,P,A,Definite,1,N,I,2
+D,CAN,can-N-114,F,1981,A,P,A,Definite,1,N,T,2
+D,CAN,can-N-82,F,1953,T,P,A,Definite,1,N,I,2
+D,CAN,can-N-114,F,1981,T,P,A,Definite,1,N,I,2
+D,CAN,can-N-83,F,1969,A,P,A,Definite,1,N,I,2
+D,CAN,can-N-115,F,1951,C,P,A,Definite,1,N,I,2
+D,CAN,can-N-83,F,1969,A,P,A,Definite,1,N,I,2
+D,CAN,can-N-83,F,1969,A,I,A,Indefinite,1,N,I,2
+D,CAN,can-N-115,F,1951,C,P,A,Definite,1,N,I,2
+D,CAN,can-N-116,F,1966,C,P,A,Definite,1,N,I,2
+D,CAN,can-N-116,F,1966,T,P,A,Definite,1,N,I,2
+D,CAN,can-N-84,M,1939,A,N,A,Definite,2,N,I,2
+D,CAN,can-N-84,M,1939,A,P,A,Definite,1,N,I,2
+D,CAN,can-N-85,F,1921,T,P,A,Definite,1,N,I,2
+D,CAN,can-N-117,F,1954,A,P,A,Definite,1,N,I,2
+D,CAN,can-N-117,F,1954,C,P,A,Definite,1,N,I,2
+D,CAN,can-N-85,F,1921,A,P,A,Definite,1,N,I,2
+D,CAN,can-N-85,F,1921,A,P,A,Definite,1,N,I,2
+D,CAN,can-N-118,F,1948,A,P,A,Definite,1,N,I,2
+D,CAN,can-N-86,F,1943,T,P,A,Definite,1,N,I,2
+D,CAN,can-N-118,F,1948,C,P,A,Definite,1,N,I,2
+D,CAN,can-N-119,M,1919,C,P,A,Definite,1,N,I,2
+D,CAN,can-N-119,M,1919,A,P,A,Definite,1,N,I,2
+D,CAN,can-N-87,M,1942,A,P,A,Definite,1,N,I,2
+D,CAN,can-N-120,F,1982,T,P,A,Definite,1,N,I,2
+D,CAN,can-N-121,F,1916,C,P,A,Definite,1,N,I,2
+D,CAN,can-N-121,F,1916,A,P,A,Definite,1,N,I,2
+D,CAN,can-Q-65,F,1983,A,I,A,Definite,2,N,I,2
+D,CAN,can-Q-67,M,1987,T,P,A,Definite,1,D,I,2
+D,CAN,can-Q-68,F,1987,A,P,A,Definite,1,N,I,2
+D,CAN,can-Q-68,F,1987,A,P,A,Definite,1,N,I,2
+D,CAN,can-Q-69,F,1984,T,P,A,Definite,1,N,I,2
+D,CAN,can-Q-71,F,1985,C,P,A,Definite,1,N,I,2
+D,CAN,can-Q-71,F,1985,A,P,A,Definite,1,N,I,2
+D,CAN,can-Q-72,F,1985,A,P,A,Definite,1,N,I,2
+D,CAN,can-Q-72,F,1985,A,P,A,Definite,1,N,I,2
+D,CAN,can-Q-72,F,1985,A,P,A,Definite,1,N,I,2
+D,CAN,can-Q-72,F,1985,A,P,A,Definite,1,N,I,2
+D,CAN,can-r-65,F,1970,T,P,A,Definite,1,N,I,2
+D,CAN,can-r-66,F,1917,T,P,I,Definite,1,N,I,2
+D,CAN,can-r-66,F,1917,T,P,I,Definite,1,N,I,2
+D,CAN,can-r-66,F,1917,T,P,A,Definite,1,N,I,2
+D,CAN,can-r-66,F,1917,A,P,A,Definite,1,N,I,2
+D,CAN,can-r-73,M,1988,T,P,A,Definite,1,I,I,2
+D,CAN,can-r-74,M,1945,A,P,A,Definite,1,N,I,2
+D,CAN,can-r-74,M,1945,A,P,A,Definite,1,N,I,2
+D,CAN,can-r-74,M,1945,T,P,A,Definite,1,N,A,2
+D,CAN,can-r-74,M,1945,T,P,A,Definite,1,N,I,2
+D,CAN,can-r-74,M,1945,A,P,A,Definite,1,N,I,2
+D,CAN,can-r-74,M,1945,A,P,A,Definite,1,N,I,2
+D,CAN,can-r-74,M,1945,T,P,A,Definite,1,N,I,2
+D,CAN,can-r-75,F,1985,C,P,A,Definite,1,N,I,2
+D,CAN,can-r-76,F,1954,A,P,A,Definite,1,N,I,2
+D,CAN,can-r-78,F,1980,A,N,A,Indefinite,2,N,I,2
+D,CAN,can-r-78,F,1980,A,P,A,Definite,1,N,I,2
+D,CAN,can-r-78,F,1980,T,P,A,Definite,1,N,I,2
+D,CAN,can-r-78,F,1980,T,P,A,Definite,1,N,I,2
+D,CAN,can-r-78,F,1980,T,P,A,Definite,1,N,I,2
+D,CAN,can-r-78,F,1980,C,P,A,Definite,1,N,I,2
+D,CAN,can-r-82,F,1924,A,N,A,Definite,2,N,I,2
+D,CAN,can-W-55,F,1964,A,P,A,Definite,1,N,I,2
+D,CAN,can-W-95,F,1927,T,P,A,Definite,1,N,I,2
+D,CAN,can-W-45,M,1920,A,N,A,Indefinite,1,N,I,2
+D,CAN,can-W-59,F,1951,C,P,A,Definite,1,N,I,2
+D,CAN,can-W-33,M,1942,T,P,A,Definite,1,N,I,2
+D,CAN,can-W-33,M,1942,A,N,A,Definite-pn,1,N,I,2
+D,CAN,can-W-33,M,1942,T,P,A,Definite,1,N,I,2
+D,CAN,can-W-33,M,1942,T,P,A,Definite,1,N,I,2
+D,CAN,can-W-33,M,1942,A,P,A,Definite,1,N,I,2
+D,CAN,can-W-91,M,1918,T,P,A,Definite,1,N,I,2
+D,CAN,can-W-91,M,1918,A,P,A,Definite,1,N,A,2
+D,CAN,can-W-91,M,1918,T,P,A,Definite,1,N,I,2
+D,CAN,can-W-93,M,1966,T,P,A,Definite,1,N,I,2
+D,CAN,can-W-43,M,1931,T,P,A,Definite,1,N,I,2
+D,CAN,can-W-43,M,1931,T,P,A,Definite,1,N,I,2
+D,CAN,can-W-43,M,1931,T,P,A,Definite,1,N,I,2
+D,CAN,can-W-43,M,1931,A,P,A,Definite,1,N,I,2
+D,CAN,can-W-43,M,1931,C,P,A,Definite,1,N,I,2
+D,CAN,can-W-61,M,1921,C,P,A,Definite,1,N,I,2
+D,CAN,can-W-61,M,1921,A,P,A,Definite,1,N,I,2
+D,CAN,can-W-61,M,1921,C,P,A,Definite,1,N,I,2
+D,CAN,can-W-124,M,1941,T,P,A,Definite,1,N,I,2
+D,CAN,can-W-124,M,1941,T,P,A,Definite,1,N,I,2
+D,CAN,can-W-126,F,1925,T,P,A,Definite,1,N,I,2
+D,CAN,can-W-97,F,1974,C,P,A,Definite,1,N,I,2
+D,CAN,can-W-98,F,1984,A,P,A,Definite,1,N,I,2
+D,CAN,can-W-98,F,1984,T,P,A,Definite,1,I,I,2
+D,CAN,can-W-98,F,1984,T,P,A,Definite,1,N,I,2
+D,CAN,can-W-99,F,1984,T,P,A,Definite,1,N,I,2
+D,CAN,can-W-99,F,1984,A,P,A,Definite,1,N,I,2
+D,CAN,can-W-99,F,1984,C,P,A,Definite,1,N,I,2
+D,CAN,can-W-101,M,1963,A,P,A,Definite,1,N,I,2
+D,CAN,can-W-102,F,1976,A,P,A,Definite,1,N,I,2
+D,CAN,can-W-102,F,1976,A,P,A,Definite,1,N,I,2
+D,CAN,can-W-105,F,1973,T,P,A,Definite,1,N,I,2
+D,CAN,can-W-74,F,1927,A,P,A,Definite,1,N,I,2
+D,CAN,can-W-106,F,1940,T,P,A,Definite,1,N,I,2
+D,CAN,can-W-108,M,1963,C,P,A,Definite,1,N,I,2
+D,CAN,can-W-76,F,1950,C,P,A,Definite,1,N,I,2
+D,CAN,can-W-109,F,1920,C,P,A,Definite,1,N,I,2
+D,CAN,can-W-110,M,1982,T,P,A,Definite,1,N,I,2
+D,CAN,can-W-79,M,1978,T,P,A,Definite,1,N,I,2
+D,CAN,can-W-79,M,1978,C,P,A,Definite,1,N,I,2
+D,CAN,can-W-79,M,1978,A,P,A,Definite,1,N,I,2
+D,CAN,can-W-79,M,1978,A,P,A,Definite,1,N,I,2
+D,CAN,can-W-112,F,1982,A,P,A,Definite,1,N,I,2
+D,CAN,can-W-80,F,1953,T,P,A,Definite,1,N,I,2
+D,CAN,can-W-113,M,1981,T,P,A,Definite,1,N,I,4
+D,CAN,can-W-84,F,1930,T,P,A,Definite,1,N,I,2
+D,CAN,can-W-84,F,1930,C,P,A,Definite,1,N,I,2
+D,CAN,can-W-84,F,1930,T,P,A,Definite,1,N,I,2
+D,CAN,can-W-84,F,1930,A,P,A,Definite,1,N,A,2
+D,CAN,can-W-84,F,1930,A,P,A,Definite,1,N,A,2
+D,CAN,can-W-118,M,1981,A,P,A,Definite,1,N,T,2
+D,CAN,can-y-65,F,1978,A,P,A,Definite,1,N,I,2
+D,CAN,can-y-65,F,1978,T,P,A,Definite,1,N,I,2
+D,CAN,can-y-67,M,1979,C,P,A,Definite,1,N,I,2
+D,CAN,can-y-68,F,1981,T,P,A,Definite,1,N,I,2
+D,CAN,can-y-70,F,1966,A,P,A,Definite,1,N,I,2
+D,CAN,can-y-71,F,1977,T,P,A,Definite,1,N,I,2
+D,CAN,can-y-71,F,1977,A,P,A,Definite,1,N,I,2
+D,CAN,can-y-73,M,1964,A,P,A,Definite,1,N,I,2
+D,CAN,can-y-74,F,1952,T,P,A,Definite,1,N,I,2
+D,CAN,can-y-74,F,1952,A,N,A,Indefinite,1,N,I,2
+D,CAN,can-y-76,F,1980,T,P,A,Definite,1,N,I,2
+D,CAN,can-y-77,M,1919,A,P,A,Definite,1,N,I,2
+D,CAN,can-y-78,M,1946,A,P,A,Definite,1,N,I,2
+D,CAN,can-y-78,M,1946,A,P,A,Definite,1,N,I,2
+D,CAN,can-y-78,M,1946,A,P,A,Definite,1,N,I,2
+D,CAN,can-y-79,F,1980,A,P,A,Definite,1,N,I,2
+D,CAN,can-y-80,F,1981,T,P,A,Definite,1,N,I,2
+D,CAN,can-y-81,F,1924,C,P,A,Definite,1,N,I,2
+D,CAN,can-y-83,M,1952,T,P,A,Definite,1,N,I,2
+D,CAN,can-y-85,M,1961,T,P,A,Definite,1,N,I,2
+D,CAN,can-y-85,M,1961,T,N,A,Definite,2,N,I,2
+D,CAN,can-y-85,M,1961,T,P,A,Definite,1,I,I,2
+D,CAN,can-2-100,M,1992,T,P,A,Definite,1,N,I,3
+D,CAN,can-2-100,M,1992,A,P,A,Definite,1,N,I,3
+D,CAN,can-2-100,M,1992,C,P,A,Definite,1,N,I,3
+D,CAN,can-2-101,F,1992,T,P,A,Definite,1,N,I,3
+D,CAN,can-2-101,F,1992,T,P,A,Definite,1,N,I,3
+D,CAN,can-2-103,M,1992,T,P,A,Definite,1,N,I,3
+D,CAN,can-2-103,M,1992,T,P,A,Definite,1,N,I,2
+D,CAN,can-2-112,M,1989,T,P,A,Definite,1,N,I,2
+D,CAN,can-2-112,M,1989,T,P,A,Definite,1,N,I,3
+D,CAN,can-2-113,M,1985,T,N,A,Indefinite,2,N,I,3
+D,CAN,can-2-113,M,1985,A,P,A,Definite,1,N,I,3
+D,CAN,can-2-115,F,1989,A,P,A,Definite,1,N,I,3
+D,CAN,can-3-66,M,1986,T,P,A,Definite,1,I,I,1
+D,CAN,can-3-66,M,1986,T,P,A,Definite,1,I,I,3
+D,CAN,can-3-66,M,1986,T,P,A,Definite,1,I,I,3
+D,CAN,can-3-67,M,1988,T,P,A,Definite,1,N,I,3
+D,CAN,can-3-75,F,1985,A,P,A,Definite,1,N,I,3
+D,CAN,can-3-76,F,1984,A,P,A,Definite,1,N,I,3
+D,CAN,can-3-82,F,1985,T,P,A,Definite,1,N,I,3
+D,CAN,can-3-86,M,1992,A,P,A,Definite,1,N,I,2
+D,CAN,can-4-97,F,1986,A,P,A,Definite,1,N,I,3
+D,CAN,can-4-100,M,1988,T,I,A,Definite,1,N,I,3
+D,CAN,can-4-102,M,1984,C,P,A,Definite,1,N,I,3
+D,CAN,can-4-103,M,1994,T,P,A,Definite,1,P,I,3
+D,CAN,can-4-76,F,1992,A,P,A,Definite,1,N,T,3
+D,CAN,can-4-79,M,1986,A,P,A,Definite,1,N,I,2
+D,CAN,can-4-79,M,1986,T,P,A,Definite,1,N,I,3
+D,CAN,can-4-82,F,1985,T,P,A,Definite,1,N,I,3
+D,CAN,can-5-98,M,1987,A,P,A,Definite,1,I,I,3
+D,CAN,can-5-100,F,1983,A,P,A,Definite,1,N,I,3
+D,CAN,can-5-100,F,1983,A,P,A,Definite,1,N,I,3
+D,CAN,can-5-100,F,1983,A,P,A,Definite,1,N,I,3
+D,CAN,can-5-100,F,1983,A,P,A,Definite,1,N,I,3
+D,CAN,can-5-101,M,1983,T,P,A,Definite,1,N,I,3
+D,CAN,can-5-102,F,1984,C,P,A,Definite,1,N,I,3
+D,CAN,can-5-105,F,1991,A,P,A,Definite,1,N,I,3
+D,CAN,can-5-107,M,1985,A,P,A,Definite,1,N,I,3
+D,CAN,can-5-110,F,1985,T,P,A,Definite,1,N,I,3
+D,CAN,can-7-51,M,1896,T,P,A,Definite,1,N,I,3
+D,CAN,can-7-64,F,1896,T,P,A,Definite,1,N,I,3
+D,CAN,can-7-64,F,1896,T,P,A,Definite,1,N,I,3
+D,CAN,can-7-64,F,1896,T,P,A,Definite,1,N,I,3
+D,CAN,can-7-37,M,1896,A,N,I,Definite,3,N,I,3
+D,CAN,can-7-70,F,1896,A,P,A,Definite,1,N,I,3
+D,CAN,can-7-70,F,1896,A,P,A,Definite,1,N,I,3
+D,CAN,can-7-72,M,1896,T,P,A,Definite,1,N,I,3
+D,CAN,can-7-73,M,1896,A,P,A,Definite,1,N,I,3
+D,CAN,can-7-73,M,1896,T,P,A,Definite,1,N,I,3
+D,CAN,can-7-119,F,1896,T,P,A,Definite,1,N,I,3
+D,CAN,can-7-120,F,1896,A,P,A,Definite,1,N,I,3
+D,CAN,can-7-122,F,1896,T,P,A,Definite,1,I,I,3
+D,CAN,can-7-122,F,1896,A,P,A,Definite,1,N,I,3
+D,CAN,can-b-65,F,1933,A,P,A,Definite,1,N,I,3
+D,CAN,can-b-69,F,1924,A,N,A,Definite-pn,1,N,I,3
+D,CAN,can-b-70,M,1984,A,P,I,Definite,1,I,I,3
+D,CAN,can-b-75,M,1951,T,P,A,Definite,1,I,I,3
+D,CAN,can-b-76,F,1948,T,P,A,Definite,1,N,I,3
+D,CAN,can-b-78,F,1924,T,P,A,Definite,1,D,I,3
+D,CAN,can-b-78,F,1924,A,P,A,Definite,1,N,I,3
+D,CAN,can-b-80,M,1943,A,P,A,Definite,1,N,I,3
+D,CAN,can-b-82,M,1926,T,P,A,Definite,1,N,I,3
+D,CAN,can-b-82,M,1926,A,P,A,Definite,1,N,I,3
+D,CAN,can-b-84,F,1921,A,P,A,Definite,1,N,T,3
+D,CAN,can-f-97,F,1987,T,P,A,Definite,1,N,I,3
+D,CAN,can-f-97,F,1987,T,P,A,Definite,1,N,I,3
+D,CAN,can-f-102,F,1982,T,P,A,Definite,1,N,I,3
+D,CAN,can-f-103,F,1981,A,P,A,Definite,1,N,I,3
+D,CAN,can-h-67,F,1984,A,P,A,Definite,1,I,I,3
+D,CAN,can-h-102,M,1991,T,P,A,Definite,1,N,I,3
+D,CAN,can-h-71,M,1983,A,N,A,Definite-pn,2,N,I,3
+D,CAN,can-h-105,F,1986,A,P,A,Definite,1,N,T,3
+D,CAN,can-h-74,F,1942,C,P,A,Definite,1,N,I,3
+D,CAN,can-h-75,F,1942,A,P,A,Definite,1,N,I,3
+D,CAN,can-h-77,M,1944,T,P,A,Definite,1,N,I,3
+D,CAN,can-h-79,M,1915,T,P,A,Definite,1,N,I,3
+D,CAN,can-h-86,M,1944,A,P,A,Definite,1,N,I,3
+D,CAN,can-I-50,F,1949,T,P,A,Definite,1,N,I,3
+D,CAN,can-I-51,F,1979,C,P,A,Definite,1,N,I,3
+D,CAN,can-I-54,F,1922,T,P,A,Definite,1,N,I,3
+D,CAN,can-l-74,M,1918,A,P,I,Definite,1,N,I,3
+D,CAN,can-N-50,F,1960,A,P,A,Definite,1,N,I,3
+D,CAN,can-N-52,M,1943,A,N,A,Definite,3,N,I,3
+D,CAN,can-N-53,F,1953,T,P,A,Definite,1,N,I,3
+D,CAN,can-N-54,F,1976,T,P,A,Definite,1,N,I,2
+D,CAN,can-N-55,F,1964,T,P,A,Definite,1,I,I,3
+D,CAN,can-N-38,M,1978,C,P,A,Definite,1,N,I,3
+D,CAN,can-N-60,M,1950,A,N,A,Definite,3,N,T,3
+D,CAN,can-N-60,M,1950,A,P,A,Definite,1,N,I,3
+D,CAN,can-N-60,M,1950,A,P,A,Definite,1,N,I,3
+D,CAN,can-N-60,M,1950,T,P,A,Definite,1,N,I,3
+D,CAN,can-N-36,M,1959,T,P,A,Definite,1,N,I,3
+D,CAN,can-N-102,M,1918,A,P,A,Definite,1,N,I,3
+D,CAN,can-N-104,F,1948,T,P,A,Definite,1,N,I,3
+D,CAN,can-N-104,F,1948,A,P,I,Definite,1,N,I,3
+D,CAN,can-N-104,F,1948,C,P,A,Definite,1,N,I,3
+D,CAN,can-N-106,M,1956,T,P,A,Definite,1,N,I,3
+D,CAN,can-N-106,M,1956,T,P,A,Definite,1,N,I,3
+D,CAN,can-N-106,M,1956,T,P,A,Definite,1,N,I,3
+D,CAN,can-N-76,F,1972,C,P,A,Definite,1,N,I,3
+D,CAN,can-N-113,F,1979,A,P,A,Definite,1,N,I,4
+D,CAN,can-N-115,F,1951,C,P,A,Definite,1,N,I,3
+D,CAN,can-N-83,F,1969,T,P,A,Definite,1,N,I,3
+D,CAN,can-N-115,F,1951,C,P,A,Definite,1,N,I,3
+D,CAN,can-N-116,F,1966,A,P,I,Definite,1,N,I,3
+D,CAN,can-N-116,F,1966,C,P,A,Definite,1,N,I,3
+D,CAN,can-N-85,F,1921,C,P,A,Definite,1,N,I,3
+D,CAN,can-N-85,F,1921,T,P,A,Definite,1,N,I,3
+D,CAN,can-N-85,F,1921,A,P,A,Definite,1,N,I,3
+D,CAN,can-N-120,F,1982,A,P,A,Definite,1,N,I,3
+D,CAN,can-N-121,F,1916,A,P,A,Definite,1,N,I,3
+D,CAN,can-N-121,F,1916,C,P,A,Definite,1,N,I,2
+D,CAN,can-Q-65,F,1983,A,P,A,Definite,1,N,I,3
+D,CAN,can-Q-65,F,1983,C,N,A,Definite,2,N,I,3
+D,CAN,can-Q-70,M,1982,T,P,A,Definite,1,N,I,3
+D,CAN,can-Q-70,M,1982,T,P,A,Definite,1,N,I,3
+D,CAN,can-Q-70,M,1982,T,P,A,Definite,1,N,I,3
+D,CAN,can-Q-70,M,1982,T,P,A,Definite,1,N,I,3
+D,CAN,can-r-69,F,1971,T,P,A,Definite,1,N,I,3
+D,CAN,can-r-73,M,1988,A,P,A,Definite,1,N,I,3
+D,CAN,can-r-75,F,1985,T,P,A,Definite,1,N,I,3
+D,CAN,can-r-75,F,1985,A,N,A,Definite,2,N,I,3
+D,CAN,can-r-75,F,1985,T,P,A,Definite,1,N,I,3
+D,CAN,can-r-78,F,1980,A,P,A,Definite,1,N,I,3
+D,CAN,can-r-79,F,1977,T,P,A,Definite,1,N,I,3
+D,CAN,can-r-83,F,1972,C,P,A,Definite,1,N,I,3
+D,CAN,can-W-48,M,1937,C,P,A,Definite,1,N,I,3
+D,CAN,can-W-48,M,1937,C,P,A,Definite,1,N,I,3
+D,CAN,can-W-53,M,1952,T,P,A,Definite,1,N,I,3
+D,CAN,can-W-53,M,1952,A,P,A,Definite,1,N,I,3
+D,CAN,can-W-57,M,1954,C,N,A,Indefinite,1,N,I,3
+D,CAN,can-W-45,M,1920,A,P,A,Definite,1,N,I,3
+D,CAN,can-W-33,M,1942,A,N,A,Indefinite,2,N,I,3
+D,CAN,can-W-91,M,1918,A,P,A,Definite,1,N,I,3
+D,CAN,can-W-91,M,1918,T,P,A,Definite,1,N,I,3
+D,CAN,can-W-91,M,1918,T,P,A,Definite,1,N,I,3
+D,CAN,can-W-43,M,1931,T,N,A,Definite,5,N,I,3
+D,CAN,can-W-124,M,1941,A,N,A,Definite,2,N,I,3
+D,CAN,can-W-97,F,1974,A,P,A,Definite,1,N,C,3
+D,CAN,can-W-97,F,1974,A,P,A,Definite,1,N,I,3
+D,CAN,can-W-98,F,1984,T,P,A,Definite,1,N,I,3
+D,CAN,can-W-102,F,1976,T,P,A,Definite,1,N,I,3
+D,CAN,can-W-105,F,1973,A,P,A,Definite,1,N,I,3
+D,CAN,can-W-74,F,1927,A,P,A,Definite,1,N,T,3
+D,CAN,can-W-108,M,1963,A,P,A,Definite,1,N,I,3
+D,CAN,can-W-108,M,1963,C,P,A,Definite,1,N,I,3
+D,CAN,can-W-109,F,1920,A,P,A,Definite,1,I,I,3
+D,CAN,can-W-79,M,1978,T,P,A,Definite,1,N,I,3
+D,CAN,can-W-83,M,1954,C,P,A,Definite,1,N,I,3
+D,CAN,can-W-115,F,1975,A,P,A,Definite,1,N,I,3
+D,CAN,can-W-83,M,1954,C,P,A,Definite,1,N,I,3
+D,CAN,can-W-84,F,1930,A,P,A,Definite,1,N,I,3
+D,CAN,can-W-84,F,1930,C,P,A,Definite,1,N,I,3
+D,CAN,can-W-84,F,1930,T,P,A,Definite,1,N,I,3
+D,CAN,can-W-118,M,1981,A,P,A,Definite,1,N,I,3
+D,CAN,can-W-118,M,1981,A,P,A,Definite,1,N,I,3
+D,CAN,can-W-119,F,1954,T,P,A,Definite,1,N,I,3
+D,CAN,can-y-68,F,1981,C,P,A,Definite,1,N,I,3
+D,CAN,can-y-69,F,1992,C,P,A,Definite,1,N,I,3
+D,CAN,can-y-73,M,1964,A,P,A,Definite,1,N,I,3
+D,CAN,can-y-76,F,1980,A,N,A,Indefinite,3,N,I,3
+D,CAN,can-y-84,M,1976,A,P,A,Definite,1,N,I,3
+D,CAN,can-2-100,M,1992,A,P,A,Definite,1,N,I,4
+D,CAN,can-2-100,M,1992,T,P,A,Definite,1,N,I,4
+D,CAN,can-2-101,F,1992,T,N,A,Definite,4,N,I,2
+D,CAN,can-2-102,M,1992,T,P,A,Definite,1,N,I,4
+D,CAN,can-2-104,M,1985,T,P,A,Definite,1,N,I,4
+D,CAN,can-2-104,M,1985,T,P,A,Definite,1,N,I,4
+D,CAN,can-2-108,M,1993,A,P,A,Definite,1,N,T,2
+D,CAN,can-2-114,F,1992,A,P,A,Definite,1,N,I,4
+D,CAN,can-3-66,M,1986,T,P,A,Definite,1,N,I,4
+D,CAN,can-3-72,M,1991,A,P,A,Definite,1,N,I,4
+D,CAN,can-3-72,M,1991,T,P,A,Definite,1,N,I,4
+D,CAN,can-3-84,F,1985,A,P,A,Definite,1,N,I,4
+D,CAN,can-3-86,M,1992,A,P,A,Definite,1,N,T,4
+D,CAN,can-4-102,M,1984,A,P,A,Definite,1,N,I,4
+D,CAN,can-4-103,M,1994,C,P,A,Definite,1,N,I,4
+D,CAN,can-4-104,M,1987,A,P,A,Definite,1,N,I,4
+D,CAN,can-4-74,M,1984,T,P,A,Definite,1,N,I,4
+D,CAN,can-4-76,F,1992,A,P,A,Definite,1,N,I,4
+D,CAN,can-5-107,M,1985,T,P,A,Definite,1,N,I,4
+D,CAN,can-5-111,M,1984,T,P,A,Definite,1,N,I,4
+D,CAN,can-5-111,M,1984,A,P,A,Definite,1,N,I,4
+D,CAN,can-7-64,F,1896,T,P,A,Definite,1,N,I,4
+D,CAN,can-7-70,F,1896,T,P,A,Definite,1,N,I,4
+D,CAN,can-7-71,M,1896,A,P,I,Definite,1,N,I,4
+D,CAN,can-7-71,M,1896,T,P,A,Definite,1,N,I,4
+D,CAN,can-7-81,M,1896,A,N,A,Definite,3,N,I,4
+D,CAN,can-7-81,M,1896,A,N,I,Definite,2,N,I,4
+D,CAN,can-7-84,F,1896,A,P,A,Definite,1,N,I,4
+D,CAN,can-7-87,F,1896,T,P,A,Definite,1,N,I,4
+D,CAN,can-7-90,M,1896,C,P,A,Definite,1,N,I,4
+D,CAN,can-b-67,F,1973,C,P,A,Definite,1,N,I,4
+D,CAN,can-b-75,M,1951,A,P,A,Definite,1,N,I,4
+D,CAN,can-b-76,F,1948,C,P,A,Definite,1,N,I,4
+D,CAN,can-b-82,M,1926,T,P,A,Definite,1,N,I,4
+D,CAN,can-e-88,F,1985,T,P,A,Definite,1,N,I,4
+D,CAN,can-f-100,F,1984,A,P,A,Definite,1,N,T,5
+D,CAN,can-f-100,F,1984,A,P,A,Definite,1,N,T,4
+D,CAN,can-f-103,F,1981,C,P,A,Definite,1,N,I,4
+D,CAN,can-h-102,M,1991,T,P,A,Definite,1,N,I,4
+D,CAN,can-h-71,M,1983,A,P,A,Definite,1,N,I,4
+D,CAN,can-h-72,M,1983,T,P,A,Definite,1,I,I,4
+D,CAN,can-h-105,F,1986,A,P,A,Definite,1,N,I,4
+D,CAN,can-h-106,F,1963,A,N,A,Definite,2,N,I,4
+D,CAN,can-h-75,F,1942,A,P,A,Definite,1,N,I,4
+D,CAN,can-h-90,F,1942,A,P,A,Definite,1,N,I,4
+D,CAN,can-I-50,F,1949,T,P,A,Definite,1,N,I,4
+D,CAN,can-I-50,F,1949,T,P,A,Definite,1,N,I,4
+D,CAN,can-I-51,F,1979,A,P,A,Definite,1,N,I,4
+D,CAN,can-I-52,F,1978,A,P,A,Definite,1,N,I,4
+D,CAN,can-I-54,F,1922,T,P,A,Definite,1,N,I,4
+D,CAN,can-k-114,F,1912,T,P,A,Definite,1,N,I,4
+D,CAN,can-k-118,M,1931,T,P,A,Definite,1,N,I,4
+D,CAN,can-l-67,M,1931,A,P,A,Definite,1,N,I,4
+D,CAN,can-l-69,M,1942,A,P,A,Definite,1,N,I,4
+D,CAN,can-l-70,F,1969,C,P,A,Definite,1,N,I,4
+D,CAN,can-l-74,M,1918,A,P,A,Definite,1,N,I,4
+D,CAN,can-N-52,M,1943,A,P,A,Definite,1,N,I,4
+D,CAN,can-N-60,M,1950,A,P,A,Definite,1,N,I,4
+D,CAN,can-N-60,M,1950,T,P,A,Definite,1,N,I,4
+D,CAN,can-N-65,F,1947,T,P,A,Definite,1,I,I,4
+D,CAN,can-N-68,M,1951,T,P,A,Definite,1,N,I,4
+D,CAN,can-N-68,M,1951,A,P,A,Definite,1,N,I,4
+D,CAN,can-N-107,F,1978,T,P,A,Definite,1,N,I,4
+D,CAN,can-N-110,F,1950,T,P,A,Definite,1,N,I,4
+D,CAN,can-N-114,F,1981,T,P,A,Definite,1,N,I,4
+D,CAN,can-N-83,F,1969,A,P,A,Definite,1,N,I,4
+D,CAN,can-N-115,F,1951,A,P,A,Definite,1,N,I,4
+D,CAN,can-N-115,F,1951,A,P,A,Definite,1,N,I,4
+D,CAN,can-N-84,M,1939,A,P,A,Definite,1,N,I,4
+D,CAN,can-N-85,F,1921,T,P,A,Definite,1,N,I,4
+D,CAN,can-N-122,M,1954,A,N,A,Indefinite,1,N,I,4
+D,CAN,can-Q-65,F,1983,A,P,A,Definite,1,N,I,4
+D,CAN,can-Q-67,M,1987,A,P,A,Definite,1,N,I,4
+D,CAN,can-Q-69,F,1984,A,P,A,Definite,1,N,I,4
+D,CAN,can-Q-70,M,1982,T,P,A,Definite,1,N,I,4
+D,CAN,can-Q-70,M,1982,T,P,A,Definite,1,N,I,4
+D,CAN,can-Q-70,M,1982,C,P,A,Definite,1,N,I,4
+D,CAN,can-Q-71,F,1985,A,P,A,Definite,1,I,I,4
+D,CAN,can-r-65,F,1970,T,P,A,Definite,1,N,I,4
+D,CAN,can-r-74,M,1945,A,P,A,Definite,1,N,I,4
+D,CAN,can-r-74,M,1945,T,P,A,Definite,1,N,I,4
+D,CAN,can-r-77,F,1948,A,P,A,Definite,1,N,I,4
+D,CAN,can-r-78,F,1980,A,P,A,Definite,1,N,I,4
+D,CAN,can-W-57,M,1954,T,P,A,Definite,1,N,I,4
+D,CAN,can-W-95,F,1927,T,P,A,Definite,1,N,I,4
+D,CAN,can-W-59,F,1951,A,P,A,Definite,1,N,I,4
+D,CAN,can-W-65,M,1950,T,P,A,Definite,1,N,I,4
+D,CAN,can-W-101,M,1963,A,P,A,Definite,1,N,I,4
+D,CAN,can-W-108,M,1963,T,P,A,Definite,1,N,I,4
+D,CAN,can-W-108,M,1963,T,P,A,Definite,1,N,I,4
+D,CAN,can-W-79,M,1978,T,N,A,Definite,2,N,I,4
+D,CAN,can-W-112,F,1982,T,P,A,Definite,1,N,I,4
+D,CAN,can-W-115,F,1975,A,P,I,Definite,1,N,I,4
+D,CAN,can-W-115,F,1975,A,P,A,Definite,1,N,T,4
+D,CAN,can-W-84,F,1930,T,P,A,Definite,1,N,I,4
+D,CAN,can-W-84,F,1930,T,P,A,Definite,1,N,I,4
+D,CAN,can-W-84,F,1930,T,P,A,Definite,1,N,I,4
+D,CAN,can-y-71,F,1977,T,P,A,Definite,1,N,I,4
+D,CAN,can-y-71,F,1977,T,P,A,Definite,1,N,I,4
+D,CAN,can-y-78,M,1946,A,P,A,Definite,1,N,T,4
+D,CAN,can-y-80,F,1981,A,P,A,Definite,1,N,I,4
+D,CAN,can-y-82,M,1981,A,P,A,Definite,1,N,I,4
+D,CAN,can-y-82,M,1981,A,P,A,Definite,1,N,I,4
+D,CAN,can-y-85,M,1961,T,P,A,Definite,1,N,I,4
+D,CAN,can-y-85,M,1961,T,P,A,Definite,1,N,I,4
+D,CAN,can-y-85,M,1961,T,P,A,Definite,1,N,I,4
+D,CAN,can-y-85,M,1961,T,P,A,Definite,1,N,I,4
+D,CAN,can-y-85,M,1961,A,P,A,Definite,1,N,I,4
+D,CAN,can-y-87,M,1970,T,P,A,Definite,1,N,I,4
+D,CAN,can-y-88,M,1945,A,P,A,Definite,1,N,I,4
+D,CAN,can-2-100,M,1992,T,P,A,Definite,1,N,I,2
+D,CAN,can-2-114,F,1992,A,P,A,Definite,1,N,I,4
+D,CAN,can-3-72,M,1991,T,P,A,Definite,1,N,I,5
+D,CAN,can-3-81,F,1987,T,P,A,Definite,1,N,I,5
+D,CAN,can-4-97,F,1986,C,P,A,Definite,1,N,I,5
+D,CAN,can-4-75,F,1984,A,P,A,Definite,2,N,I,5
+D,CAN,can-5-100,F,1983,A,P,I,Definite,1,N,I,5
+D,CAN,can-5-103,M,1984,A,P,A,Definite,1,N,I,5
+D,CAN,can-5-103,M,1984,C,P,A,Definite,1,N,I,5
+D,CAN,can-5-104,M,1991,T,P,A,Definite,1,N,I,5
+D,CAN,can-5-107,M,1985,A,P,A,Definite,1,N,T,5
+D,CAN,can-5-107,M,1985,A,P,A,Definite,1,N,I,5
+D,CAN,can-5-107,M,1985,A,P,A,Definite,1,N,I,5
+D,CAN,can-5-107,M,1985,A,P,A,Definite,1,N,I,5
+D,CAN,can-5-111,M,1984,C,P,A,Definite,1,N,I,6
+D,CAN,can-5-111,M,1984,T,P,A,Definite,1,N,I,5
+D,CAN,can-7-50,M,1896,A,P,A,Definite,1,N,I,5
+D,CAN,can-7-50,M,1896,A,P,A,Definite,1,N,I,5
+D,CAN,can-7-73,M,1896,T,P,A,Definite,1,N,I,5
+D,CAN,can-7-105,M,1896,C,P,A,Definite,1,N,I,5
+D,CAN,can-7-87,F,1896,A,P,A,Definite,1,N,I,5
+D,CAN,can-b-67,F,1973,C,P,A,Definite,1,N,I,4
+D,CAN,can-b-73,M,1939,T,P,A,Definite,1,N,I,5
+D,CAN,can-b-73,M,1939,A,P,A,Definite,1,N,I,5
+D,CAN,can-b-73,M,1939,A,P,A,Definite,1,N,I,5
+D,CAN,can-b-90,M,1969,A,P,A,Definite,1,N,I,5
+D,CAN,can-f-103,F,1981,A,P,A,Definite,1,N,I,5
+D,CAN,can-h-98,F,1990,T,P,A,Definite,1,N,I,5
+D,CAN,can-h-80,F,1972,T,P,A,Definite,1,N,I,5
+D,CAN,can-h-90,F,1942,A,N,A,Definite,12,N,I,3
+D,CAN,can-I-52,F,1978,A,P,A,Definite,1,N,I,5
+D,CAN,can-N-65,F,1947,A,P,A,Definite,1,N,I,5
+D,CAN,can-N-103,F,1948,A,P,A,Definite,1,N,I,5
+D,CAN,can-N-71,F,1977,T,P,A,Definite,1,N,I,5
+D,CAN,can-N-105,F,1950,T,P,A,Definite,1,N,I,5
+D,CAN,can-N-75,M,1977,T,P,A,Definite,1,N,I,5
+D,CAN,can-N-77,F,1975,C,P,A,Definite,1,N,I,5
+D,CAN,can-N-110,F,1950,A,P,A,Definite,1,N,I,5
+D,CAN,can-N-114,F,1981,T,P,A,Definite,1,N,I,5
+D,CAN,can-N-83,F,1969,A,P,A,Definite,1,N,I,5
+D,CAN,can-N-118,F,1948,A,P,A,Definite,1,N,I,5
+D,CAN,can-N-122,M,1954,A,P,A,Definite,1,I,I,5
+D,CAN,can-Q-70,M,1982,T,P,A,Definite,1,N,I,5
+D,CAN,can-Q-71,F,1985,T,P,A,Definite,1,N,I,5
+D,CAN,can-r-74,M,1945,T,P,A,Definite,1,N,A,5
+D,CAN,can-r-74,M,1945,T,P,A,Definite,1,N,I,5
+D,CAN,can-W-51,M,1977,A,P,I,Definite,1,N,I,5
+D,CAN,can-W-54,F,1958,A,P,A,Definite,1,N,I,5
+D,CAN,can-W-91,M,1918,T,P,A,Definite,1,N,I,4
+D,CAN,can-W-43,M,1931,T,P,A,Definite,1,N,I,5
+D,CAN,can-W-43,M,1931,A,P,A,Definite,1,I,I,5
+D,CAN,can-W-61,M,1921,A,P,A,Definite,1,N,I,5
+D,CAN,can-W-61,M,1921,C,P,A,Definite,1,N,I,5
+D,CAN,can-W-97,F,1974,A,P,A,Definite,1,N,A,5
+D,CAN,can-W-99,F,1984,C,P,A,Definite,1,N,I,5
+D,CAN,can-W-71,M,1966,A,P,A,Definite,1,N,I,5
+D,CAN,can-W-108,M,1963,T,P,A,Definite,1,N,I,5
+D,CAN,can-W-79,M,1978,T,P,A,Definite,1,N,I,5
+D,CAN,can-W-119,F,1954,A,P,A,Definite,1,N,I,5
+D,CAN,can-W-119,F,1954,A,P,A,Definite,1,N,T,5
+D,CAN,can-W-119,F,1954,A,P,A,Definite,1,N,T,5
+D,CAN,can-y-66,F,1946,T,P,A,Definite,1,I,I,5
+D,CAN,can-y-71,F,1977,A,P,A,Definite,1,N,I,5
+D,CAN,can-y-76,F,1980,A,P,A,Definite,1,N,I,5
+D,CAN,can-y-77,M,1919,T,P,A,Definite,1,I,I,5
+D,CAN,can-y-77,M,1919,A,P,A,Definite,1,N,I,5
+D,CAN,can-y-88,M,1945,A,P,A,Definite,1,N,I,5
+D,CAN,can-2-99,M,1987,A,P,A,Definite,1,N,I,3
+D,CAN,can-2-105,F,1984,A,P,A,Definite,1,N,I,6
+D,CAN,can-2-116,M,1990,A,P,A,Definite,1,N,I,6
+D,CAN,can-3-75,F,1985,T,P,A,Definite,1,N,I,6
+D,CAN,can-3-79,M,1994,C,P,A,Definite,1,N,I,6
+D,CAN,can-3-87,M,1990,A,P,A,Definite,1,N,I,6
+D,CAN,can-4-102,M,1984,A,P,A,Definite,1,N,I,2
+D,CAN,can-5-106,F,1983,C,P,A,Definite,1,N,I,6
+D,CAN,can-5-107,M,1985,A,P,A,Definite,1,N,T,6
+D,CAN,can-5-111,M,1984,C,P,A,Definite,1,N,I,6
+D,CAN,can-7-81,M,1896,A,N,A,Definite,15,N,I,6
+D,CAN,can-7-82,F,1896,A,P,A,Definite,1,N,I,6
+D,CAN,can-7-90,M,1896,C,P,A,Definite,1,N,I,6
+D,CAN,can-b-99,F,1934,T,P,A,Definite,1,N,I,2
+D,CAN,can-b-102,M,1981,A,P,A,Definite,1,N,I,6
+D,CAN,can-b-87,F,1970,A,P,A,Definite,1,N,I,6
+D,CAN,can-h-98,F,1990,T,P,A,Definite,1,N,I,6
+D,CAN,can-I-51,F,1979,A,P,A,Definite,1,N,I,6
+D,CAN,can-l-70,F,1969,A,P,A,Definite,1,N,I,6
+D,CAN,can-N-125,F,1958,A,P,A,Definite,1,N,I,6
+D,CAN,can-N-38,M,1978,A,P,A,Definite,1,N,I,6
+D,CAN,can-N-99,F,1967,A,P,A,Definite,1,N,I,6
+D,CAN,can-N-70,F,1964,A,N,A,Indefinite,1,N,I,6
+D,CAN,can-N-82,F,1953,A,P,A,Definite,1,N,I,6
+D,CAN,can-Q-71,F,1985,T,P,A,Definite,1,N,I,6
+D,CAN,can-Q-72,F,1985,A,P,A,Definite,1,N,I,6
+D,CAN,can-r-74,M,1945,T,P,A,Definite,1,N,I,6
+D,CAN,can-r-75,F,1985,T,P,A,Definite,1,N,I,6
+D,CAN,can-W-48,M,1937,A,P,A,Definite,1,N,I,6
+D,CAN,can-W-91,M,1918,C,P,A,Definite,1,N,I,6
+D,CAN,can-W-126,F,1925,T,P,A,Definite,1,N,I,6
+D,CAN,can-W-101,M,1963,A,P,A,Definite,1,N,I,6
+D,CAN,can-W-103,F,1966,A,P,A,Definite,1,N,I,6
+D,CAN,can-W-72,F,1928,A,P,A,Definite,1,N,I,6
+D,CAN,can-W-113,M,1981,A,P,A,Definite,1,N,I,6
+D,CAN,can-y-70,F,1966,A,P,A,Definite,1,N,I,6
+D,CAN,can-y-72,F,1950,A,P,A,Definite,1,N,I,6
+D,CAN,can-y-74,F,1952,A,P,A,Definite,1,N,I,6
+D,CAN,can-y-77,M,1919,A,P,A,Definite,1,N,I,6
+D,CAN,can-y-84,M,1976,A,P,A,Definite,1,N,I,6
+D,CAN,can-y-85,M,1961,T,P,A,Definite,1,N,I,6
+D,CAN,can-y-88,M,1945,T,P,A,Definite,1,I,I,6
+D,CAN,can-2-105,F,1984,A,P,A,Definite,1,N,I,7
+D,CAN,can-2-110,F,1984,T,P,A,Definite,1,N,I,7
+D,CAN,can-3-67,M,1988,T,P,A,Definite,1,N,I,4
+D,CAN,can-3-75,F,1985,A,P,A,Definite,1,N,I,5
+D,CAN,can-3-82,F,1985,T,P,A,Definite,1,N,I,7
+D,CAN,can-5-103,M,1984,C,P,A,Definite,1,N,I,7
+D,CAN,can-7-50,M,1896,T,P,A,Definite,1,N,I,7
+D,CAN,can-7-104,M,1896,A,P,A,Definite,1,N,I,7
+D,CAN,can-7-81,M,1896,A,I,A,Indefinite,1,N,I,7
+D,CAN,can-b-97,M,1959,T,P,A,Definite,1,N,I,7
+D,CAN,can-b-69,F,1924,A,P,A,Definite,1,N,I,7
+D,CAN,can-b-102,M,1981,C,P,A,Definite,1,N,I,7
+D,CAN,can-b-102,M,1981,C,P,A,Definite,1,N,I,7
+D,CAN,can-b-71,F,1962,A,P,A,Definite,1,N,I,6
+D,CAN,can-b-105,F,1986,T,P,A,Definite,1,N,I,7
+D,CAN,can-h-98,F,1990,A,P,A,Definite,1,N,I,5
+D,CAN,can-h-71,M,1983,C,P,A,Definite,1,N,I,7
+D,CAN,can-h-77,M,1944,A,P,A,Definite,1,N,I,7
+D,CAN,can-h-86,M,1944,T,P,A,Definite,1,N,I,7
+D,CAN,can-N-108,M,1950,A,P,A,Definite,1,I,I,7
+D,CAN,can-N-112,M,1983,T,P,A,Definite,1,N,I,7
+D,CAN,can-N-88,M,1957,A,P,I,Definite,1,N,I,7
+D,CAN,can-W-95,F,1927,T,P,A,Definite,1,N,I,7
+D,CAN,can-W-73,M,1956,A,P,A,Definite,1,N,I,7
+D,CAN,can-W-82,M,1968,T,P,A,Definite,1,I,I,1
+D,CAN,can-y-77,M,1919,T,P,A,Definite,1,N,I,7
+D,CAN,can-2-99,M,1987,T,P,A,Definite,1,N,I,8
+D,CAN,can-2-105,F,1984,C,P,A,Definite,1,N,I,9
+D,CAN,can-3-75,F,1985,A,P,A,Definite,1,N,T,8
+D,CAN,can-5-104,M,1991,T,P,A,Definite,1,N,I,9
+D,CAN,can-5-111,M,1984,A,P,A,Definite,1,N,I,8
+D,CAN,can-7-88,M,1896,A,P,A,Definite,1,N,I,8
+D,CAN,can-b-104,M,1987,A,P,A,Definite,1,N,I,8
+D,CAN,can-b-90,M,1969,T,N,A,Definite,2,N,I,8
+D,CAN,can-I-51,F,1979,A,P,A,Definite,1,N,I,8
+D,CAN,can-l-75,F,1920,T,P,A,Definite,1,N,I,8
+D,CAN,can-N-100,M,1920,T,N,A,Definite-pn,1,N,I,8
+D,CAN,can-N-88,M,1957,T,P,A,Definite,1,N,I,8
+D,CAN,can-r-70,M,1940,T,P,A,Definite,1,N,I,8
+D,CAN,can-b-68,F,1961,A,P,A,Definite,1,N,I,10
+D,CAN,can-l-67,M,1931,A,P,A,Definite,1,N,I,9
+D,CAN,can-N-102,M,1918,A,P,A,Definite,1,N,T,9
+D,CAN,can-r-65,F,1970,T,P,A,Definite,1,N,I,9
+D,CAN,can-W-33,M,1942,T,P,A,Definite,1,N,I,9
+D,CAN,can-W-124,M,1941,T,P,A,Definite,1,N,I,10
+D,CAN,can-W-97,F,1974,A,P,A,Definite,1,N,I,9
+D,CAN,can-W-79,M,1978,T,P,A,Definite,1,N,I,9
+D,CAN,can-W-83,M,1954,C,P,A,Definite,1,N,I,10
+D,CAN,can-2-105,F,1984,A,P,A,Definite,1,N,T,11
+D,CAN,can-5-111,M,1984,A,P,A,Definite,1,I,I,11
+D,CAN,can-7-73,M,1896,A,P,A,Definite,1,N,I,12
+D,CAN,can-b-79,F,1947,A,P,A,Definite,1,N,I,10
+D,CAN,can-N-52,M,1943,T,P,A,Definite,1,N,I,10
+D,CAN,can-Q-69,F,1984,T,P,A,Definite,1,N,I,10
+D,CAN,can-Q-73,F,1985,C,P,A,Definite,1,N,I,10
+D,CAN,can-W-61,M,1921,T,P,A,Definite,1,N,I,10
+D,CAN,can-W-83,M,1954,A,P,A,Definite,1,N,I,10
+D,CAN,can-b-102,M,1981,A,P,I,Definite,1,N,I,10
+D,CAN,can-b-102,M,1981,C,P,A,Definite,1,N,I,11
+D,CAN,can-b-69,F,1924,T,N,A,Definite,2,N,I,12
+D,CAN,can-b-100,M,1957,T,I,A,Definite,1,N,I,13
+D,CAN,can-h-80,F,1972,C,P,A,Definite,1,N,I,13
+D,CAN,can-N-107,F,1978,T,P,A,Definite,1,N,I,13
+D,CAN,can-W-102,F,1976,A,N,C,Indefinite,2,N,I,13
+D,CAN,can-W-99,F,1984,T,P,A,Definite,1,N,I,14
+D,CAN,can-f-98,F,1986,T,P,A,Definite,1,N,I,14
+D,CAN,can-2-112,M,1989,C,P,A,Definite,1,N,I,17
+D,CAN,can-N-71,F,1977,A,P,A,Definite,1,N,I,16
+D,CAN,can-W-43,M,1931,T,P,A,Definite,1,N,I,7
+D,NZ,Agnes Shacklock,F,1891,T,P,A,Definite,1,N,I,4
+D,NZ,Agnes Shacklock,F,1891,T,P,A,Definite,1,I,I,3
+D,NZ,Agnes Shacklock,F,1891,C,P,A,Definite,1,N,I,2
+D,NZ,Alice Mackie,F,1877,T,N,A,Indefinite,2,N,A,6
+D,NZ,Alice Mackie,F,1877,T,N,A,Definite,2,N,I,4
+D,NZ,Allie Wood,M,1888,A,P,A,Definite,1,N,I,4
+D,NZ,Andrew Fullarton,M,1871,A,N,A,Indefinite,3,N,I,8
+D,NZ,Andrew Fullarton,M,1871,A,N,A,Definite-pn,1,N,I,7
+D,NZ,Anne Reed,F,1896,A,P,A,Definite,1,N,I,5
+D,NZ,Anne Reed,F,1896,A,P,A,Definite,1,N,I,6
+D,NZ,Annette Golding,F,1923,T,P,A,Definite,1,N,I,2
+D,NZ,Annette Golding,F,1923,A,P,A,Definite,1,N,I,3
+D,NZ,Annette Golding,F,1923,A,P,A,Definite,1,N,I,3
+D,NZ,Annette Golding,F,1923,T,P,A,Definite,1,N,I,2
+D,NZ,Annette Golding,F,1923,C,P,A,Definite,1,N,I,5
+D,NZ,Annette Golding,F,1923,T,P,A,Definite,1,N,I,2
+D,NZ,Annie Hamilton,F,1877,T,P,A,Definite,1,N,I,5
+D,NZ,Annie Hamilton,F,1877,T,P,A,Definite,1,N,I,5
+D,NZ,Annie Hamilton,F,1877,C,P,A,Definite,1,N,I,2
+D,NZ,Annie Hamilton,F,1877,T,P,A,Definite,1,N,I,2
+D,NZ,Annie Hamilton,F,1877,T,N,A,Definite,3,N,I,3
+D,NZ,Annie Hamilton,F,1877,C,P,A,Definite,1,N,I,3
+D,NZ,Annie Hamilton,F,1877,C,P,A,Definite,1,N,I,3
+D,NZ,Annie Sanders,F,1918,T,P,A,Definite,1,N,I,8
+D,NZ,Annie Sanders,F,1918,A,P,A,Definite,1,N,I,5
+D,NZ,Annie Sanders,F,1918,A,N,A,Definite-pn,1,N,I,3
+D,NZ,Annie Sanders,F,1918,T,P,A,Definite,1,N,A,2
+D,NZ,Annie Sanders,F,1918,T,P,A,Definite,1,N,I,4
+D,NZ,Anthony Tweed,M,1865,T,P,A,Definite,1,N,I,4
+D,NZ,Anthony Tweed,M,1865,A,P,A,Definite,1,N,I,2
+D,NZ,Anthony Tweed,M,1865,A,P,A,Definite,1,N,I,10
+D,NZ,Basil Grither,M,1922,A,P,A,Definite,1,N,I,7
+D,NZ,Basil Grither,M,1922,T,P,A,Definite,1,N,I,2
+D,NZ,Basil Grither,M,1922,A,P,A,Definite,2,N,I,5
+D,NZ,Basil Grither,M,1922,C,P,A,Definite,1,N,I,2
+D,NZ,Bill Gillespie,M,1924,T,P,A,Definite,1,N,I,6
+D,NZ,Bill Gillespie,M,1924,A,P,A,Definite,1,N,I,3
+D,NZ,Bill Gillespie,M,1924,A,P,A,Definite,1,N,I,4
+D,NZ,Bill Gillespie,M,1924,A,P,A,Definite,1,N,I,4
+D,NZ,Bill Gillespie,M,1924,A,P,A,Definite,1,N,I,3
+D,NZ,Bill Gillespie,M,1924,T,P,A,Definite,1,N,I,4
+D,NZ,Bill Gillespie,M,1924,T,P,A,Definite,1,I,I,2
+D,NZ,Bill Gillespie,M,1924,T,P,A,Definite,1,I,I,1
+D,NZ,Bill Gillespie,M,1924,A,P,A,Definite,1,N,I,2
+D,NZ,Bill Gillespie,M,1924,A,P,A,Definite,1,N,I,5
+D,NZ,Bill Gillespie,M,1924,T,P,A,Definite,1,N,I,5
+D,NZ,Bill Gillespie,M,1924,T,P,A,Definite,1,N,I,2
+D,NZ,Bob Riddle,M,1860,T,P,A,Definite,1,P,I,4
+D,NZ,Bob Riddle,M,1860,A,P,A,Definite,1,N,I,2
+D,NZ,Bob Riddle,M,1860,T,P,A,Definite,1,P,I,5
+D,NZ,Bob Riddle,M,1860,T,P,A,Definite,1,N,I,7
+D,NZ,Cap Jardine,M,1916,A,P,A,Definite,1,N,I,3
+D,NZ,Catherine Dudley,F,1886,T,P,A,Definite,1,N,I,4
+D,NZ,Catherine Dudley,F,1886,A,P,A,Definite,1,N,I,2
+D,NZ,Catherine Dudley,F,1886,A,P,A,Definite,1,N,I,2
+D,NZ,Catherine Dudley,F,1886,A,P,A,Definite,1,I,I,2
+D,NZ,Chris Dixon,M,1867,T,N,A,Indefinite,2,N,I,3
+D,NZ,Chris Dixon,M,1867,A,N,A,Definite,3,N,I,2
+D,NZ,Chris Dixon,M,1867,A,D,I,Definite,1,N,I,3
+D,NZ,Colin Nicholson,M,1902,A,P,A,Definite,1,N,I,3
+D,NZ,Colin Nicholson,M,1902,T,P,A,Definite,1,N,I,2
+D,NZ,Colin Nicholson,M,1902,T,P,A,Definite,1,N,I,2
+D,NZ,Cornelius Magner,M,1889,T,N,A,Definite-pn,1,N,I,1
+D,NZ,Cornelius Magner,M,1889,A,N,A,Definite-pn,3,N,I,2
+D,NZ,Courtenay Kenny,M,1877,A,P,I,Definite,1,N,I,3
+D,NZ,David Moore,M,1915,T,P,A,Definite,1,N,I,4
+D,NZ,David Moore,M,1915,T,P,A,Definite,1,N,I,6
+D,NZ,David Moore,M,1915,A,P,A,Definite,1,N,I,2
+D,NZ,David Moore,M,1915,A,P,I,Definite,1,N,I,3
+D,NZ,David Moore,M,1915,T,P,A,Definite,1,N,I,2
+D,NZ,David Moore,M,1915,A,P,A,Definite,1,N,I,2
+D,NZ,David Moore,M,1915,A,P,A,Definite,1,N,I,3
+D,NZ,David Moore,M,1915,C,P,A,Definite,1,N,I,4
+D,NZ,David Moore,M,1915,T,P,A,Definite,1,N,I,2
+D,NZ,Dennis Kemp,M,1930,A,P,A,Definite,1,N,I,2
+D,NZ,Dennis Kemp,M,1930,C,N,A,Indefinite,1,N,I,6
+D,NZ,Dorothy Hagitt,F,1896,A,N,A,Definite,2,N,I,5
+D,NZ,Eileen Olds,F,1913,A,P,A,Definite,1,N,I,3
+D,NZ,Elliott Atkinson,M,1921,T,P,A,Definite,1,N,I,12
+D,NZ,Elliott Atkinson,M,1921,T,P,A,Definite,1,N,I,2
+D,NZ,Elliott Atkinson,M,1921,T,N,A,Definite,2,N,I,2
+D,NZ,Elliott Atkinson,M,1921,C,P,A,Definite,1,N,I,5
+D,NZ,Elliott Atkinson,M,1921,T,P,A,Definite,1,N,I,6
+D,NZ,Elliott Atkinson,M,1921,T,P,A,Definite,1,N,I,8
+D,NZ,Elsie Robinson,F,1928,A,P,A,Definite,1,N,I,13
+D,NZ,Elsie Robinson,F,1928,T,P,A,Definite,1,N,I,2
+D,NZ,Emma North,F,1878,A,P,A,Definite,1,N,I,3
+D,NZ,Emma North,F,1878,A,P,A,Definite,1,N,I,4
+D,NZ,Eric Robinson,M,1919,T,P,A,Definite,1,N,I,6
+D,NZ,Eric Robinson,M,1919,A,P,A,Definite,1,N,I,2
+D,NZ,Eric Robinson,M,1919,A,P,A,Definite,1,N,I,3
+D,NZ,Eric Robinson,M,1919,T,P,A,Definite,1,I,I,2
+D,NZ,Eric Robinson,M,1919,T,P,A,Definite,1,I,I,2
+D,NZ,Eunice Yeatman,F,1918,T,P,A,Definite,1,N,I,3
+D,NZ,Eunice Yeatman,F,1918,A,P,A,Definite,1,N,I,1
+D,NZ,Eunice Yeatman,F,1918,T,P,A,Definite,1,N,I,2
+D,NZ,Eunice Yeatman,F,1918,A,P,A,Definite,1,N,I,2
+D,NZ,Eunice Yeatman,F,1918,A,P,A,Definite,1,D,I,1
+D,NZ,fon00-21a,F,1949,A,P,A,Definite,1,N,I,2
+D,NZ,fon00-9,F,1939,A,P,A,Definite,1,N,I,2
+D,NZ,fon00-9,F,1939,A,P,A,Definite,1,N,I,4
+D,NZ,fon00-9,F,1939,A,P,A,Definite,1,N,I,3
+D,NZ,fon02-1b,F,1955,T,P,A,Definite,1,N,I,5
+D,NZ,fon02-6a,F,1945,T,P,A,Definite,1,N,I,2
+D,NZ,fon02-6a,F,1945,T,P,A,Definite,1,N,I,2
+D,NZ,fon04-1,F,1952,T,P,A,Definite,1,N,I,4
+D,NZ,fon04-1,F,1952,T,P,A,Definite,1,N,I,4
+D,NZ,fon04-1,F,1952,C,P,A,Definite,1,N,I,7
+D,NZ,fon04-1,F,1952,A,N,A,Definite-pn,1,N,I,2
+D,NZ,fon05-3,F,1959,A,P,A,Definite,1,N,I,2
+D,NZ,fon05-3,F,1959,C,P,A,Definite,1,N,I,3
+D,NZ,fon06-3,F,1950,A,P,A,Definite,1,N,T,7
+D,NZ,fon94-18,F,1941,A,P,A,Definite,1,N,I,4
+D,NZ,fon94-18,F,1941,T,P,A,Definite,1,I,I,3
+D,NZ,fon94-18,F,1941,T,P,A,Definite,1,D,I,1
+D,NZ,fon94-1a,F,1956,T,P,A,Definite,1,N,I,3
+D,NZ,fon94-1a,F,1956,C,P,A,Definite,1,N,I,2
+D,NZ,fon94-1a,F,1956,T,P,A,Definite,1,N,I,10
+D,NZ,fon94-26d,F,1936,A,P,A,Definite,1,I,I,2
+D,NZ,fon94-3,F,1942,A,P,A,Definite,1,N,T,4
+D,NZ,fon94-3,F,1942,A,P,A,Definite,1,N,I,2
+D,NZ,fon94-3,F,1942,A,P,A,Definite,1,N,I,1
+D,NZ,fon94-3,F,1942,A,P,A,Definite,1,N,I,1
+D,NZ,fon94-3,F,1942,A,P,A,Definite,1,N,T,3
+D,NZ,fon94-3,F,1942,A,P,A,Definite,1,N,I,2
+D,NZ,fon94-3,F,1942,A,P,A,Definite,1,N,T,3
+D,NZ,fon94-30a,F,1926,T,P,A,Definite,1,N,I,2
+D,NZ,fon94-36a,F,1949,C,P,A,Definite,1,N,I,3
+D,NZ,fon94-4b,F,1942,T,P,A,Definite,1,N,I,1
+D,NZ,fon94-4b,F,1942,A,P,A,Definite,1,N,I,4
+D,NZ,fon94-4b,F,1942,A,P,A,Definite,1,N,I,2
+D,NZ,fon94-4b,F,1942,T,P,A,Definite,1,N,I,7
+D,NZ,fon95-18a,F,1949,A,P,A,Definite,1,N,I,2
+D,NZ,fon95-21a,F,1934,T,P,A,Definite,1,I,I,1
+D,NZ,fon95-5b,F,1954,T,P,A,Definite,1,N,I,2
+D,NZ,fon95-5b,F,1954,T,P,A,Definite,1,N,I,2
+D,NZ,fon95-5b,F,1954,T,P,A,Definite,1,N,I,1
+D,NZ,fon95-5b,F,1954,T,P,A,Definite,1,N,I,1
+D,NZ,fon95-5b,F,1954,T,P,A,Definite,1,N,I,1
+D,NZ,fon95-5b,F,1954,A,P,A,Definite,1,N,I,5
+D,NZ,fon95-5b,F,1954,T,P,A,Definite,1,N,I,2
+D,NZ,fon95-5b,F,1954,A,P,A,Definite,1,N,I,3
+D,NZ,fon96-16,F,1933,C,P,A,Definite,1,N,I,2
+D,NZ,fon96-16,F,1933,A,P,A,Definite,1,N,T,4
+D,NZ,fon96-29a,F,1934,A,P,A,Definite,1,N,I,3
+D,NZ,fon96-29a,F,1934,A,P,A,Definite,1,N,I,3
+D,NZ,fon96-5,F,1949,C,P,A,Definite,1,N,I,4
+D,NZ,fon96-5,F,1949,T,N,A,Definite,2,N,I,3
+D,NZ,fon96-5,F,1949,T,N,A,Definite-pn,1,N,I,2
+D,NZ,fon96-5,F,1949,T,N,A,Definite-pn,1,N,I,8
+D,NZ,fon97-11a,F,1936,A,N,I,Definite,2,N,I,2
+D,NZ,fon98-15a,F,1959,A,N,A,Definite-pn,1,N,I,5
+D,NZ,fon98-5c,F,1952,T,P,A,Definite,1,N,I,3
+D,NZ,fon98-5c,F,1952,A,P,A,Definite,1,N,I,1
+D,NZ,fon98-5c,F,1952,A,P,A,Definite,1,N,I,4
+D,NZ,fon98-5c,F,1952,A,P,A,Definite,1,N,I,3
+D,NZ,fon98-5c,F,1952,A,P,A,Definite,1,N,I,2
+D,NZ,fon98-9a,F,1954,A,P,A,Definite,1,N,I,4
+D,NZ,fon99-18b,F,1944,A,P,A,Definite,1,N,I,5
+D,NZ,fon99-20a,F,1947,A,N,L,Definite-pn,1,N,I,3
+D,NZ,fon99-20a,F,1947,C,P,A,Definite,1,N,I,2
+D,NZ,fon99-6b,F,1949,A,P,A,Definite,1,N,I,2
+D,NZ,fop02-14,F,1947,C,P,A,Definite,1,N,T,2
+D,NZ,fop06-8,F,1957,C,P,A,Definite,1,N,I,7
+D,NZ,fop94-13a,F,1948,T,P,A,Definite,1,N,I,3
+D,NZ,fop94-13a,F,1948,A,P,A,Definite,1,N,I,5
+D,NZ,fop94-15,F,1948,A,P,A,Definite,1,N,I,1
+D,NZ,fop94-15,F,1948,A,P,A,Definite,1,N,I,15
+D,NZ,fop94-19b,F,1947,A,I,I,Definite,1,N,I,5
+D,NZ,fop94-19b,F,1947,A,P,A,Definite,1,N,T,2
+D,NZ,fop94-31a,F,1949,A,P,A,Definite,1,N,I,2
+D,NZ,fop94-33b,F,1947,C,P,A,Definite,1,N,I,18
+D,NZ,fop94-33b,F,1947,C,P,A,Definite,1,N,I,14
+D,NZ,fop94-7,F,1944,T,P,A,Definite,1,N,I,5
+D,NZ,fop95-10,F,1948,A,P,A,Definite,1,N,I,2
+D,NZ,fop95-1b,F,1950,A,N,A,Definite,2,N,I,2
+D,NZ,fop95-27,F,1937,A,P,A,Definite,1,N,I,3
+D,NZ,fop95-27,F,1937,T,P,A,Definite,1,N,I,3
+D,NZ,fop97-16a,F,1937,T,P,A,Definite,1,N,I,3
+D,NZ,fop97-16a,F,1937,C,P,A,Definite,1,N,I,7
+D,NZ,fop97-5b,F,1950,A,P,A,Definite,1,N,I,4
+D,NZ,fop97-8,F,1951,C,N,A,Definite,2,N,I,3
+D,NZ,fop97-8,F,1951,C,P,A,Definite,1,N,I,7
+D,NZ,fop97-8,F,1951,A,P,A,Definite,1,N,T,3
+D,NZ,fop98-13c,F,1935,T,P,A,Definite,1,N,I,1
+D,NZ,fop98-17a,F,1953,A,P,A,Definite,1,N,I,2
+D,NZ,fop98-17a,F,1953,A,P,A,Definite,1,N,I,2
+D,NZ,fop98-17a,F,1953,T,P,A,Definite,1,N,I,2
+D,NZ,fop98-4b,F,1953,A,P,A,Definite,1,N,I,2
+D,NZ,fop99-21a,F,1944,A,N,A,Definite,2,N,I,2
+D,NZ,fop99-21a,F,1944,A,P,A,Definite,1,N,I,8
+D,NZ,fop99-26,F,1956,A,P,A,Definite,1,N,T,2
+D,NZ,Frances Lewis,F,1935,A,P,A,Definite,1,N,I,2
+D,NZ,Frances Lewis,F,1935,T,P,A,Definite,1,N,I,4
+D,NZ,Frances Lewis,F,1935,T,P,A,Definite,1,N,I,2
+D,NZ,Frances Lewis,F,1935,C,P,A,Definite,1,N,I,3
+D,NZ,Frances Lewis,F,1935,C,P,A,Definite,1,D,I,1
+D,NZ,Frances Lewis,F,1935,T,P,A,Definite,1,I,I,3
+D,NZ,Frances Rigby,F,1867,A,P,A,Definite,1,N,I,4
+D,NZ,Frances Wright,F,1914,A,P,I,Definite,1,N,I,3
+D,NZ,Frank Shepherd,M,1868,A,P,A,Definite,1,N,I,7
+D,NZ,Frank Shepherd,M,1868,T,P,A,Definite,1,N,I,2
+D,NZ,Frank Shepherd,M,1868,C,P,A,Definite,1,N,I,7
+D,NZ,Frank Shepherd,M,1868,T,P,A,Definite,1,N,I,7
+D,NZ,Frank Shepherd,M,1868,T,P,A,Definite,1,N,I,3
+D,NZ,Frank Shepherd,M,1868,A,P,A,Definite,1,N,I,2
+D,NZ,Frank Shepherd,M,1868,T,P,A,Definite,1,N,I,2
+D,NZ,fyn00-2,F,1977,A,P,A,Definite,1,N,I,3
+D,NZ,fyn00-2,F,1977,A,P,A,Definite,1,N,T,8
+D,NZ,fyn00-20a,F,1979,A,P,A,Definite,1,N,I,3
+D,NZ,fyn01-10a,F,1981,T,P,A,Definite,1,N,I,3
+D,NZ,fyn01-10a,F,1981,T,P,A,Definite,1,N,I,2
+D,NZ,fyn01-2a,F,1974,A,P,A,Definite,1,N,I,1
+D,NZ,fyn01-2a,F,1974,A,P,I,Definite,1,N,I,2
+D,NZ,fyn02-13a,F,1976,T,P,A,Definite,1,N,I,3
+D,NZ,fyn02-3b,F,1982,T,P,A,Definite,1,N,I,4
+D,NZ,fyn03-1a,F,1981,T,P,A,Definite,1,N,I,2
+D,NZ,fyn03-1a,F,1981,A,P,A,Definite,1,N,I,2
+D,NZ,fyn06-7,F,1983,A,P,A,Definite,1,N,I,2
+D,NZ,fyn07-5a,F,1987,C,P,A,Definite,1,N,I,2
+D,NZ,fyn07-5a,F,1987,T,P,A,Definite,1,N,I,4
+D,NZ,fyn07-5a,F,1987,C,P,A,Definite,1,N,I,2
+D,NZ,fyn07-5a,F,1987,T,P,A,Definite,1,N,I,4
+D,NZ,fyn07-5a,F,1987,A,P,A,Definite,1,I,I,4
+D,NZ,fyn07-5a,F,1987,C,P,A,Definite,1,N,I,2
+D,NZ,fyn94-20b,F,1976,A,P,A,Definite,1,N,I,2
+D,NZ,fyn94-20b,F,1976,A,P,A,Definite,1,N,I,2
+D,NZ,fyn94-20b,F,1976,A,P,A,Definite,1,N,I,2
+D,NZ,fyn94-20b,F,1976,A,P,A,Definite,1,N,I,2
+D,NZ,fyn94-22b,F,1974,C,I,A,Definite,1,N,I,1
+D,NZ,fyn94-22b,F,1974,A,P,I,Definite,1,N,I,7
+D,NZ,fyn94-25b,F,1975,T,P,A,Definite,1,I,I,1
+D,NZ,fyn94-25b,F,1975,T,P,A,Definite,1,I,I,1
+D,NZ,fyn94-26c,F,1974,C,P,A,Definite,1,N,I,3
+D,NZ,fyn94-5a,F,1973,T,P,A,Definite,1,N,I,2
+D,NZ,fyn95-13,F,1965,T,P,A,Definite,1,N,I,2
+D,NZ,fyn95-13,F,1965,A,P,A,Definite,1,N,I,6
+D,NZ,fyn95-13,F,1965,A,N,A,Definite-pn,1,N,I,2
+D,NZ,fyn95-13,F,1965,A,P,A,Definite,1,N,I,2
+D,NZ,fyn95-13,F,1965,C,P,A,Definite,1,N,I,2
+D,NZ,fyn95-14,F,1964,A,P,A,Definite,1,N,I,2
+D,NZ,fyn95-14,F,1964,A,P,A,Definite,1,N,I,4
+D,NZ,fyn95-14,F,1964,A,P,A,Definite,1,N,I,3
+D,NZ,fyn95-14,F,1964,A,P,A,Definite,1,N,I,1
+D,NZ,fyn95-25b,F,1977,A,P,A,Definite,1,N,I,4
+D,NZ,fyn95-5a,F,1969,C,P,A,Definite,1,N,I,11
+D,NZ,fyn95-5a,F,1969,T,P,A,Definite,1,N,I,3
+D,NZ,fyn96-11b,F,1973,T,P,A,Definite,1,N,I,3
+D,NZ,fyn96-11b,F,1973,A,P,A,Definite,1,N,I,5
+D,NZ,fyn96-1b,F,1976,T,N,A,Definite-pn,1,N,A,7
+D,NZ,fyn96-25b,F,1975,A,P,A,Definite,1,N,I,2
+D,NZ,fyn96-25b,F,1975,A,P,A,Definite,1,N,I,3
+D,NZ,fyn96-28b,F,1976,T,P,A,Definite,1,N,I,7
+D,NZ,fyn97-21,F,1974,A,P,A,Definite,1,N,I,2
+D,NZ,fyn97-21,F,1974,T,P,A,Definite,1,N,I,2
+D,NZ,fyn97-21,F,1974,A,N,A,Definite-pn,1,N,T,2
+D,NZ,fyn97-21,F,1974,A,N,A,Definite-pn,1,N,I,2
+D,NZ,fyn97-21,F,1974,A,P,A,Definite,1,N,I,2
+D,NZ,fyn98-1,F,1978,A,P,A,Definite,1,N,I,2
+D,NZ,fyn98-1,F,1978,C,P,A,Definite,1,N,I,4
+D,NZ,fyn98-1,F,1978,T,P,A,Definite,1,N,I,6
+D,NZ,fyn98-1,F,1978,T,P,A,Definite,1,N,I,2
+D,NZ,fyn98-1,F,1978,T,P,A,Definite,1,N,I,2
+D,NZ,fyn98-10b,F,1970,A,P,A,Definite,1,N,A,1
+D,NZ,fyn98-10b,F,1970,A,P,A,Definite,1,N,I,1
+D,NZ,fyn98-6b,F,1974,C,P,A,Definite,1,N,I,5
+D,NZ,fyn98-6b,F,1974,T,P,A,Definite,1,N,I,4
+D,NZ,fyn99-10,F,1973,T,P,A,Definite,1,N,I,4
+D,NZ,fyn99-10,F,1973,T,P,A,Definite,1,N,I,2
+D,NZ,fyn99-10,F,1973,A,P,A,Definite,1,N,I,3
+D,NZ,fyn99-11a,F,1968,A,P,A,Definite,1,N,I,2
+D,NZ,fyn99-17b,F,1979,A,P,A,Definite,1,N,I,5
+D,NZ,fyn99-17b,F,1979,A,P,A,Definite,1,I,A,1
+D,NZ,fyp00-13,F,1978,A,P,A,Definite,1,N,I,3
+D,NZ,fyp00-13,F,1978,A,P,A,Definite,1,N,I,5
+D,NZ,fyp00-13,F,1978,T,P,A,Definite,1,N,I,3
+D,NZ,fyp01-12a,F,1980,T,P,A,Definite,1,N,I,2
+D,NZ,fyp03-1b,F,1982,T,P,A,Definite,1,N,I,2
+D,NZ,fyp04-2,F,1975,A,P,A,Definite,1,N,I,2
+D,NZ,fyp07-4,F,1975,A,P,A,Definite,1,N,I,2
+D,NZ,fyp07-4,F,1975,A,P,A,Definite,1,N,I,2
+D,NZ,fyp94-23a,F,1974,A,P,A,Definite,1,N,I,6
+D,NZ,fyp94-24,F,1966,A,N,A,Definite-pn,1,N,I,5
+D,NZ,fyp94-24,F,1966,A,N,A,Indefinite,1,N,I,9
+D,NZ,fyp94-26a,F,1973,T,P,A,Definite,1,N,I,4
+D,NZ,fyp94-28a,F,1972,A,P,A,Definite,1,N,I,2
+D,NZ,fyp94-28a,F,1972,C,P,A,Definite,1,N,I,3
+D,NZ,fyp94-29a,F,1968,A,P,A,Definite,1,N,T,6
+D,NZ,fyp94-32b,F,1971,A,P,A,Definite,1,N,I,3
+D,NZ,fyp94-32b,F,1971,A,P,A,Definite,1,N,I,2
+D,NZ,fyp94-32b,F,1971,A,P,A,Definite,1,I,I,2
+D,NZ,fyp94-35b,F,1972,A,P,A,Definite,1,N,I,9
+D,NZ,fyp94-36b,F,1971,A,P,A,Definite,1,I,I,3
+D,NZ,fyp94-36b,F,1971,T,P,A,Definite,1,D,I,1
+D,NZ,fyp95-2,F,1969,A,P,A,Definite,1,N,T,5
+D,NZ,fyp95-24b,F,1971,A,P,A,Definite,1,N,I,5
+D,NZ,fyp95-6a,F,1974,A,P,A,Definite,1,N,T,1
+D,NZ,fyp95-9,F,1969,C,P,A,Definite,1,N,I,2
+D,NZ,fyp95-9,F,1969,C,P,A,Definite,1,N,I,1
+D,NZ,fyp95-9,F,1969,C,P,A,Definite,1,N,I,2
+D,NZ,fyp96-22a,F,1975,C,P,A,Definite,1,N,I,2
+D,NZ,fyp96-8b,F,1975,T,P,A,Definite,1,N,I,3
+D,NZ,fyp98-10a,F,1968,A,P,A,Definite,1,N,I,3
+D,NZ,fyp98-14a,F,1976,C,P,A,Definite,1,N,I,2
+D,NZ,fyp99-15,F,1975,A,P,A,Definite,1,N,I,3
+D,NZ,fyp99-24a,F,1979,A,P,A,Definite,1,N,C,2
+D,NZ,fyp99-24a,F,1979,A,P,A,Definite,1,D,I,1
+D,NZ,fyp99-24a,F,1979,A,P,A,Definite,1,N,I,2
+D,NZ,George Goodyear,M,1924,A,P,A,Definite,1,N,I,6
+D,NZ,George Paul,M,1865,A,P,A,Definite,1,N,I,3
+D,NZ,George Paul,M,1865,A,P,A,Definite,1,N,I,2
+D,NZ,George Paul,M,1865,A,P,A,Definite,1,N,I,3
+D,NZ,George Paul,M,1865,A,P,A,Definite,1,N,I,12
+D,NZ,George Paul,M,1865,A,N,A,Definite-pn,2,N,I,7
+D,NZ,George Paul,M,1865,A,P,A,Definite,1,N,I,2
+D,NZ,George Ritchie,M,1898,A,P,I,Definite,1,N,I,2
+D,NZ,George Rivers,M,1868,C,P,A,Definite,1,N,I,6
+D,NZ,George Rivers,M,1868,C,P,A,Definite,1,P,I,1
+D,NZ,George Wishart,M,1884,T,P,A,Definite,1,N,I,5
+D,NZ,George Wishart,M,1884,C,P,A,Definite,1,N,I,6
+D,NZ,George Wishart,M,1884,A,P,I,Definite,1,N,I,2
+D,NZ,George Wishart,M,1884,T,P,A,Definite,1,N,I,4
+D,NZ,Hannah Cross,F,1851,T,P,A,Definite,1,N,I,1
+D,NZ,Harold Stevens,M,1877,T,P,A,Definite,1,N,I,7
+D,NZ,Harvey Summers,M,1905,A,P,I,Definite,1,N,I,5
+D,NZ,Harvey Summers,M,1905,T,P,A,Definite,1,N,I,2
+D,NZ,Harvey Summers,M,1905,T,P,A,Definite,1,I,I,1
+D,NZ,Harvey Summers,M,1905,A,P,A,Definite,1,N,I,2
+D,NZ,Harvey Summers,M,1905,T,P,A,Definite,1,N,I,2
+D,NZ,Helen Gratton,F,1857,A,P,A,Definite,1,N,I,4
+D,NZ,Henry Swarbrick,M,1889,A,P,A,Definite,1,N,I,2
+D,NZ,Henry Swarbrick,M,1889,A,P,I,Definite,1,N,I,5
+D,NZ,Henry Swarbrick,M,1889,C,N,A,Definite,2,N,I,19
+D,NZ,Henry Swarbrick,M,1889,A,P,A,Definite,1,N,I,22
+D,NZ,Henry Swarbrick,M,1889,A,P,A,Definite,1,N,I,7
+D,NZ,Henry Swarbrick,M,1889,A,P,A,Definite,1,N,I,4
+D,NZ,Henry Swarbrick,M,1889,C,P,A,Definite,1,N,I,7
+D,NZ,Irene Rylance,F,1918,T,P,A,Definite,1,N,I,2
+D,NZ,Irene Whalan,F,1916,A,P,A,Definite,1,N,I,7
+D,NZ,Irene Whalan,F,1916,T,P,A,Definite,1,N,I,3
+D,NZ,Irene Whalan,F,1916,T,P,A,Definite,1,N,I,2
+D,NZ,Irene Whalan,F,1916,A,N,A,Definite-pn,1,N,I,11
+D,NZ,Irene Whalan,F,1916,A,P,A,Definite,1,N,I,1
+D,NZ,Irene Whalan,F,1916,T,P,A,Definite,1,N,I,8
+D,NZ,Isobel Symons,F,1908,T,N,A,Definite,2,N,I,2
+D,NZ,Ivy Kench,F,1922,T,P,A,Definite,1,I,I,3
+D,NZ,Ivy Kench,F,1922,A,N,A,Definite-pn,1,N,I,1
+D,NZ,Ivy Kench,F,1922,T,N,A,Definite-pn,1,N,I,3
+D,NZ,Ivy Kench,F,1922,T,P,A,Definite,1,I,I,4
+D,NZ,Ivy Kench,F,1922,T,P,A,Definite,1,I,I,4
+D,NZ,Ivy Kench,F,1922,T,P,A,Definite,1,N,I,1
+D,NZ,Ivy Kench,F,1922,A,P,A,Definite,1,N,T,1
+D,NZ,Ivy Kench,F,1922,C,P,A,Definite,1,N,I,4
+D,NZ,Ivy Thomas,F,1912,A,P,A,Definite,1,N,I,2
+D,NZ,Ivy Thomas,F,1912,A,P,A,Definite,1,N,I,2
+D,NZ,Ivy Thomas,F,1912,T,P,A,Definite,1,N,I,3
+D,NZ,Ivy Thomas,F,1912,T,P,A,Definite,1,N,I,3
+D,NZ,Ivy Thomas,F,1912,A,P,A,Definite,1,N,I,1
+D,NZ,Ivy Thomas,F,1912,T,P,A,Definite,1,N,I,3
+D,NZ,Jack Reid,M,1921,C,P,A,Definite,1,N,I,10
+D,NZ,Jack Reid,M,1921,C,P,A,Definite,1,N,I,6
+D,NZ,Jack Reid,M,1921,T,N,A,Definite,11,N,I,9
+D,NZ,Jack Reid,M,1921,A,P,A,Definite,1,N,I,2
+D,NZ,Jack Reid,M,1921,A,P,A,Definite,1,N,T,4
+D,NZ,Jack Reid,M,1921,A,P,A,Definite,1,N,I,2
+D,NZ,Jack Reid,M,1921,A,P,A,Definite,1,N,I,8
+D,NZ,Jack Reid,M,1921,A,P,A,Definite,1,N,T,3
+D,NZ,Jack Reid,M,1921,A,P,A,Definite,1,N,T,2
+D,NZ,Jack Reid,M,1921,A,P,A,Definite,1,N,I,9
+D,NZ,Jack Reid,M,1921,T,P,A,Definite,1,N,I,1
+D,NZ,Jack Reid,M,1921,T,P,A,Definite,1,I,I,1
+D,NZ,James Gray,M,1900,C,P,A,Definite,1,N,I,7
+D,NZ,James Harris,M,1866,A,N,A,Definite-pn,1,N,I,7
+D,NZ,James Harris,M,1866,A,P,A,Definite,1,N,I,2
+D,NZ,James Miller,M,1875,A,P,A,Definite,1,N,I,5
+D,NZ,James Munro,M,1899,C,P,A,Definite,1,N,I,12
+D,NZ,James Stewart,M,1876,A,P,A,Definite,1,N,I,5
+D,NZ,James Stewart,M,1876,A,P,I,Definite,1,N,I,3
+D,NZ,James Stewart,M,1876,T,P,A,Definite,1,N,I,2
+D,NZ,James Stewart,M,1876,C,P,A,Definite,1,N,I,2
+D,NZ,James Stewart,M,1876,A,P,A,Definite,1,N,I,3
+D,NZ,James Stewart,M,1876,A,P,A,Definite,1,N,I,3
+D,NZ,Jane Reid,F,1877,T,P,A,Definite,1,N,I,1
+D,NZ,Jane Reid,F,1877,C,N,A,Definite,3,N,I,18
+D,NZ,Jean Atkinson,F,1919,A,P,A,Definite,1,N,I,7
+D,NZ,Jean Atkinson,F,1919,T,P,A,Definite,1,N,I,4
+D,NZ,Jean Atkinson,F,1919,T,P,A,Definite,1,N,I,1
+D,NZ,Jessie Brachs,F,1898,T,N,A,Definite-pn,1,N,I,2
+D,NZ,Jessie Brachs,F,1898,C,P,A,Definite,1,N,I,3
+D,NZ,Jessie Brachs,F,1898,T,P,A,Definite,1,N,I,1
+D,NZ,Jessie McLaren,F,1901,A,P,A,Definite,1,N,I,2
+D,NZ,Jessie McLaren,F,1901,A,P,A,Definite,1,N,I,2
+D,NZ,Jessie McLaren,F,1901,T,P,A,Definite,1,N,I,2
+D,NZ,Jim Wilcox,M,1929,A,P,A,Definite,1,N,T,2
+D,NZ,Joan Wicks,F,1916,A,P,A,Definite,1,N,I,1
+D,NZ,Joan Wicks,F,1916,A,N,A,Definite,2,N,I,5
+D,NZ,Joan Wicks,F,1916,A,P,A,Definite,1,N,I,3
+D,NZ,Joan Wicks,F,1916,C,P,A,Definite,1,N,I,8
+D,NZ,Joan Wicks,F,1916,C,P,A,Definite,1,N,I,9
+D,NZ,Joan Williams,F,1916,A,I,A,Definite,1,N,I,3
+D,NZ,Jocelyn McNae,F,1917,A,P,I,Definite,1,N,I,5
+D,NZ,Jocelyn McNae,F,1917,A,P,A,Definite,1,N,I,4
+D,NZ,Jocelyn McNae,F,1917,A,P,A,Definite,1,N,I,2
+D,NZ,John Douglas,M,1884,A,P,A,Definite,1,N,I,2
+D,NZ,John Douglas,M,1884,C,P,A,Definite,1,N,I,1
+D,NZ,John Edgar,M,1874,A,P,A,Definite,1,N,I,2
+D,NZ,John Edgar,M,1874,T,P,A,Definite,1,N,I,3
+D,NZ,John Edgar,M,1874,T,P,A,Definite,1,N,I,3
+D,NZ,John Edgar,M,1874,A,P,A,Definite,1,N,I,2
+D,NZ,John Edgar,M,1874,C,P,A,Definite,1,N,I,2
+D,NZ,John Edgar,M,1874,C,P,A,Definite,1,N,I,2
+D,NZ,John Edgar,M,1874,C,P,A,Definite,1,N,I,4
+D,NZ,John Johnson,M,1922,A,N,A,Definite,2,N,I,4
+D,NZ,John Johnson,M,1922,A,N,A,Definite,2,N,I,2
+D,NZ,John Johnson,M,1922,T,P,A,Definite,1,N,I,4
+D,NZ,John Martin,M,1900,T,P,A,Definite,1,N,I,19
+D,NZ,John Martin,M,1900,A,P,A,Definite,1,N,T,11
+D,NZ,John Martin,M,1900,T,P,A,Definite,1,N,I,4
+D,NZ,John McLew,M,1875,A,P,A,Definite,1,I,I,2
+D,NZ,John McLew,M,1875,T,P,A,Definite,1,N,I,2
+D,NZ,John McLew,M,1875,T,P,A,Definite,1,N,I,3
+D,NZ,John McLew,M,1875,A,P,I,Definite,1,N,I,6
+D,NZ,Joyce Tomlinson,F,1926,T,P,A,Definite,1,N,I,3
+D,NZ,Joyce Tomlinson,F,1926,T,P,A,Definite,1,D,I,1
+D,NZ,Joyce Tomlinson,F,1926,T,P,A,Definite,1,N,I,1
+D,NZ,Joyce Tomlinson,F,1926,T,P,A,Definite,1,N,I,1
+D,NZ,Joyce Tomlinson,F,1926,T,P,A,Definite,1,N,I,2
+D,NZ,Kathleen Fountain,F,1906,T,P,A,Definite,1,N,I,2
+D,NZ,Kathleen Fountain,F,1906,A,P,A,Definite,1,N,I,4
+D,NZ,Kathleen Fountain,F,1906,T,P,A,Definite,1,N,I,3
+D,NZ,Kathleen Fountain,F,1906,T,P,A,Definite,1,N,I,3
+D,NZ,Kathleen Fountain,F,1906,T,P,A,Definite,1,N,I,17
+D,NZ,Kathleen Fountain,F,1906,T,P,A,Definite,1,N,I,2
+D,NZ,Kathleen Fountain,F,1906,T,P,A,Definite,1,N,I,1
+D,NZ,Kathleen Fountain,F,1906,T,P,A,Definite,1,N,I,2
+D,NZ,Ken Algie,M,1953,T,P,A,Definite,1,N,I,6
+D,NZ,Ken Algie,M,1953,C,P,A,Definite,1,N,I,7
+D,NZ,Ken Algie,M,1953,C,P,A,Definite,1,N,I,7
+D,NZ,Lance Blackman,M,1905,C,P,A,Definite,1,N,I,3
+D,NZ,Lance Blackman,M,1905,A,P,A,Definite,1,N,I,2
+D,NZ,Lance Blackman,M,1905,A,P,A,Definite,1,N,I,2
+D,NZ,Lillian Aitken,F,1897,A,P,A,Definite,1,N,I,2
+D,NZ,Lillian Aitken,F,1897,T,P,A,Definite,1,N,I,3
+D,NZ,Margaret Annan,F,1881,A,P,A,Definite,1,N,T,4
+D,NZ,Margaret Annan,F,1881,C,N,A,Definite,2,N,I,11
+D,NZ,Marguerite Symons,F,1894,T,P,A,Definite,1,N,I,2
+D,NZ,Marguerite Symons,F,1894,T,P,A,Definite,1,N,I,2
+D,NZ,Marguerite Symons,F,1894,T,P,A,Definite,1,N,I,2
+D,NZ,Marjorie Stewart,F,1915,T,P,A,Definite,1,N,I,3
+D,NZ,Marjorie Stewart,F,1915,A,P,A,Definite,1,N,I,3
+D,NZ,Marjorie Stewart,F,1915,T,P,A,Definite,1,N,I,1
+D,NZ,Marjorie Stewart,F,1915,T,P,A,Definite,1,N,I,3
+D,NZ,Marjorie Stewart,F,1915,C,P,A,Definite,1,N,I,2
+D,NZ,Marjory Gillespie,F,1921,A,P,A,Definite,1,N,I,2
+D,NZ,Marjory Gillespie,F,1921,A,P,A,Definite,1,N,I,2
+D,NZ,Mary Ann Turnbull,F,1875,T,P,A,Definite,1,N,I,2
+D,NZ,Mary Ann Turnbull,F,1875,A,P,A,Definite,1,N,I,5
+D,NZ,Mary Ann Turnbull,F,1875,T,P,A,Definite,1,I,I,5
+D,NZ,Mary Ann Turnbull,F,1875,T,P,A,Definite,1,I,I,4
+D,NZ,Mary Direen,F,1921,C,P,A,Definite,1,N,I,2
+D,NZ,Mary Direen,F,1921,T,P,A,Definite,1,N,I,1
+D,NZ,Mary Direen,F,1921,A,P,A,Definite,1,N,I,1
+D,NZ,Mavis Jackson,F,1919,A,P,A,Definite,1,N,I,1
+D,NZ,Mavis Jackson,F,1919,T,P,A,Definite,1,N,I,4
+D,NZ,Mavis Jackson,F,1919,T,P,A,Definite,1,N,I,2
+D,NZ,Mavis Jackson,F,1919,A,P,A,Definite,1,N,I,5
+D,NZ,Mavis Jackson,F,1919,A,N,A,Definite-pn,1,N,I,1
+D,NZ,Mavis Jackson,F,1919,T,N,A,Definite,2,N,I,2
+D,NZ,Mavis Jackson,F,1919,A,P,A,Definite,1,N,I,4
+D,NZ,Millie Harris,F,1918,T,P,A,Definite,1,N,I,7
+D,NZ,mon00-16,M,1949,A,N,C,Definite,2,N,I,2
+D,NZ,mon00-16,M,1949,A,P,A,Definite,1,N,I,2
+D,NZ,mon00-16,M,1949,T,P,A,Definite,1,N,I,3
+D,NZ,mon00-17b,M,1950,T,P,A,Definite,1,N,I,2
+D,NZ,mon00-17b,M,1950,A,P,A,Definite,1,N,I,2
+D,NZ,mon01-2b,M,1943,A,P,A,Definite,1,N,I,2
+D,NZ,mon01-2b,M,1943,A,P,A,Definite,1,N,T,2
+D,NZ,mon01-2b,M,1943,C,P,A,Definite,1,N,I,4
+D,NZ,mon01-9b,M,1953,A,P,A,Definite,1,N,I,2
+D,NZ,mon02-16a,M,1956,A,N,A,Indefinite,1,N,I,3
+D,NZ,mon02-16a,M,1956,A,I,A,Indefinite,1,N,I,6
+D,NZ,mon02-16a,M,1956,A,P,A,Definite,1,N,I,3
+D,NZ,mon03-5c,M,1947,A,P,A,Definite,1,N,I,2
+D,NZ,mon03-5c,M,1947,A,P,A,Definite,1,N,I,1
+D,NZ,mon03-5c,M,1947,A,P,A,Definite,1,N,I,5
+D,NZ,mon03-5c,M,1947,A,P,A,Definite,1,N,I,5
+D,NZ,mon05-6,M,1950,A,P,A,Definite,1,N,I,2
+D,NZ,mon06-9,M,1953,C,P,A,Definite,1,N,I,6
+D,NZ,mon94-12b,M,1942,A,P,A,Definite,1,N,I,2
+D,NZ,mon94-12b,M,1942,T,P,A,Definite,1,N,I,7
+D,NZ,mon94-23b,M,1934,A,P,A,Definite,1,N,I,2
+D,NZ,mon94-23b,M,1934,A,P,A,Definite,1,N,I,3
+D,NZ,mon94-23b,M,1934,C,P,A,Definite,1,N,I,2
+D,NZ,mon94-28b,M,1944,A,N,C,Definite,2,N,I,2
+D,NZ,mon94-28b,M,1944,C,P,A,Definite,1,N,I,2
+D,NZ,mon94-28b,M,1944,A,P,A,Definite,1,N,I,7
+D,NZ,mon94-28b,M,1944,A,P,A,Definite,1,N,T,2
+D,NZ,mon94-31b,M,1953,A,P,A,Definite,1,N,I,2
+D,NZ,mon94-31b,M,1953,T,P,A,Definite,1,N,I,6
+D,NZ,mon94-33a,M,1940,A,P,A,Definite,1,N,I,2
+D,NZ,mon94-35a,M,1935,A,P,A,Definite,1,N,I,5
+D,NZ,mon94-35a,M,1935,T,N,A,Definite,2,N,I,1
+D,NZ,mon95-1a,M,1932,C,P,A,Definite,1,N,I,6
+D,NZ,mon95-24a,M,1946,T,P,A,Definite,1,I,I,1
+D,NZ,mon95-7b,M,1939,A,P,A,Definite,1,I,I,3
+D,NZ,mon96-18,M,1933,A,P,A,Definite,1,N,I,2
+D,NZ,mon96-18,M,1933,A,P,A,Definite,1,N,I,2
+D,NZ,mon98-15b,M,1946,T,P,A,Definite,1,N,I,3
+D,NZ,mon99-1b,M,1940,A,P,A,Definite,1,N,I,1
+D,NZ,mon99-3,M,1947,T,P,A,Definite,1,N,I,3
+D,NZ,mop00-3b,M,1941,A,P,A,Definite,1,N,I,2
+D,NZ,mop00-3b,M,1941,A,P,A,Definite,1,N,I,1
+D,NZ,mop01-16b,M,1955,A,P,A,Definite,1,N,I,3
+D,NZ,mop01-16b,M,1955,A,N,A,Definite-pn,1,N,I,3
+D,NZ,mop01-16b,M,1955,T,P,A,Definite,1,N,I,3
+D,NZ,mop01-4,M,1954,A,P,A,Definite,1,I,I,2
+D,NZ,mop01-4,M,1954,A,P,A,Definite,1,N,I,3
+D,NZ,mop01-6a,M,1956,C,P,A,Definite,1,N,I,2
+D,NZ,mop01-8a,M,1946,A,P,A,Definite,1,N,I,4
+D,NZ,mop02-2a,M,1947,T,P,A,Definite,1,N,I,2
+D,NZ,mop03-2b,M,1938,T,N,A,Definite-pn,1,N,I,2
+D,NZ,mop03-5a,M,1950,A,P,A,Definite,1,N,I,3
+D,NZ,mop03-7a,M,1953,A,P,A,Definite,1,N,I,2
+D,NZ,mop03-7a,M,1953,T,P,A,Definite,1,N,I,9
+D,NZ,mop03-7a,M,1953,A,P,A,Definite,1,N,I,2
+D,NZ,mop04-4,M,1955,A,P,A,Definite,1,N,I,2
+D,NZ,mop05-1,M,1959,T,P,A,Definite,1,N,I,1
+D,NZ,mop06-6,M,1947,A,P,A,Definite,1,N,I,3
+D,NZ,mop07-3b,M,1945,A,P,I,Definite,1,N,I,2
+D,NZ,mop07-3b,M,1945,A,N,A,Indefinite,1,N,I,1
+D,NZ,mop94-20a,M,1947,A,P,A,Definite,1,N,T,3
+D,NZ,mop94-20a,M,1947,A,P,A,Definite,1,N,I,3
+D,NZ,mop94-22c,M,1943,C,N,A,Indefinite,1,N,I,9
+D,NZ,mop94-33c,M,1939,A,P,A,Definite,1,N,I,5
+D,NZ,mop94-5b,M,1944,A,P,A,Definite,1,N,I,6
+D,NZ,mop94-6a,M,1947,A,P,A,Definite,1,N,I,15
+D,NZ,mop94-9a,M,1948,A,P,I,Definite,1,N,I,5
+D,NZ,mop95-12c,M,1948,A,N,A,Indefinite,1,N,I,7
+D,NZ,mop95-3,M,1940,T,P,A,Definite,1,N,I,2
+D,NZ,mop95-3,M,1940,T,P,A,Definite,1,N,I,2
+D,NZ,mop95-3,M,1940,A,P,A,Definite,1,N,I,2
+D,NZ,mop96-11a,M,1950,A,D,I,Definite,1,N,I,2
+D,NZ,mop96-21a,M,1945,A,P,I,Definite,1,N,I,6
+D,NZ,mop96-26b,M,1940,A,P,A,Definite,1,N,C,3
+D,NZ,mop96-29b,M,1941,A,P,A,Definite,1,N,I,6
+D,NZ,mop96-29b,M,1941,T,P,A,Definite,1,N,I,3
+D,NZ,mop96-29b,M,1941,C,P,A,Definite,1,N,I,2
+D,NZ,mop97-12a,M,1952,C,P,A,Definite,1,N,I,8
+D,NZ,mop97-12a,M,1952,C,P,A,Definite,1,N,I,11
+D,NZ,mop98-7a,M,1947,T,P,A,Definite,1,N,I,2
+D,NZ,mop98-7a,M,1947,T,P,A,Definite,1,I,I,1
+D,NZ,mop98-8b,M,1946,A,P,A,Definite,1,N,I,3
+D,NZ,mop99-11b,M,1956,T,P,A,Definite,1,N,I,2
+D,NZ,mop99-17a,M,1946,A,P,I,Definite,1,N,I,2
+D,NZ,mop99-17a,M,1946,A,P,I,Definite,1,N,I,1
+D,NZ,Mrs Fullarton,F,1864,A,N,A,Indefinite,2,N,I,1
+D,NZ,Mrs Fullarton,F,1864,T,P,A,Definite,1,D,I,2
+D,NZ,Mrs Fullarton,F,1864,T,P,A,Definite,1,N,I,2
+D,NZ,Mrs Fullarton,F,1864,A,P,A,Definite,1,I,I,1
+D,NZ,my_03-2a,M,1980,T,P,A,Definite,1,I,I,1
+D,NZ,my_03-2a,M,1980,A,P,A,Definite,1,N,I,6
+D,NZ,myn00-11c,M,1980,T,P,A,Definite,1,P,I,1
+D,NZ,myn00-17a,M,1976,T,P,A,Definite,1,N,I,3
+D,NZ,myn00-17a,M,1976,C,P,A,Definite,1,N,I,6
+D,NZ,myn00-17a,M,1976,A,P,A,Definite,1,N,T,2
+D,NZ,myn00-17a,M,1976,T,P,A,Definite,1,N,I,8
+D,NZ,myn02-11a,M,1981,A,P,I,Definite,1,N,I,2
+D,NZ,myn02-11a,M,1981,A,P,I,Definite,1,N,I,2
+D,NZ,myn02-11a,M,1981,A,P,I,Definite,1,N,I,3
+D,NZ,myn02-19a,M,1982,A,N,A,Definite-pn,1,N,I,2
+D,NZ,myn03-2c,M,1976,A,P,A,Definite,1,N,I,3
+D,NZ,myn03-4c,M,1972,T,P,A,Definite,1,N,I,2
+D,NZ,myn04-3,M,1972,A,P,A,Definite,1,N,I,2
+D,NZ,myn05-5a,M,1977,A,P,I,Definite,1,I,I,4
+D,NZ,myn05-7,M,1980,A,I,I,Definite,1,N,I,2
+D,NZ,myn07-7,M,1986,A,P,A,Definite,1,N,I,3
+D,NZ,myn94-13b,M,1973,A,P,A,Definite,1,N,I,3
+D,NZ,myn94-14,M,1968,A,P,A,Definite,1,N,I,2
+D,NZ,myn94-14,M,1968,A,P,A,Definite,1,N,I,6
+D,NZ,myn94-30b,M,1968,A,P,A,Definite,1,N,I,2
+D,NZ,myn94-30b,M,1968,A,P,A,Definite,1,N,I,2
+D,NZ,myn94-6b,M,1975,A,P,A,Definite,1,N,I,4
+D,NZ,myn94-6b,M,1975,A,P,A,Definite,1,N,I,3
+D,NZ,myn94-8a,M,1967,A,P,I,Definite,1,N,I,1
+D,NZ,myn95-11a,M,1971,C,P,A,Definite,1,N,I,6
+D,NZ,myn95-11a,M,1971,T,P,A,Definite,1,N,I,2
+D,NZ,myn95-11a,M,1971,C,P,A,Definite,1,N,I,5
+D,NZ,myn95-21b,M,1975,T,P,A,Definite,1,N,I,3
+D,NZ,myn95-21b,M,1975,A,P,A,Definite,1,N,I,3
+D,NZ,myn95-26,M,1969,A,P,A,Definite,1,N,I,3
+D,NZ,myn95-26,M,1969,A,P,I,Definite,1,N,I,2
+D,NZ,myn95-26,M,1969,A,P,I,Definite,1,N,I,3
+D,NZ,myn95-26,M,1969,T,P,A,Definite,1,N,I,4
+D,NZ,myn95-26,M,1969,T,N,A,Definite,2,N,I,1
+D,NZ,myn96-21b,M,1976,A,P,A,Definite,1,N,I,2
+D,NZ,myn97-1a,M,1976,A,P,A,Definite,1,N,T,5
+D,NZ,myn97-5a,M,1976,A,P,A,Definite,1,N,I,2
+D,NZ,myn98-16a,M,1978,A,P,A,Definite,1,N,I,2
+D,NZ,myn98-16a,M,1978,A,P,A,Definite,1,N,I,2
+D,NZ,myn98-16a,M,1978,T,P,A,Definite,1,N,I,1
+D,NZ,myn99-1a,M,1970,T,P,A,Definite,1,N,I,2
+D,NZ,myn99-20b,M,1975,T,P,A,Definite,1,N,I,4
+D,NZ,myn99-21b,M,1976,T,P,A,Definite,1,N,I,3
+D,NZ,myp00-12a,M,1976,A,P,A,Definite,1,N,I,3
+D,NZ,myp00-5a,M,1975,T,P,A,Definite,1,N,I,1
+D,NZ,myp00-5a,M,1975,T,P,A,Definite,1,N,I,4
+D,NZ,myp01-1b,M,1981,A,P,A,Definite,1,N,I,2
+D,NZ,myp02-11b,M,1975,C,P,A,Definite,1,N,T,3
+D,NZ,myp02-7,M,1980,A,P,A,Definite,1,N,T,5
+D,NZ,myp07-6,M,1981,A,P,A,Definite,1,N,I,2
+D,NZ,myp94-17,M,1964,A,P,A,Definite,1,N,I,2
+D,NZ,myp94-17,M,1964,A,P,A,Definite,1,N,I,4
+D,NZ,myp94-17,M,1964,A,P,A,Definite,1,N,I,2
+D,NZ,myp94-17,M,1964,A,P,A,Definite,1,N,I,2
+D,NZ,myp94-17,M,1964,A,P,A,Definite,1,N,I,10
+D,NZ,myp94-19a,M,1970,A,P,A,Definite,1,N,I,2
+D,NZ,myp94-1b,M,1969,A,P,A,Definite,1,I,I,1
+D,NZ,myp94-21a,M,1974,T,P,A,Definite,1,N,I,2
+D,NZ,myp94-31c,M,1970,A,P,I,Definite,1,N,I,2
+D,NZ,myp94-31c,M,1970,A,P,A,Definite,1,N,I,2
+D,NZ,myp94-34a,M,1970,A,P,A,Definite,1,N,I,1
+D,NZ,myp94-34a,M,1970,A,P,A,Definite,1,N,I,2
+D,NZ,myp95-12b,M,1970,A,N,I,Definite,2,N,I,6
+D,NZ,myp95-17,M,1972,A,P,A,Definite,1,N,A,2
+D,NZ,myp95-17,M,1972,A,P,A,Definite,1,N,I,3
+D,NZ,myp95-17,M,1972,A,P,A,Definite,1,N,I,3
+D,NZ,myp95-22,M,1964,A,P,A,Definite,1,N,I,8
+D,NZ,myp95-22,M,1964,A,P,A,Definite,1,N,I,6
+D,NZ,myp95-7a,M,1974,A,P,A,Definite,1,N,I,6
+D,NZ,myp95-7a,M,1974,A,P,A,Definite,1,N,I,2
+D,NZ,myp97-14b,M,1968,A,P,A,Definite,1,N,T,3
+D,NZ,myp97-4b,M,1968,A,P,I,Definite,1,N,I,11
+D,NZ,myp97-4b,M,1968,A,P,A,Definite,1,N,I,3
+D,NZ,myp98-12b,M,1974,A,P,A,Definite,1,N,I,2
+D,NZ,myp98-8a,M,1976,T,P,A,Definite,1,N,I,2
+D,NZ,myp99-25,M,1978,C,P,A,Definite,1,N,I,2
+D,NZ,Myra Ralston,F,1906,A,P,I,Definite,1,N,I,3
+D,NZ,Myra Ralston,F,1906,A,P,A,Definite,1,N,I,2
+D,NZ,Myra Ralston,F,1906,T,N,A,Definite-pn,1,N,I,3
+D,NZ,Myra Ralston,F,1906,T,P,A,Definite,1,D,I,1
+D,NZ,Myra Ralston,F,1906,T,P,A,Definite,1,N,I,2
+D,NZ,Nan Hay,F,1916,T,P,A,Definite,1,I,I,1
+D,NZ,Nelson Drinnan,M,1900,C,P,A,Definite,1,N,I,6
+D,NZ,Norman Cannon,M,1907,C,P,A,Definite,1,N,I,6
+D,NZ,Pat Toomey,F,1893,T,P,A,Definite,1,N,I,4
+D,NZ,Pat Toomey,F,1893,T,P,A,Definite,1,N,I,5
+D,NZ,Pat Toomey,F,1893,A,P,A,Definite,1,N,I,1
+D,NZ,Pauline Grither,F,1921,T,P,A,Definite,1,N,I,5
+D,NZ,Pauline Grither,F,1921,T,P,A,Definite,1,N,I,7
+D,NZ,Pauline Grither,F,1921,T,P,A,Definite,1,N,I,2
+D,NZ,Percy Cox,M,1920,A,P,A,Definite,1,N,I,3
+D,NZ,Percy Cox,M,1920,T,P,A,Definite,1,N,I,3
+D,NZ,Percy Cox,M,1920,A,N,A,Definite,2,N,T,6
+D,NZ,Percy Cox,M,1920,A,N,A,Indefinite,9,N,I,2
+D,NZ,Percy Cox,M,1920,T,P,A,Definite,1,N,I,4
+D,NZ,Percy Cox,M,1920,A,P,A,Definite,1,N,I,1
+D,NZ,Percy Cox,M,1920,A,P,A,Definite,1,N,I,1
+D,NZ,Percy Cox,M,1920,T,P,A,Definite,1,N,I,1
+D,NZ,Reginald Williams,M,1914,T,P,A,Definite,1,N,I,1
+D,NZ,Reginald Williams,M,1914,A,P,I,Definite,1,N,I,1
+D,NZ,Reginald Williams,M,1914,T,P,A,Definite,1,N,I,4
+D,NZ,Robert Ritchie,M,1864,A,P,A,Definite,1,N,I,2
+D,NZ,Robert Ritchie,M,1864,A,P,A,Definite,1,N,I,5
+D,NZ,Robert Ritchie,M,1864,A,P,A,Definite,1,N,I,5
+D,NZ,Robert Ritchie,M,1864,A,P,A,Definite,1,N,I,2
+D,NZ,Robert Ritchie,M,1864,A,P,A,Definite,1,N,I,2
+D,NZ,Robert Ritchie,M,1864,A,P,A,Definite,1,N,T,3
+D,NZ,Robert Ritchie,M,1864,T,P,A,Definite,1,N,I,2
+D,NZ,Robert Templeton,M,1887,T,P,A,Definite,1,N,A,2
+D,NZ,Runa Williams,F,1917,T,P,A,Definite,1,N,I,3
+D,NZ,Runa Williams,F,1917,C,P,A,Definite,1,N,I,2
+D,NZ,Sam Temple,M,1868,A,P,A,Definite,1,I,I,1
+D,NZ,Sam Temple,M,1868,T,P,A,Definite,1,N,L,1
+D,NZ,Sam Temple,M,1868,A,P,A,Definite,1,N,I,1
+D,NZ,Susan McKearney,F,1866,C,P,A,Definite,1,N,I,8
+D,NZ,Susan McKearney,F,1866,T,P,A,Definite,1,N,I,12
+D,NZ,Susan McKearney,F,1866,T,P,A,Definite,1,N,I,3
+D,NZ,Susan McKearney,F,1866,C,P,A,Definite,1,N,I,5
+D,NZ,Susan McKearney,F,1866,C,P,A,Definite,1,N,T,2
+D,NZ,Thomas Lillis,M,1889,T,P,A,Definite,1,N,I,4
+D,NZ,Thomas McConnell,M,1903,A,P,A,Definite,1,N,I,5
+D,NZ,Thomas McConnell,M,1903,A,P,A,Definite,1,N,I,5
+D,NZ,Thomas McConnell,M,1903,A,P,A,Definite,1,N,I,5
+D,NZ,Thomas McConnell,M,1903,T,P,A,Definite,1,N,I,3
+D,NZ,Thomas McConnell,M,1903,T,P,A,Definite,1,N,I,2
+D,NZ,Thomas McConnell,M,1903,A,N,A,Definite,2,N,I,2
+D,NZ,Thomas McConnell,M,1903,T,P,A,Definite,1,N,I,2
+D,NZ,Thomas McConnell,M,1903,T,P,A,Definite,1,N,I,2
+D,NZ,Thomas Ryan,M,1919,A,D,I,Definite,1,N,I,5
+D,NZ,Thomas Ryan,M,1919,A,P,A,Definite,1,N,I,2
+D,NZ,Thomas Steel,M,1874,A,P,A,Definite,1,N,I,2
+D,NZ,Thomas Steel,M,1874,T,P,A,Definite,1,N,I,3
+D,NZ,Thomas Steel,M,1874,T,P,A,Definite,1,N,I,6
+D,NZ,Vera Hayward,F,1902,T,P,A,Definite,1,N,I,2
+D,NZ,Vera Hayward,F,1902,A,P,A,Definite,1,N,I,5
+D,NZ,Verdon Sheehy,M,1896,C,P,A,Definite,1,N,I,1
+D,NZ,Verdon Sheehy,M,1896,A,P,A,Definite,1,N,I,4
+D,NZ,Verdon Sheehy,M,1896,A,P,A,Definite,1,I,I,3
+D,NZ,Verdon Sheehy,M,1896,T,P,A,Definite,1,N,I,2
+D,NZ,Verdon Sheehy,M,1896,A,N,A,Definite,3,N,I,3
+D,NZ,Verdon Sheehy,M,1896,A,P,A,Definite,1,N,I,3
+D,NZ,Violet Dingwall,F,1910,A,P,A,Definite,1,N,I,2
+D,NZ,Violet Dingwall,F,1910,T,P,A,Definite,1,N,I,4
+D,NZ,Violet Dingwall,F,1910,A,N,A,Definite,2,N,T,2
+D,NZ,Violet Dingwall,F,1910,T,P,A,Definite,1,N,I,2
+D,NZ,Violet Dingwall,F,1910,C,P,A,Definite,1,N,I,2
+D,NZ,Violet Eccles,F,1900,A,P,I,Definite,1,N,I,5
+D,NZ,Violet Eccles,F,1900,A,P,A,Definite,1,N,C,11
+D,NZ,Violet Eccles,F,1900,T,P,A,Definite,1,N,I,2
+D,NZ,Violet Eccles,F,1900,T,P,A,Definite,1,N,I,4
+D,NZ,Vivian Young,M,1885,T,P,A,Definite,1,N,I,4
+D,NZ,Vivian Young,M,1885,T,P,A,Definite,1,N,I,2
+D,NZ,Vivian Young,M,1885,T,P,A,Definite,1,N,I,2
+D,NZ,Vivian Young,M,1885,T,P,A,Definite,1,N,A,2
+D,NZ,Vivian Young,M,1885,T,N,A,Definite,2,N,I,2
+D,NZ,Vivian Young,M,1885,C,N,C,Definite,2,N,I,2
+D,NZ,Vivian Young,M,1885,A,P,A,Definite,1,N,I,2
+D,NZ,William Dufty,M,1865,A,P,A,Definite,1,N,T,2
+D,NZ,William Dufty,M,1865,T,P,A,Definite,1,N,I,2
+D,NZ,William Dufty,M,1865,T,P,A,Definite,1,N,I,2
+D,NZ,William Dufty,M,1865,A,P,A,Definite,1,N,A,3
+D,NZ,William Dufty,M,1865,T,N,A,Definite-pn,3,N,A,4
+D,NZ,William Dufty,M,1865,A,P,A,Definite,1,N,I,2
+D,NZ,William Dufty,M,1865,C,P,A,Definite,1,I,I,5
+D,NZ,William Dufty,M,1865,C,P,A,Definite,1,D,I,1
+D,NZ,Will Oliver,M,1907,C,P,A,Definite,1,N,I,2
+D,NZ,Will Oliver,M,1907,C,P,A,Definite,1,N,I,2
+D,NZ,Will Oliver,M,1907,A,P,A,Definite,1,N,I,2
+D,NZ,Will Oliver,M,1907,A,P,A,Definite,1,D,I,1
+D,NZ,Will Oliver,M,1907,T,P,A,Definite,1,N,I,2
+D,NZ,Will Oliver,M,1907,C,P,A,Definite,1,N,I,4
+D,NZ,William Partridge,M,1895,A,P,A,Definite,1,N,I,2
+D,NZ,William Partridge,M,1895,A,P,A,Definite,1,N,I,2
+D,NZ,William Warren,M,1874,A,P,I,Definite,1,N,I,2
+D,UK,uk-plus-139,M,1945,T,P,A,Definite,1,P,I,1
+D,UK,uk-plus-187,M,1915,A,P,A,Definite,1,N,I,1
+D,UK,uk-plus-187,M,1915,T,P,A,Definite,1,I,I,1
+D,UK,uk-plus-187,M,1915,A,P,A,Definite,1,N,I,1
+D,UK,uk-plus-187,M,1915,A,P,A,Definite,1,N,I,1
+D,UK,uk-plus-128,F,1945,T,P,A,Definite,1,N,I,1
+D,UK,uk-plus-211,F,1920,A,P,A,Definite,1,N,I,1
+D,UK,uk-A-97,F,1925,A,P,A,Definite,1,N,I,1
+D,UK,uk-A-66,M,1933,T,P,A,Definite,1,P,I,1
+D,UK,uk-A-66,M,1933,T,P,A,Definite,1,N,I,1
+D,UK,uk-A-100,M,1933,A,P,A,Definite,1,N,T,1
+D,UK,uk-A-69,F,1937,T,P,A,Definite,1,D,I,1
+D,UK,uk-A-101,F,1934,T,P,A,Definite,1,N,I,1
+D,UK,uk-A-70,F,1918,T,P,A,Definite,1,P,I,1
+D,UK,uk-A-102,F,1925,T,P,A,Definite,1,P,I,1
+D,UK,uk-A-102,F,1925,T,P,A,Definite,1,D,I,1
+D,UK,uk-A-102,F,1925,T,P,A,Definite,1,N,I,1
+D,UK,uk-A-70,F,1918,T,P,A,Definite,1,P,I,1
+D,UK,uk-A-71,F,1925,T,P,A,Definite,1,P,I,1
+D,UK,uk-A-105,F,1911,A,P,A,Definite,2,N,I,1
+D,UK,uk-A-105,F,1911,T,P,A,Definite,1,I,I,1
+D,UK,uk-A-106,F,1936,T,P,A,Definite,1,I,I,1
+D,UK,uk-A-106,F,1936,T,P,A,Definite,2,D,I,1
+D,UK,uk-A-107,M,1936,T,P,A,Definite,1,P,I,1
+D,UK,uk-A-108,M,1936,T,P,I,Definite,1,N,I,1
+D,UK,uk-A-79,M,1933,A,P,A,Definite,1,N,I,1
+D,UK,uk-A-113,M,1913,T,P,A,Definite,1,P,I,1
+D,UK,uk-A-113,M,1913,T,P,A,Definite,1,D,I,1
+D,UK,uk-A-113,M,1913,T,P,A,Definite,1,P,I,1
+D,UK,uk-A-119,M,1934,T,P,A,Definite,1,P,I,1
+D,UK,uk-B-53,M,1949,T,P,A,Definite,1,I,I,1
+D,UK,uk-B-98,M,1915,A,P,A,Definite,1,N,I,1
+D,UK,uk-B-98,M,1915,T,P,A,Definite,1,P,I,1
+D,UK,uk-B-102,M,1919,T,P,A,Definite,1,P,I,1
+D,UK,uk-B-103,F,1917,T,P,A,Definite,1,P,I,1
+D,UK,uk-C-98,M,1918,T,P,A,Definite,1,D,I,1
+D,UK,uk-C-98,M,1918,T,P,A,Definite,1,I,I,1
+D,UK,uk-C-98,M,1918,A,P,A,Definite,1,N,I,1
+D,UK,uk-C-98,M,1918,T,P,A,Definite,1,N,I,1
+D,UK,uk-C-101,F,1915,T,P,A,Definite,1,D,I,1
+D,UK,uk-C-101,F,1915,T,P,A,Definite,1,P,I,1
+D,UK,uk-C-102,M,1927,T,P,A,Definite,1,P,I,1
+D,UK,uk-C-102,M,1927,T,P,A,Definite,1,P,I,1
+D,UK,uk-C-102,M,1927,T,P,A,Definite,1,I,I,1
+D,UK,uk-C-102,M,1927,T,P,A,Definite,1,P,I,1
+D,UK,uk-C-103,M,1913,A,P,A,Definite,1,N,I,1
+D,UK,uk-C-105,M,1919,T,P,A,Definite,1,I,I,1
+D,UK,uk-C-105,M,1919,T,P,A,Definite,1,I,I,1
+D,UK,uk-C-107,M,1920,T,P,A,Definite,1,I,I,1
+D,UK,uk-C-110,M,1917,A,P,A,Definite,1,N,I,1
+D,UK,uk-C-116,M,1925,T,P,A,Definite,1,P,I,1
+D,UK,uk-D-97,F,1939,T,P,A,Definite,1,I,I,1
+D,UK,uk-D-98,M,1936,T,P,A,Definite,1,D,I,1
+D,UK,uk-D-100,F,1940,T,N,A,Definite-pn,1,I,I,1
+D,UK,uk-D-102,M,1931,T,P,A,Definite,1,N,I,1
+D,UK,uk-D-102,M,1931,T,P,A,Definite,1,P,I,1
+D,UK,uk-H-97,F,1980,A,P,A,Definite,1,P,I,1
+D,UK,uk-H-97,F,1980,T,P,A,Definite,1,I,I,1
+D,UK,uk-H-99,M,1929,C,P,A,Definite,1,N,I,1
+D,UK,uk-H-99,M,1929,T,P,A,Definite,1,N,I,1
+D,UK,uk-H-100,F,1930,T,P,A,Definite,1,P,I,1
+D,UK,uk-H-100,F,1930,A,P,A,Definite,1,N,I,1
+D,UK,uk-H-100,F,1930,T,P,A,Definite,1,N,I,1
+D,UK,uk-H-107,F,1961,T,P,A,Definite,1,N,I,1
+D,UK,uk-H-107,F,1961,T,P,A,Definite,1,N,I,1
+D,UK,uk-H-108,M,1950,T,P,A,Definite,1,D,I,1
+D,UK,uk-H-109,F,1931,T,P,A,Definite,1,N,I,1
+D,UK,uk-H-113,M,1975,C,P,A,Definite,1,D,I,1
+D,UK,uk-H-116,M,1964,T,P,A,Definite,1,N,I,1
+D,UK,uk-H-116,M,1964,T,P,A,Definite,1,N,I,1
+D,UK,uk-H-118,M,1939,T,P,A,Definite,1,I,I,1
+D,UK,uk-H-121,F,1936,T,P,A,Definite,1,P,I,1
+D,UK,uk-M-49,M,1963,T,P,A,Definite,1,I,I,1
+D,UK,uk-M-49,M,1963,C,P,A,Definite,1,N,I,1
+D,UK,uk-M-65,F,1978,A,P,A,Definite,1,D,I,1
+D,UK,uk-M-65,F,1978,T,P,A,Definite,1,D,I,1
+D,UK,uk-M-66,F,1980,T,P,A,Definite,1,N,I,1
+D,UK,uk-M-99,M,1914,T,P,A,Definite,1,N,I,1
+D,UK,uk-M-101,F,1929,T,I,A,Definite,1,N,I,1
+D,UK,uk-M-103,M,1926,T,P,A,Definite,1,N,I,1
+D,UK,uk-M-71,M,1980,A,P,A,Definite,1,D,I,1
+D,UK,uk-M-103,M,1926,T,D,A,Definite,2,I,I,1
+D,UK,uk-M-103,M,1926,T,N,A,Definite,3,N,I,1
+D,UK,uk-M-103,M,1926,T,P,A,Definite,1,N,I,1
+D,UK,uk-M-104,F,1922,T,N,A,Definite-pn,3,N,I,1
+D,UK,uk-M-104,F,1922,T,P,A,Definite,1,N,I,1
+D,UK,uk-M-108,M,1925,T,P,A,Definite,1,D,I,1
+D,UK,uk-M-108,M,1925,A,P,A,Definite,1,N,I,1
+D,UK,uk-M-109,F,1916,T,P,A,Definite,1,N,I,1
+D,UK,uk-M-112,M,1922,T,P,A,Definite,1,N,I,1
+D,UK,uk-M-117,F,1935,A,P,A,Definite,1,N,I,1
+D,UK,uk-M-121,M,1943,T,P,A,Definite,1,N,I,1
+D,UK,uk-M-122,M,1943,T,P,A,Definite,1,D,I,1
+D,UK,uk-M-122,M,1943,T,I,A,Indefinite,1,D,I,1
+D,UK,uk-P-33,F,1914,T,P,A,Definite,1,P,I,1
+D,UK,uk-P-33,F,1914,T,P,A,Definite,1,P,I,1
+D,UK,uk-P-35,F,1922,C,P,A,Definite,1,N,I,1
+D,UK,uk-P-37,F,1932,T,N,A,Indefinite,1,D,I,1
+D,UK,uk-P-37,F,1932,T,P,A,Definite,1,I,I,1
+D,UK,uk-P-37,F,1932,T,P,A,Definite,1,P,I,1
+D,UK,uk-P-43,M,1929,A,P,A,Definite,1,N,I,1
+D,UK,uk-P-162,M,1927,A,P,A,Definite,1,N,T,1
+D,UK,uk-P-98,M,1931,T,P,A,Definite,1,D,I,1
+D,UK,uk-P-104,M,1933,T,P,A,Definite,1,I,I,1
+D,UK,uk-P-104,M,1933,T,P,A,Definite,1,P,I,1
+D,UK,uk-P-104,M,1933,T,P,A,Definite,1,P,I,1
+D,UK,uk-P-110,M,1921,T,P,A,Definite,1,I,I,1
+D,UK,uk-P-114,M,1914,T,P,A,Definite,1,P,I,1
+D,UK,uk-P-114,M,1914,A,P,A,Definite,1,I,I,1
+D,UK,uk-P-117,M,1919,T,P,A,Definite,1,P,I,1
+D,UK,uk-P-117,M,1919,T,P,A,Definite,1,D,I,1
+D,UK,uk-P-120,M,1937,A,P,I,Definite,1,N,I,1
+D,UK,uk-P-121,F,1921,T,P,A,Definite,1,P,I,1
+D,UK,uk-P-121,F,1921,T,P,A,Definite,1,N,I,1
+D,UK,uk-P-121,F,1921,T,P,A,Definite,1,N,I,1
+D,UK,uk-V-97,M,1939,C,P,A,Definite,1,N,I,1
+D,UK,uk-V-98,M,1949,T,P,A,Definite,1,I,I,1
+D,UK,uk-V-98,M,1949,T,P,A,Definite,1,I,I,1
+D,UK,uk-V-98,M,1949,T,P,A,Definite,1,I,I,1
+D,UK,uk-V-98,M,1949,T,P,A,Definite,1,P,I,1
+D,UK,uk-V-99,M,1934,A,P,A,Definite,1,N,I,1
+D,UK,uk-V-99,M,1934,A,N,I,Definite,2,N,I,1
+D,UK,uk-V-104,M,1929,T,P,A,Definite,1,I,I,1
+D,UK,uk-V-104,M,1929,T,P,A,Definite,1,I,I,1
+D,UK,uk-V-104,M,1929,T,P,A,Definite,1,N,I,1
+D,UK,uk-V-104,M,1929,T,P,A,Definite,1,N,I,1
+D,UK,uk-V-104,M,1929,T,P,A,Definite,1,P,I,1
+D,UK,uk-V-104,M,1929,T,P,A,Definite,1,N,I,1
+D,UK,uk-V-104,M,1929,A,N,A,Definite-pn,1,N,I,1
+D,UK,uk-V-104,M,1929,T,P,A,Definite,2,N,I,1
+D,UK,uk-X-101,F,1928,T,P,A,Definite,1,N,I,1
+D,UK,uk-X-103,M,1926,C,P,A,Definite,1,D,I,1
+D,UK,uk-X-104,M,1913,T,P,A,Definite,1,N,I,1
+D,UK,uk-X-104,M,1913,A,P,A,Definite,1,N,I,1
+D,UK,uk-Y-33,F,1941,T,P,A,Definite,1,N,I,1
+D,UK,uk-Y-33,F,1941,T,P,A,Definite,1,I,I,1
+D,UK,uk-Y-182,F,1953,T,P,A,Definite,1,I,I,1
+D,UK,uk-Y-63,M,1963,T,P,A,Definite,1,N,I,1
+D,UK,uk-Y-65,M,1941,C,P,A,Definite,1,N,T,1
+D,UK,uk-Y-98,F,1921,T,P,A,Definite,1,N,I,1
+D,UK,uk-Y-98,F,1921,T,P,A,Definite,1,N,I,1
+D,UK,uk-Y-98,F,1921,T,P,A,Definite,1,N,I,1
+D,UK,uk-Y-98,F,1921,T,P,A,Definite,1,N,I,1
+D,UK,uk-Y-98,F,1921,T,P,A,Definite,1,N,I,1
+D,UK,uk-Y-98,F,1921,T,P,A,Definite,2,N,I,1
+D,UK,uk-Y-99,F,1933,T,P,A,Definite,1,I,I,1
+D,UK,uk-Y-106,M,1931,T,P,A,Definite,1,N,I,1
+D,UK,uk-Y-107,F,1916,A,P,A,Definite,1,D,I,1
+D,UK,uk-Y-79,F,1972,A,N,A,Definite-pn,1,N,I,1
+D,UK,uk-Y-186,F,1933,T,P,A,Definite,1,D,I,1
+D,UK,uk-Y-186,F,1933,T,P,A,Definite,1,I,I,1
+D,UK,uk-Y-112,F,1929,T,P,A,Definite,1,P,I,1
+D,UK,uk-Y-81,F,1940,T,P,A,Definite,1,D,I,1
+D,UK,uk-Y-87,F,1980,T,P,A,Definite,1,D,I,1
+D,UK,uk-Y-87,F,1980,A,P,A,Definite,1,N,I,1
+D,UK,uk-Y-87,F,1980,T,P,A,Definite,1,N,I,1
+D,UK,uk-Y-87,F,1980,A,P,A,Definite,1,P,I,1
+D,UK,uk-Y-120,F,1928,T,P,A,Definite,1,N,I,1
+D,UK,uk-Y-90,F,1981,T,P,A,Definite,1,N,I,1
+D,UK,uk-plus-151,F,1945,A,P,A,Definite,1,N,I,2
+D,UK,uk-plus-151,F,1945,A,P,A,Definite,1,N,I,2
+D,UK,uk-plus-139,M,1945,A,P,A,Definite,1,N,I,2
+D,UK,uk-plus-187,M,1915,T,P,A,Definite,1,N,I,2
+D,UK,uk-plus-176,M,1944,T,P,A,Definite,1,N,I,2
+D,UK,uk-plus-193,M,1926,T,P,A,Definite,1,N,I,2
+D,UK,uk-plus-193,M,1926,T,P,A,Definite,1,N,I,2
+D,UK,uk-plus-193,M,1926,T,P,A,Definite,1,I,I,2
+D,UK,uk-plus-210,F,1937,A,N,L,Indefinite,1,N,I,2
+D,UK,uk-A-65,M,1928,A,P,A,Definite,1,N,I,2
+D,UK,uk-A-65,M,1928,A,P,A,Definite,1,N,I,2
+D,UK,uk-A-97,F,1925,T,P,A,Definite,1,N,I,1
+D,UK,uk-A-65,M,1928,A,P,A,Definite,1,N,I,2
+D,UK,uk-A-66,M,1933,T,P,A,Definite,1,N,I,2
+D,UK,uk-A-99,M,1928,A,P,A,Definite,1,N,I,2
+D,UK,uk-A-67,M,1926,A,N,A,Indefinite,1,N,T,2
+D,UK,uk-A-67,M,1926,A,N,A,Definite,2,N,T,2
+D,UK,uk-A-67,M,1926,C,P,A,Definite,1,N,I,2
+D,UK,uk-A-100,M,1933,T,P,A,Definite,1,N,I,2
+D,UK,uk-A-100,M,1933,T,P,A,Definite,1,N,I,2
+D,UK,uk-A-100,M,1933,T,P,A,Definite,1,N,I,2
+D,UK,uk-A-70,F,1918,A,P,A,Definite,1,N,I,2
+D,UK,uk-A-102,F,1925,T,P,A,Definite,1,N,I,2
+D,UK,uk-A-71,F,1925,T,P,A,Definite,1,N,I,2
+D,UK,uk-A-71,F,1925,T,P,A,Definite,1,N,I,2
+D,UK,uk-A-103,F,1936,A,P,A,Definite,1,N,I,2
+D,UK,uk-A-71,F,1925,T,P,A,Definite,1,N,I,2
+D,UK,uk-A-104,F,1938,A,P,A,Definite,1,N,I,2
+D,UK,uk-A-105,F,1911,A,P,A,Definite,1,N,I,2
+D,UK,uk-A-105,F,1911,A,P,A,Definite,1,N,I,2
+D,UK,uk-A-105,F,1911,T,P,A,Definite,1,N,I,2
+D,UK,uk-A-106,F,1936,T,P,A,Definite,1,N,I,2
+D,UK,uk-A-106,F,1936,T,P,A,Definite,1,N,I,2
+D,UK,uk-A-106,F,1936,T,P,A,Definite,1,D,I,2
+D,UK,uk-A-106,F,1936,T,P,A,Definite,1,N,I,2
+D,UK,uk-A-75,M,1921,C,P,A,Definite,1,N,I,2
+D,UK,uk-A-75,M,1921,A,P,A,Definite,1,N,I,2
+D,UK,uk-A-109,F,1915,A,P,A,Definite,1,N,I,2
+D,UK,uk-A-77,F,1937,A,P,A,Definite,1,N,I,2
+D,UK,uk-A-109,F,1915,T,P,A,Definite,1,N,A,2
+D,UK,uk-A-77,F,1937,A,P,A,Definite,2,N,I,2
+D,UK,uk-A-79,M,1933,A,P,A,Definite,1,I,I,2
+D,UK,uk-A-79,M,1933,A,P,A,Definite,1,N,I,2
+D,UK,uk-A-112,M,1933,T,P,A,Definite,1,N,I,2
+D,UK,uk-A-113,M,1913,T,N,A,Definite-pn,1,N,I,2
+D,UK,uk-A-113,M,1913,A,P,A,Definite,1,N,I,2
+D,UK,uk-A-113,M,1913,A,P,A,Definite,1,N,I,2
+D,UK,uk-A-113,M,1913,T,P,A,Definite,1,N,I,2
+D,UK,uk-A-117,M,1931,A,P,A,Definite,1,N,I,2
+D,UK,uk-A-118,F,1933,A,P,A,Definite,1,N,I,2
+D,UK,uk-A-118,F,1933,C,P,A,Definite,1,N,I,2
+D,UK,uk-A-121,F,1915,C,P,A,Definite,1,I,I,1
+D,UK,uk-A-121,F,1915,A,P,I,Definite,1,N,I,2
+D,UK,uk-A-121,F,1915,T,P,A,Definite,1,N,I,2
+D,UK,uk-A-121,F,1915,T,P,A,Definite,1,N,I,2
+D,UK,uk-B-97,F,1919,T,P,A,Definite,1,N,I,2
+D,UK,uk-B-97,F,1919,T,P,A,Definite,1,N,I,2
+D,UK,uk-B-97,F,1919,T,P,A,Definite,1,N,I,2
+D,UK,uk-B-97,F,1919,T,P,A,Definite,1,N,I,2
+D,UK,uk-B-97,F,1919,T,P,A,Definite,1,N,I,2
+D,UK,uk-B-97,F,1919,A,P,A,Definite,1,N,I,2
+D,UK,uk-B-97,F,1919,C,P,A,Definite,1,N,I,2
+D,UK,uk-B-97,F,1919,C,P,A,Definite,1,N,I,2
+D,UK,uk-B-97,F,1919,A,P,A,Definite,1,N,T,2
+D,UK,uk-B-98,M,1915,A,P,A,Definite,1,N,T,2
+D,UK,uk-B-98,M,1915,T,P,A,Definite,1,N,I,2
+D,UK,uk-B-98,M,1915,A,P,A,Definite,1,N,I,2
+D,UK,uk-B-98,M,1915,C,P,A,Definite,1,N,I,2
+D,UK,uk-B-99,M,1915,A,P,A,Definite,1,N,I,2
+D,UK,uk-B-99,M,1915,C,P,A,Definite,1,N,I,2
+D,UK,uk-B-100,M,1915,T,P,A,Definite,1,N,I,2
+D,UK,uk-B-101,F,1917,A,P,A,Definite,1,N,I,2
+D,UK,uk-B-103,F,1917,A,P,A,Definite,1,N,I,2
+D,UK,uk-B-103,F,1917,T,P,A,Definite,1,N,I,2
+D,UK,uk-B-103,F,1917,T,P,A,Definite,1,D,I,2
+D,UK,uk-C-97,F,1914,C,P,A,Definite,1,N,I,2
+D,UK,uk-C-97,F,1914,T,P,A,Definite,1,N,I,2
+D,UK,uk-C-97,F,1914,T,P,A,Definite,1,N,I,2
+D,UK,uk-C-97,F,1914,T,P,A,Definite,1,N,I,2
+D,UK,uk-C-98,M,1918,C,P,A,Definite,1,N,I,2
+D,UK,uk-C-98,M,1918,A,P,A,Definite,1,N,I,2
+D,UK,uk-C-100,M,1919,A,P,A,Definite,1,N,I,2
+D,UK,uk-C-102,M,1927,T,P,A,Definite,1,N,I,2
+D,UK,uk-C-102,M,1927,T,P,A,Definite,1,N,I,2
+D,UK,uk-C-104,M,1925,T,P,A,Definite,1,N,I,2
+D,UK,uk-C-105,M,1919,A,P,A,Definite,1,N,I,2
+D,UK,uk-C-105,M,1919,A,P,A,Definite,1,N,I,2
+D,UK,uk-C-105,M,1919,T,P,A,Definite,1,N,I,1
+D,UK,uk-C-105,M,1919,T,N,A,Definite-pn,1,N,I,2
+D,UK,uk-C-107,M,1920,A,P,A,Definite,1,N,I,2
+D,UK,uk-C-107,M,1920,T,P,A,Definite,1,N,I,2
+D,UK,uk-C-108,F,1917,A,N,A,Definite,2,N,I,2
+D,UK,uk-C-109,M,1950,T,P,A,Definite,1,N,I,2
+D,UK,uk-C-111,M,1917,T,P,A,Definite,1,N,I,2
+D,UK,uk-C-111,M,1917,T,P,A,Definite,1,N,I,2
+D,UK,uk-C-111,M,1917,T,P,A,Definite,1,N,I,2
+D,UK,uk-C-111,M,1917,T,P,A,Definite,1,I,I,2
+D,UK,uk-C-112,F,1917,A,P,A,Definite,1,N,I,2
+D,UK,uk-C-113,F,1914,T,N,A,Definite,2,N,L,2
+D,UK,uk-C-113,F,1914,T,P,A,Definite,1,N,I,2
+D,UK,uk-D-97,F,1939,T,P,A,Definite,1,N,I,2
+D,UK,uk-D-97,F,1939,T,P,A,Definite,1,D,I,2
+D,UK,uk-D-97,F,1939,T,P,A,Definite,1,D,I,2
+D,UK,uk-D-97,F,1939,T,P,A,Definite,1,N,I,2
+D,UK,uk-D-98,M,1936,A,P,A,Definite,1,N,I,2
+D,UK,uk-D-98,M,1936,T,P,A,Definite,1,N,I,2
+D,UK,uk-D-100,F,1940,A,N,A,Indefinite,4,N,I,2
+D,UK,uk-D-105,M,1934,T,P,A,Definite,1,N,I,2
+D,UK,uk-H-100,F,1930,T,P,A,Definite,1,N,I,2
+D,UK,uk-H-101,M,1954,A,P,A,Definite,1,N,I,2
+D,UK,uk-H-103,M,1982,C,P,A,Definite,1,N,I,2
+D,UK,uk-H-105,M,1977,T,P,A,Definite,1,N,I,3
+D,UK,uk-H-107,F,1961,T,P,A,Definite,1,N,I,2
+D,UK,uk-H-107,F,1961,A,P,A,Definite,1,N,I,2
+D,UK,uk-H-107,F,1961,A,P,A,Definite,1,N,I,2
+D,UK,uk-H-107,F,1961,C,P,A,Definite,1,N,I,2
+D,UK,uk-H-107,F,1961,T,P,A,Definite,1,N,I,2
+D,UK,uk-H-107,F,1961,A,P,A,Definite,1,N,I,2
+D,UK,uk-H-107,F,1961,A,P,A,Definite,1,N,I,2
+D,UK,uk-H-108,M,1950,T,P,A,Definite,1,N,I,2
+D,UK,uk-H-110,F,1967,T,P,A,Definite,1,N,I,2
+D,UK,uk-H-110,F,1967,A,I,A,Indefinite,1,N,I,2
+D,UK,uk-H-110,F,1967,T,P,A,Definite,1,N,I,2
+D,UK,uk-H-111,F,1974,T,N,C,Indefinite,1,N,I,2
+D,UK,uk-H-112,M,1979,T,P,A,Definite,1,N,I,2
+D,UK,uk-H-114,M,1971,A,N,A,Definite,3,N,I,2
+D,UK,uk-H-115,F,1942,T,P,A,Definite,1,N,I,2
+D,UK,uk-H-116,M,1964,T,P,A,Definite,1,N,I,2
+D,UK,uk-H-116,M,1964,A,P,A,Definite,1,N,I,2
+D,UK,uk-H-116,M,1964,A,P,A,Definite,1,N,I,2
+D,UK,uk-H-116,M,1964,A,P,A,Definite,1,N,I,2
+D,UK,uk-H-116,M,1964,A,P,A,Definite,1,N,I,2
+D,UK,uk-H-116,M,1964,A,P,A,Definite,1,N,I,2
+D,UK,uk-H-116,M,1964,C,P,A,Definite,1,N,I,2
+D,UK,uk-H-116,M,1964,T,P,A,Definite,1,N,I,2
+D,UK,uk-H-118,M,1939,T,P,A,Definite,1,N,I,2
+D,UK,uk-H-118,M,1939,T,P,A,Definite,1,N,I,2
+D,UK,uk-H-121,F,1936,T,P,A,Definite,1,N,I,2
+D,UK,uk-H-121,F,1936,T,P,A,Definite,1,N,I,2
+D,UK,uk-M-49,M,1963,T,P,A,Definite,1,I,I,2
+D,UK,uk-M-49,M,1963,C,P,A,Definite,1,N,I,2
+D,UK,uk-M-49,M,1963,C,P,A,Definite,1,N,I,2
+D,UK,uk-M-51,M,1967,T,P,A,Definite,1,N,I,2
+D,UK,uk-M-52,F,1948,C,I,A,Indefinite,1,N,I,2
+D,UK,uk-M-52,F,1948,T,P,A,Definite,1,N,I,2
+D,UK,uk-M-52,F,1948,T,P,A,Definite,2,N,I,2
+D,UK,uk-M-54,F,1967,T,P,A,Definite,1,N,I,2
+D,UK,uk-M-54,F,1967,A,P,A,Definite,1,N,I,2
+D,UK,uk-M-97,M,1931,T,P,A,Definite,1,N,I,2
+D,UK,uk-M-65,F,1978,A,P,A,Definite,1,N,I,2
+D,UK,uk-M-99,M,1914,T,N,A,Definite-pn,1,N,I,2
+D,UK,uk-M-100,F,1921,T,P,A,Definite,1,N,I,2
+D,UK,uk-M-68,M,1982,T,P,A,Definite,1,N,I,2
+D,UK,uk-M-68,M,1982,C,P,A,Definite,1,N,I,2
+D,UK,uk-M-101,F,1929,T,P,A,Definite,1,N,I,2
+D,UK,uk-M-101,F,1929,C,P,A,Definite,1,N,I,2
+D,UK,uk-M-69,M,1979,T,P,A,Definite,1,N,I,2
+D,UK,uk-M-102,M,1934,A,P,A,Definite,1,N,T,2
+D,UK,uk-M-102,M,1934,T,P,A,Definite,1,N,I,2
+D,UK,uk-M-70,M,1980,T,P,A,Definite,1,N,I,2
+D,UK,uk-M-104,F,1922,T,P,A,Definite,1,N,I,2
+D,UK,uk-M-105,M,1927,A,P,A,Definite,1,N,I,2
+D,UK,uk-M-106,M,1938,T,P,A,Definite,1,N,I,2
+D,UK,uk-M-108,M,1925,T,P,A,Definite,1,N,I,2
+D,UK,uk-M-108,M,1925,T,P,A,Definite,1,N,I,2
+D,UK,uk-M-113,F,1931,T,P,A,Definite,1,N,I,2
+D,UK,uk-M-115,M,1937,A,P,A,Definite,1,N,I,2
+D,UK,uk-M-116,F,1933,A,P,A,Definite,1,N,I,2
+D,UK,uk-M-117,F,1935,T,P,A,Definite,1,N,I,2
+D,UK,uk-M-122,M,1943,T,I,A,Indefinite,1,N,I,2
+D,UK,uk-M-122,M,1943,A,P,A,Definite,1,N,I,2
+D,UK,uk-P-33,F,1914,T,P,A,Definite,1,N,I,2
+D,UK,uk-P-33,F,1914,T,P,A,Definite,1,N,I,2
+D,UK,uk-P-33,F,1914,T,P,A,Definite,1,N,I,2
+D,UK,uk-P-64,F,1930,A,N,A,Definite,2,N,I,2
+D,UK,uk-P-64,F,1930,T,P,A,Definite,1,N,I,2
+D,UK,uk-P-35,F,1922,A,P,A,Definite,1,N,A,2
+D,UK,uk-P-35,F,1922,A,P,A,Definite,1,N,I,2
+D,UK,uk-P-35,F,1922,T,P,A,Definite,1,N,I,2
+D,UK,uk-P-35,F,1922,T,P,A,Definite,1,N,I,2
+D,UK,uk-P-37,F,1932,T,P,A,Definite,1,N,I,2
+D,UK,uk-P-63,F,1926,T,P,A,Definite,1,N,I,2
+D,UK,uk-P-63,F,1926,T,P,A,Definite,1,N,I,2
+D,UK,uk-P-36,F,1934,T,P,A,Definite,1,N,I,2
+D,UK,uk-P-163,F,1937,A,P,I,Definite,1,N,I,2
+D,UK,uk-P-97,M,1940,C,P,A,Definite,1,N,I,2
+D,UK,uk-P-104,M,1933,T,P,A,Definite,1,N,I,2
+D,UK,uk-P-104,M,1933,T,P,A,Definite,1,N,I,2
+D,UK,uk-P-110,M,1921,T,P,A,Definite,1,N,I,2
+D,UK,uk-P-110,M,1921,T,P,A,Definite,1,N,I,2
+D,UK,uk-P-114,M,1914,T,P,A,Definite,1,N,I,2
+D,UK,uk-P-114,M,1914,T,P,A,Definite,1,N,I,2
+D,UK,uk-P-114,M,1914,T,P,A,Definite,1,N,I,2
+D,UK,uk-P-114,M,1914,A,P,A,Definite,1,N,T,2
+D,UK,uk-P-114,M,1914,A,P,A,Definite,1,N,T,2
+D,UK,uk-P-115,F,1924,T,N,A,Definite,2,N,I,2
+D,UK,uk-P-116,F,1928,A,P,A,Definite,1,N,I,2
+D,UK,uk-P-116,F,1928,T,P,A,Definite,1,N,I,2
+D,UK,uk-P-120,M,1937,T,N,A,Definite,5,N,I,2
+D,UK,uk-P-121,F,1921,T,P,A,Definite,1,N,I,2
+D,UK,uk-R-98,F,1987,C,P,A,Definite,1,N,I,2
+D,UK,uk-R-99,M,1987,A,P,A,Definite,1,N,I,2
+D,UK,uk-R-104,M,1965,T,P,A,Definite,1,N,I,2
+D,UK,uk-V-98,M,1949,T,P,A,Definite,1,N,I,2
+D,UK,uk-V-98,M,1949,T,P,A,Definite,1,N,I,2
+D,UK,uk-V-98,M,1949,T,P,A,Definite,1,N,I,2
+D,UK,uk-V-98,M,1949,T,P,A,Definite,1,N,I,2
+D,UK,uk-V-98,M,1949,A,P,A,Definite,1,N,I,2
+D,UK,uk-V-99,M,1934,A,P,A,Definite,1,N,I,2
+D,UK,uk-V-99,M,1934,T,P,A,Definite,1,N,I,2
+D,UK,uk-V-99,M,1934,T,P,A,Definite,1,N,I,2
+D,UK,uk-V-100,F,1941,T,P,A,Definite,1,N,I,2
+D,UK,uk-V-103,M,1936,C,P,A,Definite,1,N,I,2
+D,UK,uk-V-103,M,1936,T,P,A,Definite,1,N,I,2
+D,UK,uk-V-103,M,1936,T,P,A,Definite,1,N,I,2
+D,UK,uk-V-104,M,1929,C,P,A,Definite,1,N,T,2
+D,UK,uk-V-104,M,1929,T,P,A,Definite,1,N,I,2
+D,UK,uk-V-104,M,1929,A,P,A,Definite,1,N,I,2
+D,UK,uk-V-104,M,1929,C,P,A,Definite,1,N,I,2
+D,UK,uk-V-104,M,1929,T,P,A,Definite,1,N,I,2
+D,UK,uk-V-104,M,1929,T,P,A,Definite,1,N,I,2
+D,UK,uk-V-104,M,1929,T,P,A,Definite,1,N,I,2
+D,UK,uk-V-104,M,1929,A,P,A,Definite,1,N,I,2
+D,UK,uk-V-104,M,1929,T,P,A,Definite,1,N,I,2
+D,UK,uk-X-98,F,1916,T,P,A,Definite,1,N,I,2
+D,UK,uk-X-100,M,1927,T,P,A,Definite,1,N,I,2
+D,UK,uk-X-102,F,1918,A,P,A,Definite,1,N,I,2
+D,UK,uk-X-102,F,1918,T,P,A,Definite,1,N,I,2
+D,UK,uk-X-103,M,1926,C,P,A,Definite,1,N,T,2
+D,UK,uk-Y-49,F,1969,A,P,A,Definite,1,N,I,2
+D,UK,uk-Y-51,F,1957,A,P,A,Definite,1,N,I,2
+D,UK,uk-Y-51,F,1957,T,P,A,Definite,1,N,I,2
+D,UK,uk-Y-53,M,1973,A,P,A,Definite,1,N,I,2
+D,UK,uk-Y-57,M,1919,A,N,A,Definite,2,N,T,2
+D,UK,uk-Y-57,M,1919,A,P,A,Definite,1,N,I,2
+D,UK,uk-Y-57,M,1919,A,P,A,Definite,1,N,I,2
+D,UK,uk-Y-57,M,1919,A,P,A,Definite,1,N,T,2
+D,UK,uk-Y-95,M,1983,A,P,A,Definite,1,N,I,2
+D,UK,uk-Y-133,F,1969,T,P,A,Definite,1,N,I,2
+D,UK,uk-Y-145,F,1968,A,P,A,Definite,1,N,I,2
+D,UK,uk-Y-182,F,1953,T,P,A,Definite,1,N,I,2
+D,UK,uk-Y-174,M,1963,C,P,A,Definite,1,N,I,2
+D,UK,uk-Y-64,F,1942,A,P,A,Definite,1,N,I,2
+D,UK,uk-Y-38,M,1977,T,P,A,Definite,1,N,I,2
+D,UK,uk-Y-37,M,1986,T,P,A,Definite,1,N,I,2
+D,UK,uk-Y-63,M,1963,T,P,A,Definite,1,N,I,2
+D,UK,uk-Y-63,M,1963,C,P,A,Definite,1,N,I,2
+D,UK,uk-Y-43,M,1984,T,P,A,Definite,1,N,I,2
+D,UK,uk-Y-43,M,1984,T,P,A,Definite,1,N,I,2
+D,UK,uk-Y-61,F,1941,A,P,A,Definite,1,N,I,2
+D,UK,uk-Y-63,M,1928,T,P,A,Definite,1,N,I,2
+D,UK,uk-Y-162,M,1937,T,N,A,Definite,2,I,I,2
+D,UK,uk-Y-162,M,1937,T,N,A,Definite,2,N,I,2
+D,UK,uk-Y-162,M,1937,T,N,C,Definite,2,N,I,2
+D,UK,uk-Y-162,M,1937,A,P,A,Definite,1,N,I,2
+D,UK,uk-Y-165,M,1922,C,P,A,Definite,1,N,I,2
+D,UK,uk-Y-65,M,1941,C,P,A,Definite,1,N,I,2
+D,UK,uk-Y-170,F,1927,T,P,A,Definite,1,N,I,2
+D,UK,uk-Y-98,F,1921,T,P,A,Definite,2,N,I,2
+D,UK,uk-Y-99,F,1933,A,P,A,Definite,1,N,I,2
+D,UK,uk-Y-67,F,1934,T,P,A,Definite,1,N,I,2
+D,UK,uk-Y-69,F,1940,C,P,A,Definite,1,N,I,2
+D,UK,uk-Y-102,F,1948,A,P,A,Definite,1,N,I,2
+D,UK,uk-Y-103,F,1931,A,P,A,Definite,1,N,I,2
+D,UK,uk-Y-104,F,1977,C,P,A,Definite,1,N,I,2
+D,UK,uk-Y-72,M,1979,T,P,A,Definite,2,N,I,2
+D,UK,uk-Y-105,F,1970,T,P,A,Definite,1,N,I,2
+D,UK,uk-Y-105,F,1970,T,P,A,Definite,1,N,I,2
+D,UK,uk-Y-73,F,1932,T,P,A,Definite,1,N,I,2
+D,UK,uk-Y-106,M,1931,T,P,A,Definite,1,N,I,2
+D,UK,uk-Y-74,F,1965,A,P,A,Definite,1,N,T,2
+D,UK,uk-Y-106,M,1931,T,P,A,Definite,1,N,I,2
+D,UK,uk-Y-107,F,1916,A,P,A,Definite,1,N,T,2
+D,UK,uk-Y-107,F,1916,A,P,A,Definite,1,N,T,2
+D,UK,uk-Y-108,F,1938,A,P,A,Definite,1,N,I,2
+D,UK,uk-Y-109,M,1944,T,P,A,Definite,1,N,I,2
+D,UK,uk-Y-109,M,1944,C,P,A,Definite,1,N,I,2
+D,UK,uk-Y-110,F,1976,A,P,A,Definite,1,N,I,2
+D,UK,uk-Y-78,M,1974,C,P,A,Definite,1,N,I,2
+D,UK,uk-Y-79,F,1972,A,I,A,Definite,1,N,I,2
+D,UK,uk-Y-186,F,1933,T,P,A,Definite,1,N,I,2
+D,UK,uk-Y-112,F,1929,T,P,A,Definite,1,N,I,2
+D,UK,uk-Y-112,F,1929,C,P,A,Definite,1,N,I,2
+D,UK,uk-Y-112,F,1929,T,P,A,Definite,1,N,I,2
+D,UK,uk-Y-81,F,1940,A,P,A,Definite,1,N,I,2
+D,UK,uk-Y-114,M,1931,A,P,I,Definite,1,N,I,2
+D,UK,uk-Y-115,M,1953,A,P,A,Definite,2,N,I,2
+D,UK,uk-Y-116,F,1958,T,I,A,Definite,4,N,I,2
+D,UK,uk-Y-153,M,1979,A,P,I,Definite,1,N,I,2
+D,UK,uk-Y-118,F,1924,T,P,A,Definite,1,N,I,2
+D,UK,uk-Y-87,F,1980,A,P,A,Definite,1,N,I,2
+D,UK,uk-Y-87,F,1980,A,P,A,Definite,1,N,I,2
+D,UK,uk-Y-87,F,1980,A,P,A,Definite,1,N,I,2
+D,UK,uk-Y-87,F,1980,A,P,A,Definite,1,N,I,2
+D,UK,uk-Y-88,F,1946,T,P,A,Definite,1,N,I,2
+D,UK,uk-Y-88,F,1946,T,P,A,Definite,1,N,I,2
+D,UK,uk-Y-90,F,1981,T,N,A,Definite,2,N,I,2
+D,UK,uk-Y-90,F,1981,A,P,A,Definite,1,N,I,2
+D,UK,uk-plus-151,F,1945,A,P,A,Definite,1,N,T,3
+D,UK,uk-plus-139,M,1945,C,P,A,Definite,1,N,I,3
+D,UK,uk-plus-187,M,1915,A,P,A,Definite,1,N,I,3
+D,UK,uk-plus-187,M,1915,T,P,A,Definite,1,N,I,3
+D,UK,uk-plus-210,F,1937,A,P,A,Definite,1,N,I,3
+D,UK,uk-plus-212,M,1927,T,P,A,Definite,1,N,I,3
+D,UK,uk-A-97,F,1925,A,P,A,Definite,1,N,I,3
+D,UK,uk-A-100,M,1933,A,P,A,Definite,1,N,I,2
+D,UK,uk-A-74,F,1917,C,P,A,Definite,1,N,I,3
+D,UK,uk-A-106,F,1936,T,P,A,Definite,1,N,I,3
+D,UK,uk-A-106,F,1936,T,N,A,Definite,3,N,I,3
+D,UK,uk-A-75,M,1921,T,P,A,Definite,1,N,I,3
+D,UK,uk-A-78,M,1928,T,P,A,Definite,1,N,I,3
+D,UK,uk-A-79,M,1933,A,P,I,Definite,1,N,I,3
+D,UK,uk-A-111,M,1935,A,P,I,Definite,1,N,T,3
+D,UK,uk-A-113,M,1913,A,P,A,Definite,1,P,I,3
+D,UK,uk-A-113,M,1913,T,P,A,Definite,1,N,I,3
+D,UK,uk-A-117,M,1931,A,P,A,Definite,1,D,I,3
+D,UK,uk-A-118,F,1933,A,P,A,Definite,1,N,I,3
+D,UK,uk-A-120,F,1934,T,P,A,Definite,1,N,I,3
+D,UK,uk-A-121,F,1915,A,P,A,Definite,1,N,I,3
+D,UK,uk-B-53,M,1949,A,P,A,Definite,1,N,I,3
+D,UK,uk-B-97,F,1919,A,P,A,Definite,1,N,I,3
+D,UK,uk-B-98,M,1915,A,P,A,Definite,1,N,I,3
+D,UK,uk-B-103,F,1917,T,P,A,Definite,1,N,I,3
+D,UK,uk-B-103,F,1917,T,P,A,Definite,1,N,I,3
+D,UK,uk-C-97,F,1914,A,P,I,Definite,1,N,I,3
+D,UK,uk-C-99,M,1912,T,P,A,Definite,1,N,I,3
+D,UK,uk-C-101,F,1915,A,P,A,Definite,1,I,I,3
+D,UK,uk-C-102,M,1927,T,P,A,Definite,1,I,I,3
+D,UK,uk-C-106,M,1927,T,P,A,Definite,1,N,I,3
+D,UK,uk-C-107,M,1920,C,P,A,Definite,1,N,T,3
+D,UK,uk-C-108,F,1917,C,P,A,Indefinite,3,N,I,3
+D,UK,uk-C-108,F,1917,T,P,A,Definite,1,N,I,3
+D,UK,uk-C-108,F,1917,T,P,A,Definite,1,N,I,3
+D,UK,uk-C-109,M,1950,A,P,A,Definite,1,N,I,3
+D,UK,uk-C-110,M,1917,T,P,A,Definite,1,N,I,3
+D,UK,uk-C-110,M,1917,T,P,A,Definite,1,N,I,3
+D,UK,uk-C-111,M,1917,T,P,A,Definite,1,N,I,3
+D,UK,uk-C-116,M,1925,T,P,A,Definite,1,N,I,3
+D,UK,uk-D-97,F,1939,T,P,A,Definite,1,N,I,3
+D,UK,uk-D-99,M,1924,T,P,A,Definite,1,N,I,2
+D,UK,uk-D-105,M,1934,T,P,A,Definite,1,N,I,3
+D,UK,uk-H-97,F,1980,T,P,A,Definite,1,N,I,3
+D,UK,uk-H-97,F,1980,T,P,A,Definite,1,N,I,3
+D,UK,uk-H-98,F,1951,A,N,A,Definite,2,N,I,3
+D,UK,uk-H-105,M,1977,A,P,A,Definite,1,N,I,3
+D,UK,uk-H-107,F,1961,T,P,A,Definite,1,N,I,3
+D,UK,uk-H-107,F,1961,C,P,A,Definite,1,N,I,3
+D,UK,uk-H-111,F,1974,C,N,A,Definite-pn,1,N,I,3
+D,UK,uk-H-113,M,1975,T,P,A,Definite,1,N,I,3
+D,UK,uk-H-114,M,1971,T,P,A,Definite,1,N,I,3
+D,UK,uk-H-115,F,1942,C,P,A,Definite,1,N,I,3
+D,UK,uk-H-116,M,1964,A,P,A,Definite,1,N,I,3
+D,UK,uk-H-118,M,1939,T,P,A,Definite,1,N,I,3
+D,UK,uk-H-118,M,1939,T,P,A,Definite,1,N,I,3
+D,UK,uk-H-121,F,1936,T,P,A,Definite,1,D,I,3
+D,UK,uk-M-49,M,1963,T,P,A,Definite,1,N,I,3
+D,UK,uk-M-54,F,1967,T,P,A,Definite,1,N,I,3
+D,UK,uk-M-65,F,1978,A,P,A,Definite,1,N,I,3
+D,UK,uk-M-67,M,1979,A,P,I,Definite,1,N,I,3
+D,UK,uk-M-99,M,1914,T,P,A,Definite,1,N,I,3
+D,UK,uk-M-68,M,1982,T,P,A,Definite,1,N,I,3
+D,UK,uk-M-68,M,1982,T,P,A,Definite,1,N,I,3
+D,UK,uk-M-101,F,1929,A,P,A,Definite,1,N,I,3
+D,UK,uk-M-101,F,1929,A,P,A,Definite,1,N,I,3
+D,UK,uk-M-101,F,1929,A,P,A,Definite,1,I,I,3
+D,UK,uk-M-70,M,1980,A,P,A,Definite,1,N,I,3
+D,UK,uk-M-102,M,1934,T,N,A,Definite,2,N,I,3
+D,UK,uk-M-71,M,1980,A,N,A,Definite,2,N,I,3
+D,UK,uk-M-105,M,1927,A,N,A,Indefinite,2,N,I,3
+D,UK,uk-M-105,M,1927,A,P,A,Definite,1,I,I,3
+D,UK,uk-M-106,M,1938,T,P,A,Definite,1,N,I,3
+D,UK,uk-M-108,M,1925,T,P,A,Definite,1,N,I,3
+D,UK,uk-M-110,F,1936,T,P,A,Definite,1,N,I,3
+D,UK,uk-M-115,M,1937,T,P,A,Definite,1,D,I,3
+D,UK,uk-M-121,M,1943,T,N,A,Definite,2,N,I,3
+D,UK,uk-M-121,M,1943,T,N,A,Definite,2,N,I,3
+D,UK,uk-M-122,M,1943,T,P,A,Definite,1,N,I,3
+D,UK,uk-P-33,F,1914,C,P,A,Definite,1,N,I,3
+D,UK,uk-P-38,F,1934,C,P,A,Definite,1,N,I,3
+D,UK,uk-P-35,F,1922,T,P,A,Definite,1,N,I,3
+D,UK,uk-P-37,F,1932,T,N,A,Definite-pn,2,N,I,3
+D,UK,uk-P-63,F,1926,A,P,I,Definite,1,N,I,3
+D,UK,uk-P-63,F,1926,C,P,A,Definite,1,N,I,3
+D,UK,uk-P-100,F,1930,A,P,A,Definite,1,N,I,3
+D,UK,uk-P-104,M,1933,T,P,A,Definite,1,N,I,3
+D,UK,uk-P-104,M,1933,A,N,A,Definite,2,N,I,3
+D,UK,uk-P-110,M,1921,T,P,A,Definite,1,N,I,3
+D,UK,uk-P-110,M,1921,T,P,A,Definite,1,N,I,3
+D,UK,uk-P-110,M,1921,T,P,A,Definite,1,N,I,3
+D,UK,uk-P-118,F,1929,A,P,A,Definite,1,I,I,3
+D,UK,uk-P-121,F,1921,A,P,A,Definite,1,N,I,3
+D,UK,uk-R-110,F,1987,T,P,A,Definite,1,N,I,3
+D,UK,uk-V-97,M,1939,T,P,A,Definite,1,N,I,3
+D,UK,uk-V-98,M,1949,A,N,L,Definite-pn,1,N,I,3
+D,UK,uk-V-98,M,1949,A,N,L,Definite-pn,1,N,I,3
+D,UK,uk-V-98,M,1949,C,P,A,Definite,1,I,I,3
+D,UK,uk-V-102,M,1946,A,P,A,Definite,1,N,T,3
+D,UK,uk-V-103,M,1936,A,P,A,Definite,1,I,I,3
+D,UK,uk-V-103,M,1936,A,P,A,Definite,1,N,I,3
+D,UK,uk-V-104,M,1929,T,P,A,Definite,1,N,I,3
+D,UK,uk-V-104,M,1929,T,P,A,Definite,1,N,I,3
+D,UK,uk-V-104,M,1929,T,P,A,Definite,1,N,I,3
+D,UK,uk-X-97,F,1924,T,P,A,Definite,1,N,I,3
+D,UK,uk-X-100,M,1927,T,P,A,Definite,1,N,I,3
+D,UK,uk-X-102,F,1918,T,P,A,Definite,1,N,I,3
+D,UK,uk-X-102,F,1918,C,P,A,Definite,1,I,I,3
+D,UK,uk-X-102,F,1918,T,P,A,Definite,1,N,I,3
+D,UK,uk-Y-57,M,1919,A,P,A,Definite,1,N,T,3
+D,UK,uk-Y-95,M,1983,A,P,A,Definite,1,N,T,3
+D,UK,uk-Y-174,M,1963,A,P,A,Definite,4,N,I,3
+D,UK,uk-Y-37,M,1986,T,P,A,Definite,1,N,I,3
+D,UK,uk-Y-170,F,1927,A,P,A,Definite,1,N,I,3
+D,UK,uk-Y-98,F,1921,C,P,A,Definite,1,N,I,3
+D,UK,uk-Y-67,F,1934,T,P,A,Definite,1,N,I,3
+D,UK,uk-Y-67,F,1934,T,P,A,Definite,1,N,I,3
+D,UK,uk-Y-67,F,1934,A,P,A,Definite,1,N,I,3
+D,UK,uk-Y-68,M,1983,A,P,A,Definite,1,N,I,3
+D,UK,uk-Y-74,F,1965,T,P,A,Definite,1,N,I,3
+D,UK,uk-Y-107,F,1916,A,I,A,Indefinite,1,N,I,3
+D,UK,uk-Y-111,F,1933,C,P,A,Definite,1,N,I,3
+D,UK,uk-Y-186,F,1933,T,P,A,Definite,1,N,I,3
+D,UK,uk-Y-186,F,1933,A,P,A,Definite,1,I,I,3
+D,UK,uk-Y-114,M,1931,T,P,A,Definite,1,D,I,3
+D,UK,uk-Y-114,M,1931,A,P,A,Definite,1,N,I,3
+D,UK,uk-Y-83,M,1962,T,P,A,Definite,1,N,I,3
+D,UK,uk-Y-115,M,1953,A,P,A,Definite,1,N,I,3
+D,UK,uk-Y-116,F,1958,C,P,A,Definite,1,N,I,3
+D,UK,uk-Y-117,M,1919,A,P,I,Definite,1,N,I,3
+D,UK,uk-Y-117,M,1919,T,P,A,Definite,1,N,I,3
+D,UK,uk-Y-87,F,1980,A,P,A,Definite,1,N,I,3
+D,UK,uk-Y-87,F,1980,A,P,A,Definite,1,N,I,3
+D,UK,uk-Y-87,F,1980,T,P,A,Definite,1,N,I,3
+D,UK,uk-Y-87,F,1980,T,P,A,Definite,1,N,I,3
+D,UK,uk-Y-87,F,1980,C,P,A,Definite,1,N,I,3
+D,UK,uk-Y-120,F,1928,A,P,A,Definite,1,N,I,3
+D,UK,uk-plus-151,F,1945,T,P,A,Definite,1,N,A,4
+D,UK,uk-plus-151,F,1945,A,P,A,Definite,1,N,I,4
+D,UK,uk-plus-151,F,1945,A,P,A,Definite,1,N,I,4
+D,UK,uk-plus-151,F,1945,A,P,A,Definite,1,N,T,4
+D,UK,uk-plus-151,F,1945,A,P,A,Definite,1,N,I,2
+D,UK,uk-plus-187,M,1915,T,P,A,Definite,1,N,I,4
+D,UK,uk-plus-187,M,1915,T,P,A,Definite,1,N,I,4
+D,UK,uk-plus-128,F,1945,T,P,A,Definite,1,N,I,4
+D,UK,uk-plus-128,F,1945,T,P,A,Definite,1,N,I,4
+D,UK,uk-plus-128,F,1945,T,P,A,Definite,1,N,I,4
+D,UK,uk-plus-193,M,1926,T,P,A,Definite,1,N,I,4
+D,UK,uk-A-67,M,1926,A,P,A,Definite,1,N,I,4
+D,UK,uk-A-100,M,1933,A,N,A,Indefinite,4,N,I,4
+D,UK,uk-A-68,M,1937,C,P,A,Definite,1,N,I,4
+D,UK,uk-A-103,F,1936,A,N,A,Indefinite,1,N,I,4
+D,UK,uk-A-103,F,1936,A,P,I,Definite,1,N,I,4
+D,UK,uk-A-103,F,1936,A,P,A,Definite,1,N,I,4
+D,UK,uk-A-72,F,1920,T,P,A,Definite,1,N,I,4
+D,UK,uk-A-74,F,1917,T,P,A,Definite,1,N,I,5
+D,UK,uk-A-117,M,1931,T,P,A,Definite,1,N,I,4
+D,UK,uk-A-121,F,1915,T,P,A,Definite,1,N,I,4
+D,UK,uk-B-53,M,1949,A,P,A,Definite,1,N,I,4
+D,UK,uk-B-53,M,1949,T,P,A,Definite,1,N,I,4
+D,UK,uk-B-97,F,1919,C,P,A,Definite,1,N,I,4
+D,UK,uk-B-97,F,1919,T,P,A,Definite,1,N,I,4
+D,UK,uk-B-98,M,1915,T,P,A,Definite,1,N,I,4
+D,UK,uk-B-98,M,1915,A,P,A,Definite,1,N,I,4
+D,UK,uk-C-98,M,1918,T,P,A,Definite,1,N,I,4
+D,UK,uk-C-99,M,1912,T,P,A,Definite,1,N,I,4
+D,UK,uk-C-102,M,1927,A,P,A,Definite,1,N,I,4
+D,UK,uk-C-104,M,1925,A,P,A,Definite,1,N,I,4
+D,UK,uk-C-105,M,1919,A,P,A,Definite,1,N,I,4
+D,UK,uk-C-105,M,1919,T,P,A,Definite,1,N,I,4
+D,UK,uk-C-105,M,1919,T,N,A,Definite,2,N,I,4
+D,UK,uk-C-107,M,1920,A,P,A,Definite,1,N,I,4
+D,UK,uk-C-109,M,1950,T,P,A,Definite,1,N,I,4
+D,UK,uk-C-115,M,1945,A,P,A,Definite,1,N,I,4
+D,UK,uk-D-97,F,1939,A,P,A,Definite,1,N,I,4
+D,UK,uk-D-97,F,1939,T,P,A,Definite,1,N,I,4
+D,UK,uk-D-102,M,1931,A,P,A,Definite,1,N,I,4
+D,UK,uk-H-97,F,1980,T,P,A,Definite,1,N,I,4
+D,UK,uk-H-107,F,1961,A,N,A,Definite,4,N,I,4
+D,UK,uk-H-108,M,1950,A,P,A,Definite,1,N,I,4
+D,UK,uk-H-111,F,1974,A,P,A,Definite,1,N,I,4
+D,UK,uk-H-118,M,1939,T,P,A,Definite,1,N,I,4
+D,UK,uk-M-49,M,1963,A,I,A,Definite,1,N,I,4
+D,UK,uk-M-51,M,1967,T,P,A,Definite,1,N,I,4
+D,UK,uk-M-54,F,1967,A,P,A,Definite,1,N,I,4
+D,UK,uk-M-54,F,1967,T,P,A,Definite,1,N,I,4
+D,UK,uk-M-97,M,1931,A,P,A,Definite,1,N,I,4
+D,UK,uk-M-66,F,1980,A,P,A,Definite,1,N,I,4
+D,UK,uk-M-101,F,1929,A,P,A,Definite,1,N,I,4
+D,UK,uk-M-104,F,1922,T,P,A,Definite,1,N,I,4
+D,UK,uk-M-109,F,1916,T,P,A,Definite,1,N,I,4
+D,UK,uk-M-121,M,1943,C,P,A,Definite,1,N,I,4
+D,UK,uk-M-121,M,1943,T,P,A,Definite,2,N,I,4
+D,UK,uk-M-122,M,1943,T,I,A,Indefinite,1,N,I,4
+D,UK,uk-P-94,M,1931,A,P,A,Definite,1,N,I,4
+D,UK,uk-P-38,F,1934,A,P,A,Definite,1,N,I,4
+D,UK,uk-P-63,F,1926,T,P,A,Definite,1,N,I,4
+D,UK,uk-P-36,F,1934,A,N,L,Definite-pn,1,N,I,4
+D,UK,uk-P-163,F,1937,A,P,I,Definite,1,N,I,4
+D,UK,uk-P-170,F,1928,A,P,A,Definite,1,N,I,4
+D,UK,uk-P-98,M,1931,T,P,A,Definite,1,N,I,4
+D,UK,uk-P-100,F,1930,A,P,A,Definite,1,N,I,4
+D,UK,uk-P-104,M,1933,T,P,A,Definite,1,N,I,4
+D,UK,uk-P-104,M,1933,T,P,A,Definite,1,N,I,4
+D,UK,uk-P-104,M,1933,T,P,A,Definite,1,N,I,4
+D,UK,uk-P-110,M,1921,A,P,A,Definite,1,N,I,4
+D,UK,uk-P-156,M,1930,A,P,I,Definite,1,N,I,4
+D,UK,uk-P-114,M,1914,T,P,A,Definite,1,N,I,4
+D,UK,uk-P-114,M,1914,T,P,A,Definite,1,N,I,4
+D,UK,uk-P-115,F,1924,T,P,A,Definite,1,N,I,4
+D,UK,uk-P-118,F,1929,A,P,A,Definite,1,I,I,4
+D,UK,uk-P-122,M,1925,A,P,A,Definite,1,N,I,4
+D,UK,uk-R-113,M,1987,T,P,A,Definite,1,N,I,2
+D,UK,uk-V-98,M,1949,T,P,A,Definite,1,N,I,4
+D,UK,uk-V-98,M,1949,A,N,C,Definite-pn,1,N,I,4
+D,UK,uk-V-104,M,1929,T,P,A,Definite,1,N,I,4
+D,UK,uk-V-104,M,1929,T,P,A,Definite,1,D,I,4
+D,UK,uk-V-104,M,1929,C,P,A,Definite,1,N,I,4
+D,UK,uk-X-98,F,1916,A,P,A,Definite,1,N,I,4
+D,UK,uk-X-102,F,1918,A,P,A,Definite,2,N,I,4
+D,UK,uk-Y-53,M,1973,T,P,A,Definite,1,N,I,4
+D,UK,uk-Y-54,F,1956,A,P,A,Definite,1,N,I,4
+D,UK,uk-Y-57,M,1919,T,P,A,Definite,1,N,I,4
+D,UK,uk-Y-64,F,1942,T,N,A,Definite,4,N,I,4
+D,UK,uk-Y-64,F,1942,A,P,A,Definite,1,N,I,4
+D,UK,uk-Y-64,F,1942,A,P,A,Definite,1,N,I,4
+D,UK,uk-Y-42,F,1980,T,P,A,Definite,1,N,I,4
+D,UK,uk-Y-63,M,1963,T,N,A,Definite,4,N,I,4
+D,UK,uk-Y-61,F,1941,A,P,A,Definite,1,N,I,4
+D,UK,uk-Y-63,M,1928,A,P,A,Definite,1,N,I,4
+D,UK,uk-Y-67,F,1934,T,P,A,Definite,1,N,I,4
+D,UK,uk-Y-99,F,1933,A,P,A,Definite,1,N,I,4
+D,UK,uk-Y-101,M,1935,T,N,A,Definite,2,N,I,4
+D,UK,uk-Y-73,F,1932,T,P,A,Definite,1,N,I,4
+D,UK,uk-Y-73,F,1932,A,P,A,Definite,1,N,I,4
+D,UK,uk-Y-76,M,1917,T,P,A,Definite,1,N,I,4
+D,UK,uk-Y-79,F,1972,A,P,A,Definite,1,N,I,4
+D,UK,uk-Y-79,F,1972,A,P,A,Definite,1,N,I,4
+D,UK,uk-Y-79,F,1972,A,P,A,Definite,1,N,I,4
+D,UK,uk-Y-82,F,1962,A,P,A,Definite,1,N,T,4
+D,UK,uk-Y-88,F,1946,C,P,A,Definite,1,N,I,4
+D,UK,uk-Y-121,M,1980,C,P,A,Definite,1,N,I,4
+D,UK,uk-A-65,M,1928,A,P,A,Definite,1,N,I,5
+D,UK,uk-A-66,M,1933,A,P,A,Definite,1,N,I,5
+D,UK,uk-A-99,M,1928,A,P,A,Definite,1,N,I,5
+D,UK,uk-A-100,M,1933,C,P,A,Definite,1,N,I,5
+D,UK,uk-A-100,M,1933,A,P,A,Definite,1,N,I,5
+D,UK,uk-A-70,F,1918,A,P,A,Definite,1,N,I,5
+D,UK,uk-A-106,F,1936,A,P,A,Definite,1,N,I,5
+D,UK,uk-A-112,M,1933,A,D,I,Definite,1,N,T,5
+D,UK,uk-B-103,F,1917,T,P,A,Definite,1,N,I,5
+D,UK,uk-C-97,F,1914,C,P,A,Definite,1,N,I,5
+D,UK,uk-C-104,M,1925,A,P,A,Definite,1,N,I,5
+D,UK,uk-C-104,M,1925,A,P,A,Definite,1,N,I,5
+D,UK,uk-C-110,M,1917,T,P,A,Definite,1,N,I,5
+D,UK,uk-C-115,M,1945,T,P,A,Definite,1,N,I,5
+D,UK,uk-D-101,M,1927,T,P,A,Definite,1,N,I,3
+D,UK,uk-H-111,F,1974,A,P,A,Definite,1,N,I,5
+D,UK,uk-M-49,M,1963,A,P,A,Definite,1,N,I,5
+D,UK,uk-M-66,F,1980,C,P,A,Definite,1,N,I,5
+D,UK,uk-M-99,M,1914,T,I,A,Indefinite,1,N,I,5
+D,UK,uk-M-104,F,1922,T,P,A,Definite,1,N,I,5
+D,UK,uk-M-106,M,1938,A,P,A,Definite,1,N,I,5
+D,UK,uk-M-108,M,1925,T,P,A,Definite,1,N,I,5
+D,UK,uk-M-108,M,1925,A,P,A,Definite,1,N,I,2
+D,UK,uk-M-115,M,1937,A,P,A,Definite,1,N,I,5
+D,UK,uk-M-117,F,1935,A,P,A,Definite,1,N,I,5
+D,UK,uk-M-121,M,1943,T,N,A,Definite-pn,1,N,I,5
+D,UK,uk-M-121,M,1943,A,P,A,Definite,1,N,A,5
+D,UK,uk-P-42,M,1915,T,P,A,Definite,1,N,I,5
+D,UK,uk-P-35,F,1922,A,P,A,Definite,1,N,T,2
+D,UK,uk-P-63,F,1926,T,P,A,Definite,1,N,I,5
+D,UK,uk-P-63,F,1926,A,P,A,Definite,1,N,T,5
+D,UK,uk-P-98,M,1931,T,P,A,Definite,1,N,I,3
+D,UK,uk-P-100,F,1930,T,P,A,Definite,2,N,I,5
+D,UK,uk-P-114,M,1914,A,P,A,Definite,1,I,I,5
+D,UK,uk-P-121,F,1921,A,P,A,Definite,1,N,I,5
+D,UK,uk-R-98,F,1987,A,N,A,Indefinite,1,N,I,5
+D,UK,uk-V-98,M,1949,A,N,I,Definite,2,N,T,5
+D,UK,uk-V-103,M,1936,C,P,A,Definite,1,N,I,5
+D,UK,uk-X-97,F,1924,T,P,A,Definite,1,N,I,5
+D,UK,uk-X-98,F,1916,A,P,A,Definite,1,N,A,5
+D,UK,uk-X-103,M,1926,C,I,A,Indefinite,1,N,I,5
+D,UK,uk-X-103,M,1926,C,P,A,Definite,1,N,I,5
+D,UK,uk-Y-54,F,1956,A,P,A,Definite,1,N,I,5
+D,UK,uk-Y-54,F,1956,A,P,A,Definite,1,N,I,5
+D,UK,uk-Y-55,M,1943,A,P,A,Definite,1,N,I,5
+D,UK,uk-Y-161,F,1975,A,P,A,Definite,1,N,I,5
+D,UK,uk-Y-38,M,1977,A,P,A,Definite,1,N,I,5
+D,UK,uk-Y-38,M,1977,T,P,A,Definite,1,N,I,5
+D,UK,uk-Y-61,F,1941,T,P,A,Definite,1,N,I,5
+D,UK,uk-Y-63,M,1928,T,P,A,Definite,1,N,I,5
+D,UK,uk-Y-67,F,1934,T,P,A,Definite,1,N,I,5
+D,UK,uk-Y-70,M,1936,T,P,A,Definite,1,N,I,5
+D,UK,uk-Y-103,F,1931,C,P,A,Definite,1,N,I,5
+D,UK,uk-Y-103,F,1931,C,P,A,Definite,1,N,I,5
+D,UK,uk-Y-107,F,1916,T,P,A,Definite,1,N,I,5
+D,UK,uk-Y-79,F,1972,A,P,A,Definite,1,N,T,5
+D,UK,uk-Y-112,F,1929,T,N,A,Definite,2,N,I,5
+D,UK,uk-Y-81,F,1940,C,P,A,Definite,1,N,T,6
+D,UK,uk-Y-82,F,1962,A,P,A,Definite,1,N,T,5
+D,UK,uk-Y-153,M,1979,A,P,A,Definite,1,N,I,5
+D,UK,uk-Y-88,F,1946,T,P,A,Definite,1,N,I,5
+D,UK,uk-Y-120,F,1928,T,N,A,Definite-pn,1,N,I,5
+D,UK,uk-Y-120,F,1928,A,P,A,Definite,1,N,T,5
+D,UK,uk-Y-121,M,1980,A,N,A,Indefinite,3,N,I,5
+D,UK,uk-Y-90,F,1981,A,P,A,Definite,1,N,I,5
+D,UK,uk-Y-90,F,1981,T,P,A,Definite,1,N,I,5
+D,UK,uk-A-65,M,1928,T,P,A,Definite,1,N,I,6
+D,UK,uk-A-70,F,1918,T,P,A,Definite,1,N,I,6
+D,UK,uk-A-73,F,1916,A,P,A,Definite,1,N,I,7
+D,UK,uk-B-99,M,1915,C,P,A,Definite,1,N,I,6
+D,UK,uk-C-97,F,1914,A,P,A,Definite,1,N,I,6
+D,UK,uk-C-97,F,1914,T,P,A,Definite,1,N,I,6
+D,UK,uk-C-109,M,1950,A,P,A,Definite,1,N,I,6
+D,UK,uk-C-112,F,1917,T,P,A,Definite,1,N,I,6
+D,UK,uk-C-113,F,1914,C,P,A,Definite,1,N,I,6
+D,UK,uk-D-99,M,1924,T,P,A,Definite,1,N,I,6
+D,UK,uk-H-114,M,1971,A,P,A,Definite,1,N,I,6
+D,UK,uk-M-50,F,1985,C,P,A,Definite,1,N,I,6
+D,UK,uk-M-100,F,1921,T,P,A,Definite,1,N,I,6
+D,UK,uk-M-104,F,1922,T,P,A,Definite,1,N,I,6
+D,UK,uk-M-108,M,1925,A,P,A,Definite,1,N,I,6
+D,UK,uk-M-114,M,1927,T,P,A,Definite,1,N,I,6
+D,UK,uk-M-122,M,1943,T,P,A,Definite,1,N,I,6
+D,UK,uk-P-35,F,1922,T,P,A,Definite,1,N,I,6
+D,UK,uk-P-37,F,1932,A,P,A,Definite,1,N,I,5
+D,UK,uk-P-63,F,1926,A,P,A,Definite,1,N,I,6
+D,UK,uk-P-63,F,1926,T,P,A,Definite,1,N,I,6
+D,UK,uk-P-100,F,1930,C,P,A,Definite,1,N,I,7
+D,UK,uk-P-117,M,1919,C,P,A,Definite,1,N,I,6
+D,UK,uk-P-117,M,1919,A,P,A,Definite,1,N,I,6
+D,UK,uk-P-122,M,1925,T,P,A,Definite,1,I,I,6
+D,UK,uk-V-104,M,1929,A,P,A,Definite,1,N,I,6
+D,UK,uk-X-97,F,1924,C,N,A,Definite-pn,1,N,I,6
+D,UK,uk-Y-51,F,1957,A,P,A,Definite,1,N,I,6
+D,UK,uk-Y-95,M,1983,A,P,A,Definite,1,N,I,6
+D,UK,uk-Y-33,F,1941,T,P,A,Definite,1,I,I,7
+D,UK,uk-Y-108,F,1938,A,P,A,Definite,1,N,I,6
+D,UK,uk-Y-110,F,1976,A,P,A,Definite,1,N,I,6
+D,UK,uk-Y-186,F,1933,A,P,A,Definite,1,N,I,6
+D,UK,uk-Y-112,F,1929,C,P,A,Definite,1,N,I,6
+D,UK,uk-Y-122,F,1952,C,P,A,Definite,1,N,I,6
+D,UK,uk-A-75,M,1921,A,N,C,Definite,2,N,I,4
+D,UK,uk-A-100,M,1933,T,P,A,Definite,1,N,I,1
+D,UK,uk-A-116,F,1913,T,P,A,Definite,1,N,I,7
+D,UK,uk-A-119,M,1934,A,P,A,Definite,1,N,I,7
+D,UK,uk-B-98,M,1915,T,P,A,Definite,1,N,I,7
+D,UK,uk-H-101,M,1954,T,P,A,Definite,1,N,I,7
+D,UK,uk-H-115,F,1942,A,N,A,Definite-pn,2,N,I,7
+D,UK,uk-H-116,M,1964,T,P,A,Definite,1,N,I,7
+D,UK,uk-H-120,M,1936,T,P,A,Definite,1,N,I,7
+D,UK,uk-M-52,F,1948,T,P,A,Definite,1,N,I,7
+D,UK,uk-M-70,M,1980,A,P,A,Definite,1,N,I,7
+D,UK,uk-M-105,M,1927,T,P,A,Definite,1,N,I,7
+D,UK,uk-M-117,F,1935,T,P,A,Definite,1,N,I,7
+D,UK,uk-M-117,F,1935,A,P,A,Definite,1,N,I,7
+D,UK,uk-M-121,M,1943,T,P,A,Definite,1,N,I,7
+D,UK,uk-P-36,F,1934,C,P,A,Definite,1,N,I,7
+D,UK,uk-P-98,M,1931,A,P,A,Definite,1,N,I,7
+D,UK,uk-P-108,F,1943,T,P,A,Definite,1,N,I,7
+D,UK,uk-V-103,M,1936,C,P,A,Definite,1,N,I,7
+D,UK,uk-Y-103,F,1931,T,P,A,Definite,1,N,I,7
+D,UK,uk-Y-103,F,1931,A,P,A,Definite,1,N,I,5
+D,UK,uk-Y-106,M,1931,T,P,A,Definite,1,N,I,7
+D,UK,uk-Y-107,F,1916,T,P,A,Definite,1,N,I,7
+D,UK,uk-Y-81,F,1940,A,P,A,Definite,1,N,I,7
+D,UK,uk-Y-118,F,1924,T,P,A,Definite,1,N,I,7
+D,UK,uk-A-100,M,1933,C,P,A,Definite,1,N,I,8
+D,UK,uk-A-100,M,1933,A,N,A,Indefinite,1,N,I,8
+D,UK,uk-A-102,F,1925,T,P,A,Definite,1,N,I,8
+D,UK,uk-A-75,M,1921,T,P,A,Definite,1,N,I,9
+D,UK,uk-B-97,F,1919,C,P,A,Definite,1,N,I,8
+D,UK,uk-C-102,M,1927,T,P,A,Definite,1,N,I,8
+D,UK,uk-C-104,M,1925,A,P,A,Definite,1,I,I,8
+D,UK,uk-C-107,M,1920,A,P,A,Definite,1,N,I,8
+D,UK,uk-D-97,F,1939,T,P,A,Definite,1,N,I,8
+D,UK,uk-H-101,M,1954,A,P,A,Definite,1,N,T,8
+D,UK,uk-H-107,F,1961,T,P,A,Definite,1,N,I,8
+D,UK,uk-H-116,M,1964,A,P,A,Definite,1,N,I,8
+D,UK,uk-M-108,M,1925,T,P,A,Definite,1,N,I,8
+D,UK,uk-M-110,F,1936,T,P,A,Definite,1,N,I,8
+D,UK,uk-P-104,M,1933,T,P,A,Definite,1,N,I,6
+D,UK,uk-P-121,F,1921,T,P,A,Definite,1,N,I,8
+D,UK,uk-V-103,M,1936,A,P,A,Definite,1,N,T,8
+D,UK,uk-Y-54,F,1956,A,P,A,Definite,1,N,I,4
+D,UK,uk-Y-182,F,1953,T,P,A,Definite,1,I,I,9
+D,UK,uk-Y-73,F,1932,C,N,A,Definite-pn,1,N,I,8
+D,UK,uk-Y-113,M,1931,A,P,A,Definite,1,N,I,2
+D,UK,uk-Y-120,F,1928,C,P,A,Definite,1,N,I,8
+D,UK,uk-Y-90,F,1981,T,P,A,Definite,1,N,I,8
+D,UK,uk-M-68,M,1982,A,P,A,Definite,1,N,I,9
+D,UK,uk-X-103,M,1926,C,P,A,Definite,1,N,I,8
+D,UK,uk-X-103,M,1926,A,P,A,Definite,1,N,I,9
+D,UK,uk-Y-162,M,1937,T,P,A,Definite,1,N,I,8
+D,UK,uk-C-102,M,1927,C,P,A,Definite,1,N,I,10
+D,UK,uk-H-111,F,1974,A,P,A,Definite,1,N,I,11
+D,UK,uk-Y-86,M,1950,T,P,A,Definite,1,N,I,10
+D,UK,uk-P-63,F,1926,T,P,A,Definite,1,N,I,11
+D,UK,uk-M-121,M,1943,C,P,A,Definite,1,N,I,8
+D,UK,uk-Y-103,F,1931,C,P,A,Definite,1,N,I,12
+D,UK,uk-C-105,M,1919,T,P,A,Definite,1,N,I,13
+D,UK,uk-Y-97,F,1941,T,P,A,Definite,1,N,I,13
+D,UK,uk-plus-193,M,1926,A,P,A,Definite,1,N,I,6
+D,US,1002,F,1963,T,P,A,Definite,1,I,I,1
+D,US,1016,F,1945,T,P,A,Definite,1,P,I,1
+D,US,1026,F,1957,A,P,A,Definite,1,N,I,1
+D,US,1031,F,1940,A,P,A,Definite,1,N,I,1
+D,US,1033,F,1965,T,P,A,Definite,1,I,I,1
+D,US,1050,M,1950,A,P,A,Definite,1,N,I,1
+D,US,1053,F,1967,T,P,A,Definite,1,I,I,1
+D,US,1061,M,1957,T,P,A,Definite,1,N,I,1
+D,US,1083,F,1962,T,P,A,Definite,1,I,I,1
+D,US,1083,F,1962,T,P,L,Definite,1,N,I,1
+D,US,1083,F,1962,T,P,L,Definite,1,N,I,1
+D,US,1086,F,1965,A,P,I,Definite,1,N,I,2
+D,US,1090,M,1964,C,P,A,Definite,1,N,I,1
+D,US,1093,F,1960,T,P,A,Definite,1,D,I,1
+D,US,1094,F,1960,T,P,A,Definite,1,N,I,1
+D,US,1094,F,1960,T,N,A,Definite,2,N,I,1
+D,US,1096,F,1963,T,P,A,Definite,1,N,I,1
+D,US,1104,M,1938,C,P,I,Definite,1,N,I,1
+D,US,1104,M,1938,T,P,L,Definite,1,N,I,1
+D,US,1106,F,1964,T,P,A,Definite,1,I,I,1
+D,US,1112,F,1956,A,P,A,Definite,1,N,I,1
+D,US,1115,M,1958,A,P,A,Definite,1,N,I,1
+D,US,1116,M,1955,A,P,A,Definite,1,D,I,1
+D,US,1120,F,1969,T,P,A,Definite,1,N,I,1
+D,US,1121,M,1937,A,P,A,Definite,1,N,I,1
+D,US,1123,F,1956,A,P,A,Definite,1,N,I,1
+D,US,1123,F,1956,T,P,A,Definite,1,N,I,1
+D,US,1126,F,1963,T,P,A,Definite,1,N,I,1
+D,US,1126,F,1963,A,P,A,Definite,1,N,I,1
+D,US,1151,M,1953,T,P,L,Definite,1,N,I,1
+D,US,1151,M,1953,A,P,A,Definite,1,N,I,1
+D,US,1155,F,1941,A,P,A,Definite,1,N,I,1
+D,US,1157,F,1944,A,N,A,Indefinite,4,N,I,1
+D,US,1171,M,1956,A,N,A,Definite,2,N,I,1
+D,US,1175,F,1956,T,N,A,Definite,2,I,I,1
+D,US,1175,F,1956,A,P,A,Definite,1,N,I,1
+D,US,1179,F,1959,A,P,A,Definite,1,I,I,1
+D,US,1190,M,1941,A,P,A,Definite,1,N,I,1
+D,US,1195,M,1947,A,P,A,Definite,1,N,I,1
+D,US,1209,M,1954,A,N,A,Definite,6,N,I,1
+D,US,1224,F,1959,T,P,A,Definite,1,I,I,1
+D,US,1235,F,1957,A,N,A,Definite,2,N,I,1
+D,US,1249,F,1954,A,N,A,Indefinite,1,N,I,1
+D,US,1249,F,1954,T,P,I,Definite,1,N,I,1
+D,US,1251,F,1945,T,P,A,Definite,1,N,I,1
+D,US,1251,F,1945,A,P,A,Definite,1,N,I,1
+D,US,1252,F,1933,A,P,A,Definite,1,N,I,1
+D,US,1253,F,1958,A,P,A,Definite,1,N,I,1
+D,US,1253,F,1958,A,P,A,Definite,1,N,I,1
+D,US,1255,M,1953,A,P,A,Definite,1,N,I,1
+D,US,1313,F,1956,A,P,A,Definite,1,N,I,1
+D,US,1313,F,1956,A,P,A,Definite,1,N,I,1
+D,US,1320,F,1962,T,P,A,Definite,1,D,I,1
+D,US,1324,F,1954,A,P,A,Definite,1,N,I,1
+D,US,1344,F,1935,A,P,A,Definite,1,N,I,1
+D,US,1352,F,1959,A,N,A,Indefinite,1,N,I,1
+D,US,1359,M,1952,A,N,A,Definite,2,D,I,1
+D,US,1362,F,1942,T,P,A,Definite,1,I,I,1
+D,US,1362,F,1942,A,P,A,Definite,1,N,I,1
+D,US,1362,F,1942,A,P,A,Definite,1,N,I,1
+D,US,1366,F,1945,A,N,A,Indefinite,2,N,I,1
+D,US,1378,M,1940,T,P,A,Definite,1,I,I,1
+D,US,1386,F,1958,T,P,A,Definite,1,N,I,1
+D,US,1394,F,1931,A,P,A,Definite,1,I,I,1
+D,US,1404,F,1968,T,P,A,Definite,1,N,I,1
+D,US,1408,F,1961,A,P,A,Definite,1,N,I,1
+D,US,1408,F,1961,T,P,A,Definite,1,N,I,1
+D,US,1408,F,1961,T,P,A,Definite,1,D,I,1
+D,US,1410,F,1955,A,P,I,Definite,1,N,I,1
+D,US,1438,M,1959,A,P,I,Definite,1,N,I,1
+D,US,1438,M,1959,T,N,A,Indefinite,1,N,I,1
+D,US,1446,M,1969,A,P,A,Definite,1,N,I,1
+D,US,1463,M,1955,A,P,C,Definite,1,N,I,1
+D,US,1464,M,1959,A,P,I,Definite,1,N,I,1
+D,US,1481,F,1935,A,P,A,Definite,1,N,I,1
+D,US,1496,M,1970,A,P,I,Definite,1,D,I,1
+D,US,1502,F,1962,T,P,A,Definite,1,N,I,1
+D,US,1504,F,1943,T,N,A,Definite,3,I,A,1
+D,US,1525,M,1959,A,P,A,Definite,1,N,I,1
+D,US,1533,M,1965,C,P,A,Definite,1,N,I,1
+D,US,1549,M,1950,A,P,A,Definite,1,N,I,1
+D,US,1556,M,1961,A,P,A,Definite,1,D,I,1
+D,US,1561,M,1951,A,P,A,Definite,1,N,I,1
+D,US,1602,F,1963,A,P,A,Definite,1,N,I,1
+D,US,1624,M,1943,T,P,A,Definite,1,N,I,1
+D,US,1626,F,1953,A,P,A,Definite,1,N,I,1
+D,US,1643,M,1955,A,P,A,Definite,1,N,I,1
+D,US,1651,M,1969,T,P,A,Definite,1,N,I,1
+D,US,1697,F,1940,T,P,A,Definite,1,I,I,1
+D,US,1002,F,1963,C,P,A,Definite,1,N,I,2
+D,US,1004,F,1958,A,P,I,Definite,1,N,I,2
+D,US,1010,M,1932,A,P,I,Definite,1,N,I,2
+D,US,1010,M,1932,T,P,A,Definite,1,N,L,2
+D,US,1010,M,1932,A,P,A,Definite,1,N,I,2
+D,US,1014,F,1947,A,N,A,Indefinite,2,N,I,2
+D,US,1014,F,1947,C,P,A,Definite,1,N,I,2
+D,US,1016,F,1945,A,P,A,Definite,1,N,I,2
+D,US,1016,F,1945,T,P,A,Definite,1,N,I,2
+D,US,1016,F,1945,A,P,A,Definite,1,N,I,2
+D,US,1016,F,1945,A,P,A,Definite,1,N,I,2
+D,US,1018,F,1962,A,N,A,Indefinite,2,N,I,2
+D,US,1018,F,1962,A,P,A,Definite,1,N,I,2
+D,US,1019,M,1941,A,I,A,Definite,1,N,I,2
+D,US,1019,M,1941,A,P,A,Definite,1,N,I,2
+D,US,1019,M,1941,T,P,A,Definite,1,N,I,2
+D,US,1019,M,1941,C,P,A,Definite,1,N,I,2
+D,US,1023,M,1939,A,P,A,Definite,1,N,I,2
+D,US,1024,M,1964,A,P,L,Definite,1,N,I,2
+D,US,1025,M,1953,A,P,C,Definite,1,N,I,2
+D,US,1026,F,1957,A,P,A,Definite,1,N,I,2
+D,US,1031,F,1940,A,P,I,Definite,1,N,T,3
+D,US,1033,F,1965,A,N,A,Definite,2,N,I,2
+D,US,1035,F,1953,A,P,A,Definite,1,N,I,2
+D,US,1035,F,1953,A,P,A,Definite,1,N,I,2
+D,US,1039,M,1943,A,P,A,Definite,1,N,I,2
+D,US,1041,M,1936,A,P,A,Definite,1,N,I,2
+D,US,1041,M,1936,A,P,A,Definite,1,N,I,2
+D,US,1042,F,1938,C,P,A,Definite,1,N,I,2
+D,US,1043,F,1936,A,N,C,Indefinite,1,N,I,2
+D,US,1043,F,1936,A,P,I,Definite,1,N,I,2
+D,US,1051,M,1954,C,P,A,Definite,1,N,I,2
+D,US,1052,M,1930,A,P,A,Definite,1,N,T,2
+D,US,1052,M,1930,A,P,A,Definite,1,N,I,2
+D,US,1052,M,1930,A,P,A,Definite,1,N,I,2
+D,US,1053,F,1967,C,P,A,Definite,1,N,I,2
+D,US,1055,F,1965,T,P,A,Definite,1,N,I,2
+D,US,1056,M,1948,A,P,A,Definite,1,N,I,2
+D,US,1056,M,1948,T,P,A,Definite,1,N,I,2
+D,US,1059,M,1963,A,P,A,Definite,1,N,I,2
+D,US,1059,M,1963,A,P,A,Definite,1,N,I,2
+D,US,1059,M,1963,T,P,A,Definite,1,N,I,2
+D,US,1060,F,1942,A,P,A,Definite,1,N,I,2
+D,US,1061,M,1957,A,P,A,Definite,1,N,I,2
+D,US,1061,M,1957,A,P,A,Definite,1,N,I,2
+D,US,1064,F,1951,T,P,A,Definite,1,N,I,2
+D,US,1073,M,1967,A,P,A,Definite,1,N,I,1
+D,US,1073,M,1967,A,P,A,Definite,1,N,I,2
+D,US,1074,F,1968,A,P,A,Definite,1,N,I,2
+D,US,1083,F,1962,T,P,A,Definite,1,N,I,2
+D,US,1084,M,1959,A,P,A,Definite,1,N,I,2
+D,US,1084,M,1959,A,P,A,Definite,1,N,I,2
+D,US,1085,M,1947,A,I,I,Indefinite,1,N,I,2
+D,US,1085,M,1947,A,P,A,Definite,1,N,T,2
+D,US,1087,M,1958,A,N,A,Definite,2,N,I,2
+D,US,1091,F,1942,A,P,A,Definite,1,N,A,2
+D,US,1093,F,1960,A,P,A,Definite,1,N,I,2
+D,US,1093,F,1960,C,P,A,Definite,1,N,I,2
+D,US,1093,F,1960,A,P,A,Definite,1,N,T,2
+D,US,1093,F,1960,A,P,A,Definite,1,N,I,2
+D,US,1096,F,1963,A,P,I,Definite,1,N,I,2
+D,US,1096,F,1963,T,P,C,Definite,1,N,I,2
+D,US,1098,F,1957,A,P,A,Definite,1,N,I,2
+D,US,1100,F,1962,A,P,A,Definite,1,N,I,2
+D,US,1102,M,1965,A,D,I,Definite,1,N,I,2
+D,US,1104,M,1938,T,P,A,Definite,1,N,I,2
+D,US,1104,M,1938,A,P,I,Definite,1,N,I,2
+D,US,1104,M,1938,A,P,A,Definite,1,N,I,2
+D,US,1104,M,1938,A,P,A,Definite,1,N,T,2
+D,US,1104,M,1938,C,P,A,Definite,1,N,I,2
+D,US,1104,M,1938,T,P,A,Definite,1,N,I,2
+D,US,1106,F,1964,A,P,A,Definite,1,N,I,2
+D,US,1107,F,1961,T,P,A,Definite,1,N,I,2
+D,US,1108,M,1950,A,P,A,Definite,1,N,I,2
+D,US,1108,M,1950,A,P,A,Definite,1,N,T,2
+D,US,1108,M,1950,A,P,A,Definite,1,N,T,7
+D,US,1110,M,1961,A,P,I,Definite,1,N,I,2
+D,US,1110,M,1961,A,P,A,Definite,1,N,I,2
+D,US,1112,F,1956,A,P,I,Definite,1,N,I,2
+D,US,1114,F,1957,A,P,A,Definite,1,N,I,2
+D,US,1115,M,1958,A,N,A,Definite,3,I,I,2
+D,US,1115,M,1958,A,P,A,Definite,1,N,I,2
+D,US,1117,M,1950,A,P,I,Definite,1,N,I,3
+D,US,1117,M,1950,A,P,A,Definite,1,N,I,2
+D,US,1120,F,1969,A,N,A,Indefinite,2,N,I,2
+D,US,1120,F,1969,A,P,A,Definite,1,I,I,2
+D,US,1120,F,1969,T,P,A,Definite,1,N,I,2
+D,US,1121,M,1937,A,P,A,Definite,1,N,I,2
+D,US,1121,M,1937,A,P,A,Definite,1,N,I,2
+D,US,1121,M,1937,T,P,A,Definite,1,N,I,2
+D,US,1122,M,1964,T,P,A,Definite,1,N,I,2
+D,US,1122,M,1964,A,P,A,Definite,1,N,I,2
+D,US,1122,M,1964,A,P,A,Definite,1,N,I,2
+D,US,1124,M,1960,A,P,A,Definite,1,N,I,2
+D,US,1127,M,1933,A,P,A,Definite,1,N,I,2
+D,US,1127,M,1933,A,P,A,Definite,1,N,T,2
+D,US,1128,M,1933,A,P,A,Definite,1,N,I,2
+D,US,1128,M,1933,A,P,A,Definite,1,N,I,2
+D,US,1130,F,1941,A,P,I,Definite,1,N,I,2
+D,US,1130,F,1941,T,P,A,Definite,1,N,I,2
+D,US,1130,F,1941,A,P,A,Definite,1,N,I,2
+D,US,1132,F,1942,A,P,I,Definite,1,N,I,2
+D,US,1132,F,1942,A,P,I,Definite,1,N,I,2
+D,US,1132,F,1942,C,P,A,Definite,1,N,I,2
+D,US,1138,F,1961,A,P,A,Definite,1,N,I,2
+D,US,1139,M,1956,A,P,A,Definite,1,N,I,2
+D,US,1139,M,1956,A,P,I,Definite,1,N,I,2
+D,US,1139,M,1956,A,N,A,Definite,2,N,I,2
+D,US,1139,M,1956,A,P,L,Definite,1,N,I,2
+D,US,1139,M,1956,A,P,A,Definite,1,N,I,2
+D,US,1139,M,1956,A,P,A,Definite,1,N,I,2
+D,US,1141,M,1962,A,P,A,Definite,1,N,I,2
+D,US,1141,M,1962,T,P,A,Definite,1,N,I,2
+D,US,1141,M,1962,A,P,A,Definite,1,N,I,2
+D,US,1145,M,1969,C,P,A,Definite,1,N,I,2
+D,US,1146,M,1961,A,P,A,Definite,1,N,I,2
+D,US,1146,M,1961,T,P,A,Definite,1,N,I,2
+D,US,1146,M,1961,A,P,A,Definite,1,N,I,2
+D,US,1146,M,1961,A,P,A,Definite,1,N,I,2
+D,US,1146,M,1961,T,P,A,Definite,1,N,I,2
+D,US,1147,M,1942,A,P,A,Definite,1,N,I,2
+D,US,1151,M,1953,A,P,A,Definite,1,N,I,2
+D,US,1151,M,1953,A,P,A,Definite,1,N,I,1
+D,US,1151,M,1953,A,P,I,Definite,1,N,I,2
+D,US,1151,M,1953,A,N,A,Definite-pn,2,N,I,2
+D,US,1151,M,1953,A,P,A,Definite,1,N,I,2
+D,US,1151,M,1953,A,P,L,Definite,1,N,I,2
+D,US,1151,M,1953,T,P,A,Definite,1,N,I,2
+D,US,1155,F,1941,A,P,A,Definite,1,N,I,2
+D,US,1155,F,1941,C,P,I,Definite,1,I,I,2
+D,US,1155,F,1941,A,P,A,Definite,1,N,I,2
+D,US,1156,F,1946,A,P,A,Definite,1,N,I,2
+D,US,1159,M,1944,T,P,A,Definite,1,N,I,2
+D,US,1167,M,1969,A,P,I,Definite,1,N,I,2
+D,US,1167,M,1969,T,P,A,Definite,1,N,I,2
+D,US,1167,M,1969,T,P,A,Definite,1,N,I,2
+D,US,1167,M,1969,T,P,A,Definite,1,N,I,2
+D,US,1167,M,1969,T,P,A,Definite,1,N,T,2
+D,US,1170,M,1952,T,P,A,Definite,1,N,I,2
+D,US,1170,M,1952,C,P,A,Definite,1,N,I,2
+D,US,1174,M,1962,A,N,A,Definite,2,N,I,2
+D,US,1174,M,1962,A,P,A,Definite,1,N,I,2
+D,US,1174,M,1962,A,P,A,Definite,1,N,I,2
+D,US,1175,F,1956,A,P,A,Definite,1,N,I,2
+D,US,1175,F,1956,A,P,A,Definite,1,N,I,2
+D,US,1175,F,1956,A,P,A,Definite,1,N,I,2
+D,US,1175,F,1956,T,P,A,Definite,1,N,I,2
+D,US,1176,F,1959,A,P,I,Definite,1,N,I,2
+D,US,1180,F,1934,T,P,C,Definite,1,N,I,2
+D,US,1181,M,1958,T,P,A,Definite,1,N,I,2
+D,US,1181,M,1958,A,P,A,Definite,1,N,I,2
+D,US,1181,M,1958,T,P,A,Definite,1,N,I,2
+D,US,1188,M,1944,A,P,A,Definite,1,N,I,2
+D,US,1199,M,1941,T,N,A,Definite,2,N,I,4
+D,US,1199,M,1941,T,P,A,Definite,1,N,I,2
+D,US,1212,M,1943,A,P,A,Definite,1,N,I,2
+D,US,1212,M,1943,C,P,A,Definite,1,N,I,2
+D,US,1214,F,1960,A,N,A,Indefinite,2,N,I,2
+D,US,1214,F,1960,T,P,A,Definite,1,N,I,2
+D,US,1219,M,1953,A,P,I,Definite,1,N,I,2
+D,US,1219,M,1953,A,P,A,Definite,1,N,I,2
+D,US,1219,M,1953,A,I,A,Indefinite,1,N,I,2
+D,US,1219,M,1953,C,P,A,Definite,1,N,I,2
+D,US,1225,F,1946,T,P,A,Definite,1,N,I,2
+D,US,1225,F,1946,T,P,A,Definite,1,N,I,2
+D,US,1225,F,1946,A,P,A,Definite,1,N,I,2
+D,US,1226,F,1970,A,P,A,Definite,1,N,I,2
+D,US,1229,F,1950,T,P,A,Definite,1,N,I,2
+D,US,1230,F,1961,A,N,A,Definite,2,N,T,2
+D,US,1232,M,1958,T,P,A,Definite,1,I,I,2
+D,US,1233,F,1931,A,P,A,Definite,1,N,I,2
+D,US,1235,F,1957,T,P,A,Definite,1,N,I,2
+D,US,1235,F,1957,T,P,A,Definite,1,N,I,2
+D,US,1236,F,1965,A,I,A,Indefinite,1,N,T,3
+D,US,1237,M,1965,A,I,A,Definite,1,N,I,2
+D,US,1237,M,1965,T,P,A,Definite,1,N,I,2
+D,US,1237,M,1965,A,P,A,Definite,1,N,I,2
+D,US,1248,F,1936,A,P,A,Definite,1,N,I,2
+D,US,1248,F,1936,A,P,A,Definite,1,N,I,2
+D,US,1248,F,1936,A,P,A,Definite,1,N,I,2
+D,US,1248,F,1936,A,P,A,Definite,1,N,I,2
+D,US,1248,F,1936,C,P,A,Definite,1,N,I,2
+D,US,1249,F,1954,C,P,A,Definite,1,N,I,2
+D,US,1252,F,1933,A,P,A,Definite,1,N,I,2
+D,US,1252,F,1933,A,P,A,Definite,1,N,I,2
+D,US,1255,M,1953,A,P,I,Definite,1,N,I,2
+D,US,1258,M,1956,A,P,A,Definite,1,N,I,2
+D,US,1259,F,1963,A,P,A,Definite,1,N,I,2
+D,US,1263,F,1934,A,N,A,Definite,2,N,I,2
+D,US,1263,F,1934,A,P,A,Definite,1,N,I,2
+D,US,1270,M,1965,A,P,A,Definite,1,N,T,2
+D,US,1279,M,1935,A,P,A,Definite,1,N,I,2
+D,US,1285,F,1939,C,P,A,Definite,1,N,I,2
+D,US,1292,F,1942,A,P,A,Definite,1,N,I,2
+D,US,1297,F,1965,C,P,A,Definite,1,N,I,2
+D,US,1298,F,1941,A,P,I,Definite,1,N,I,2
+D,US,1304,M,1950,A,P,I,Definite,1,N,I,2
+D,US,1304,M,1950,A,P,I,Definite,1,N,I,2
+D,US,1304,M,1950,A,P,I,Definite,1,N,I,2
+D,US,1307,F,1953,A,P,A,Definite,1,D,I,2
+D,US,1312,M,1951,A,P,A,Definite,1,N,I,2
+D,US,1312,M,1951,A,P,A,Definite,1,N,I,2
+D,US,1325,M,1960,A,P,A,Definite,1,N,I,2
+D,US,1327,F,1944,A,P,A,Definite,1,N,I,2
+D,US,1341,F,1944,A,I,A,Indefinite,1,N,T,2
+D,US,1349,F,1965,A,P,A,Definite,1,N,I,2
+D,US,1349,F,1965,A,P,A,Definite,1,N,I,2
+D,US,1349,F,1965,T,P,A,Definite,1,N,A,2
+D,US,1352,F,1959,A,P,I,Definite,1,N,I,2
+D,US,1357,F,1936,C,P,A,Definite,1,N,I,2
+D,US,1359,M,1952,A,P,A,Definite,1,N,I,2
+D,US,1367,F,1955,T,P,A,Definite,1,N,I,2
+D,US,1370,M,1964,A,P,A,Definite,1,N,I,2
+D,US,1371,F,1970,T,P,A,Definite,1,N,I,2
+D,US,1374,M,1961,C,P,A,Definite,1,N,I,2
+D,US,1378,M,1940,A,P,A,Definite,1,N,I,2
+D,US,1383,M,1947,A,P,A,Definite,1,N,I,2
+D,US,1388,M,1967,A,P,A,Definite,1,N,I,2
+D,US,1390,M,1942,A,P,A,Definite,1,N,I,2
+D,US,1390,M,1942,A,P,A,Definite,1,N,I,2
+D,US,1400,F,1942,T,P,A,Definite,1,N,I,2
+D,US,1402,M,1924,T,P,A,Definite,1,N,A,2
+D,US,1402,M,1924,A,N,C,Definite,4,N,T,2
+D,US,1402,M,1924,C,P,A,Definite,1,N,I,2
+D,US,1405,F,1955,C,P,A,Definite,1,N,I,2
+D,US,1407,M,1949,A,N,I,Definite,2,N,I,2
+D,US,1408,F,1961,C,P,A,Definite,1,N,I,2
+D,US,1411,M,1951,A,P,A,Definite,1,N,I,2
+D,US,1413,M,1940,A,P,A,Definite,1,N,I,2
+D,US,1415,F,1939,T,P,A,Definite,1,N,I,2
+D,US,1417,F,1962,C,P,C,Definite,1,N,I,2
+D,US,1417,F,1962,C,P,A,Definite,1,N,I,2
+D,US,1429,M,1964,A,P,A,Definite,1,N,I,2
+D,US,1436,M,1940,T,I,A,Definite,1,N,I,4
+D,US,1436,M,1940,A,P,I,Definite,1,N,I,2
+D,US,1436,M,1940,A,D,I,Definite,1,N,I,2
+D,US,1436,M,1940,C,P,A,Definite,1,N,I,2
+D,US,1437,F,1941,C,P,A,Definite,1,N,I,2
+D,US,1438,M,1959,A,P,A,Definite,1,N,I,2
+D,US,1440,F,1945,T,P,A,Definite,1,N,I,2
+D,US,1440,F,1945,T,P,A,Definite,1,N,I,2
+D,US,1443,F,1944,A,P,A,Definite,1,N,T,2
+D,US,1444,F,1962,A,P,A,Definite,1,I,I,2
+D,US,1446,M,1969,A,P,A,Definite,1,N,I,2
+D,US,1449,M,1969,A,P,I,Definite,1,N,I,2
+D,US,1449,M,1969,A,N,I,Definite,2,N,I,2
+D,US,1450,F,1927,T,N,A,Definite,2,N,I,2
+D,US,1455,F,1960,C,P,A,Definite,1,N,I,2
+D,US,1457,M,1954,C,P,A,Definite,1,N,I,2
+D,US,1462,M,1961,A,P,A,Definite,1,N,I,2
+D,US,1464,M,1959,A,P,A,Definite,1,N,I,2
+D,US,1465,F,1942,A,P,A,Definite,1,N,I,2
+D,US,1465,F,1942,A,P,A,Definite,1,N,I,2
+D,US,1465,F,1942,A,P,A,Definite,1,N,I,2
+D,US,1469,F,1961,T,P,A,Definite,1,N,I,2
+D,US,1476,M,1955,A,P,A,Definite,1,N,I,2
+D,US,1477,M,1957,T,P,A,Definite,1,N,I,2
+D,US,1477,M,1957,T,P,A,Definite,1,N,I,2
+D,US,1480,F,1959,C,P,A,Definite,1,N,I,2
+D,US,1481,F,1935,A,P,A,Definite,1,N,I,2
+D,US,1481,F,1935,A,P,A,Definite,1,N,I,2
+D,US,1481,F,1935,A,P,A,Definite,1,N,I,2
+D,US,1485,M,1956,A,P,A,Definite,1,N,I,2
+D,US,1486,M,1963,A,P,I,Definite,1,N,I,2
+D,US,1487,M,1967,T,P,A,Definite,1,N,I,2
+D,US,1487,M,1967,T,P,A,Definite,1,N,I,2
+D,US,1489,F,1961,A,P,A,Definite,1,N,I,2
+D,US,1490,M,1950,A,N,L,Definite-pn,1,N,I,2
+D,US,1495,F,1970,T,P,A,Definite,1,N,I,2
+D,US,1497,M,1932,C,P,A,Definite,1,N,I,2
+D,US,1498,F,1937,C,P,C,Definite,1,N,I,2
+D,US,1501,F,1962,A,P,A,Definite,1,I,I,2
+D,US,1504,F,1943,C,P,A,Definite,1,N,I,2
+D,US,1504,F,1943,T,P,A,Indefinite,3,N,I,2
+D,US,1507,F,1939,A,P,A,Definite,1,N,I,2
+D,US,1508,F,1963,A,P,A,Definite,1,N,I,2
+D,US,1513,F,1936,A,P,A,Definite,1,N,I,2
+D,US,1519,F,1971,C,P,A,Definite,1,N,I,2
+D,US,1521,F,1954,T,N,A,Definite,2,N,I,2
+D,US,1528,M,1940,T,P,A,Definite,1,N,I,2
+D,US,1528,M,1940,T,P,A,Definite,1,N,I,2
+D,US,1528,M,1940,C,P,A,Definite,1,N,I,2
+D,US,1531,M,1967,T,P,A,Definite,1,N,I,4
+D,US,1531,M,1967,A,P,A,Definite,1,N,I,2
+D,US,1533,M,1965,A,P,I,Definite,1,N,I,2
+D,US,1533,M,1965,C,P,A,Definite,1,N,I,2
+D,US,1539,M,1938,A,N,I,Indefinite,2,N,I,2
+D,US,1539,M,1938,A,N,I,Definite,2,N,I,2
+D,US,1543,M,1959,A,N,I,Definite,4,N,I,2
+D,US,1547,M,1965,C,P,A,Definite,1,N,I,2
+D,US,1555,M,1960,A,P,A,Definite,1,N,I,2
+D,US,1556,M,1961,T,P,A,Definite,1,N,I,2
+D,US,1564,M,1952,A,P,A,Definite,1,N,I,2
+D,US,1577,M,1962,T,P,A,Definite,1,N,I,2
+D,US,1587,M,1969,A,P,A,Definite,1,N,I,2
+D,US,1597,M,1962,A,P,A,Definite,1,N,I,2
+D,US,1602,F,1963,T,P,A,Definite,1,N,I,2
+D,US,1654,M,1959,C,P,A,Definite,1,N,I,2
+D,US,1676,M,1964,A,P,A,Definite,1,N,I,2
+D,US,1680,F,1950,T,P,A,Definite,1,N,I,2
+D,US,1684,F,1966,C,P,A,Definite,1,N,I,2
+D,US,1697,F,1940,A,P,A,Definite,1,N,I,2
+D,US,1002,F,1963,A,P,A,Definite,1,N,I,3
+D,US,1010,M,1932,A,P,A,Definite,1,N,I,3
+D,US,1011,F,1964,A,N,I,Definite,2,N,I,3
+D,US,1018,F,1962,T,P,A,Definite,1,D,I,3
+D,US,1019,M,1941,C,P,A,Definite,1,N,I,3
+D,US,1022,F,1959,C,P,A,Definite,1,N,I,3
+D,US,1022,F,1959,A,I,A,Indefinite,1,N,I,3
+D,US,1022,F,1959,C,P,C,Definite,1,N,I,3
+D,US,1025,M,1953,A,P,A,Definite,1,N,I,3
+D,US,1028,M,1965,A,P,A,Definite,1,N,I,3
+D,US,1028,M,1965,A,P,A,Definite,1,N,I,3
+D,US,1032,F,1943,T,I,A,Definite,2,N,I,3
+D,US,1032,F,1943,A,P,A,Definite,1,N,I,3
+D,US,1033,F,1965,T,P,A,Definite,1,N,I,3
+D,US,1033,F,1965,T,P,A,Definite,1,N,I,3
+D,US,1039,M,1943,A,P,A,Definite,1,N,I,3
+D,US,1041,M,1936,T,P,A,Definite,1,N,I,3
+D,US,1042,F,1938,A,P,A,Definite,1,N,I,3
+D,US,1052,M,1930,A,P,A,Definite,1,N,T,2
+D,US,1056,M,1948,A,P,I,Definite,1,N,T,3
+D,US,1056,M,1948,A,P,I,Definite,1,N,I,3
+D,US,1064,F,1951,A,P,A,Definite,1,N,L,3
+D,US,1070,M,1962,A,P,I,Definite,1,N,I,3
+D,US,1073,M,1967,A,P,A,Definite,1,N,I,3
+D,US,1073,M,1967,T,P,A,Definite,1,N,I,3
+D,US,1083,F,1962,A,P,A,Definite,1,N,T,3
+D,US,1084,M,1959,A,P,A,Definite,1,N,I,3
+D,US,1089,F,1939,A,P,A,Definite,1,I,I,3
+D,US,1090,M,1964,A,N,A,Definite,2,I,I,3
+D,US,1091,F,1942,A,N,A,Definite,2,N,T,3
+D,US,1093,F,1960,T,P,A,Definite,1,N,I,3
+D,US,1098,F,1957,T,P,A,Definite,1,N,I,3
+D,US,1102,M,1965,A,N,A,Definite,3,N,T,3
+D,US,1104,M,1938,T,N,A,Indefinite,1,N,I,5
+D,US,1104,M,1938,T,P,A,Definite,1,N,I,3
+D,US,1106,F,1964,A,P,A,Definite,1,N,I,3
+D,US,1107,F,1961,T,P,A,Definite,1,N,I,3
+D,US,1107,F,1961,T,P,A,Definite,1,N,I,3
+D,US,1110,M,1961,A,P,A,Definite,1,N,I,3
+D,US,1116,M,1955,A,P,A,Definite,1,N,I,3
+D,US,1120,F,1969,T,P,A,Definite,1,N,I,3
+D,US,1122,M,1964,A,N,A,Definite,2,N,I,3
+D,US,1122,M,1964,A,P,A,Definite,1,N,I,3
+D,US,1122,M,1964,A,P,A,Definite,1,N,I,3
+D,US,1122,M,1964,A,P,A,Definite,1,N,I,3
+D,US,1122,M,1964,A,P,A,Definite,1,N,I,3
+D,US,1127,M,1933,A,P,A,Definite,1,N,I,3
+D,US,1128,M,1933,T,P,A,Definite,1,N,I,3
+D,US,1128,M,1933,A,P,I,Definite,1,N,I,3
+D,US,1130,F,1941,A,P,A,Definite,1,N,I,3
+D,US,1132,F,1942,T,P,A,Definite,1,N,I,3
+D,US,1138,F,1961,A,P,A,Definite,1,N,I,3
+D,US,1139,M,1956,A,P,A,Definite,1,N,I,3
+D,US,1139,M,1956,A,P,A,Definite,1,N,I,3
+D,US,1141,M,1962,A,N,A,Definite,2,N,I,3
+D,US,1142,M,1963,C,P,A,Definite,1,N,I,3
+D,US,1149,F,1954,T,P,A,Definite,1,N,I,3
+D,US,1149,F,1954,A,I,A,Indefinite,1,N,I,3
+D,US,1151,M,1953,A,P,A,Definite,1,N,I,3
+D,US,1153,F,1959,T,P,A,Definite,1,N,I,3
+D,US,1156,F,1946,C,P,A,Definite,1,N,I,3
+D,US,1157,F,1944,A,P,A,Definite,1,N,I,3
+D,US,1157,F,1944,A,P,A,Definite,1,N,I,3
+D,US,1167,M,1969,A,P,A,Definite,1,N,I,3
+D,US,1167,M,1969,A,P,A,Definite,1,N,I,3
+D,US,1167,M,1969,T,P,A,Definite,1,I,I,3
+D,US,1168,M,1949,T,P,A,Definite,1,N,I,5
+D,US,1175,F,1956,T,P,A,Definite,1,N,I,3
+D,US,1175,F,1956,A,P,A,Definite,1,N,I,3
+D,US,1176,F,1959,T,P,A,Definite,1,N,I,3
+D,US,1180,F,1934,A,P,A,Definite,1,N,I,3
+D,US,1181,M,1958,A,P,A,Definite,1,N,I,3
+D,US,1181,M,1958,A,P,A,Definite,1,N,I,3
+D,US,1190,M,1941,T,P,C,Definite,1,N,I,3
+D,US,1199,M,1941,T,P,A,Definite,1,N,I,3
+D,US,1208,F,1941,T,N,A,Indefinite,1,N,I,3
+D,US,1208,F,1941,T,P,L,Definite,1,N,I,3
+D,US,1209,M,1954,A,P,I,Definite,1,N,I,3
+D,US,1209,M,1954,A,P,A,Definite,1,N,I,3
+D,US,1209,M,1954,A,P,A,Definite,1,N,I,3
+D,US,1214,F,1960,T,P,A,Definite,1,N,I,3
+D,US,1225,F,1946,T,P,A,Definite,1,N,I,3
+D,US,1225,F,1946,A,P,A,Definite,1,N,I,3
+D,US,1229,F,1950,A,P,I,Definite,1,N,T,3
+D,US,1229,F,1950,C,P,A,Definite,1,N,I,3
+D,US,1232,M,1958,A,P,A,Definite,1,N,I,3
+D,US,1233,F,1931,A,P,I,Definite,1,N,I,3
+D,US,1233,F,1931,A,P,I,Definite,1,N,I,3
+D,US,1233,F,1931,A,P,I,Definite,1,N,I,3
+D,US,1235,F,1957,A,P,A,Definite,1,N,T,3
+D,US,1236,F,1965,A,P,I,Definite,1,N,I,3
+D,US,1239,M,1936,A,N,A,Indefinite,1,N,I,3
+D,US,1239,M,1936,A,P,A,Definite,1,N,I,3
+D,US,1248,F,1936,A,P,I,Definite,1,N,I,3
+D,US,1248,F,1936,T,P,A,Definite,1,N,I,3
+D,US,1253,F,1958,A,P,A,Definite,1,N,T,3
+D,US,1255,M,1953,A,P,A,Definite,1,N,I,3
+D,US,1257,M,1933,A,I,A,Definite,1,N,I,3
+D,US,1258,M,1956,A,P,A,Definite,1,N,I,3
+D,US,1259,F,1963,A,P,A,Definite,1,N,A,3
+D,US,1264,F,1943,A,P,A,Definite,1,N,I,3
+D,US,1266,F,1947,T,P,A,Definite,1,I,I,3
+D,US,1268,F,1961,A,P,A,Definite,1,N,I,3
+D,US,1281,F,1955,C,P,A,Definite,1,N,I,3
+D,US,1292,F,1942,A,P,A,Definite,1,N,T,3
+D,US,1300,F,1938,A,P,A,Definite,1,N,I,3
+D,US,1302,F,1947,A,P,A,Definite,1,N,T,3
+D,US,1302,F,1947,T,P,A,Definite,1,N,I,3
+D,US,1324,F,1954,A,P,A,Definite,1,N,T,3
+D,US,1341,F,1944,A,P,I,Definite,1,N,I,3
+D,US,1342,F,1937,A,P,A,Definite,1,N,I,3
+D,US,1344,F,1935,A,P,A,Definite,1,N,I,3
+D,US,1352,F,1959,T,P,A,Definite,1,N,I,3
+D,US,1361,F,1966,A,P,A,Definite,1,N,I,3
+D,US,1367,F,1955,A,P,A,Definite,1,N,I,3
+D,US,1367,F,1955,A,P,A,Definite,1,N,I,3
+D,US,1371,F,1970,A,P,A,Definite,1,N,I,3
+D,US,1381,F,1924,A,I,A,Indefinite,1,N,I,3
+D,US,1385,F,1956,A,I,A,Indefinite,1,N,I,3
+D,US,1385,F,1956,A,I,A,Indefinite,1,N,I,3
+D,US,1394,F,1931,A,P,A,Definite,1,N,I,3
+D,US,1394,F,1931,A,P,A,Definite,1,N,I,3
+D,US,1400,F,1942,A,P,A,Definite,1,N,I,3
+D,US,1406,M,1954,A,P,A,Definite,1,N,I,3
+D,US,1409,F,1941,T,P,A,Definite,1,N,A,3
+D,US,1412,F,1961,T,P,A,Definite,1,N,I,3
+D,US,1417,F,1962,A,P,A,Definite,1,N,I,3
+D,US,1420,M,1966,A,P,A,Definite,1,N,I,3
+D,US,1426,M,1952,A,P,A,Definite,1,N,I,3
+D,US,1429,M,1964,T,P,L,Definite,1,N,I,3
+D,US,1436,M,1940,T,P,A,Definite,1,N,I,3
+D,US,1437,F,1941,A,P,A,Definite,1,N,T,3
+D,US,1437,F,1941,C,P,A,Definite,1,N,I,3
+D,US,1444,F,1962,T,N,A,Definite,3,N,A,3
+D,US,1446,M,1969,C,P,A,Definite,1,N,I,3
+D,US,1447,F,1950,A,P,I,Definite,1,N,I,3
+D,US,1449,M,1969,A,P,A,Definite,1,N,I,3
+D,US,1450,F,1927,T,N,A,Definite,2,N,I,3
+D,US,1459,M,1947,A,P,A,Definite,1,N,I,3
+D,US,1467,M,1955,A,P,A,Definite,1,N,I,3
+D,US,1467,M,1955,T,P,A,Definite,1,I,I,3
+D,US,1470,M,1944,A,P,A,Definite,1,N,I,3
+D,US,1472,M,1950,A,P,A,Definite,1,N,I,3
+D,US,1473,F,1932,A,P,A,Definite,1,N,I,3
+D,US,1475,F,1958,A,N,C,Indefinite,2,N,I,3
+D,US,1476,M,1955,C,P,A,Definite,1,N,I,3
+D,US,1477,M,1957,T,P,A,Definite,1,N,I,3
+D,US,1481,F,1935,C,P,A,Definite,1,N,I,5
+D,US,1481,F,1935,T,P,A,Definite,1,I,I,3
+D,US,1481,F,1935,A,P,A,Definite,1,N,I,3
+D,US,1482,F,1970,T,N,A,Definite,4,P,I,3
+D,US,1485,M,1956,C,P,A,Definite,1,N,I,3
+D,US,1486,M,1963,T,P,A,Definite,1,N,I,5
+D,US,1487,M,1967,T,P,A,Definite,1,I,I,3
+D,US,1488,M,1947,A,P,A,Definite,1,N,I,3
+D,US,1497,M,1932,A,P,A,Definite,1,N,I,3
+D,US,1497,M,1932,A,P,A,Definite,1,N,T,3
+D,US,1516,M,1964,A,P,A,Definite,1,N,I,3
+D,US,1516,M,1964,A,P,A,Definite,1,N,I,3
+D,US,1525,M,1959,A,P,A,Definite,1,N,I,3
+D,US,1531,M,1967,A,P,A,Definite,1,N,I,3
+D,US,1533,M,1965,A,P,A,Definite,1,N,I,3
+D,US,1543,M,1959,T,P,A,Definite,1,D,I,3
+D,US,1555,M,1960,A,P,A,Definite,1,N,I,3
+D,US,1570,M,1961,A,P,A,Definite,1,N,I,3
+D,US,1573,M,1966,A,P,A,Definite,1,N,I,3
+D,US,1573,M,1966,A,P,A,Definite,1,N,T,3
+D,US,1577,M,1962,C,P,A,Definite,1,N,I,3
+D,US,1582,M,1953,A,P,A,Definite,1,N,T,3
+D,US,1586,M,1965,T,P,A,Definite,1,N,I,3
+D,US,1597,M,1962,A,P,A,Definite,1,N,I,3
+D,US,1613,M,1961,A,P,A,Definite,1,N,T,3
+D,US,1613,M,1961,A,P,A,Definite,1,N,T,3
+D,US,1661,M,1956,T,P,A,Definite,1,N,I,3
+D,US,1674,F,1946,A,P,A,Definite,1,N,I,3
+D,US,1680,F,1950,A,P,A,Definite,1,N,T,3
+D,US,1699,M,1964,T,P,A,Definite,1,N,I,3
+D,US,1002,F,1963,A,P,I,Definite,1,N,I,4
+D,US,1002,F,1963,A,P,A,Definite,1,N,I,4
+D,US,1007,F,1965,A,N,A,Indefinite,1,N,I,4
+D,US,1007,F,1965,A,P,A,Definite,1,N,I,4
+D,US,1010,M,1932,A,N,A,Definite,2,N,I,4
+D,US,1018,F,1962,A,P,A,Definite,1,N,I,4
+D,US,1018,F,1962,A,P,A,Definite,1,N,T,4
+D,US,1019,M,1941,A,P,A,Definite,1,N,I,4
+D,US,1025,M,1953,A,P,I,Definite,1,N,I,4
+D,US,1027,F,1961,A,N,A,Definite-pn,1,N,I,4
+D,US,1028,M,1965,A,P,A,Definite,1,N,A,4
+D,US,1028,M,1965,T,P,A,Definite,1,I,I,4
+D,US,1028,M,1965,A,P,A,Definite,1,N,I,4
+D,US,1028,M,1965,A,P,A,Definite,1,N,I,4
+D,US,1042,F,1938,A,P,A,Definite,1,N,I,4
+D,US,1051,M,1954,C,P,A,Definite,1,N,I,4
+D,US,1057,F,1963,A,P,A,Definite,1,N,I,4
+D,US,1059,M,1963,A,P,A,Definite,1,N,I,4
+D,US,1064,F,1951,T,P,A,Definite,1,N,I,4
+D,US,1071,F,1951,A,P,A,Definite,1,N,I,4
+D,US,1074,F,1968,A,P,A,Definite,1,N,I,4
+D,US,1083,F,1962,A,P,A,Definite,1,N,I,4
+D,US,1085,M,1947,A,P,A,Definite,1,N,I,4
+D,US,1087,M,1958,A,P,A,Definite,1,N,I,4
+D,US,1095,M,1958,A,P,A,Definite,1,N,I,4
+D,US,1096,F,1963,A,P,A,Definite,1,N,I,4
+D,US,1096,F,1963,A,P,A,Definite,1,N,I,4
+D,US,1103,M,1950,A,P,A,Definite,1,N,I,4
+D,US,1104,M,1938,T,P,A,Definite,1,N,I,4
+D,US,1104,M,1938,A,P,A,Definite,1,N,I,4
+D,US,1104,M,1938,A,P,A,Definite,1,N,T,4
+D,US,1104,M,1938,A,P,A,Definite,1,N,I,4
+D,US,1117,M,1950,T,P,A,Definite,1,N,I,4
+D,US,1119,M,1946,A,P,A,Definite,1,N,I,4
+D,US,1122,M,1964,A,P,A,Definite,1,N,I,4
+D,US,1122,M,1964,A,P,A,Definite,1,N,I,4
+D,US,1124,M,1960,A,P,A,Definite,1,N,I,4
+D,US,1127,M,1933,T,P,A,Definite,1,N,I,4
+D,US,1128,M,1933,T,P,A,Definite,1,N,I,4
+D,US,1138,F,1961,A,P,A,Definite,1,N,T,4
+D,US,1139,M,1956,A,P,A,Definite,1,N,I,4
+D,US,1141,M,1962,A,P,A,Definite,1,N,I,4
+D,US,1146,M,1961,A,N,A,Definite,2,N,I,4
+D,US,1148,F,1959,A,N,A,Indefinite,1,N,I,4
+D,US,1151,M,1953,T,P,A,Definite,1,N,I,4
+D,US,1155,F,1941,T,P,A,Definite,1,N,I,5
+D,US,1167,M,1969,T,P,A,Definite,1,N,I,1
+D,US,1171,M,1956,A,P,A,Definite,1,N,I,4
+D,US,1179,F,1959,A,N,I,Definite,2,N,I,4
+D,US,1181,M,1958,A,P,A,Definite,1,N,I,4
+D,US,1194,M,1963,A,P,A,Definite,1,N,I,4
+D,US,1204,F,1951,C,P,A,Definite,1,N,I,4
+D,US,1208,F,1941,C,P,A,Definite,1,N,I,4
+D,US,1214,F,1960,T,P,A,Definite,1,N,I,4
+D,US,1219,M,1953,T,I,A,Definite,1,N,I,4
+D,US,1225,F,1946,T,P,A,Definite,1,N,I,4
+D,US,1229,F,1950,C,P,A,Definite,1,N,I,4
+D,US,1238,F,1966,A,P,I,Definite,1,N,T,4
+D,US,1244,F,1937,A,P,A,Definite,1,N,I,4
+D,US,1244,F,1937,A,N,I,Indefinite,1,N,I,4
+D,US,1255,M,1953,A,P,A,Definite,1,N,I,4
+D,US,1257,M,1933,A,P,A,Definite,1,N,I,4
+D,US,1263,F,1934,A,P,A,Definite,1,N,I,4
+D,US,1268,F,1961,A,P,A,Definite,1,N,I,4
+D,US,1281,F,1955,T,P,A,Definite,1,N,I,4
+D,US,1281,F,1955,T,P,A,Definite,1,N,I,4
+D,US,1282,F,1945,T,P,A,Definite,1,N,I,4
+D,US,1291,F,1945,T,P,A,Definite,1,N,I,4
+D,US,1292,F,1942,A,P,A,Definite,1,N,I,4
+D,US,1300,F,1938,A,P,A,Definite,1,N,I,4
+D,US,1300,F,1938,A,P,A,Definite,1,N,I,4
+D,US,1300,F,1938,A,P,A,Definite,1,N,I,4
+D,US,1304,M,1950,A,P,A,Definite,1,N,I,4
+D,US,1307,F,1953,A,P,A,Definite,1,N,T,1
+D,US,1312,M,1951,C,P,A,Definite,1,N,I,4
+D,US,1313,F,1956,T,P,A,Definite,1,N,I,4
+D,US,1320,F,1962,A,P,I,Definite,1,N,I,4
+D,US,1321,M,1959,C,P,A,Definite,1,N,I,4
+D,US,1324,F,1954,C,P,A,Definite,1,N,I,4
+D,US,1349,F,1965,A,P,A,Definite,1,N,I,4
+D,US,1357,F,1936,A,P,A,Definite,1,N,I,4
+D,US,1359,M,1952,A,P,A,Definite,1,N,I,4
+D,US,1370,M,1964,A,P,A,Definite,1,N,I,4
+D,US,1381,F,1924,A,N,A,Definite-pn,2,N,I,4
+D,US,1385,F,1956,C,P,A,Definite,1,N,I,4
+D,US,1385,F,1956,A,P,A,Definite,1,N,I,4
+D,US,1389,F,1971,A,P,A,Definite,1,N,T,4
+D,US,1393,F,1935,A,P,I,Definite,1,N,I,4
+D,US,1394,F,1931,A,P,A,Definite,1,N,I,4
+D,US,1402,M,1924,A,P,A,Definite,1,N,I,4
+D,US,1406,M,1954,A,P,A,Definite,1,N,I,5
+D,US,1407,M,1949,A,N,I,Definite,2,N,I,4
+D,US,1408,F,1961,A,P,I,Definite,1,N,I,4
+D,US,1410,F,1955,A,N,A,Definite,2,N,I,4
+D,US,1410,F,1955,A,D,I,Definite,1,N,I,4
+D,US,1414,F,1941,C,P,A,Definite,1,N,I,4
+D,US,1418,M,1970,A,P,A,Definite,1,N,I,4
+D,US,1420,M,1966,A,P,A,Definite,1,N,I,4
+D,US,1421,M,1962,A,P,A,Definite,1,N,I,4
+D,US,1436,M,1940,T,P,A,Definite,1,N,I,4
+D,US,1437,F,1941,T,P,A,Definite,1,N,I,4
+D,US,1438,M,1959,T,P,A,Definite,1,N,I,4
+D,US,1440,F,1945,T,P,A,Definite,1,N,I,4
+D,US,1444,F,1962,A,N,C,Definite,2,N,I,4
+D,US,1449,M,1969,A,P,A,Definite,1,N,I,4
+D,US,1455,F,1960,A,P,A,Definite,1,N,T,4
+D,US,1458,M,1948,T,P,A,Definite,1,N,I,4
+D,US,1458,M,1948,A,N,A,Definite-pn,2,N,I,4
+D,US,1462,M,1961,T,N,A,Definite,4,N,I,4
+D,US,1465,F,1942,A,P,A,Definite,1,N,I,4
+D,US,1467,M,1955,A,P,A,Definite,1,N,I,4
+D,US,1472,M,1950,A,P,A,Definite,1,N,I,4
+D,US,1473,F,1932,T,P,A,Definite,3,I,I,4
+D,US,1480,F,1959,C,P,A,Definite,1,N,I,5
+D,US,1481,F,1935,A,P,I,Definite,1,N,I,4
+D,US,1494,M,1941,A,P,A,Definite,1,N,I,4
+D,US,1501,F,1962,A,P,A,Definite,1,N,I,4
+D,US,1501,F,1962,A,P,A,Definite,1,N,I,4
+D,US,1513,F,1936,A,P,A,Definite,1,N,I,4
+D,US,1524,M,1963,A,P,A,Definite,1,N,T,4
+D,US,1524,M,1963,A,N,A,Definite,5,N,I,4
+D,US,1525,M,1959,A,N,A,Definite,2,N,I,4
+D,US,1532,M,1965,A,P,A,Definite,1,N,I,4
+D,US,1533,M,1965,T,P,A,Definite,1,N,I,2
+D,US,1533,M,1965,T,P,A,Definite,1,N,I,4
+D,US,1554,M,1960,A,P,A,Definite,1,N,I,4
+D,US,1555,M,1960,A,P,A,Definite,1,N,T,4
+D,US,1567,M,1946,A,P,A,Definite,1,N,I,4
+D,US,1607,M,1945,A,P,A,Definite,1,N,I,4
+D,US,1646,F,1967,T,P,A,Definite,1,N,I,4
+D,US,1661,M,1956,A,N,A,Definite,2,N,T,6
+D,US,1669,F,1954,T,P,A,Definite,1,N,I,4
+D,US,1680,F,1950,A,P,A,Definite,1,N,T,4
+D,US,1697,F,1940,C,P,A,Definite,1,N,I,4
+D,US,1002,F,1963,A,P,A,Definite,1,N,I,4
+D,US,1005,F,1956,A,P,A,Definite,1,I,I,5
+D,US,1005,F,1956,A,P,I,Definite,1,N,I,5
+D,US,1028,M,1965,A,N,A,Definite,2,N,I,5
+D,US,1032,F,1943,A,P,A,Definite,1,N,I,5
+D,US,1033,F,1965,A,P,A,Definite,1,N,I,5
+D,US,1042,F,1938,A,P,A,Definite,1,I,I,5
+D,US,1064,F,1951,T,P,A,Definite,1,N,I,5
+D,US,1070,M,1962,A,P,A,Definite,1,N,I,5
+D,US,1070,M,1962,A,P,A,Definite,1,N,I,5
+D,US,1073,M,1967,A,P,A,Definite,1,N,I,5
+D,US,1073,M,1967,A,P,A,Definite,1,N,I,5
+D,US,1087,M,1958,A,P,A,Definite,1,N,I,5
+D,US,1115,M,1958,A,I,A,Indefinite,1,N,I,5
+D,US,1116,M,1955,A,P,A,Definite,1,N,I,5
+D,US,1117,M,1950,A,P,A,Definite,1,N,I,5
+D,US,1121,M,1937,C,P,A,Definite,1,N,I,5
+D,US,1127,M,1933,T,P,A,Definite,1,N,I,5
+D,US,1128,M,1933,A,P,I,Definite,1,N,I,5
+D,US,1140,M,1941,A,P,I,Definite,1,N,I,5
+D,US,1140,M,1941,A,N,A,Definite,2,N,I,5
+D,US,1141,M,1962,A,N,A,Definite,2,N,T,5
+D,US,1145,M,1969,A,P,C,Definite,1,N,T,5
+D,US,1151,M,1953,T,I,A,Indefinite,1,N,I,5
+D,US,1155,F,1941,T,P,A,Definite,1,N,I,5
+D,US,1156,F,1946,A,P,A,Definite,1,N,I,5
+D,US,1168,M,1949,A,P,C,Definite,1,N,I,5
+D,US,1174,M,1962,A,N,A,Definite,2,N,I,5
+D,US,1175,F,1956,T,P,A,Definite,1,N,I,6
+D,US,1179,F,1959,A,P,A,Definite,1,N,I,5
+D,US,1181,M,1958,T,N,L,Indefinite,2,N,I,5
+D,US,1208,F,1941,A,P,A,Definite,1,N,I,5
+D,US,1213,M,1929,A,P,A,Definite,1,N,I,5
+D,US,1214,F,1960,A,I,A,Definite,1,N,I,5
+D,US,1230,F,1961,A,P,I,Definite,1,N,I,5
+D,US,1230,F,1961,A,P,A,Definite,1,N,I,5
+D,US,1230,F,1961,A,P,A,Definite,1,N,I,5
+D,US,1235,F,1957,C,P,A,Definite,1,N,I,5
+D,US,1237,M,1965,A,I,A,Indefinite,1,N,I,5
+D,US,1244,F,1937,C,P,A,Definite,1,N,I,5
+D,US,1252,F,1933,A,P,A,Definite,1,N,I,5
+D,US,1259,F,1963,A,P,A,Definite,1,N,I,5
+D,US,1260,F,1953,C,P,A,Definite,1,N,I,5
+D,US,1268,F,1961,A,P,A,Definite,1,N,I,5
+D,US,1281,F,1955,A,P,A,Definite,1,N,I,5
+D,US,1285,F,1939,A,P,C,Definite,1,N,I,5
+D,US,1304,M,1950,A,P,A,Definite,1,N,I,5
+D,US,1307,F,1953,A,P,A,Definite,1,I,I,5
+D,US,1312,M,1951,A,P,A,Definite,1,N,I,5
+D,US,1316,F,1951,A,P,A,Definite,1,N,I,5
+D,US,1320,F,1962,C,P,A,Definite,1,N,I,5
+D,US,1321,M,1959,A,P,A,Definite,1,I,I,5
+D,US,1325,M,1960,T,P,A,Definite,1,N,I,5
+D,US,1341,F,1944,C,P,A,Definite,1,N,I,5
+D,US,1349,F,1965,A,P,A,Definite,1,N,I,5
+D,US,1352,F,1959,A,P,A,Definite,1,N,T,5
+D,US,1378,M,1940,T,P,A,Definite,1,N,I,5
+D,US,1379,M,1933,A,P,A,Definite,1,N,L,5
+D,US,1390,M,1942,A,N,A,Definite,2,N,I,5
+D,US,1393,F,1935,A,N,I,Definite-pn,5,N,I,5
+D,US,1406,M,1954,A,P,A,Definite,1,N,I,5
+D,US,1414,F,1941,A,P,I,Definite,1,N,I,5
+D,US,1415,F,1939,A,P,A,Definite,1,N,I,5
+D,US,1440,F,1945,T,P,A,Definite,1,N,I,5
+D,US,1457,M,1954,A,N,A,Indefinite,1,N,I,5
+D,US,1461,F,1962,A,P,A,Definite,1,N,I,5
+D,US,1470,M,1944,T,P,A,Definite,1,N,I,5
+D,US,1477,M,1957,A,N,A,Definite-pn,1,N,I,5
+D,US,1477,M,1957,A,P,I,Definite,1,N,I,5
+D,US,1477,M,1957,T,P,A,Definite,1,N,I,5
+D,US,1486,M,1963,A,P,A,Definite,1,N,I,5
+D,US,1513,F,1936,A,P,A,Definite,1,N,I,5
+D,US,1516,M,1964,A,P,A,Definite,1,N,I,5
+D,US,1530,M,1968,A,P,A,Definite,1,N,I,5
+D,US,1533,M,1965,A,P,A,Definite,1,N,I,5
+D,US,1549,M,1950,A,P,A,Definite,1,N,I,5
+D,US,1549,M,1950,A,P,A,Definite,1,N,T,5
+D,US,1557,M,1969,A,P,A,Definite,1,N,I,5
+D,US,1568,M,1962,A,P,I,Definite,1,N,I,5
+D,US,1596,M,1956,C,P,A,Definite,1,N,I,6
+D,US,1641,F,1963,A,P,A,Definite,1,N,I,5
+D,US,1676,M,1964,T,P,C,Definite,1,N,I,5
+D,US,1688,M,1965,A,P,A,Definite,1,N,I,5
+D,US,1011,F,1964,A,P,I,Definite,1,N,I,6
+D,US,1019,M,1941,A,P,A,Definite,1,N,I,6
+D,US,1026,F,1957,A,P,A,Definite,1,N,I,6
+D,US,1039,M,1943,A,P,A,Definite,1,I,I,6
+D,US,1043,F,1936,A,P,A,Definite,1,N,I,6
+D,US,1050,M,1950,A,P,I,Definite,1,I,I,6
+D,US,1052,M,1930,A,P,A,Definite,1,N,T,6
+D,US,1060,F,1942,A,P,A,Definite,1,N,T,6
+D,US,1074,F,1968,A,N,A,Definite,2,N,I,6
+D,US,1083,F,1962,T,N,A,Indefinite,2,N,I,6
+D,US,1085,M,1947,A,P,A,Definite,1,N,T,6
+D,US,1102,M,1965,A,P,I,Definite,1,N,I,6
+D,US,1104,M,1938,A,P,A,Definite,1,N,I,6
+D,US,1104,M,1938,A,P,A,Definite,1,N,I,6
+D,US,1115,M,1958,A,P,A,Definite,1,N,I,6
+D,US,1120,F,1969,T,N,A,Definite-pn,3,N,I,6
+D,US,1120,F,1969,C,P,A,Definite,1,N,I,7
+D,US,1121,M,1937,C,P,A,Definite,1,I,I,6
+D,US,1139,M,1956,A,P,A,Definite,1,N,I,6
+D,US,1149,F,1954,C,P,A,Definite,1,I,I,7
+D,US,1151,M,1953,T,P,A,Definite,1,N,I,6
+D,US,1156,F,1946,A,P,A,Definite,1,N,I,6
+D,US,1175,F,1956,A,N,A,Indefinite,6,N,I,16
+D,US,1175,F,1956,T,P,A,Definite,1,N,I,6
+D,US,1176,F,1959,A,P,I,Definite,1,N,I,6
+D,US,1191,M,1940,A,I,A,Definite,1,N,T,6
+D,US,1209,M,1954,A,N,C,Definite,3,I,I,6
+D,US,1225,F,1946,A,N,A,Definite,2,N,I,6
+D,US,1239,M,1936,A,N,A,Definite,2,N,L,6
+D,US,1239,M,1936,A,P,A,Definite,1,N,I,6
+D,US,1263,F,1934,A,P,I,Definite,1,N,I,6
+D,US,1264,F,1943,A,P,A,Definite,1,N,I,6
+D,US,1280,F,1958,A,P,A,Definite,1,N,I,6
+D,US,1303,F,1946,A,P,I,Definite,1,N,I,7
+D,US,1327,F,1944,C,P,A,Definite,1,N,I,6
+D,US,1388,M,1967,T,P,A,Definite,1,N,I,6
+D,US,1390,M,1942,A,P,A,Definite,1,N,I,6
+D,US,1450,F,1927,T,P,A,Definite,1,N,I,6
+D,US,1467,M,1955,T,P,A,Definite,1,N,I,6
+D,US,1471,M,1952,A,P,A,Definite,1,N,I,6
+D,US,1481,F,1935,C,P,A,Definite,1,N,I,7
+D,US,1487,M,1967,A,P,A,Definite,1,N,I,6
+D,US,1531,M,1967,A,N,A,Definite,7,N,I,6
+D,US,1533,M,1965,A,P,A,Definite,1,N,I,6
+D,US,1641,F,1963,A,P,A,Definite,1,N,I,6
+D,US,1661,M,1956,A,N,A,Indefinite,2,N,I,4
+D,US,1676,M,1964,A,P,A,Definite,1,N,I,6
+D,US,1002,F,1963,T,P,C,Definite,1,N,I,7
+D,US,1005,F,1956,A,P,A,Definite,1,N,I,7
+D,US,1013,F,1957,A,P,A,Definite,1,N,I,7
+D,US,1014,F,1947,A,P,A,Definite,1,N,I,8
+D,US,1014,F,1947,A,P,A,Definite,1,N,I,7
+D,US,1028,M,1965,A,N,A,Indefinite,1,N,I,7
+D,US,1083,F,1962,A,P,L,Definite,1,N,I,7
+D,US,1087,M,1958,A,P,A,Definite,1,N,I,7
+D,US,1092,M,1960,A,P,A,Definite,1,N,I,7
+D,US,1108,M,1950,A,P,A,Definite,1,I,I,7
+D,US,1115,M,1958,A,P,A,Definite,1,N,I,7
+D,US,1126,F,1963,T,P,A,Definite,1,N,I,7
+D,US,1128,M,1933,A,P,A,Definite,1,N,T,7
+D,US,1147,M,1942,T,P,A,Definite,1,N,I,7
+D,US,1148,F,1959,A,P,A,Definite,1,N,I,7
+D,US,1156,F,1946,A,P,A,Definite,1,N,I,7
+D,US,1165,M,1937,A,P,A,Definite,1,N,I,8
+D,US,1180,F,1934,C,P,A,Definite,1,N,I,7
+D,US,1180,F,1934,A,P,A,Definite,1,N,I,7
+D,US,1181,M,1958,A,P,A,Definite,1,N,I,7
+D,US,1209,M,1954,A,P,A,Definite,1,N,I,7
+D,US,1212,M,1943,A,P,A,Definite,1,N,I,8
+D,US,1219,M,1953,T,I,A,Definite,1,N,I,7
+D,US,1225,F,1946,A,P,A,Definite,1,N,I,7
+D,US,1258,M,1956,A,P,C,Definite,1,N,I,7
+D,US,1264,F,1943,A,P,A,Definite,1,N,I,7
+D,US,1268,F,1961,A,P,A,Definite,1,N,I,7
+D,US,1315,F,1943,A,P,A,Definite,1,N,I,7
+D,US,1340,F,1941,A,P,A,Definite,1,N,I,7
+D,US,1362,F,1942,A,P,A,Definite,1,N,I,7
+D,US,1374,M,1961,T,P,A,Definite,1,N,I,7
+D,US,1402,M,1924,A,P,A,Definite,1,N,I,7
+D,US,1409,F,1941,T,N,A,Definite,4,N,I,7
+D,US,1409,F,1941,A,P,A,Definite,1,N,I,7
+D,US,1414,F,1941,A,P,A,Definite,1,N,I,19
+D,US,1437,F,1941,A,P,A,Definite,1,N,T,7
+D,US,1444,F,1962,A,N,A,Definite,2,N,I,7
+D,US,1455,F,1960,A,P,A,Definite,1,N,T,7
+D,US,1487,M,1967,A,P,A,Definite,1,N,I,8
+D,US,1531,M,1967,A,P,A,Definite,1,N,I,7
+D,US,1541,M,1966,A,P,A,Definite,1,N,T,7
+D,US,1543,M,1959,T,P,A,Definite,1,N,I,7
+D,US,1549,M,1950,C,N,A,Indefinite,2,N,I,7
+D,US,1552,M,1950,A,P,A,Definite,1,N,I,7
+D,US,1555,M,1960,A,N,A,Definite,2,N,T,7
+D,US,1573,M,1966,A,P,A,Definite,1,N,I,7
+D,US,1582,M,1953,T,P,A,Definite,1,N,I,7
+D,US,1669,F,1954,A,P,C,Definite,1,N,I,7
+D,US,1676,M,1964,A,N,I,Definite,2,N,I,7
+D,US,1691,M,1969,A,P,A,Definite,1,N,I,7
+D,US,1039,M,1943,C,P,A,Definite,1,N,I,9
+D,US,1041,M,1936,A,P,A,Definite,1,N,I,8
+D,US,1052,M,1930,A,N,A,Indefinite,2,N,I,9
+D,US,1070,M,1962,A,P,A,Definite,1,N,I,8
+D,US,1098,F,1957,A,P,A,Definite,1,N,I,8
+D,US,1121,M,1937,A,P,A,Definite,1,N,I,9
+D,US,1121,M,1937,A,P,A,Definite,1,N,I,8
+D,US,1139,M,1956,A,P,A,Definite,1,N,I,8
+D,US,1145,M,1969,C,P,A,Definite,1,N,I,8
+D,US,1147,M,1942,A,N,A,Definite,2,N,I,9
+D,US,1148,F,1959,A,P,A,Definite,1,N,I,8
+D,US,1159,M,1944,T,N,A,Definite,2,I,I,8
+D,US,1163,F,1932,T,P,A,Definite,1,N,I,8
+D,US,1168,M,1949,A,P,A,Definite,1,N,I,8
+D,US,1169,M,1961,A,N,A,Definite,7,N,I,8
+D,US,1181,M,1958,A,P,A,Definite,1,N,T,8
+D,US,1224,F,1959,A,P,C,Definite,1,N,I,8
+D,US,1248,F,1936,A,P,A,Definite,1,N,I,8
+D,US,1252,F,1933,A,P,A,Definite,1,N,I,8
+D,US,1258,M,1956,A,P,A,Definite,1,N,T,8
+D,US,1292,F,1942,A,P,A,Definite,1,N,I,8
+D,US,1303,F,1946,A,P,A,Definite,1,N,I,8
+D,US,1316,F,1951,A,P,A,Definite,1,N,I,8
+D,US,1372,F,1955,C,P,A,Definite,1,N,I,8
+D,US,1383,M,1947,T,P,A,Definite,1,N,I,8
+D,US,1415,F,1939,A,P,A,Definite,1,N,I,8
+D,US,1423,F,1960,C,P,A,Definite,1,N,I,8
+D,US,1463,M,1955,A,P,A,Definite,1,N,I,8
+D,US,1466,F,1957,A,P,A,Definite,1,N,I,8
+D,US,1478,M,1945,A,P,A,Definite,1,N,T,1
+D,US,1528,M,1940,A,P,A,Definite,1,N,I,8
+D,US,1553,M,1957,A,N,A,Definite,2,N,I,8
+D,US,1554,M,1960,T,P,A,Definite,1,N,I,8
+D,US,1555,M,1960,A,P,A,Definite,1,N,T,8
+D,US,1568,M,1962,C,P,A,Definite,1,N,I,8
+D,US,1002,F,1963,A,P,A,Definite,1,N,I,9
+D,US,1018,F,1962,A,P,A,Definite,1,N,I,10
+D,US,1031,F,1940,A,N,A,Definite,2,N,I,10
+D,US,1035,F,1953,A,I,A,Definite,1,N,I,9
+D,US,1051,M,1954,A,P,A,Definite,1,N,I,9
+D,US,1059,M,1963,A,P,A,Definite,1,N,I,9
+D,US,1075,F,1957,A,P,A,Definite,1,N,I,3
+D,US,1083,F,1962,A,P,A,Definite,1,N,A,9
+D,US,1119,M,1946,A,P,A,Definite,1,N,I,9
+D,US,1121,M,1937,C,P,A,Definite,1,N,I,9
+D,US,1149,F,1954,A,P,A,Definite,1,N,T,11
+D,US,1212,M,1943,A,P,A,Definite,1,N,I,9
+D,US,1219,M,1953,A,P,A,Definite,1,N,I,9
+D,US,1283,M,1950,A,P,A,Definite,1,N,I,9
+D,US,1303,F,1946,C,P,A,Definite,1,N,I,9
+D,US,1307,F,1953,C,P,A,Definite,1,N,I,9
+D,US,1423,F,1960,A,P,A,Definite,1,N,I,9
+D,US,1536,M,1961,A,P,A,Definite,1,N,I,9
+D,US,1614,F,1963,C,P,A,Definite,1,N,I,9
+D,US,1684,F,1966,A,P,A,Definite,1,N,I,9
+D,US,1002,F,1963,A,P,A,Definite,1,N,I,10
+D,US,1018,F,1962,A,P,A,Definite,1,N,I,11
+D,US,1574,M,1962,A,P,A,Definite,1,N,I,10
+D,US,1621,M,1964,A,P,A,Definite,1,N,T,10
+D,US,1680,F,1950,A,P,A,Definite,1,N,I,10
+D,US,1502,F,1962,A,P,A,Definite,1,N,I,11
+D,US,1519,F,1971,A,P,A,Definite,1,N,T,11
+D,US,1007,F,1965,A,P,A,Definite,1,N,I,12
+D,US,1549,M,1950,A,P,A,Definite,1,N,I,12
+D,US,1676,M,1964,A,P,A,Definite,1,N,I,12
+D,US,1554,M,1960,A,P,A,Definite,1,N,T,13
+D,US,1570,M,1961,A,P,A,Definite,1,N,I,13
+D,US,1002,F,1963,A,P,A,Definite,1,N,I,14
+D,US,1570,M,1961,A,P,A,Definite,1,N,T,15
+D,US,1010,M,1932,A,P,A,Definite,1,I,I,11
+D,US,1014,F,1947,A,P,A,Definite,1,N,I,13
+D,US,1018,F,1962,A,N,A,Definite,5,N,I,12
+D,US,1027,F,1961,C,P,A,Definite,1,N,I,10
+D,US,1027,F,1961,A,P,C,Definite,1,N,I,15
+D,US,1035,F,1953,A,P,A,Definite,1,N,I,21
+D,US,1035,F,1953,C,N,A,Definite,2,N,I,18
+D,US,1039,M,1943,A,N,A,Definite,3,N,I,12
+D,US,1042,F,1938,A,P,A,Definite,1,N,I,12
+D,US,1042,F,1938,A,P,A,Definite,1,N,I,20
+D,US,1042,F,1938,A,P,A,Definite,1,N,I,44
+D,US,1043,F,1936,A,P,A,Definite,1,N,I,12
+D,US,1054,M,1945,A,P,A,Definite,1,N,I,10
+D,US,1071,F,1951,C,P,A,Definite,1,N,I,15
+D,US,1094,F,1960,A,N,A,Definite,3,N,I,13
+D,US,1117,M,1950,C,P,A,Definite,1,N,I,14
+D,US,1121,M,1937,C,P,A,Definite,1,N,I,11
+D,US,1121,M,1937,C,P,A,Definite,1,N,I,12
+D,US,1121,M,1937,C,P,A,Definite,1,N,I,14
+D,US,1121,M,1937,T,P,A,Definite,1,N,I,17
+D,US,1132,F,1942,A,P,A,Definite,1,N,I,13
+D,US,1132,F,1942,T,P,A,Definite,1,N,I,12
+D,US,1139,M,1956,C,P,A,Definite,1,N,I,10
+D,US,1139,M,1956,C,P,A,Definite,1,N,I,24
+D,US,1139,M,1956,A,P,A,Definite,1,N,I,11
+D,US,1139,M,1956,A,P,A,Definite,1,N,I,15
+D,US,1140,M,1941,A,P,I,Definite,1,N,I,17
+D,US,1146,M,1961,T,P,A,Definite,1,N,I,1
+D,US,1149,F,1954,T,P,A,Definite,1,N,I,13
+D,US,1149,F,1954,C,P,A,Definite,1,I,I,12
+D,US,1151,M,1953,T,P,A,Definite,1,N,I,10
+D,US,1157,F,1944,A,P,A,Definite,1,N,I,17
+D,US,1176,F,1959,A,N,A,Indefinite,2,N,I,15
+D,US,1181,M,1958,C,P,A,Definite,1,N,I,11
+D,US,1208,F,1941,T,P,A,Definite,1,N,I,10
+D,US,1209,M,1954,T,N,A,Indefinite,1,N,I,13
+D,US,1212,M,1943,A,P,C,Definite,1,N,I,11
+D,US,1214,F,1960,T,I,A,Indefinite,1,N,I,13
+D,US,1219,M,1953,C,P,A,Definite,1,N,I,14
+D,US,1232,M,1958,A,P,A,Definite,1,N,I,13
+D,US,1245,M,1935,A,N,A,Definite,9,N,I,13
+D,US,1249,F,1954,T,P,A,Definite,1,N,I,31
+D,US,1249,F,1954,T,P,A,Definite,1,N,I,10
+D,US,1253,F,1958,A,P,A,Definite,1,N,I,11
+D,US,1255,M,1953,A,N,C,Definite,3,N,I,14
+D,US,1263,F,1934,C,P,A,Definite,1,N,I,14
+D,US,1280,F,1958,A,P,A,Definite,1,N,I,13
+D,US,1304,M,1950,C,P,A,Definite,1,N,I,11
+D,US,1353,M,1943,A,P,A,Definite,1,N,I,14
+D,US,1372,F,1955,A,P,A,Definite,1,N,I,10
+D,US,1383,M,1947,A,P,A,Definite,1,N,I,27
+D,US,1408,F,1961,A,P,A,Definite,1,N,I,12
+D,US,1409,F,1941,A,P,A,Definite,1,N,I,10
+D,US,1413,M,1940,A,P,A,Definite,1,N,I,13
+D,US,1414,F,1941,A,P,A,Definite,1,N,I,10
+D,US,1415,F,1939,A,P,A,Definite,1,N,I,11
+D,US,1417,F,1962,A,P,A,Definite,1,N,I,15
+D,US,1425,M,1960,A,P,A,Definite,1,N,I,13
+D,US,1438,M,1959,A,P,I,Definite,1,N,I,10
+D,US,1448,M,1951,A,P,A,Definite,1,N,I,21
+D,US,1449,M,1969,A,P,A,Definite,1,N,I,25
+D,US,1458,M,1948,A,P,A,Definite,1,N,I,29
+D,US,1463,M,1955,T,P,A,Definite,1,N,I,12
+D,US,1467,M,1955,A,P,A,Definite,1,N,I,20
+D,US,1484,F,1963,A,P,A,Definite,1,N,I,10
+D,US,1484,F,1963,A,P,A,Definite,1,N,I,12
+D,US,1485,M,1956,A,P,A,Definite,1,N,I,10
+D,US,1488,M,1947,A,P,I,Definite,1,N,I,15
+D,US,1490,M,1950,C,P,A,Definite,1,N,I,10
+D,US,1494,M,1941,A,N,C,Definite,6,N,T,11
+D,US,1496,M,1970,A,N,A,Indefinite,1,N,I,15
+D,US,1513,F,1936,T,P,A,Definite,1,N,I,15
+D,US,1518,F,1961,T,N,C,Definite,2,N,I,18
+D,US,1528,M,1940,A,P,A,Definite,1,I,I,16
+D,US,1547,M,1965,A,P,A,Definite,1,N,I,16
+D,US,1555,M,1960,A,N,A,Indefinite,1,N,I,28
+P,CAN,can-2-99,M,1987,T,N,A,Definite-pn,1,P,I,1
+P,CAN,can-2-99,M,1987,T,N,A,Definite-pn,1,P,I,1
+P,CAN,can-2-102,M,1992,T,P,A,Definite,1,P,I,1
+P,CAN,can-2-110,F,1984,T,P,A,Definite,1,P,I,1
+P,CAN,can-2-110,F,1984,T,P,A,Definite,1,P,I,1
+P,CAN,can-2-114,F,1992,T,P,A,Definite,1,P,I,1
+P,CAN,can-2-115,F,1989,T,P,A,Definite,1,P,I,1
+P,CAN,can-2-115,F,1989,T,N,A,Definite,8,P,I,1
+P,CAN,can-2-115,F,1989,T,N,A,Indefinite,4,P,I,1
+P,CAN,can-3-70,F,1986,T,N,A,Definite,2,P,I,1
+P,CAN,can-3-70,F,1986,T,I,A,Indefinite,1,N,I,1
+P,CAN,can-3-72,M,1991,T,P,A,Definite,1,N,I,2
+P,CAN,can-3-73,F,1989,T,P,A,Definite,1,P,I,1
+P,CAN,can-3-73,F,1989,T,P,A,Definite,1,P,I,1
+P,CAN,can-3-77,F,1984,T,P,A,Definite,1,P,I,1
+P,CAN,can-3-81,F,1987,T,P,A,Definite,1,P,I,1
+P,CAN,can-3-82,F,1985,T,N,A,Definite,8,P,I,1
+P,CAN,can-3-85,F,1991,T,P,A,Definite,1,P,I,1
+P,CAN,can-3-85,F,1991,T,P,A,Definite,1,P,I,1
+P,CAN,can-4-97,F,1986,T,P,A,Definite,1,P,I,1
+P,CAN,can-4-100,M,1988,T,P,A,Definite,1,P,I,1
+P,CAN,can-4-102,M,1984,T,N,A,Definite,2,P,I,1
+P,CAN,can-4-102,M,1984,T,N,A,Definite,3,P,I,1
+P,CAN,can-4-76,F,1992,T,N,C,Definite,2,D,I,1
+P,CAN,can-4-80,F,1989,C,N,A,Definite,2,N,I,1
+P,CAN,can-4-82,F,1985,T,N,A,Indefinite,2,P,I,1
+P,CAN,can-4-82,F,1985,T,I,A,Indefinite,1,P,I,1
+P,CAN,can-4-82,F,1985,T,P,A,Definite,1,P,I,1
+P,CAN,can-5-97,F,1988,A,P,A,Definite,1,P,I,1
+P,CAN,can-5-98,M,1987,T,N,A,Definite-pn,1,P,I,1
+P,CAN,can-5-102,F,1984,C,P,A,Definite,1,P,I,1
+P,CAN,can-5-105,F,1991,T,P,A,Definite,1,P,I,1
+P,CAN,can-5-107,M,1985,T,P,A,Definite,1,P,I,1
+P,CAN,can-5-108,F,1990,T,P,A,Definite,1,P,I,1
+P,CAN,can-5-110,F,1985,T,P,A,Definite,1,P,I,1
+P,CAN,can-5-110,F,1985,T,P,A,Definite,1,P,I,1
+P,CAN,can-5-111,M,1984,T,P,A,Definite,1,P,I,1
+P,CAN,can-5-111,M,1984,T,N,A,Definite,2,P,I,1
+P,CAN,can-5-111,M,1984,T,P,A,Definite,1,P,I,1
+P,CAN,can-5-111,M,1984,T,P,A,Definite,1,N,I,1
+P,CAN,can-5-111,M,1984,A,P,A,Definite,1,P,I,1
+P,CAN,can-5-111,M,1984,T,P,A,Definite,1,P,I,1
+P,CAN,can-5-111,M,1984,T,P,A,Definite,1,P,I,1
+P,CAN,can-5-112,F,1986,T,P,A,Definite,1,P,I,1
+P,CAN,can-5-112,F,1986,T,P,A,Definite,1,P,I,1
+P,CAN,can-7-56,M,1896,C,P,A,Definite,1,P,I,1
+P,CAN,can-7-70,F,1896,T,N,A,Definite,2,P,I,1
+P,CAN,can-7-70,F,1896,T,N,C,Definite,2,P,I,1
+P,CAN,can-7-70,F,1896,A,N,C,Definite,3,N,I,1
+P,CAN,can-7-70,F,1896,T,N,I,Definite,4,P,I,1
+P,CAN,can-7-70,F,1896,T,P,A,Definite,1,P,I,1
+P,CAN,can-7-72,M,1896,T,P,A,Definite,1,P,I,1
+P,CAN,can-7-73,M,1896,T,P,A,Definite,1,P,I,1
+P,CAN,can-7-81,M,1896,A,N,I,Definite,8,N,I,1
+P,CAN,can-7-122,F,1896,T,P,A,Definite,1,P,I,1
+P,CAN,can-7-122,F,1896,T,P,A,Definite,1,P,I,1
+P,CAN,can-b-97,M,1959,T,N,C,Definite,4,P,I,1
+P,CAN,can-b-67,F,1973,T,N,A,Definite-pn,1,P,I,1
+P,CAN,can-b-99,F,1934,T,P,A,Definite,1,P,I,1
+P,CAN,can-b-69,F,1924,T,P,A,Definite,1,P,I,1
+P,CAN,can-b-75,M,1951,A,P,A,Definite,2,P,I,1
+P,CAN,can-b-78,F,1924,T,N,A,Definite,2,P,I,1
+P,CAN,can-b-82,M,1926,T,N,A,Definite,2,P,I,1
+P,CAN,can-b-84,F,1921,T,N,I,Definite,2,P,I,1
+P,CAN,can-b-84,F,1921,T,N,I,Definite,2,P,I,1
+P,CAN,can-f-97,F,1987,T,N,A,Definite-pn,2,P,A,1
+P,CAN,can-f-98,F,1986,T,P,A,Definite,1,P,I,1
+P,CAN,can-f-101,F,1983,T,N,A,Definite,5,P,I,1
+P,CAN,can-f-101,F,1983,T,N,A,Definite,2,P,I,1
+P,CAN,can-f-103,F,1981,T,P,A,Definite,1,P,I,1
+P,CAN,can-h-71,M,1983,T,P,A,Definite,1,P,I,1
+P,CAN,can-h-106,F,1963,T,P,A,Definite,1,P,A,1
+P,CAN,can-h-77,M,1944,T,P,A,Definite,1,P,I,1
+P,CAN,can-h-90,F,1942,T,N,A,Definite-pn,1,P,A,1
+P,CAN,can-I-54,F,1922,T,I,A,Definite,2,N,I,1
+P,CAN,can-I-56,M,1971,T,N,A,Definite-pn,1,P,I,1
+P,CAN,can-I-56,M,1971,C,P,A,Definite,1,P,I,1
+P,CAN,can-k-74,F,1950,T,P,A,Definite,1,N,I,1
+P,CAN,can-k-114,F,1912,T,P,A,Definite,1,P,I,1
+P,CAN,can-k-114,F,1912,T,N,A,Indefinite,4,P,I,1
+P,CAN,can-k-84,F,1981,T,P,A,Definite,1,D,I,1
+P,CAN,can-k-118,M,1931,T,P,A,Definite,1,P,I,1
+P,CAN,can-l-67,M,1931,T,N,I,Definite,3,P,I,1
+P,CAN,can-l-68,F,1973,T,P,A,Definite,1,P,I,1
+P,CAN,can-l-72,F,1956,T,P,A,Definite,1,P,I,1
+P,CAN,can-N-49,M,1958,T,N,A,Definite-pn,1,P,I,1
+P,CAN,can-N-50,F,1960,T,P,A,Definite,1,P,I,1
+P,CAN,can-N-50,F,1960,T,P,A,Definite,1,P,I,1
+P,CAN,can-N-50,F,1960,T,P,A,Definite,1,P,I,1
+P,CAN,can-N-52,M,1943,T,P,A,Definite,1,P,I,1
+P,CAN,can-N-54,F,1976,T,P,A,Definite,1,D,I,1
+P,CAN,can-N-71,F,1977,T,N,A,Indefinite,3,P,I,1
+P,CAN,can-N-104,F,1948,C,P,A,Definite,1,P,I,1
+P,CAN,can-N-104,F,1948,T,I,A,Indefinite,1,P,I,1
+P,CAN,can-N-107,F,1978,T,P,A,Definite,1,P,I,1
+P,CAN,can-N-110,F,1950,T,N,A,Definite,5,P,I,1
+P,CAN,can-N-111,M,1978,A,P,A,Definite,1,D,I,1
+P,CAN,can-N-81,F,1931,T,P,A,Definite,1,P,I,1
+P,CAN,can-N-113,F,1979,T,P,A,Definite,1,P,I,1
+P,CAN,can-N-81,F,1931,T,N,A,Definite,3,P,A,1
+P,CAN,can-N-83,F,1969,T,I,A,Indefinite,1,N,I,1
+P,CAN,can-N-116,F,1966,T,N,A,Indefinite,2,P,I,1
+P,CAN,can-N-116,F,1966,T,P,A,Definite,1,P,I,1
+P,CAN,can-N-116,F,1966,T,P,A,Definite,1,P,I,1
+P,CAN,can-N-85,F,1921,C,P,A,Definite,1,P,I,1
+P,CAN,can-N-85,F,1921,T,P,A,Definite,1,P,I,1
+P,CAN,can-N-85,F,1921,T,P,A,Definite,1,P,I,1
+P,CAN,can-Q-68,F,1987,T,P,A,Definite,1,P,I,1
+P,CAN,can-Q-71,F,1985,A,N,I,Indefinite,1,N,T,1
+P,CAN,can-Q-71,F,1985,T,P,A,Definite,1,P,I,1
+P,CAN,can-r-72,M,1917,T,N,A,Definite,2,D,I,1
+P,CAN,can-r-73,M,1988,T,N,A,Indefinite,6,P,I,1
+P,CAN,can-r-75,F,1985,C,N,A,Definite,2,P,I,1
+P,CAN,can-r-81,M,1977,T,P,A,Definite,1,P,I,1
+P,CAN,can-r-83,F,1972,T,N,A,Definite,2,P,I,1
+P,CAN,can-W-95,F,1927,T,P,A,Definite,1,P,I,1
+P,CAN,can-W-91,M,1918,T,N,A,Indefinite,5,P,A,1
+P,CAN,can-W-91,M,1918,T,N,A,Definite,3,P,I,1
+P,CAN,can-W-43,M,1931,T,P,A,Definite,1,P,I,1
+P,CAN,can-W-43,M,1931,T,P,A,Definite,1,P,I,1
+P,CAN,can-W-43,M,1931,T,N,A,Definite,8,P,I,1
+P,CAN,can-W-43,M,1931,T,N,A,Indefinite,2,N,I,1
+P,CAN,can-W-43,M,1931,T,N,A,Definite,7,P,I,1
+P,CAN,can-W-43,M,1931,T,P,A,Definite,1,P,I,1
+P,CAN,can-W-126,F,1925,T,N,A,Definite,4,I,I,1
+P,CAN,can-W-97,F,1974,T,N,A,Definite,2,I,I,1
+P,CAN,can-W-105,F,1973,T,N,I,Indefinite,1,P,I,1
+P,CAN,can-W-109,F,1920,T,P,A,Definite,1,P,I,1
+P,CAN,can-W-79,M,1978,T,I,A,Indefinite,1,P,I,1
+P,CAN,can-W-83,M,1954,T,P,A,Definite,1,P,I,1
+P,CAN,can-W-84,F,1930,T,P,A,Definite,1,P,I,1
+P,CAN,can-W-84,F,1930,T,N,A,Definite,2,P,I,1
+P,CAN,can-W-118,M,1981,A,N,A,Indefinite,3,N,I,1
+P,CAN,can-W-118,M,1981,T,N,A,Indefinite,4,D,I,1
+P,CAN,can-W-118,M,1981,T,P,A,Definite,1,P,I,1
+P,CAN,can-y-65,F,1978,T,P,A,Definite,1,P,I,1
+P,CAN,can-y-69,F,1992,T,P,A,Definite,1,P,I,1
+P,CAN,can-y-71,F,1977,T,P,A,Definite,1,P,I,1
+P,CAN,can-y-71,F,1977,T,P,A,Definite,1,P,I,1
+P,CAN,can-y-71,F,1977,T,P,A,Definite,1,P,I,1
+P,CAN,can-y-77,M,1919,T,N,A,Indefinite,3,P,A,1
+P,CAN,can-y-81,F,1924,T,N,A,Definite,3,P,I,1
+P,CAN,can-y-85,M,1961,T,P,A,Definite,1,P,I,1
+P,CAN,can-y-85,M,1961,T,P,A,Definite,1,P,I,1
+P,CAN,can-y-85,M,1961,T,P,A,Definite,1,D,I,1
+P,CAN,can-3-70,F,1986,A,P,A,Definite,1,N,I,2
+P,CAN,can-5-103,M,1984,C,P,A,Definite,1,N,I,2
+P,CAN,can-7-72,M,1896,T,N,A,Indefinite,7,N,I,2
+P,CAN,can-7-108,F,1896,T,N,C,Definite,2,N,I,2
+P,CAN,can-h-98,F,1990,T,N,A,Definite,2,P,I,2
+P,CAN,can-h-76,F,1943,A,P,A,Definite,1,N,I,2
+P,CAN,can-I-50,F,1949,T,N,A,Definite,2,I,I,2
+P,CAN,can-l-68,F,1973,A,P,I,Definite,1,N,I,2
+P,CAN,can-N-98,F,1940,T,P,A,Definite,1,N,I,2
+P,CAN,can-N-72,F,1972,T,N,A,Definite,2,N,I,2
+P,CAN,can-N-81,F,1931,T,N,A,Definite,2,N,I,2
+P,CAN,can-N-119,M,1919,T,N,A,Definite,2,N,I,2
+P,CAN,can-r-82,F,1924,T,N,A,Indefinite,1,N,L,2
+P,CAN,can-W-95,F,1927,T,N,A,Definite,2,N,I,2
+P,CAN,can-W-45,M,1920,A,N,I,Definite,3,N,I,2
+P,CAN,can-W-33,M,1942,T,N,I,Indefinite,3,N,I,2
+P,CAN,can-W-61,M,1921,A,P,A,Definite,1,N,I,2
+P,CAN,can-W-126,F,1925,T,P,A,Definite,1,D,I,2
+P,CAN,can-W-83,M,1954,T,N,A,Definite,2,N,I,2
+P,CAN,can-y-66,F,1946,A,N,I,Definite,5,N,I,2
+P,CAN,can-y-77,M,1919,T,N,A,Definite,2,N,I,2
+P,CAN,can-y-85,M,1961,T,P,A,Definite,1,N,I,2
+P,CAN,can-y-88,M,1945,A,N,I,Definite,3,N,I,2
+P,CAN,can-b-88,M,1918,A,N,A,Definite,2,N,I,3
+P,CAN,can-h-104,F,1950,T,P,A,Definite,1,I,I,3
+P,CAN,can-N-83,F,1969,A,I,A,Definite,3,N,I,3
+P,CAN,can-r-71,M,1949,T,I,A,Indefinite,1,N,I,3
+P,CAN,can-3-80,F,1987,A,N,A,Indefinite,1,N,I,4
+P,CAN,can-5-107,M,1985,A,N,A,Indefinite,1,N,I,4
+P,CAN,can-7-51,M,1896,A,N,I,Definite,6,N,I,4
+P,CAN,can-b-82,M,1926,A,N,A,Indefinite,3,N,I,4
+P,CAN,can-b-85,F,1934,A,N,C,Definite-pn,3,N,I,4
+P,CAN,can-5-111,M,1984,T,N,C,Definite,2,P,I,5
+P,CAN,can-7-81,M,1896,A,N,A,Definite,2,N,I,5
+P,CAN,can-b-97,M,1959,T,N,A,Indefinite,2,N,I,5
+P,CAN,can-b-89,M,1976,A,N,I,Indefinite,3,N,I,5
+P,CAN,can-N-98,F,1940,T,N,A,Definite,2,N,I,5
+P,CAN,can-W-43,M,1931,T,N,A,Definite-pn,1,P,I,4
+P,CAN,can-W-115,F,1975,A,P,I,Definite,1,N,I,5
+P,CAN,can-7-70,F,1896,T,N,I,Definite,3,N,I,6
+P,NZ,Agnes Shacklock,F,1891,T,N,A,Indefinite,4,P,I,1
+P,NZ,Agnes Shacklock,F,1891,T,N,A,Indefinite,4,P,I,1
+P,NZ,Alice Mackie,F,1877,T,N,A,Definite-pn,2,P,I,1
+P,NZ,Alice Mackie,F,1877,T,N,A,Definite,2,P,I,1
+P,NZ,Andrew Fullarton,M,1871,T,P,A,Definite,1,P,I,1
+P,NZ,Annette Golding,F,1923,T,P,A,Definite,1,P,I,1
+P,NZ,Annette Golding,F,1923,A,N,A,Definite,7,N,I,2
+P,NZ,Annie Hamilton,F,1877,T,P,A,Definite,1,P,I,1
+P,NZ,Bill Gillespie,M,1924,T,N,A,Definite-pn,1,N,I,2
+P,NZ,Catherine Dudley,F,1886,T,P,A,Definite,1,P,I,1
+P,NZ,Catherine Dudley,F,1886,T,P,A,Definite,1,P,I,1
+P,NZ,Cornelius Magner,M,1889,A,N,A,Definite-pn,1,N,I,3
+P,NZ,Denis Sumpter,M,1904,A,N,L,Definite,10,N,I,2
+P,NZ,Edith German,F,1868,T,N,C,Definite,3,D,I,1
+P,NZ,Edward Twort,M,1915,T,N,A,Definite,2,P,I,1
+P,NZ,Elsie Robinson,F,1928,A,N,A,Definite,2,P,I,1
+P,NZ,Eric Robinson,M,1919,T,N,A,Definite,2,P,A,1
+P,NZ,Eunice Yeatman,F,1918,T,P,A,Definite,1,P,I,1
+P,NZ,fon94-3,F,1942,T,P,A,Definite,1,P,I,1
+P,NZ,fon94-4b,F,1942,T,P,A,Definite,1,P,I,1
+P,NZ,fon95-5b,F,1954,T,P,A,Definite,1,P,I,1
+P,NZ,fon99-6b,F,1949,T,N,A,Definite,3,P,I,1
+P,NZ,fop94-13a,F,1948,T,N,A,Definite,3,N,I,2
+P,NZ,fop94-27a,F,1948,T,N,C,Definite,3,N,A,2
+P,NZ,Frances Rigby,F,1867,T,N,A,Definite-pn,1,P,I,1
+P,NZ,fyn01-18,F,1973,T,P,A,Definite,1,P,I,1
+P,NZ,fyn01-8b,F,1981,T,N,A,Definite-pn,1,D,I,1
+P,NZ,fyn02-1a,F,1977,T,P,A,Definite,1,P,I,1
+P,NZ,fyn03-1a,F,1981,T,P,A,Definite,1,P,I,1
+P,NZ,fyn95-14,F,1964,A,N,A,Definite,2,N,I,2
+P,NZ,fyn96-9a,F,1968,T,P,A,Definite,1,N,I,5
+P,NZ,fyn99-11a,F,1968,A,P,A,Definite,1,P,I,1
+P,NZ,fyp94-24,F,1966,T,N,I,Indefinite,4,P,A,1
+P,NZ,fyp94-29a,F,1968,T,P,A,Definite,1,P,I,1
+P,NZ,Hannah Cross,F,1851,T,N,A,Definite,2,D,I,1
+P,NZ,Hannah Cross,F,1851,T,N,A,Definite,2,P,I,1
+P,NZ,Henry Swarbrick,M,1889,A,N,I,Indefinite,9,N,I,2
+P,NZ,Henry Swarbrick,M,1889,A,N,I,Definite,4,N,I,2
+P,NZ,Henry Swarbrick,M,1889,A,N,L,Definite,3,N,I,2
+P,NZ,Henry Swarbrick,M,1889,A,N,I,Definite,3,N,I,2
+P,NZ,Irene Whalan,F,1916,T,N,A,Definite,2,P,I,1
+P,NZ,Ivy Kench,F,1922,T,N,A,Definite,3,P,I,1
+P,NZ,Jack Reid,M,1921,A,N,A,Indefinite,2,N,I,1
+P,NZ,Jack Reid,M,1921,T,P,A,Definite,1,P,I,1
+P,NZ,James Stewart,M,1876,A,P,A,Definite,1,P,I,1
+P,NZ,Jane Reid,F,1877,T,P,A,Definite,1,P,I,1
+P,NZ,Jean Watt,F,1908,T,N,A,Indefinite,2,P,I,1
+P,NZ,Jean Watt,F,1908,T,N,I,Definite,3,D,I,1
+P,NZ,Jim Wilcox,M,1929,A,N,C,Definite,2,N,T,2
+P,NZ,John McLew,M,1875,T,P,A,Definite,1,P,I,1
+P,NZ,Kathleen Fountain,F,1906,T,N,A,Definite-pn,1,D,I,1
+P,NZ,Kathleen Fountain,F,1906,T,N,I,Definite,2,P,I,1
+P,NZ,Ken Algie,M,1953,T,N,A,Definite-pn,1,P,I,1
+P,NZ,Ken Algie,M,1953,T,P,A,Definite,1,D,I,1
+P,NZ,Lloyd Algie,M,1926,T,N,A,Definite,2,P,I,1
+P,NZ,Marjorie Stewart,F,1915,T,N,A,Definite-pn,2,P,I,1
+P,NZ,Marjorie Stewart,F,1915,T,N,C,Definite,3,P,I,1
+P,NZ,Marjorie Stewart,F,1915,T,N,C,Definite,5,P,I,1
+P,NZ,Marjorie Stewart,F,1915,T,N,A,Definite,4,P,I,1
+P,NZ,Mary Ann Turnbull,F,1875,T,P,A,Definite,1,P,I,1
+P,NZ,Mary Ann Turnbull,F,1875,T,N,A,Definite,2,P,I,1
+P,NZ,Mary Ann Turnbull,F,1875,T,N,A,Definite,2,P,I,1
+P,NZ,Mavis Jackson,F,1919,T,I,A,Indefinite,2,P,I,1
+P,NZ,mon94-28b,M,1944,A,I,A,Indefinite,1,N,I,2
+P,NZ,mon94-35a,M,1935,T,N,A,Definite-pn,1,N,I,1
+P,NZ,mop00-10a,M,1947,T,N,C,Indefinite,4,N,I,3
+P,NZ,mop01-4,M,1954,C,N,A,Indefinite,2,P,I,1
+P,NZ,mop95-3,M,1940,T,N,A,Indefinite,1,N,I,1
+P,NZ,Mrs Fullarton,F,1864,T,P,A,Definite,1,P,I,1
+P,NZ,Mrs Fullarton,F,1864,T,N,A,Definite-pn,1,P,I,1
+P,NZ,myn00-17a,M,1976,C,N,A,Definite,2,P,I,1
+P,NZ,myn00-17a,M,1976,C,N,A,Indefinite,4,P,I,1
+P,NZ,myn00-17a,M,1976,C,N,A,Definite,2,P,I,1
+P,NZ,myn03-2c,M,1976,C,P,A,Definite,1,P,I,1
+P,NZ,myn94-27b,M,1973,T,N,C,Definite,3,P,I,1
+P,NZ,myn95-11a,M,1971,T,P,A,Definite,1,N,I,2
+P,NZ,myn96-21b,M,1976,T,P,A,Definite,1,P,I,1
+P,NZ,myp94-21a,M,1974,T,N,A,Definite,2,I,I,1
+P,NZ,myp98-12b,M,1974,T,N,L,Definite-pn,1,I,I,1
+P,NZ,Paddy Crosby,M,1865,A,N,A,Definite,3,N,I,3
+P,NZ,Pat Toomey,F,1893,T,P,A,Indefinite,3,N,I,2
+P,NZ,Sam Temple,M,1868,T,P,A,Definite,1,P,A,1
+P,NZ,Thomas Ryan,M,1919,T,N,C,Definite,3,N,I,1
+P,NZ,Vivian Young,M,1885,T,N,A,Definite-pn,2,N,I,2
+P,NZ,William Dufty,M,1865,T,N,A,Definite-pn,1,P,I,1
+P,NZ,William Dufty,M,1865,T,N,A,Definite-pn,1,P,I,1
+P,UK,uk-plus-128,F,1945,T,N,A,Definite,9,D,I,1
+P,UK,uk-A-66,M,1933,T,N,C,Definite,2,P,I,1
+P,UK,uk-A-67,M,1926,A,N,A,Indefinite,5,N,I,1
+P,UK,uk-A-72,F,1920,T,N,A,Definite,2,I,I,1
+P,UK,uk-A-74,F,1917,T,N,A,Definite-pn,1,P,I,1
+P,UK,uk-A-74,F,1917,T,P,A,Definite,1,P,I,1
+P,UK,uk-A-74,F,1917,T,P,A,Definite,1,P,I,1
+P,UK,uk-A-75,M,1921,T,I,A,Indefinite,1,P,I,1
+P,UK,uk-A-79,M,1933,T,N,A,Definite,2,P,I,1
+P,UK,uk-A-79,M,1933,T,N,A,Definite,3,D,I,1
+P,UK,uk-B-99,M,1915,T,N,A,Definite-pn,1,D,I,1
+P,UK,uk-B-102,M,1919,T,N,A,Definite,2,D,I,1
+P,UK,uk-C-97,F,1914,T,N,A,Definite-pn,1,P,I,1
+P,UK,uk-C-98,M,1918,T,P,A,Definite,1,P,I,1
+P,UK,uk-C-102,M,1927,T,N,C,Definite-pn,1,P,I,1
+P,UK,uk-C-105,M,1919,T,N,A,Indefinite,3,P,I,1
+P,UK,uk-C-113,F,1914,T,N,A,Definite,2,P,I,1
+P,UK,uk-C-116,M,1925,T,I,A,Indefinite,1,P,I,1
+P,UK,uk-D-97,F,1939,T,P,A,Definite,1,P,I,1
+P,UK,uk-D-97,F,1939,T,P,A,Definite,1,P,I,1
+P,UK,uk-D-97,F,1939,T,N,A,Definite,9,P,I,1
+P,UK,uk-H-99,M,1929,T,N,A,Definite-pn,1,P,I,1
+P,UK,uk-H-101,M,1954,T,I,A,Indefinite,2,P,I,1
+P,UK,uk-H-107,F,1961,T,P,A,Definite,1,P,I,1
+P,UK,uk-H-114,M,1971,T,P,A,Definite,1,P,I,1
+P,UK,uk-M-53,F,1963,T,P,A,Definite,1,P,I,1
+P,UK,uk-M-65,F,1978,T,P,A,Definite,1,P,I,1
+P,UK,uk-M-67,M,1979,T,P,A,Definite,1,P,I,1
+P,UK,uk-M-104,F,1922,T,P,A,Definite,1,P,I,1
+P,UK,uk-M-104,F,1922,T,P,A,Definite,1,P,I,1
+P,UK,uk-M-105,M,1927,A,N,A,Indefinite,2,D,I,1
+P,UK,uk-M-108,M,1925,T,N,A,Definite,2,D,I,1
+P,UK,uk-M-110,F,1936,T,P,A,Definite,1,P,I,1
+P,UK,uk-M-110,F,1936,T,P,A,Definite,1,P,I,1
+P,UK,uk-M-110,F,1936,T,P,A,Definite,1,P,I,1
+P,UK,uk-M-111,F,1935,T,N,A,Definite,2,P,I,1
+P,UK,uk-M-121,M,1943,T,N,A,Definite,2,P,I,1
+P,UK,uk-P-42,M,1915,T,N,A,Definite,2,P,I,1
+P,UK,uk-P-35,F,1922,T,N,A,Definite-pn,1,P,I,1
+P,UK,uk-P-37,F,1932,T,N,A,Indefinite,2,P,I,1
+P,UK,uk-P-63,F,1926,T,N,A,Indefinite,1,P,I,1
+P,UK,uk-P-43,M,1929,A,N,C,Definite-pn,1,N,I,1
+P,UK,uk-P-43,M,1929,T,N,C,Definite,3,P,I,1
+P,UK,uk-P-100,F,1930,T,N,A,Definite,2,I,I,1
+P,UK,uk-P-104,M,1933,T,N,A,Indefinite,7,P,I,1
+P,UK,uk-R-98,F,1987,C,P,A,Definite,1,P,I,1
+P,UK,uk-V-102,M,1946,T,P,A,Definite,1,P,I,1
+P,UK,uk-V-103,M,1936,T,N,A,Definite,2,P,I,1
+P,UK,uk-V-104,M,1929,T,N,A,Definite-pn,1,P,I,1
+P,UK,uk-V-104,M,1929,T,P,A,Definite,1,P,I,1
+P,UK,uk-X-97,F,1924,T,P,A,Definite,1,P,I,1
+P,UK,uk-X-97,F,1924,T,N,A,Definite-pn,1,P,I,1
+P,UK,uk-X-98,F,1916,T,P,A,Definite,1,P,A,1
+P,UK,uk-Y-53,M,1973,T,N,A,Definite,2,P,I,1
+P,UK,uk-Y-95,M,1983,A,P,A,Definite,1,P,I,1
+P,UK,uk-Y-162,M,1937,T,N,A,Definite,2,P,I,1
+P,UK,uk-Y-98,F,1921,T,N,A,Definite-pn,6,P,I,1
+P,UK,uk-Y-98,F,1921,T,N,A,Definite-pn,1,P,I,1
+P,UK,uk-Y-67,F,1934,T,P,A,Definite,1,P,I,1
+P,UK,uk-Y-105,F,1970,T,N,A,Definite,3,D,I,1
+P,UK,uk-Y-105,F,1970,T,N,A,Definite,2,P,I,1
+P,UK,uk-Y-73,F,1932,T,I,A,Indefinite,2,P,I,1
+P,UK,uk-Y-107,F,1916,T,N,A,Definite,3,P,I,1
+P,UK,uk-Y-107,F,1916,T,I,A,Indefinite,1,P,I,1
+P,UK,uk-Y-77,F,1918,T,P,A,Definite,1,P,I,1
+P,UK,uk-Y-114,M,1931,T,N,A,Definite,2,P,I,1
+P,UK,uk-Y-114,M,1931,T,N,A,Definite,3,P,I,1
+P,UK,uk-Y-89,M,1944,T,N,L,Definite,2,P,I,1
+P,UK,uk-Y-90,F,1981,A,P,A,Definite,1,D,I,1
+P,UK,uk-plus-151,F,1945,T,N,A,Definite,2,N,I,2
+P,UK,uk-A-106,F,1936,T,N,A,Definite-pn,1,P,I,2
+P,UK,uk-P-63,F,1926,T,N,A,Definite-pn,2,N,I,2
+P,UK,uk-P-100,F,1930,T,N,A,Definite,2,N,I,2
+D,UK,uk-P-117,M,1919,T,P,I,Definite,1,N,I,2
+P,UK,uk-R-110,F,1987,C,P,A,Definite,1,N,I,2
+P,UK,uk-Y-62,M,1912,A,N,L,Definite,2,N,T,2
+P,UK,uk-Y-97,F,1941,A,N,A,Definite-pn,1,N,I,2
+P,UK,uk-Y-66,F,1933,A,P,A,Definite,1,N,T,2
+P,UK,uk-Y-75,M,1925,T,N,A,Definite,2,N,I,2
+P,UK,uk-Y-114,M,1931,T,N,A,Definite,2,N,I,2
+P,UK,uk-Y-90,F,1981,T,N,I,Indefinite,3,D,I,2
+P,UK,uk-A-106,F,1936,T,N,A,Definite,4,N,I,3
+P,UK,uk-M-70,M,1980,T,N,A,Definite,6,N,I,5
+P,US,1002,F,1963,T,N,I,Indefinite,1,D,I,1
+P,US,1005,F,1956,T,P,A,Definite,1,P,I,1
+P,US,1010,M,1932,T,N,A,Definite-pn,2,D,I,1
+P,US,1013,F,1957,T,P,A,Definite,1,P,I,1
+P,US,1013,F,1957,A,N,A,Indefinite,2,P,I,1
+P,US,1018,F,1962,T,P,A,Definite,1,P,I,1
+P,US,1018,F,1962,T,P,A,Definite,1,P,I,1
+P,US,1018,F,1962,T,I,A,Indefinite,2,P,I,1
+P,US,1022,F,1959,A,N,A,Definite,2,N,I,1
+P,US,1022,F,1959,A,N,A,Definite,2,N,I,1
+P,US,1027,F,1961,A,P,A,Definite,1,P,I,1
+P,US,1032,F,1943,T,P,A,Definite,3,N,I,1
+P,US,1032,F,1943,T,P,A,Definite,1,P,I,1
+P,US,1033,F,1965,T,P,A,Definite,1,P,I,1
+P,US,1033,F,1965,T,P,A,Definite,1,P,I,1
+P,US,1033,F,1965,T,N,A,Definite,2,P,I,1
+P,US,1033,F,1965,T,P,A,Definite,1,P,I,1
+P,US,1035,F,1953,T,I,A,Definite,5,P,I,1
+P,US,1042,F,1938,T,P,A,Definite,1,P,I,1
+P,US,1043,F,1936,T,N,A,Indefinite,4,N,I,1
+P,US,1051,M,1954,T,N,A,Indefinite,2,P,I,1
+P,US,1051,M,1954,T,N,C,Definite,3,P,I,1
+P,US,1053,F,1967,T,P,A,Definite,1,P,I,1
+P,US,1055,F,1965,T,P,A,Definite,1,P,I,1
+P,US,1071,F,1951,T,P,A,Definite,1,P,I,1
+P,US,1072,F,1941,T,N,C,Definite,7,P,I,1
+P,US,1073,M,1967,T,N,C,Definite,2,N,I,1
+P,US,1074,F,1968,A,P,A,Definite,1,P,I,1
+P,US,1075,F,1957,A,P,A,Definite,1,P,I,1
+P,US,1083,F,1962,T,N,A,Definite-pn,1,P,I,1
+P,US,1083,F,1962,T,N,C,Definite,2,N,I,1
+P,US,1083,F,1962,T,I,A,Definite,3,P,I,1
+P,US,1083,F,1962,T,P,L,Definite,1,P,I,1
+P,US,1083,F,1962,T,P,A,Definite,1,P,I,1
+P,US,1087,M,1958,T,P,I,Definite,1,P,I,1
+P,US,1094,F,1960,T,N,L,Definite,5,P,I,1
+P,US,1104,M,1938,A,N,A,Indefinite,2,P,I,1
+P,US,1104,M,1938,T,N,A,Definite,2,P,I,1
+P,US,1105,F,1944,T,P,A,Definite,1,P,I,1
+P,US,1108,M,1950,T,P,A,Definite,1,P,I,1
+P,US,1110,M,1961,T,N,C,Definite,2,P,I,1
+P,US,1121,M,1937,T,N,A,Indefinite,3,P,I,1
+P,US,1124,M,1960,T,N,C,Definite,4,N,I,1
+P,US,1126,F,1963,T,P,A,Definite,1,P,I,1
+P,US,1127,M,1933,A,P,A,Definite,1,P,I,1
+P,US,1139,M,1956,T,N,L,Definite,4,N,I,1
+P,US,1140,M,1941,T,N,A,Definite,2,P,I,1
+P,US,1141,M,1962,T,P,A,Definite,1,P,I,1
+P,US,1148,F,1959,T,N,A,Indefinite,1,N,I,1
+P,US,1148,F,1959,T,I,A,Indefinite,2,P,I,1
+P,US,1151,M,1953,T,P,A,Definite,1,I,A,1
+P,US,1151,M,1953,T,P,A,Definite,1,P,I,1
+P,US,1151,M,1953,T,P,A,Definite,1,P,I,1
+P,US,1156,F,1946,T,N,A,Indefinite,2,P,I,1
+P,US,1174,M,1962,A,N,L,Indefinite,2,N,I,1
+P,US,1174,M,1962,T,I,A,Indefinite,2,P,I,1
+P,US,1175,F,1956,A,P,A,Definite,1,P,I,1
+P,US,1175,F,1956,T,P,A,Definite,1,P,I,1
+P,US,1180,F,1934,T,P,C,Definite,1,P,I,1
+P,US,1188,M,1944,A,N,C,Definite,2,N,I,1
+P,US,1209,M,1954,A,N,L,Definite,2,I,I,1
+P,US,1212,M,1943,A,N,A,Definite-pn,1,P,I,1
+P,US,1212,M,1943,A,P,A,Definite,1,P,I,1
+P,US,1225,F,1946,T,I,A,Definite,1,P,I,1
+P,US,1230,F,1961,A,N,A,Definite,2,D,I,1
+P,US,1232,M,1958,A,N,A,Definite-pn,1,P,I,1
+P,US,1235,F,1957,T,N,A,Indefinite,2,P,A,1
+P,US,1235,F,1957,T,P,A,Definite,1,P,I,1
+P,US,1237,M,1965,T,P,A,Definite,1,P,I,1
+P,US,1244,F,1937,A,N,A,Indefinite,2,P,I,1
+P,US,1248,F,1936,A,N,A,Definite,13,P,I,1
+P,US,1252,F,1933,T,N,A,Indefinite,1,P,I,1
+P,US,1258,M,1956,T,N,A,Definite,2,P,I,1
+P,US,1259,F,1963,A,P,A,Definite,1,P,I,1
+P,US,1297,F,1965,C,P,A,Definite,1,P,I,1
+P,US,1313,F,1956,T,P,A,Definite,1,P,I,1
+P,US,1382,F,1939,T,P,A,Definite,1,P,I,1
+P,US,1388,M,1967,T,P,A,Definite,1,P,I,1
+P,US,1393,F,1935,T,P,A,Definite,1,P,I,1
+P,US,1394,F,1931,T,P,A,Definite,1,P,I,1
+P,US,1394,F,1931,T,P,A,Definite,1,P,I,1
+P,US,1399,F,1949,T,P,A,Definite,1,P,I,1
+P,US,1406,M,1954,A,P,C,Definite,1,P,I,1
+P,US,1410,F,1955,T,P,A,Definite,1,P,I,1
+P,US,1415,F,1939,C,P,A,Definite,1,P,I,1
+P,US,1423,F,1960,A,P,A,Definite,1,P,I,1
+P,US,1425,M,1960,T,P,A,Definite,1,P,I,1
+P,US,1436,M,1940,T,N,A,Definite,3,P,I,1
+P,US,1437,F,1941,T,P,A,Definite,1,P,I,1
+P,US,1438,M,1959,T,P,I,Definite,1,P,I,1
+P,US,1446,M,1969,A,N,I,Definite,12,N,I,1
+P,US,1457,M,1954,A,N,A,Definite,9,N,I,1
+P,US,1470,M,1944,A,N,C,Indefinite,2,P,I,1
+P,US,1477,M,1957,T,P,A,Definite,1,P,I,1
+P,US,1477,M,1957,T,N,A,Definite,3,P,I,1
+P,US,1477,M,1957,T,P,A,Definite,1,P,I,1
+P,US,1481,F,1935,T,P,I,Definite,1,P,I,1
+P,US,1486,M,1963,T,P,L,Definite,1,P,I,1
+P,US,1490,M,1950,T,P,A,Definite,1,P,I,1
+P,US,1497,M,1932,T,N,C,Definite,2,P,I,1
+P,US,1498,F,1937,C,P,A,Definite,1,P,I,1
+P,US,1507,F,1939,T,P,A,Definite,1,P,I,1
+P,US,1531,M,1967,C,P,I,Definite,1,P,I,1
+P,US,1539,M,1938,T,N,A,Definite,3,P,I,1
+P,US,1569,M,1962,A,P,A,Definite,1,P,I,1
+P,US,1575,M,1954,T,I,A,Definite,1,P,I,1
+P,US,1586,M,1965,T,N,I,Indefinite,4,P,I,1
+P,US,1591,M,1961,A,N,A,Definite,2,P,I,1
+P,US,1595,M,1962,T,N,C,Definite,4,N,I,1
+P,US,1626,F,1953,T,P,A,Definite,1,P,I,1
+P,US,1626,F,1953,T,N,A,Indefinite,9,P,I,1
+P,US,1676,M,1964,A,N,I,Definite,8,N,I,1
+P,US,1087,M,1958,T,P,C,Definite,1,N,I,2
+P,US,1165,M,1937,A,N,A,Definite,3,N,I,2
+P,US,1181,M,1958,C,N,C,Definite,2,N,I,2
+P,US,1237,M,1965,C,N,A,Definite,2,N,I,2
+P,US,1257,M,1933,A,N,C,Definite-pn,2,N,I,2
+P,US,1359,M,1952,T,N,A,Definite,3,N,I,2
+P,US,1359,M,1952,A,N,I,Indefinite,5,N,I,2
+P,US,1372,F,1955,A,P,I,Definite,1,N,I,2
+P,US,1372,F,1955,A,P,I,Definite,1,N,T,2
+P,US,1374,M,1961,T,N,A,Definite,2,N,I,2
+P,US,1381,F,1924,T,N,A,Definite,10,I,I,2
+P,US,1425,M,1960,A,N,A,Definite,9,N,I,2
+P,US,1444,F,1962,A,N,A,Indefinite,2,N,I,2
+P,US,1488,M,1947,T,N,A,Definite,2,N,I,2
+P,US,1555,M,1960,A,N,I,Indefinite,2,N,I,2
+P,US,1575,M,1954,T,N,A,Definite,2,N,I,2
+P,US,1582,M,1953,A,N,C,Definite,2,N,I,2
+P,US,1592,M,1967,T,N,C,Definite,3,N,I,2
+P,US,1612,M,1962,C,N,C,Definite,2,N,I,2
+P,US,1680,F,1950,A,N,A,Indefinite,4,N,I,2
+P,US,1680,F,1950,A,P,I,Definite,1,N,I,2
+P,US,1680,F,1950,T,N,L,Definite-pn,1,N,I,3
+P,US,1025,M,1953,A,N,A,Definite,3,N,I,3
+P,US,1041,M,1936,T,N,A,Definite,2,N,I,3
+P,US,1130,F,1941,A,I,A,Indefinite,2,N,I,3
+P,US,1146,M,1961,A,N,A,Definite,2,N,I,3
+P,US,1257,M,1933,A,N,C,Definite,3,N,I,3
+P,US,1362,F,1942,A,N,A,Indefinite,1,N,I,3
+P,US,1425,M,1960,A,N,I,Indefinite,7,N,I,3
+P,US,1487,M,1967,T,N,A,Definite,2,N,I,3
+P,US,1530,M,1968,A,N,A,Indefinite,3,N,I,3
+P,US,1626,F,1953,C,N,A,Definite,2,N,I,3
+P,US,1121,M,1937,C,I,A,Indefinite,1,N,I,4
+P,US,1209,M,1954,A,N,L,Definite,2,N,T,4
+P,US,1239,M,1936,A,N,I,Definite,6,N,I,4
+P,US,1104,M,1938,A,N,A,Indefinite,6,N,I,5
+P,US,1106,F,1964,A,N,L,Definite-pn,1,N,I,5
+P,US,1292,F,1942,T,N,C,Definite,2,N,I,5
+P,US,1446,M,1969,A,N,A,Indefinite,4,N,I,5
+P,US,1531,M,1967,A,N,A,Definite,3,N,I,6
+P,US,1010,M,1932,A,N,A,Definite,5,N,I,6
+P,US,1032,F,1943,T,I,A,Definite,1,N,I,6
+P,US,1597,M,1962,A,N,L,Definite-pn,1,N,I,6
