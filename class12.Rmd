@@ -29,7 +29,7 @@ tutorial::go_interactive()
 # Load the readr package
 
 # Load the course data from the coutrse website to the object 'dataSet':
-# http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv
+# https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class3_claes_2017.csv
 
 # Load the dplyr package
 
@@ -43,8 +43,8 @@ tutorial::go_interactive()
 # Load the readr package
 library(readr)
 # Load the course data from the course website to the object 'dataSet':
-# http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv")
+# https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class3_claes_2017.csv
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class3_claes_2017.csv")
 # Load the dplyr package
 library(dplyr)
 # Convert all character values to factor with mutate_if
@@ -68,7 +68,7 @@ success_msg("Great!")
 library(readr)
 library(dplyr)
 
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv") %>% mutate_if(is.character, as.factor)
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class3_claes_2017.csv") %>% mutate_if(is.character, as.factor)
 ```
 
 ```{r ex="firstmodel", type="sample-code"}
@@ -129,7 +129,7 @@ success_msg("Great!")
 library(readr)
 library(dplyr)
 
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv") %>% mutate_if(is.character, as.factor)
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class3_claes_2017.csv") %>% mutate_if(is.character, as.factor)
 ```
 
 ```{r ex="gammodel", type="sample-code"}

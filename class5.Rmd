@@ -28,7 +28,7 @@ tutorial::go_interactive()
 # Load the readr package
 
 # Load the course data from the course website to the object 'dataSet':
-# http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class5_Kuperman_et_al_2012.csv
+# https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class5_Kuperman_et_al_2012.csv
 
 # Load the dplyr package
 
@@ -44,8 +44,8 @@ tutorial::go_interactive()
 # Load the readr package
 library(readr)
 # Load the course data from the course website to the object 'dataSet':
-# http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class5_Kuperman_et_al_2012.csv
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class5_Kuperman_et_al_2012.csv")
+# https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class5_Kuperman_et_al_2012.csv
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class5_Kuperman_et_al_2012.csv")
 # Load the dplyr package
 library(dplyr)
 # Print a 'glimpse' of the dataSet
@@ -69,7 +69,7 @@ success_msg("Great!")
 ### 1.2  A first visual inspection of the relationship
 ```{r ex="Kuperman_boxplot_associations", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class5_Kuperman_et_al_2012.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class5_Kuperman_et_al_2012.csv")
 ```
 
 ```{r ex="Kuperman_boxplot_associations", type="sample-code"}
@@ -113,7 +113,7 @@ success_msg("Great!")
 ```{r ex="Kuperman_bivariate_normal", type="pre-exercise-code"}
 library(readr)
 library(energy)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class5_Kuperman_et_al_2012.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class5_Kuperman_et_al_2012.csv")
 ```
 
 ```{r ex="Kuperman_bivariate_normal", type="sample-code"}
@@ -155,7 +155,7 @@ success_msg("Excellent work!")
 
 ```{r ex="Kuperman_heteroske_normal", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class5_Kuperman_et_al_2012.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class5_Kuperman_et_al_2012.csv")
 ```
 
 ```{r ex="Kuperman_heteroske_normal", type="sample-code"}
@@ -196,7 +196,7 @@ success_msg("Great!")
 ```{r ex="Kuperman_autocorr_normal", type="pre-exercise-code"}
 library(readr)
 library(energy)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class5_Kuperman_et_al_2012.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class5_Kuperman_et_al_2012.csv")
 ```
 
 ```{r ex="Kuperman_autocorr_normal", type="sample-code"}
@@ -239,7 +239,7 @@ success_msg("Great!")
 
 ```{r ex="Kuperman_test_normal", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class5_Kuperman_et_al_2012.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class5_Kuperman_et_al_2012.csv")
 ```
 
 ```{r ex="Kuperman_test_normal", type="sample-code"}
@@ -299,7 +299,7 @@ success_msg("Good job!")
 # Load the readr package
 
 # Load the course data from the course website to the object 'dataSet':
-# http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class5_Greenberg_1960.csv
+# https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class5_Greenberg_1960.csv
 
 # Load the dplyr package
 
@@ -315,8 +315,8 @@ success_msg("Good job!")
 # Load the readr package
 library(readr)
 # Load the course data from the course website to the object 'dataSet':
-# http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class5_Greenberg_1960.csv
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class5_Greenberg_1960.csv")
+# https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class5_Greenberg_1960.csv
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class5_Greenberg_1960.csv")
 # Load the dplyr package
 library(dplyr)
 # Print a 'glimpse' of the dataSet
@@ -340,7 +340,7 @@ success_msg("Great!")
 ### 2.2  A first visual inspection of the relationship
 ```{r ex="Greenberg_boxplot_associations", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class5_Greenberg_1960.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class5_Greenberg_1960.csv")
 ```
 
 ```{r ex="Greenberg_boxplot_associations", type="sample-code"}
@@ -384,7 +384,7 @@ success_msg("Fantastic work!")
 ```{r ex="Greenberg_bivariate_normal", type="pre-exercise-code"}
 library(readr)
 library(energy)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class5_Greenberg_1960.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class5_Greenberg_1960.csv")
 ```
 
 ```{r ex="Greenberg_bivariate_normal", type="sample-code"}
@@ -425,7 +425,7 @@ success_msg("Good job!")
 
 ```{r ex="Greenberg_heteroske_normal", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class5_Greenberg_1960.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class5_Greenberg_1960.csv")
 ```
 
 ```{r ex="Greenberg_heteroske_normal", type="sample-code"}
@@ -466,7 +466,7 @@ success_msg("Great!")
 ```{r ex="Greenberg_autocorr_normal", type="pre-exercise-code"}
 library(readr)
 library(energy)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class5_Greenberg_1960.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class5_Greenberg_1960.csv")
 ```
 
 ```{r ex="Greenberg_autocorr_normal", type="sample-code"}
@@ -509,7 +509,7 @@ success_msg("Great!")
 
 ```{r ex="Greenberg_test_normal", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class5_Greenberg_1960.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class5_Greenberg_1960.csv")
 ```
 
 ```{r ex="Greenberg_test_normal", type="sample-code"}

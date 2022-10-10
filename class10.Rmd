@@ -33,7 +33,7 @@ tutorial::go_interactive()
 # Load the readr package
 
 # Load the course data from the course website to the object 'dataSet':
-# http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv
+# https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class10_Bresnan_et_al_2017.csv
 
 # Load the dplyr package
 
@@ -47,8 +47,8 @@ tutorial::go_interactive()
 # Load the readr package
 library(readr)
 # Load the course data from the course website to the object 'dataSet':
-#http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv
-dataSet<-read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv")
+#https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class10_Bresnan_et_al_2017.csv
+dataSet<-read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class10_Bresnan_et_al_2017.csv")
 # Load the dplyr package
 library(dplyr)
 # Convert all character values to Factor with `mutate_if`
@@ -71,7 +71,7 @@ success_msg("Great!")
 ```{r ex="shape_Response.variable", type="pre-exercise-code"}
 library(readr)
 library(dplyr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv") %>% mutate_if(is.character, as.factor)
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class10_Bresnan_et_al_2017.csv") %>% mutate_if(is.character, as.factor)
 ```
 
 ```{r ex="shape_Response.variable", type="sample-code"}
@@ -108,7 +108,7 @@ success_msg("Well done!")
 
 ```{r ex="shape_Variety", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class10_Bresnan_et_al_2017.csv")
 ```
 
 ```{r ex="shape_Variety", type="sample-code"}
@@ -145,7 +145,7 @@ success_msg("Well done!")
 
 ```{r ex="shape_Speaker.sex", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class10_Bresnan_et_al_2017.csv")
 ```
 
 ```{r ex="shape_Speaker.sex", type="sample-code"}
@@ -183,7 +183,7 @@ success_msg("Well done!")
 #### 2.4.1 Central tendency
 ```{r ex="shape_Speaker.YOB", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class10_Bresnan_et_al_2017.csv")
 ```
 
 ```{r ex="shape_Speaker.YOB", type="sample-code"}
@@ -227,7 +227,7 @@ success_msg("I can't evaluate your plot, but I think you did great!")
 #### 2.4.2 Dispersion
 ```{r ex="dispersion_Speaker.YOB", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class10_Bresnan_et_al_2017.csv")
 ```
 
 ```{r ex="dispersion_Speaker.YOB", type="sample-code"}
@@ -275,7 +275,7 @@ success_msg("Good work!")
 
 ```{r ex="shape_Semantics", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class10_Bresnan_et_al_2017.csv")
 ```
 
 ```{r ex="shape_Semantics", type="sample-code"}
@@ -313,7 +313,7 @@ success_msg("Well done!")
 
 ```{r ex="shape_Recipient.type", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class10_Bresnan_et_al_2017.csv")
 ```
 
 ```{r ex="shape_Recipient.type", type="sample-code"}
@@ -350,7 +350,7 @@ success_msg("Well done!")
 
 ```{r ex="shape_Recipient.animacy", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class10_Bresnan_et_al_2017.csv")
 ```
 
 ```{r ex="shape_Recipient.animacy", type="sample-code"}
@@ -387,7 +387,7 @@ success_msg("Well done!")
 
 ```{r ex="shape_Recipient.definiteness", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class10_Bresnan_et_al_2017.csv")
 ```
 
 ```{r ex="shape_Recipient.definiteness", type="sample-code"}
@@ -424,7 +424,7 @@ success_msg("Well done!")
 
 ```{r ex="shape_Theme.type", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class10_Bresnan_et_al_2017.csv")
 ```
 
 ```{r ex="shape_Theme.type", type="sample-code"}
@@ -461,7 +461,7 @@ success_msg("Well done!")
 
 ```{r ex="shape_Theme.animacy", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class10_Bresnan_et_al_2017.csv")
 ```
 
 ```{r ex="shape_Theme.animacy", type="sample-code"}
@@ -500,7 +500,7 @@ success_msg("Well done!")
 ```{r ex="recoding", type="pre-exercise-code"}
 library(readr)
 library(dplyr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv") %>% mutate_if(is.character, as.factor)
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class10_Bresnan_et_al_2017.csv") %>% mutate_if(is.character, as.factor)
 ```
 
 ```{r ex="recoding", type="sample-code"}
@@ -550,7 +550,7 @@ success_msg("Well done!")
 ```{r ex="firstmodel", type="pre-exercise-code"}
 library(readr)
 library(dplyr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv") %>% mutate_if(is.character, as.factor)
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class10_Bresnan_et_al_2017.csv") %>% mutate_if(is.character, as.factor)
 dataSet$Recipient.type<-recode(dataSet$Recipient.type, D="O", I="O", N="O")
 # Recode Recipient.animacy so that its C, I, and L categories are collapsed in a new 'O' category
 dataSet$Recipient.animacy<-recode(dataSet$Recipient.animacy, C="O", I="O", L="O")
@@ -596,7 +596,7 @@ success_msg("Well done!")
 ```{r ex="assumptions", type="pre-exercise-code"}
 library(readr)
 library(dplyr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv") %>% mutate_if(is.character, as.factor)
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class10_Bresnan_et_al_2017.csv") %>% mutate_if(is.character, as.factor)
 dataSet$Recipient.type<-recode(dataSet$Recipient.type, D="O", I="O", N="O")
 # Recode Recipient.animacy so that its C, I, and L categories are collapsed in a new 'O' category
 dataSet$Recipient.animacy<-recode(dataSet$Recipient.animacy, C="O", I="O", L="O")
@@ -674,7 +674,7 @@ success_msg("Well done!")
 ```{r ex="occam", type="pre-exercise-code"}
 library(readr)
 library(dplyr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv") %>% mutate_if(is.character, as.factor)
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class10_Bresnan_et_al_2017.csv") %>% mutate_if(is.character, as.factor)
 dataSet$Recipient.type<-recode(dataSet$Recipient.type, D="O", I="O", N="O")
 # Recode Recipient.animacy so that its C, I, and L categories are collapsed in a new 'O' category
 dataSet$Recipient.animacy<-recode(dataSet$Recipient.animacy, C="O", I="O", L="O")
@@ -748,7 +748,7 @@ success_msg("Well done!")
 ```{r ex="bootstrap", type="pre-exercise-code"}
 library(readr)
 library(dplyr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv") %>% mutate_if(is.character, as.factor)
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class10_Bresnan_et_al_2017.csv") %>% mutate_if(is.character, as.factor)
 dataSet$Recipient.type<-recode(dataSet$Recipient.type, D="O", I="O", N="O")
 # Recode Recipient.animacy so that its C, I, and L categories are collapsed in a new 'O' category
 dataSet$Recipient.animacy<-recode(dataSet$Recipient.animacy, C="O", I="O", L="O")
@@ -762,7 +762,7 @@ dataSet<-dataSet[-c(3703,3943 ),]
 
 # Hack to make sure that students see always the same intervals, plus this is much faster 
 bootstrap <- function(model, replicates=1000) {
-  suppressWarnings(suppressMessages( read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class1O_Bresnan_et_al_2017_confints.csv")))
+  suppressWarnings(suppressMessages( read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class1O_Bresnan_et_al_2017_confints.csv")))
   
 }
 
@@ -801,7 +801,7 @@ success_msg("Well done!")
 ```{r ex="assessfit", type="pre-exercise-code"}
 library(readr)
 library(dplyr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv") %>% mutate_if(is.character, as.factor)
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class10_Bresnan_et_al_2017.csv") %>% mutate_if(is.character, as.factor)
 dataSet$Recipient.type<-recode(dataSet$Recipient.type, D="O", I="O", N="O")
 # Recode Recipient.animacy so that its C, I, and L categories are collapsed in a new 'O' category
 dataSet$Recipient.animacy<-recode(dataSet$Recipient.animacy, C="O", I="O", L="O")
@@ -860,7 +860,7 @@ success_msg("Well done!")
 ```{r ex="interpetation", type="pre-exercise-code"}
 library(readr)
 library(dplyr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv") %>% mutate_if(is.character, as.factor)
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class10_Bresnan_et_al_2017.csv") %>% mutate_if(is.character, as.factor)
 dataSet$Recipient.type<-recode(dataSet$Recipient.type, D="O", I="O", N="O")
 # Recode Recipient.animacy so that its C, I, and L categories are collapsed in a new 'O' category
 dataSet$Recipient.animacy<-recode(dataSet$Recipient.animacy, C="O", I="O", L="O")

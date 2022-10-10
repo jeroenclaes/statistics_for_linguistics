@@ -37,7 +37,7 @@ options(contr=c("contr.Sum", "contr.Poly"))
 # Load the readr package
 
 # Load the course data from the course website to the object 'dataSet':
-# http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv
+# https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class8_Berry_2018.csv
 
 # Load the dplyr package
 
@@ -49,8 +49,8 @@ options(contr=c("contr.Sum", "contr.Poly"))
 # Load the readr package
 library(readr)
 # Load the course data from the course website to the object 'dataSet':
-# http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+# https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class8_Berry_2018.csv
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class8_Berry_2018.csv")
 # Load the dplyr package
 library(dplyr)
 # Print a 'glimpse' of the dataSet
@@ -69,7 +69,7 @@ success_msg("Great!")
 ### 2.1 Central tendency
 ```{r ex="shape_norm_F1", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class8_Berry_2018.csv")
 ```
 
 ```{r ex="shape_norm_F1", type="sample-code"}
@@ -113,7 +113,7 @@ success_msg("I can't evaluate your plot, but I think you did great!")
 ### 2.2 Dispersion
 ```{r ex="dispersion_norm_F1", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class8_Berry_2018.csv")
 ```
 
 ```{r ex="dispersion_norm_F1", type="sample-code"}
@@ -162,7 +162,7 @@ success_msg("Good work!")
 ### 3.1 Counts
 ```{r ex="shape_Proactive", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class8_Berry_2018.csv")
 ```
 
 ```{r ex="shape_Proactive", type="sample-code"}
@@ -199,7 +199,7 @@ success_msg("Well done!")
 ### 4.1 Counts
 ```{r ex="shape_Reactive", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class8_Berry_2018.csv")
 ```
 
 ```{r ex="shape_Reactive", type="sample-code"}
@@ -237,7 +237,7 @@ success_msg("Well done!")
 ### 5.1 Counts
 ```{r ex="shape_Style", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class8_Berry_2018.csv")
 ```
 
 ```{r ex="shape_Style", type="sample-code"}
@@ -275,7 +275,7 @@ success_msg("Well done!")
 ### 6.1 Central tendency
 ```{r ex="shape_BirthYear", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class8_Berry_2018.csv")
 ```
 
 ```{r ex="shape_BirthYear", type="sample-code"}
@@ -324,7 +324,7 @@ success_msg("You did great!")
 ### 6.2 Dispersion
 ```{r ex="dispersion_BirthYear", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class8_Berry_2018.csv")
 ```
 
 ```{r ex="dispersion_BirthYear", type="sample-code"}
@@ -372,7 +372,7 @@ success_msg("Good job!")
 ### 7.1 Counts
 ```{r ex="shape_Sex", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class8_Berry_2018.csv")
 ```
 
 ```{r ex="shape_Sex", type="sample-code"}
@@ -410,7 +410,7 @@ success_msg("Well done!")
 ### 8.1 Counts
 ```{r ex="shape_PartnerEthnicity", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class8_Berry_2018.csv")
 ```
 
 ```{r ex="shape_PartnerEthnicity", type="sample-code"}
@@ -448,7 +448,7 @@ success_msg("Well done!")
 ### 9.1 Counts
 ```{r ex="shape_PhillyLiveTime", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class8_Berry_2018.csv")
 ```
 
 ```{r ex="shape_PhillyLiveTime", type="sample-code"}
@@ -486,7 +486,7 @@ success_msg("Well done!")
 ### 10.1 Counts
 ```{r ex="shape_HighSchoolType", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class8_Berry_2018.csv")
 ```
 
 ```{r ex="shape_HighSchoolType", type="sample-code"}
@@ -523,7 +523,7 @@ success_msg("Well done!")
 ### 11.1 Counts
 ```{r ex="shape_Occupation_Group", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class8_Berry_2018.csv")
 ```
 
 ```{r ex="shape_Occupation_Group", type="sample-code"}
@@ -561,7 +561,7 @@ success_msg("Well done!")
 ### 12.1 Central tendency
 ```{r ex="shape_wordLength", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class8_Berry_2018.csv")
 ```
 
 ```{r ex="shape_wordLength", type="sample-code"}
@@ -606,7 +606,7 @@ success_msg("You did great!")
 ### 12.2 Dispersion
 ```{r ex="dispersion_wordLength", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class8_Berry_2018.csv")
 ```
 
 ```{r ex="dispersion_wordLength", type="sample-code"}
@@ -656,7 +656,7 @@ success_msg("Good job!")
 
 ```{r ex="outliers", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class8_Berry_2018.csv")
 ```
 
 ```{r ex="outliers", type="sample-code"}
@@ -689,7 +689,7 @@ success_msg("Great work!")
 ### 14.1 `BirthYear` vs `norm_F1`
 ```{r ex="rel_BirthYear", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class8_Berry_2018.csv")
 # Remove outliers from norm_F1
 dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
 
@@ -734,7 +734,7 @@ success_msg("Great work!")
 ### 14.2 `wordLength` vs `norm_F1`
 ```{r ex="rel_wordLength", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class8_Berry_2018.csv")
 # Remove outliers from norm_F1
 dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
 
@@ -783,7 +783,7 @@ success_msg("Great work!")
 
 ```{r ex="corsearch", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class8_Berry_2018.csv")
 # Remove outliers from norm_F1
 dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
 ```
@@ -881,7 +881,7 @@ success_msg("Great work!")
 
 ```{r ex="interactions_BirthYear", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class8_Berry_2018.csv")
 # Remove outliers from norm_F1
 dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
 ```
@@ -959,7 +959,7 @@ success_msg("Great work!")
 
 ```{r ex="interactions_wordLength", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class8_Berry_2018.csv")
 # Remove outliers from norm_F1
 dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
 ```
@@ -1041,7 +1041,7 @@ success_msg("Great work!")
 
 ```{r ex="interactions_Proactive", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class8_Berry_2018.csv")
 # Remove outliers from norm_F1
 dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
 ```
@@ -1117,7 +1117,7 @@ success_msg("Great work!")
 
 ```{r ex="interactions_Reactive", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class8_Berry_2018.csv")
 # Remove outliers from norm_F1
 dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
 ```
@@ -1188,7 +1188,7 @@ success_msg("Great work!")
 
 ```{r ex="interactions_Style", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class8_Berry_2018.csv")
 # Remove outliers from norm_F1
 dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
 ```
@@ -1253,7 +1253,7 @@ success_msg("Great work!")
 
 ```{r ex="interactions_Sex", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class8_Berry_2018.csv")
 # Remove outliers from norm_F1
 dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
 ```
@@ -1313,7 +1313,7 @@ success_msg("Great work!")
 
 ```{r ex="interactions_PartnerEthnicity", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class8_Berry_2018.csv")
 # Remove outliers from norm_F1
 dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
 ```
@@ -1368,7 +1368,7 @@ success_msg("Great work!")
 
 ```{r ex="interactions_PhillyLiveTime", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class8_Berry_2018.csv")
 # Remove outliers from norm_F1
 dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
 ```
@@ -1419,7 +1419,7 @@ success_msg("Great work!")
 
 ```{r ex="interactions_HighSchoolType", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class8_Berry_2018.csv")
 # Remove outliers from norm_F1
 dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
 ```
@@ -1463,7 +1463,7 @@ success_msg("Great work!")
 - Our work here is corpus-based, so `sum` constrasts make more sense than `treatment` contrast. Let's go ahead and specify sum contrasts.
 ```{r ex="contrasts", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class8_Berry_2018.csv")
 # Remove outliers from norm_F1
 dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
 
@@ -1510,7 +1510,7 @@ success_msg("Great work!")
 
 ```{r ex="multicollinearity", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class8_Berry_2018.csv")
 # Remove outliers from norm_F1
 dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
 
@@ -1565,7 +1565,7 @@ test_library_function("car")
 ### 26.2 There are no overly influential observations
 ```{r ex="influence", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class8_Berry_2018.csv")
 # Remove outliers from norm_F1
 dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
 ```
@@ -1623,7 +1623,7 @@ success_msg("Great work!")
 ```{r ex="heteroskedasticity", type="sample-code"}
 library(readr)
 
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class8_Berry_2018.csv")
 # Remove outliers from norm_F1
 dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
 
@@ -1652,7 +1652,7 @@ mod<-lm(norm_F1 ~ Proactive + Reactive + Style + BirthYear + Sex + PartnerEthnic
 ```{r ex="heteroskedasticity", type="solution"}
 library(readr)
 
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class8_Berry_2018.csv")
 # Remove outliers from norm_F1
 dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
 
@@ -1705,7 +1705,7 @@ success_msg("Great work!")
 
 ```{r ex="linearity", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class8_Berry_2018.csv")
 # Remove outliers from norm_F1
 dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
 # Remove outliers from Familiarity
@@ -1757,7 +1757,7 @@ success_msg("I can't test your plots, but I hope you did everything as you shoul
 
 ```{r ex="autocorrelation", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class8_Berry_2018.csv")
 # Remove outliers from norm_F1
 dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
 # Remove outliers from Familiarity
@@ -1766,7 +1766,7 @@ dataSet<- dataSet[-indices, ]
 dataSet$norm_F1<-dataSet$norm_F1^0.6666667
 # Hack, durbin-watson takes way too long to compute
 durbinWatsonTest<-function(mod) {
- read_rds(gzcon(url("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_durbinWatson.rds")))
+ read_rds(gzcon(url("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class8_durbinWatson.rds")))
 } 
 
 ```
@@ -1814,7 +1814,7 @@ success_msg("Great work!")
 ### 26.7 The residuals are normally distributed
 ```{r ex="distr", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class8_Berry_2018.csv")
 # Remove outliers from norm_F1
 dataSet$wordLength<-log(dataSet$wordLength)
 
@@ -1859,7 +1859,7 @@ success_msg("Great work!")
 
 ```{r ex="occam", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class8_Berry_2018.csv")
 # Remove outliers from norm_F1
 dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
 dataSet$wordLength<-log(dataSet$wordLength)
@@ -1905,7 +1905,7 @@ success_msg("Great work!")
 
 ```{r ex="occam_proactivereactive", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class8_Berry_2018.csv")
 # Remove outliers from norm_F1
 dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
 dataSet$wordLength<-log(dataSet$wordLength)
@@ -1953,7 +1953,7 @@ success_msg("Great work!")
 
 ```{r ex="proactivesex", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class8_Berry_2018.csv")
 # Remove outliers from norm_F1
 dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
 dataSet$wordLength<-log(dataSet$wordLength)
@@ -2000,7 +2000,7 @@ success_msg("Great work!")
 
 ```{r ex="proactiveHighSchoolType", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class8_Berry_2018.csv")
 # Remove outliers from norm_F1
 dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
 dataSet$wordLength<-log(dataSet$wordLength)
@@ -2046,7 +2046,7 @@ success_msg("Great work!")
 
 ```{r ex="Occupation_Group", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class8_Berry_2018.csv")
 # Remove outliers from norm_F1
 dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
 dataSet$wordLength<-log(dataSet$wordLength)
@@ -2092,7 +2092,7 @@ success_msg("Great work!")
 
 ```{r ex="BirthYear", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class8_Berry_2018.csv")
 # Remove outliers from norm_F1
 dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
 dataSet$wordLength<-log(dataSet$wordLength)
@@ -2141,7 +2141,7 @@ success_msg("Great work!")
 library(readr)
 #This is a hack, it reads pre-defined bootstrap data from the server, to avoid that (1) the scripts runs longer than 80 seconds, the datacamp light limit and (2) that students have to wait a long time for their results
 bootstrap <- function(model) {
-boots<-suppressMessages(as.data.frame(read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_bootstraps.csv")))
+boots<-suppressMessages(as.data.frame(read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class8_bootstraps.csv")))
 return(boots)
 }
 mod<-"mod"
@@ -2192,7 +2192,7 @@ success_msg("Great work!")
 
 ```{r ex="interpretation", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_Berry_2018.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class8_Berry_2018.csv")
 # Remove outliers from norm_F1
 dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
 # Remove outliers from Familiarity
@@ -2202,7 +2202,7 @@ dataSet$norm_F1<-dataSet$norm_F1^0.6666667
 dataSet$wordLength<-log(dataSet$wordLength)
 #This is a hack, it reads pre-defined bootstrap data from the server, to avoid that (1) the scripts runs longer than 80 seconds, the datacamp light limit and (2) that students have to wait a long time for their results
 bootstrap <- function(model) {
-boots<-read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class8_bootstraps.csv")
+boots<-read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class8_bootstraps.csv")
 return(boots)
 }
 mod<-lm(norm_F1 ~ Proactive + Reactive + Style + Sex + PartnerEthnicity + PhillyLiveTime + HighSchoolType + wordLength, dataSet)

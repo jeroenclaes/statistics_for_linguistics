@@ -12,7 +12,7 @@ tutorial::go_interactive()
 library(car)
 library(dplyr)
 library(readr)
-dataSet<-read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv")
+dataSet<-read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/datasets/class10_Bresnan_et_al_2017.csv")
 
 options(contr=c("contr.Sum", "contr.Poly"))
 ```
@@ -46,7 +46,7 @@ options(contr=c("contr.Sum", "contr.Poly"))
 # Load the readr package
 
 # Load the course data from the course website to the object 'dataSet':
-# http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class11_Berry_2018.csv
+# https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class11_Berry_2018.csv
 
 # Load the dplyr package
 
@@ -69,8 +69,8 @@ options(contr=c("contr.Sum", "contr.Poly"))
 # Load the readr package
 library(readr)
 # Load the course data from the course website to the object 'dataSet':
-# http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class11_Berry_2018.csv
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class11_Berry_2018.csv")
+# https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class11_Berry_2018.csv
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/datasets/class11_Berry_2018.csv")
 # Load the dplyr package
 library(dplyr)
 # Convert all character values to factor
@@ -106,7 +106,7 @@ success_msg("Great!")
 #### 1.2.1 `Proactive | Speaker`
 ```{r ex="ProactiveSpeaker", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class11_Berry_2018.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/datasets/class11_Berry_2018.csv")
 # Remove outliers from norm_F1
 dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
 # Remove outliers from Familiarity
@@ -148,7 +148,7 @@ success_msg("Great work!")
 #### 1.2.2 `Reactive | Speaker`
 ```{r ex="ReactiveSpeaker", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class11_Berry_2018.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/datasets/class11_Berry_2018.csv")
 # Remove outliers from norm_F1
 dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
 # Remove outliers from Familiarity
@@ -191,7 +191,7 @@ success_msg("Great work!")
 #### 1.2.3 `Style | Speaker`
 ```{r ex="StyleSpeaker", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class11_Berry_2018.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/datasets/class11_Berry_2018.csv")
 # Remove outliers from norm_F1
 dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
 # Remove outliers from Familiarity
@@ -234,7 +234,7 @@ success_msg("Great work!")
 ```{r ex="wordLengthSpeaker", type="pre-exercise-code"}
 library(readr)
 library(dplyr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class11_Berry_2018.csv") %>%
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/datasets/class11_Berry_2018.csv") %>%
   mutate_if(is.character, as.factor)
 # Remove outliers from norm_F1
 dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
@@ -279,7 +279,7 @@ success_msg("Great work!")
 ```{r ex="randslopespeaker", type="pre-exercise-code"}
 library(readr)
 library(dplyr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class11_Berry_2018.csv") %>%
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/datasets/class11_Berry_2018.csv") %>%
   mutate_if(is.character, as.factor)
 # Remove outliers from norm_F1
 dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
@@ -327,7 +327,7 @@ success_msg("Great work!")
 ```{r ex="occamrand", type="pre-exercise-code"}
 library(readr)
 library(dplyr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class11_Berry_2018.csv") %>%
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/datasets/class11_Berry_2018.csv") %>%
   mutate_if(is.character, as.factor)
 # Remove outliers from norm_F1
 dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
@@ -395,7 +395,7 @@ success_msg("Great work!")
 ```{r ex="linearfit", type="pre-exercise-code"}
 library(readr)
 library(dplyr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class11_Berry_2018.csv") %>%
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/datasets/class11_Berry_2018.csv") %>%
   mutate_if(is.character, as.factor)
 # Remove outliers from norm_F1
 dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
@@ -447,7 +447,7 @@ success_msg("Great work!")
 library(readr)
 library(dplyr)
 library(lme4)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class11_Berry_2018.csv") %>%
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/datasets/class11_Berry_2018.csv") %>%
   mutate_if(is.character, as.factor)
 # Remove outliers from norm_F1
 dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
@@ -458,7 +458,7 @@ dataSet$norm_F1<-dataSet$norm_F1^0.6666667
 dataSet$wordLength<-log(dataSet$wordLength)
 
 confint<-function(model, method, boot.type, nsim, parallel, ncpus) {
-  suppressWarnings(suppressMessages(as.data.frame(read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class11_Berry_2018_confints_model_1.csv"))))
+  suppressWarnings(suppressMessages(as.data.frame(read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class11_Berry_2018_confints_model_1.csv"))))
 }
 ```
 
@@ -518,7 +518,7 @@ success_msg("Great work!")
 library(readr)
 library(dplyr)
 library(lme4)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class11_Berry_2018.csv") %>%
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/datasets/class11_Berry_2018.csv") %>%
   mutate_if(is.character, as.factor)
 # Remove outliers from norm_F1
 dataSet<- dataSet[abs(scale(dataSet$norm_F1))<= 2, ]
@@ -529,7 +529,7 @@ dataSet$norm_F1<-dataSet$norm_F1^0.6666667
 dataSet$wordLength<-log(dataSet$wordLength)
 
 confint<-function(model, method, boot.type, nsim, parallel, ncpus) {
-  suppressWarnings(suppressMessages(as.data.frame(read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class11_Berry_2018_confints_model_2.csv"))))
+  suppressWarnings(suppressMessages(as.data.frame(read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class11_Berry_2018_confints_model_2.csv"))))
 }
 ```
 
@@ -642,7 +642,7 @@ success_msg("Great work!")
 # Load the readr package
 
 # Load the course data from the course website to the object 'dataSet':
-# http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv
+# https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/datasets/class10_Bresnan_et_al_2017.csv
 
 # Load the dplyr package
 
@@ -656,8 +656,8 @@ success_msg("Great work!")
 # Load the readr package
 library(readr)
 # Load the course data from the course website to the object 'dataSet':
-#http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv
-dataSet<-read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv")
+#https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/datasets/class10_Bresnan_et_al_2017.csv
+dataSet<-read_csv("https://github.com/jeroenclaes/statistics_for_linguistics/blob/master/datasets/class10_Bresnan_et_al_2017.csv")
 # Load the dplyr package
 library(dplyr)
 # Convert all character values to Factor with `mutate_if`
@@ -685,8 +685,8 @@ success_msg("Great!")
 # Load the readr package
 library(readr)
 # Load the course data from the course website to the object 'dataSet':
-#http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv
-dataSet<-read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv")
+#https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/datasets/class10_Bresnan_et_al_2017.csv
+dataSet<-read_csv("https://github.com/jeroenclaes/statistics_for_linguistics/blob/master/datasets/class10_Bresnan_et_al_2017.csv")
 # Load the dplyr package
 library(dplyr)
 # Convert all character values to Factor with `mutate_if`
@@ -770,8 +770,8 @@ success_msg("Great work!")
 # Load the readr package
 library(readr)
 # Load the course data from the course website to the object 'dataSet':
-#http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv
-dataSet<-read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv")
+#https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/datasets/class10_Bresnan_et_al_2017.csv
+dataSet<-read_csv("https://github.com/jeroenclaes/statistics_for_linguistics/blob/master/datasets/class10_Bresnan_et_al_2017.csv")
 # Load the dplyr package
 library(dplyr)
 # Convert all character values to Factor with `mutate_if`
@@ -852,8 +852,8 @@ success_msg("Great work!")
 # Load the readr package
 library(readr)
 # Load the course data from the course website to the object 'dataSet':
-#http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv
-dataSet<-read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv")
+#https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/datasets/class10_Bresnan_et_al_2017.csv
+dataSet<-read_csv("https://github.com/jeroenclaes/statistics_for_linguistics/blob/master/datasets/class10_Bresnan_et_al_2017.csv")
 # Load the dplyr package
 library(dplyr)
 # Convert all character values to Factor with `mutate_if`
@@ -934,8 +934,8 @@ success_msg("Great work!")
 # Load the readr package
 library(readr)
 # Load the course data from the course website to the object 'dataSet':
-#http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv
-dataSet<-read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv")
+#https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/datasets/class10_Bresnan_et_al_2017.csv
+dataSet<-read_csv("https://github.com/jeroenclaes/statistics_for_linguistics/blob/master/datasets/class10_Bresnan_et_al_2017.csv")
 # Load the dplyr package
 library(dplyr)
 # Convert all character values to Factor with `mutate_if`
@@ -1016,8 +1016,8 @@ success_msg("Great work!")
 # Load the readr package
 library(readr)
 # Load the course data from the course website to the object 'dataSet':
-#http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv
-dataSet<-read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv")
+#https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/datasets/class10_Bresnan_et_al_2017.csv
+dataSet<-read_csv("https://github.com/jeroenclaes/statistics_for_linguistics/blob/master/datasets/class10_Bresnan_et_al_2017.csv")
 # Load the dplyr package
 library(dplyr)
 # Convert all character values to Factor with `mutate_if`
@@ -1098,8 +1098,8 @@ success_msg("Great work!")
 # Load the readr package
 library(readr)
 # Load the course data from the course website to the object 'dataSet':
-#http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv
-dataSet<-read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv")
+#https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/datasets/class10_Bresnan_et_al_2017.csv
+dataSet<-read_csv("https://github.com/jeroenclaes/statistics_for_linguistics/blob/master/datasets/class10_Bresnan_et_al_2017.csv")
 # Load the dplyr package
 library(dplyr)
 # Convert all character values to Factor with `mutate_if`
@@ -1183,8 +1183,8 @@ success_msg("Great work!")
 # Load the readr package
 library(readr)
 # Load the course data from the course website to the object 'dataSet':
-#http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv
-dataSet<-read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv")
+#https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/datasets/class10_Bresnan_et_al_2017.csv
+dataSet<-read_csv("https://github.com/jeroenclaes/statistics_for_linguistics/blob/master/datasets/class10_Bresnan_et_al_2017.csv")
 # Load the dplyr package
 library(dplyr)
 # Convert all character values to Factor with `mutate_if`
@@ -1232,8 +1232,8 @@ success_msg("Great work!")
 # Load the readr package
 library(readr)
 # Load the course data from the course website to the object 'dataSet':
-#http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv
-dataSet<-read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv")
+#https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/datasets/class10_Bresnan_et_al_2017.csv
+dataSet<-read_csv("https://github.com/jeroenclaes/statistics_for_linguistics/blob/master/datasets/class10_Bresnan_et_al_2017.csv")
 # Load the dplyr package
 library(dplyr)
 # Convert all character values to Factor with `mutate_if`
@@ -1301,8 +1301,8 @@ success_msg("Great work!")
 # Load the readr package
 library(readr)
 # Load the course data from the course website to the object 'dataSet':
-#http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv
-dataSet<-read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Bresnan_et_al_2017.csv")
+#https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/datasets/class10_Bresnan_et_al_2017.csv
+dataSet<-read_csv("https://github.com/jeroenclaes/statistics_for_linguistics/blob/master/datasets/class10_Bresnan_et_al_2017.csv")
 # Load the dplyr package
 library(dplyr)
 # Convert all character values to Factor with `mutate_if`
@@ -1317,7 +1317,7 @@ dataSet$Theme.animacy<-dplyr::recode(dataSet$Theme.animacy, C="O", A="O", L="O",
 dataSet <- mutate_if(dataSet, is.character, as.factor)
 library(lme4)
 confint<-function(model, method, boot.type, nsim, parallel, ncpus) {
-  suppressWarnings(suppressMessages(as.data.frame(read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class11_Bresnan_et_al_2017_confints_model.csv"))))
+  suppressWarnings(suppressMessages(as.data.frame(read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class11_Bresnan_et_al_2017_confints_model.csv"))))
 }
 ```
 

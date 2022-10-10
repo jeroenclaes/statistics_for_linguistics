@@ -22,7 +22,7 @@ tutorial::go_interactive()
 # Load the readr package
 
 # Load the course data from the course website to the object 'dataSet':
-# http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class4_dude.csv
+# https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class4_dude.csv
 
 # Load the dplyr package
 
@@ -36,8 +36,8 @@ tutorial::go_interactive()
 # Load the readr package
 library(readr)
 # Load the course data from the course website to the object 'dataSet':
-# http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class4_dude.csv
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class4_dude.csv")
+# https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class4_dude.csv
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class4_dude.csv")
 # Load the dplyr package
 library(dplyr)
 # Print a 'glimpse' of the dataSet
@@ -59,7 +59,7 @@ success_msg("Great!")
 
 ```{r ex="boxplot", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class4_dude.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class4_dude.csv")
 ```
 
 ```{r ex="boxplot", type="sample-code"}
@@ -93,7 +93,7 @@ success_msg("Great!")
 
 ```{r ex="dude_distribution", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class4_dude.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class4_dude.csv")
 ```
 
 ```{r ex="dude_distribution", type="sample-code"}
@@ -152,7 +152,7 @@ success_msg("Great work!")
 ```{r ex="dude_test", type="pre-exercise-code"}
 library(readr)
 library(ggplot2)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class4_dude.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class4_dude.csv")
 ```
 
 ```{r ex="dude_test", type="sample-code"}
@@ -205,7 +205,7 @@ success_msg("Great!")
 ### 1.5 Plotting the differences between the groups
 ```{r ex="dude_plot", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class4_dude.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class4_dude.csv")
 ```
 
 ```{r ex="dude_plot", type="sample-code"}
@@ -289,7 +289,7 @@ success_msg("Great!")
 # Load the readr package
 
 # Load the course data from the course website to the object 'dataSet':
-# http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class4_Paivio_et_al_1968.csv
+# https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class4_Paivio_et_al_1968.csv
 
 # Load the dplyr package
 
@@ -303,8 +303,8 @@ success_msg("Great!")
 # Load the readr package
 library(readr)
 # Load the course data from the course website to the object 'dataSet':
-# http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class4_Paivio_et_al_1968.csv
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class4_Paivio_et_al_1968.csv")
+# https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class4_Paivio_et_al_1968.csv
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class4_Paivio_et_al_1968.csv")
 # Load the dplyr package
 library(dplyr)
 # Print a 'glimpse' of the dataSet
@@ -325,7 +325,7 @@ success_msg("Great!")
 ### 2.2  A first exploration of the differences with a box-and-whisker plot
 ```{r ex="boxplot_associations", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class4_Paivio_et_al_1968.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class4_Paivio_et_al_1968.csv")
 ```
 
 ```{r ex="boxplot_associations", type="sample-code"}
@@ -359,7 +359,7 @@ success_msg("Great!")
 
 ```{r ex="associations_distribution", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class4_Paivio_et_al_1968.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class4_Paivio_et_al_1968.csv")
 ```
 
 ```{r ex="associations_distribution", type="sample-code"}
@@ -417,7 +417,7 @@ success_msg("Good work!")
 ```{r ex="associations_test", type="pre-exercise-code"}
 library(readr)
 library(ggplot2)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class4_Paivio_et_al_1968.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class4_Paivio_et_al_1968.csv")
 ```
 
 ```{r ex="associations_test", type="sample-code"}
@@ -470,7 +470,7 @@ success_msg("Great job!")
 ### 2.5 Plotting the differences between the groups
 ```{r ex="associations_plot", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class4_Paivio_et_al_1968.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class4_Paivio_et_al_1968.csv")
 ```
 
 ```{r ex="associations_plot", type="sample-code"}
@@ -552,7 +552,7 @@ success_msg("Great!")
 # Load the readr package
 
 # Load the course data from the course website to the object 'dataSet':
-# http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class4_Eddington_and_Ruiz-Mendoza_2010.csv
+# https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class4_Eddington_and_Ruiz-Mendoza_2010.csv
 
 # Load the dplyr package
 
@@ -566,8 +566,8 @@ success_msg("Great!")
 # Load the readr package
 library(readr)
 # Load the course data from the course website to the object 'dataSet':
-# http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class4_Eddington_and_Ruiz-Mendoza_2010.csv
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class4_Eddington_and_Ruiz-Mendoza_2010.csv")
+# https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class4_Eddington_and_Ruiz-Mendoza_2010.csv
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class4_Eddington_and_Ruiz-Mendoza_2010.csv")
 # Load the dplyr package
 library(dplyr)
 # Print a 'glimpse' of the dataSet
@@ -588,7 +588,7 @@ success_msg("Great!")
 ### 3.2  A first exploration of the differences with a box-and-whisker plot
 ```{r ex="boxplot_conditions_RT", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class4_Eddington_and_Ruiz-Mendoza_2010.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class4_Eddington_and_Ruiz-Mendoza_2010.csv")
 ```
 
 ```{r ex="boxplot_conditions_RT", type="sample-code"}
@@ -622,7 +622,7 @@ success_msg("Great!")
 
 ```{r ex="conditions_RT_distribution", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class4_Eddington_and_Ruiz-Mendoza_2010.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class4_Eddington_and_Ruiz-Mendoza_2010.csv")
 ```
 
 ```{r ex="conditions_RT_distribution", type="sample-code"}
@@ -681,7 +681,7 @@ success_msg("Great!")
 ### 3.4 Performing the statistical test
 ```{r ex="conditions_RT_test", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class4_Eddington_and_Ruiz-Mendoza_2010.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class4_Eddington_and_Ruiz-Mendoza_2010.csv")
 ```
 
 ```{r ex="conditions_RT_test", type="sample-code"}
@@ -728,7 +728,7 @@ confMedian <- function(x) {
   sort(x)[qbinom(c(.025,.975), length(x), 0.5)]
 }
 
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class4_Eddington_and_Ruiz-Mendoza_2010.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class4_Eddington_and_Ruiz-Mendoza_2010.csv")
 ```
 
 ```{r ex="conditions_RT_plot", type="sample-code"}

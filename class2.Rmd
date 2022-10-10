@@ -13,7 +13,7 @@ tutorial::go_interactive()
 # Load the readr package
 
 # Load the course data from the course website to the object 'dataSet':
-# http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class2_balota_et_al_2007.csv
+# https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class2_balota_et_al_2007.csv
 
 # Load dplyr
 
@@ -26,8 +26,8 @@ tutorial::go_interactive()
 # Load the readr package
 library(readr)
 # Load the course data from the course website to the object 'dataSet':
-# http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class2_balota_et_al_2007.csv
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class2_balota_et_al_2007.csv")
+# https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class2_balota_et_al_2007.csv
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class2_balota_et_al_2007.csv")
 
 # Load dplyr
 library(dplyr)
@@ -48,7 +48,7 @@ success_msg("Great!")
 
 ```{r ex="explore", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class2_balota_et_al_2007.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class2_balota_et_al_2007.csv")
 ```
 
 ```{r ex="explore", type="sample-code"}
@@ -81,7 +81,7 @@ success_msg("Great!")
 
 ```{r ex="explore2", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class2_balota_et_al_2007.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class2_balota_et_al_2007.csv")
 ```
 
 ```{r ex="explore2", type="sample-code"}
@@ -115,7 +115,7 @@ success_msg("Great!")
 ### Subsetting data.frames (1/2)
 ```{r ex="subset1", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class2_balota_et_al_2007.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class2_balota_et_al_2007.csv")
 ```
 
 ```{r ex="subset1", type="sample-code"}
@@ -153,7 +153,7 @@ success_msg("Great!")
 ### Subsetting data.frames (2/2)
 ```{r ex="subset2", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class2_balota_et_al_2007.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class2_balota_et_al_2007.csv")
 ```
 
 ```{r ex="subset2", type="sample-code"}
@@ -199,7 +199,7 @@ success_msg("Great job!")
 
 ```{r ex="Freq", type="sample-code"}
 # Load the data again from
-# http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class2_balota_et_al_2007.csv
+# https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class2_balota_et_al_2007.csv
 # Remember that you will need the package readr for that
 
 # Calculate the mean of 'Freq'
@@ -218,10 +218,10 @@ success_msg("Great job!")
 
 ```{r ex="Freq", type="solution"}
 # Load the data again from
-# http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class2_balota_et_al_2007.csv
+# https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class2_balota_et_al_2007.csv
 # Remember that you will need the package readr for that
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class2_balota_et_al_2007.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class2_balota_et_al_2007.csv")
 # Calculate the mean of 'Freq'
 mean(dataSet$Freq, na.rm=TRUE)
 # Calculate the median of 'Freq'
@@ -250,7 +250,7 @@ success_msg("Great job!")
 ### 2.1 The `Mean_RT` variable
 ```{r ex="Mean_RT", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class2_balota_et_al_2007.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class2_balota_et_al_2007.csv")
 
 ```
 
@@ -305,7 +305,7 @@ success_msg("Great job!")
 ####  Mean and median
 ```{r ex="Freq_median_mean", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class2_balota_et_al_2007.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class2_balota_et_al_2007.csv")
 ```
 
 ```{r ex="Freq_median_mean", type="sample-code"}
@@ -337,7 +337,7 @@ test_output_contains("median(dataSet$Freq, na.rm=TRUE)", incorrect_msg = "Make s
 ####  Density plot 
 ```{r ex="Freq_density", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class2_balota_et_al_2007.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class2_balota_et_al_2007.csv")
 ```
 
 ```{r ex="Freq_density", type="sample-code"}
@@ -369,7 +369,7 @@ success_msg("Great!")
 ####  QQ-plot 
 ```{r ex="Freq_qq", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class2_balota_et_al_2007.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class2_balota_et_al_2007.csv")
 ```
 
 ```{r ex="Freq_qq", type="sample-code"}
@@ -401,7 +401,7 @@ success_msg("Great!")
 ####  Shapiro-Wilk test
 ```{r ex="Freq_shap", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class2_balota_et_al_2007.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class2_balota_et_al_2007.csv")
 ```
 
 ```{r ex="Freq_shap", type="sample-code"}
@@ -427,7 +427,7 @@ test_output_contains("shapiro.test(dataSet$Freq)", incorrect_msg = "Make sure yo
 ####  Mean and median
 ```{r ex="Mean_RT_median_mean", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class2_balota_et_al_2007.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class2_balota_et_al_2007.csv")
 ```
 
 ```{r ex="Mean_RT_median_mean", type="sample-code"}
@@ -459,7 +459,7 @@ test_output_contains("median(dataSet$Mean_RT, na.rm=TRUE)", incorrect_msg = "Mak
 ####  Density plot 
 ```{r ex="Mean_RT_density", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class2_balota_et_al_2007.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class2_balota_et_al_2007.csv")
 ```
 
 ```{r ex="Mean_RT_density", type="sample-code"}
@@ -491,7 +491,7 @@ success_msg("Great!")
 ####  QQ-plot 
 ```{r ex="Mean_RT_qq", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class2_balota_et_al_2007.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class2_balota_et_al_2007.csv")
 ```
 
 ```{r ex="Mean_RT_qq", type="sample-code"}
@@ -522,7 +522,7 @@ success_msg("Great!")
 ####  Shapiro-Wilk test
 ```{r ex="Mean_RT_shap", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class2_balota_et_al_2007.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class2_balota_et_al_2007.csv")
 ```
 
 ```{r ex="Mean_RT_shap", type="sample-code"}
@@ -555,7 +555,7 @@ success_msg("Great job!")
 #### Range, Variance, standard deviation, interquartile range, and  median absolute deviation 
 ```{r ex="Freq_dispersion", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class2_balota_et_al_2007.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class2_balota_et_al_2007.csv")
 ```
 
 ```{r ex="Freq_dispersion", type="sample-code"}
@@ -597,7 +597,7 @@ success_msg("Great job!")
 #### Box-and-whiskers plot
 ```{r ex="Freq_boxplot", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class2_balota_et_al_2007.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class2_balota_et_al_2007.csv")
 ```
 
 ```{r ex="Freq_boxplot", type="sample-code"}
@@ -627,7 +627,7 @@ success_msg("Great!")
 #### Range, Variance, standard deviation, interquartile range, and  median absolute deviation 
 ```{r ex="Mean_RT_dispersion", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class2_balota_et_al_2007.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class2_balota_et_al_2007.csv")
 ```
 
 ```{r ex="Mean_RT_dispersion", type="sample-code"}
@@ -669,7 +669,7 @@ success_msg("Great job!")
 #### Box-and-whiskers plot
 ```{r ex="Mean_RT_boxplot", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class2_balota_et_al_2007.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class2_balota_et_al_2007.csv")
 ```
 
 ```{r ex="Mean_RT_boxplot", type="sample-code"}

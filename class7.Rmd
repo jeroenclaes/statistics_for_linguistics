@@ -24,7 +24,7 @@ tutorial::go_interactive()
 # Load the readr package
 
 # Load the course data from the course website to the object 'dataSet':
-# http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class7_Baayen_et_al_2006.csv
+# https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class7_Baayen_et_al_2006.csv
 
 # Load the dplyr package
 
@@ -36,8 +36,8 @@ tutorial::go_interactive()
 # Load the readr package
 library(readr)
 # Load the course data from the course website to the object 'dataSet':
-# http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class5_Kuperman_et_al_2012.csv
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class7_Baayen_et_al_2006.csv")
+# https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class5_Kuperman_et_al_2012.csv
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class7_Baayen_et_al_2006.csv")
 # Load the dplyr package
 library(dplyr)
 # Print a 'glimpse' of the dataSet
@@ -56,7 +56,7 @@ success_msg("Great!")
 ### 2.1 Central tendency
 ```{r ex="shape_RTlexdec", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class7_Baayen_et_al_2006.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class7_Baayen_et_al_2006.csv")
 ```
 
 ```{r ex="shape_RTlexdec", type="sample-code"}
@@ -100,7 +100,7 @@ success_msg("I can't evaluate your plot, but I think you did great!")
 ### 2.2 Dispersion
 ```{r ex="dispersion_RTlexdec", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class7_Baayen_et_al_2006.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class7_Baayen_et_al_2006.csv")
 ```
 
 ```{r ex="dispersion_RTlexdec", type="sample-code"}
@@ -148,7 +148,7 @@ success_msg("Good work!")
 ### 3.1 Central tendency
 ```{r ex="shape_Familiarity", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class7_Baayen_et_al_2006.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class7_Baayen_et_al_2006.csv")
 ```
 
 ```{r ex="shape_Familiarity", type="sample-code"}
@@ -192,7 +192,7 @@ success_msg("I can't evaluate your plot, but I think you did great!")
 ### 3.2 Dispersion
 ```{r ex="dispersion_Familiarity", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class7_Baayen_et_al_2006.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class7_Baayen_et_al_2006.csv")
 ```
 
 ```{r ex="dispersion_Familiarity", type="sample-code"}
@@ -241,7 +241,7 @@ success_msg("Good job!")
 ### 4.1 Counts
 ```{r ex="shape_AgeSubject", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class7_Baayen_et_al_2006.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class7_Baayen_et_al_2006.csv")
 ```
 
 ```{r ex="shape_AgeSubject", type="sample-code"}
@@ -278,7 +278,7 @@ success_msg("Well done!")
 ### 5.1 Central tendency
 ```{r ex="shape_WrittenFrequency", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class7_Baayen_et_al_2006.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class7_Baayen_et_al_2006.csv")
 ```
 
 ```{r ex="shape_WrittenFrequency", type="sample-code"}
@@ -321,7 +321,7 @@ success_msg("I can't evaluate your plot, but I think you did great!")
 ### 5.2 Dispersion
 ```{r ex="dispersion_WrittenFrequency", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class7_Baayen_et_al_2006.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class7_Baayen_et_al_2006.csv")
 ```
 
 ```{r ex="dispersion_WrittenFrequency", type="sample-code"}
@@ -367,7 +367,7 @@ success_msg("I can't evaluate your plot, but I think you did great!")
 ### 6.1 Counts
 ```{r ex="shape_WordCategory", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class7_Baayen_et_al_2006.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class7_Baayen_et_al_2006.csv")
 ```
 
 ```{r ex="shape_WordCategory", type="sample-code"}
@@ -404,7 +404,7 @@ success_msg("Well done!")
 ### 7.1 Central tendency
 ```{r ex="shape_LengthInLetters", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class7_Baayen_et_al_2006.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class7_Baayen_et_al_2006.csv")
 ```
 
 ```{r ex="shape_LengthInLetters", type="sample-code"}
@@ -446,7 +446,7 @@ success_msg("I can't evaluate your plot, but I think you did great!")
 ### 7.2 Dispersion
 ```{r ex="dispersion_LengthInLetters", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class7_Baayen_et_al_2006.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class7_Baayen_et_al_2006.csv")
 ```
 
 ```{r ex="dispersion_LengthInLetters", type="sample-code"}
@@ -492,7 +492,7 @@ success_msg("I can't evaluate your plot, but I think you did great!")
 ### 8.1 Central tendency
 ```{r ex="shape_FrequencyInitialDiphoneWord", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class7_Baayen_et_al_2006.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class7_Baayen_et_al_2006.csv")
 ```
 
 ```{r ex="shape_FrequencyInitialDiphoneWord", type="sample-code"}
@@ -536,7 +536,7 @@ success_msg("I can't evaluate your plot, but I think you did great!")
 ###  8.2 Dispersion
 ```{r ex="dispersion_FrequencyInitialDiphoneWord", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class7_Baayen_et_al_2006.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class7_Baayen_et_al_2006.csv")
 ```
 
 ```{r ex="dispersion_FrequencyInitialDiphoneWord", type="sample-code"}
@@ -583,7 +583,7 @@ success_msg("I can't evaluate your plot, but I think you did great!")
 
 ```{r ex="outliers", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class7_Baayen_et_al_2006.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class7_Baayen_et_al_2006.csv")
 ```
 
 ```{r ex="outliers", type="sample-code"}
@@ -632,7 +632,7 @@ success_msg("Great work!")
 ### 10.1 `Familiarity` vs `RTlexdec`
 ```{r ex="rel_Familiarity", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class7_Baayen_et_al_2006.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class7_Baayen_et_al_2006.csv")
 # Remove outliers from RTlexdec
 dataSet<- dataSet[abs(scale(dataSet$RTlexdec))<= 2, ]
 # Remove outliers from Familiarity
@@ -685,7 +685,7 @@ success_msg("Great work!")
 ### 10.2 `WrittenFrequency` vs `RTlexdec`
 ```{r ex="rel_WrittenFrequency", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class7_Baayen_et_al_2006.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class7_Baayen_et_al_2006.csv")
 # Remove outliers from RTlexdec
 dataSet<- dataSet[abs(scale(dataSet$RTlexdec))<= 2, ]
 # Remove outliers from Familiarity
@@ -738,7 +738,7 @@ success_msg("Great work!")
 ### 10.3 `LengthInLetters` vs `RTlexdec`
 ```{r ex="rel_LengthInLetters", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class7_Baayen_et_al_2006.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class7_Baayen_et_al_2006.csv")
 # Remove outliers from RTlexdec
 dataSet<- dataSet[abs(scale(dataSet$RTlexdec))<= 2, ]
 # Remove outliers from Familiarity
@@ -792,7 +792,7 @@ success_msg("Great work!")
 ### 10.4 `FrequencyInitialDiphoneWord` vs `RTlexdec`
 ```{r ex="rel_FrequencyInitialDiphoneWord", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class7_Baayen_et_al_2006.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class7_Baayen_et_al_2006.csv")
 # Remove outliers from RTlexdec
 dataSet<- dataSet[abs(scale(dataSet$RTlexdec))<= 2, ]
 # Remove outliers from Familiarity
@@ -848,7 +848,7 @@ success_msg("Great work!")
 
 ```{r ex="rel_familiarityvsfrequency", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class7_Baayen_et_al_2006.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class7_Baayen_et_al_2006.csv")
 # Remove outliers from RTlexdec
 dataSet<- dataSet[abs(scale(dataSet$RTlexdec))<= 2, ]
 # Remove outliers from Familiarity
@@ -925,7 +925,7 @@ success_msg("Great work!")
 
 ```{r ex="firstmodel", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class7_Baayen_et_al_2006.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class7_Baayen_et_al_2006.csv")
 # Remove outliers from RTlexdec
 dataSet<- dataSet[abs(scale(dataSet$RTlexdec))<= 2, ]
 # Remove outliers from Familiarity
@@ -974,7 +974,7 @@ success_msg("Great work!")
 ### 13.1 There are no overly influential observations
 ```{r ex="influence", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class7_Baayen_et_al_2006.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class7_Baayen_et_al_2006.csv")
 # Remove outliers from RTlexdec
 dataSet<- dataSet[abs(scale(dataSet$RTlexdec))<= 2, ]
 # Remove outliers from Familiarity
@@ -1035,7 +1035,7 @@ success_msg("Great work!")
 
 ```{r ex="linearity", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class7_Baayen_et_al_2006.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class7_Baayen_et_al_2006.csv")
 # Remove outliers from RTlexdec
 dataSet<- dataSet[abs(scale(dataSet$RTlexdec))<= 2, ]
 # Remove outliers from Familiarity
@@ -1100,7 +1100,7 @@ success_msg("I can't test your plots, but I hope you did everything as you shoul
 ### 13.3 There is no multicollinearity
 ```{r ex="multicollinearity", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class7_Baayen_et_al_2006.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class7_Baayen_et_al_2006.csv")
 # Remove outliers from RTlexdec
 dataSet<- dataSet[abs(scale(dataSet$RTlexdec))<= 2, ]
 # Remove outliers from Familiarity
@@ -1154,7 +1154,7 @@ test_library_function("car")
 
 ```{r ex="autocorrelation", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class7_Baayen_et_al_2006.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class7_Baayen_et_al_2006.csv")
 # Remove outliers from RTlexdec
 dataSet<- dataSet[abs(scale(dataSet$RTlexdec))<= 2, ]
 # Remove outliers from Familiarity
@@ -1210,7 +1210,7 @@ success_msg("Great work!")
 ### 13.5 There is no heteroskedasticity (1/2)
 ```{r ex="heteroskedasticity", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class7_Baayen_et_al_2006.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class7_Baayen_et_al_2006.csv")
 # Remove outliers from RTlexdec
 dataSet<- dataSet[abs(scale(dataSet$RTlexdec))<= 2, ]
 # Remove outliers from Familiarity
@@ -1286,7 +1286,7 @@ success_msg("Great work!")
 
 ```{r ex="heteroskedasticity2", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class7_Baayen_et_al_2006.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class7_Baayen_et_al_2006.csv")
 # Remove outliers from RTlexdec
 dataSet<- dataSet[abs(scale(dataSet$RTlexdec))<= 2, ]
 # Remove outliers from Familiarity
@@ -1365,7 +1365,7 @@ success_msg("Great work!")
 ### 13.6 The residuals are normally distributed
 ```{r ex="distr", type="pre-exercise-code"}
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class7_Baayen_et_al_2006.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class7_Baayen_et_al_2006.csv")
 # Remove outliers from RTlexdec
 dataSet<- dataSet[abs(scale(dataSet$RTlexdec))<= 2, ]
 # Remove outliers from Familiarity

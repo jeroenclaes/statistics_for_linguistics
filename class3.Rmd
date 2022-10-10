@@ -16,7 +16,7 @@ tutorial::go_interactive()
 # Load the readr package
 
 # Load the course data from the coutrse website to the object 'dataSet':
-# http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv
+# https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class3_claes_2017.csv
 
 # Load the dplyr package
 
@@ -28,8 +28,8 @@ tutorial::go_interactive()
 # Load the readr package
 library(readr)
 # Load the course data from the course website to the object 'dataSet':
-# http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv")
+# https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class3_claes_2017.csv
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class3_claes_2017.csv")
 # Load the dplyr package
 library(dplyr)
 # Print a 'glimpse' of the dataSet
@@ -49,7 +49,7 @@ success_msg("Great!")
 ```{r ex="explore", type="pre-exercise-code"}
 Sys.setlocale(category = 'LC_ALL','en_US.UTF-8')
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv", locale=locale(encoding = "UTF-8"))
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class3_claes_2017.csv", locale=locale(encoding = "UTF-8"))
 ```
 
 ```{r ex="explore", type="sample-code"}
@@ -78,7 +78,7 @@ success_msg("Great!")
 ```{r ex="explore2", type="pre-exercise-code"}
 Sys.setlocale(category = 'LC_ALL','en_US.UTF-8')
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class3_claes_2017.csv")
 ```
 
 ```{r ex="explore2", type="sample-code"}
@@ -104,7 +104,7 @@ success_msg("Great!")
 ```{r ex="subset1", type="pre-exercise-code"}
 Sys.setlocale(category = 'LC_ALL','en_US.UTF-8')
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class3_claes_2017.csv")
 ```
 
 ```{r ex="subset1", type="sample-code"}
@@ -145,7 +145,7 @@ success_msg("Great!")
 Sys.setlocale(category = 'LC_ALL','en_US.UTF-8')
 library(readr)
 library(dplyr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class3_claes_2017.csv")
 ```
 
 ```{r ex="subset2", type="sample-code"}
@@ -196,7 +196,7 @@ success_msg("Great job!")
 ```{r ex="normal1_characters_before_noun", type="pre-exercise-code"}
 Sys.setlocale(category = 'LC_ALL','en_US.UTF-8')
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class3_claes_2017.csv")
 ```
 
 ```{r ex="normal1_characters_before_noun", type="sample-code"}
@@ -253,7 +253,7 @@ success_msg("Great job!")
 ```{r ex="normal2", type="pre-exercise-code"}
 Sys.setlocale(category = 'LC_ALL','en_US.UTF-8')
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class3_claes_2017.csv")
 ```
 
 ```{r ex="normal2", type="sample-code"}
@@ -313,7 +313,7 @@ success_msg("Great job!")
 ```{r ex="noun_length_outliers", type="pre-exercise-code"}
 Sys.setlocale(category = 'LC_ALL','en_US.UTF-8')
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class3_claes_2017.csv")
 ```
 
 ```{r ex="noun_length_outliers", type="sample-code"}
@@ -367,7 +367,7 @@ success_msg("Great job!")
 ```{r ex="factors1", type="pre-exercise-code"}
 Sys.setlocale(category = 'LC_ALL','en_US.UTF-8')
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class3_claes_2017.csv")
 ```
 
 ```{r ex="factors1", type="sample-code"}
@@ -397,7 +397,7 @@ success_msg("Great!")
 ```{r ex="factors2", type="pre-exercise-code"}
 Sys.setlocale(category = 'LC_ALL','en_US.UTF-8')
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv") 
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class3_claes_2017.csv") 
 ```
 
 ```{r ex="factors2", type="sample-code"}
@@ -439,7 +439,7 @@ success_msg("Great!")
 ```{r ex="factors3", type="pre-exercise-code"}
 Sys.setlocale(category = 'LC_ALL','en_US.UTF-8')
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class3_claes_2017.csv")
 ```
 
 ```{r ex="factors3", type="sample-code"}
@@ -479,7 +479,7 @@ success_msg("Great!")
 ```{r ex="counts_negation_freq", type="pre-exercise-code"}
 Sys.setlocale(category = 'LC_ALL','en_US.UTF-8')
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class3_claes_2017.csv")
 ```
 
 ```{r ex="counts_negation_freq", type="sample-code"}
@@ -520,7 +520,7 @@ success_msg("Great!")
 ```{r ex="counts_province", type="pre-exercise-code"}
 Sys.setlocale(category = 'LC_ALL','en_US.UTF-8')
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class3_claes_2017.csv")
 ```
 
 ```{r ex="counts_province", type="sample-code"}
@@ -560,7 +560,7 @@ success_msg("Great!")
 ```{r ex="counts_Typical.Action.Chain.Pos", type="pre-exercise-code"}
 Sys.setlocale(category = 'LC_ALL','en_US.UTF-8')
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class3_claes_2017.csv")
 ```
 
 ```{r ex="counts_Typical.Action.Chain.Pos", type="sample-code"}
@@ -602,7 +602,7 @@ success_msg("Great!")
 ```{r ex="proportionsTypical.Action.Chain.Pos", type="pre-exercise-code"}
 Sys.setlocale(category = 'LC_ALL','en_US.UTF-8')
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class3_claes_2017.csv")
 ```
 
 ```{r ex="proportionsTypical.Action.Chain.Pos", type="sample-code"}
@@ -642,7 +642,7 @@ success_msg("Great!")
 ```{r ex="proportionscorpus1", type="pre-exercise-code"}
 Sys.setlocale(category = 'LC_ALL','en_US.UTF-8')
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class3_claes_2017.csv")
 ```
 
 ```{r ex="proportionscorpus1", type="sample-code"}
@@ -689,7 +689,7 @@ success_msg("Great!")
 ```{r ex="freq1", type="pre-exercise-code"}
 Sys.setlocale(category = 'LC_ALL','en_US.UTF-8')
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class3_claes_2017.csv")
 ```
 
 ```{r ex="freq1", type="sample-code"}
@@ -720,7 +720,7 @@ success_msg("Great!")
 ```{r ex="freq2", type="pre-exercise-code"}
 Sys.setlocale(category = 'LC_ALL','en_US.UTF-8')
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class3_claes_2017.csv")
 ```
 
 ```{r ex="freq2", type="sample-code"}
@@ -758,7 +758,7 @@ success_msg("Great!")
 ```{r ex="broad.regions_1", type="pre-exercise-code"}
 Sys.setlocale(category = 'LC_ALL','en_US.UTF-8')
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class3_claes_2017.csv")
 ```
 
 ```{r ex="broad.regions_1", type="sample-code"}
@@ -790,7 +790,7 @@ success_msg("Great!")
 ```{r ex="broad.regions", type="pre-exercise-code"}
 Sys.setlocale(category = 'LC_ALL','en_US.UTF-8')
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class3_claes_2017.csv")
 ```
 
 ```{r ex="broad.regions", type="sample-code"}
@@ -828,7 +828,7 @@ success_msg("Great!")
 ```{r ex="negation", type="pre-exercise-code"}
 Sys.setlocale(category = 'LC_ALL','en_US.UTF-8')
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class3_claes_2017.csv")
 ```
 
 ```{r ex="negation", type="sample-code"}
@@ -873,7 +873,7 @@ success_msg("Great!")
 ```{r ex="freq1_prop", type="pre-exercise-code"}
 Sys.setlocale(category = 'LC_ALL','en_US.UTF-8')
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class3_claes_2017.csv")
 ```
 
 ```{r ex="freq1_prop", type="sample-code"}
@@ -906,7 +906,7 @@ success_msg("Great!")
 ```{r ex="prop2", type="pre-exercise-code"}
 Sys.setlocale(category = 'LC_ALL','en_US.UTF-8')
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class3_claes_2017.csv")
 ```
 
 ```{r ex="prop2", type="sample-code"}
@@ -945,7 +945,7 @@ success_msg("Great!")
 ```{r ex="broad.regions_1", type="pre-exercise-code"}
 Sys.setlocale(category = 'LC_ALL','en_US.UTF-8')
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class3_claes_2017.csv")
 ```
 
 ```{r ex="broad.regions_1", type="sample-code"}
@@ -977,7 +977,7 @@ success_msg("Great!")
 ```{r ex="broad.regions_prop", type="pre-exercise-code"}
 Sys.setlocale(category = 'LC_ALL','en_US.UTF-8')
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class3_claes_2017.csv")
 ```
 
 ```{r ex="broad.regions_prop", type="sample-code"}
@@ -1015,7 +1015,7 @@ success_msg("Great!")
 ```{r ex="negation_prop", type="pre-exercise-code"}
 Sys.setlocale(category = 'LC_ALL','en_US.UTF-8')
 library(readr)
-dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv")
+dataSet <- read_csv("https://raw.githubusercontent.com/jeroenclaes/statistics_for_linguistics/master/class3_claes_2017.csv")
 ```
 
 ```{r ex="negation_prop", type="sample-code"}
