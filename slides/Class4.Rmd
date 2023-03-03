@@ -1,0 +1,556 @@
+---
+title: 'Topic 4: Comparing the central tendency of two groups'
+author: "Jeroen Claes"
+output:
+  word_document:
+    toc: no
+  revealjs::revealjs_presentation:
+    css: white.css
+    self_contained: no
+    transition: none
+  html_document:
+    toc: no
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval=TRUE, message=FALSE, warning=FALSE, error=FALSE, fig.height = 4, dpi = 300)
+library(pander)
+library(dplyr)
+```
+
+## Contents
+1. Comparing the median with box-and-whisker plots
+2. The basis of inferential statistics: Hypothesis testing
+3. Comparing normally distributed data with t-tests
+4. A little side note on Standard Errors and confidence intervals
+5. Comparing non-normally distributed data with Wilcoxon-tests
+6. Comparing groups with plots
+7. Questions
+8. References
+
+## 1. Data for this class
+- 58 responses from a visual lexical decision latency experiment for beginning learners (8 year-old Dutch children) by Perdijk et al. (2006) (data provided by Baayen, 2013). 
+- Here we will work with the responses to just two words: *grinniken* 'to chuckle' and *ui* ('onion'). 
+- We will use a subset of three columns:
+    - Word 
+    - Subject (participant code)
+    - LogRT (logarithm of the reaction times in the lexical decision experiment)
+ 
+```{r data}
+library(readr)
+dataSet<-read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class4_Perdijk_et_al_2006.csv")
+summary(dataSet$LogRT)
+```
+
+## 1. Comparing the median with box-and-whisker plots
+## 1. Comparing the median with box-and-whisker plots
+- Box-and whisker plots are ideal for comparing the median of two groups
+- In the previous class, we put `1` on the x-axis and our variable on the y-axis
+- Here, we put our *grouping factor* (`Word`) on the x-axis and `LogRT` on the y-axis
+
+```{r box-whisker, eval=F}
+library(ggplot2)
+ggplot(dataSet, aes(x=Word, y=LogRT)) + geom_boxplot()
+```
+
+## 1. Comparing the median with box-and-whisker plots
+- The plot shows that the median response to *ui* was a bit faster (some 160 ms) than the median response to *grinniken*
+
+```{r box-whisker1, eval=T}
+library(ggplot2)
+ggplot(dataSet, aes(x=Word, y=LogRT)) + geom_boxplot()
+```
+
+## 2. Inferential statistics and hypothesis testing
+## 2. Inferential statistics and hypothesis testing
+- Inferential statistics tries to infer a property of a population by studying a sample
+- Most often, we try to test a hypothesis about a property of a population by analyzing a sample
+
+## 2. Hypothesis testing (1/3)
+- Before collecting data it is important to have:
+    1. A research question: 
+        - *What is the relationship between words and reaction times in an auditory lexical decision task?*
+     2. Hypotheses: (theoretically motivated) tentative answers to these research questions: 
+        - *A short, common word like* ui *will be recognized faster than a longer, less common word like* grinniken
+
+## 2. Hypothesis testing (2/3)
+- Each hypothesis (called *alternative hypothesis*) has its *null hypothesis*:  
+    - *There is no difference between words like* ui *and words like* grinniken 
+- A hypothesis test tries to estimate the probability of obtaining the observed or more extreme results assuming the null hypothesis
+- This way, it tries to establish wheather the difference between the groups 
+    - is reliably large
+    - is larger than would be predicted by chance
+
+## 2. Hypothesis testing (3/3)
+- It is important to formulate your hypotheses very precisely:
+    - Directional hypothesis: ui *will be recognized faster than* grinniken:
+        - You need to perform a **one-tailed** test, which evaluates if the reaction time is shorter than would be expected under the null hypothesis
+    - Non-directional hypothesis: ui *and* grinniken *will have different reaction times*:
+        - You need to perform a **two-tailed** test, which evaluates if reaction times are longer **OR** shorter than would be expected under the null hypothesis
+ 
+## 2.1 The logic/process of hypothesis testing (1/9)
+- Suppose there are two groups who participated in the same experiment
+- Research question: 
+    - *Did groupA do different from groupB in the experiment?*
+- Hypothesis:
+    - *groupB scored better than groupA*
+- Null hypothesis:
+    - *groupB did not score beter than groupA*
+ 
+## 2.1 The logic/process of hypothesis testing (2/9)
+```{r box-data, eval=TRUE, echo=FALSE, asis=TRUE, results='asis'}
+experiment <- data.frame(groupA=c(1,2,3,4,5), groupB=c(6,7,8,9,10))
+pandoc.table(experiment)
+```
+
+## 2.1 The logic/process of hypothesis testing (3/9)
+- To explore if the difference in the *means* of the two groups is reliably large:
+    - We calculate some statistic based on your sample data
+    - Here we use the `t-statistic` we will discuss later on
+    - This statistic belongs to a well-known distribution type
+ 
+```{r t-hand1, eval=TRUE, echo=TRUE}
+(mean(experiment$groupA)-mean(experiment$groupB))/
+ sqrt((var(experiment$groupA)/nrow(experiment))+(var(experiment$groupB)/nrow(experiment)))
+``` 
+
+## 2.1 The logic/process of hypothesis testing (4/9)
+- We determine our degrees of freedom: 
+    - number of observations - number of groups
+```{r t-hand2, eval=TRUE, echo=TRUE}
+df <- (nrow(experiment)*2) - ncol(experiment)
+df
+``` 
+
+## 2.1 The logic/process of hypothesis testing (5/9)
+- For each distribution type, there are tables that specify with which probability some value can occur in the distribution
+    -  For the normal distribution values close to the mean always have a very high probability of occurring by chance/under the null hypothesis
+- To go from the statistic to this probability, we compare our statistic (`r (mean(experiment$groupA)-mean(experiment$groupB))/sqrt((var(experiment$groupA)/nrow(experiment))+(var(experiment$groupB)/nrow(experiment)))`) to the row that contains the t-distribution for 8 degrees of freedom
+ 
+```{r t-hand3, eval=TRUE, echo=FALSE, results="asis", asis=TRUE}
+pandoc.table(as.data.frame(read_csv('df,".40",".25",".10",".05",".025",".01",".005",".001",".0005"
+4,0.271,0.741,1.533,2.132,2.776,3.747,4.604,7.173,8.610
+5,0.267,0.727,1.476,2.015,2.571,3.365,4.032,5.893,6.869
+6,0.265,0.718,1.440,1.943,2.447,3.143,3.707,5.208,5.959
+7,0.263,0.711,1.415,1.895,2.365,2.998,3.499,4.785,5.408
+8,0.262,0.706,1.397,1.860,2.306,2.896,3.355,4.501,5.041'))) 
+``` 
+ 
+## 2.1 The logic/process of hypothesis testing (6/9)
+- If your hypothesis is non-directional (`different from` rather than `lower` or `higher`), you multiply the probability by two (the value may occur in the left or the right tail of the distribution)
+- Our hypothesis is directional, so we conclude that the chance/probability that the null is true is less than 0.001 (1/1000)
+
+## 2.1 The logic/process of hypothesis testing (7/9)
+- Now we check if that probability is lower than our pre-set **alpha-level**:
+    - Common alpha level: 0.05 (1/20)
+    - Expresses that we will accept the null hypothesis if there is a 5% probability (1/20 chance) that it is true
+- If the probability is lower than the alpha-level, we *reject* the null hypothesis 
+- If the probability is higher, we are forced to accept the null hypothesis
+- Here we find that p < 0.05, so we reject the null hypothesis: 
+    - groupA scored reliably worse than groupB
+
+## 2.1 The logic/process of hypothesis testing (8/9)
+- It is important to determine your alpha-level carefully:
+    - Too strict: too many *Type I errors* (false positives: we reject the null, but it is true)
+    - Too relaxed: too many *Type II errors* (false negatives: we accept the null, but it is false)
+- For most tests, the p-value will be smaller for larger samples. For large samples you should use lower alpha-levels (0.01 or 0.001)
+
+## 2.1 The logic/process of hypothesis testing (9/9)
+- Observe that our actual hypothesis was only tested indirectly, in two ways:
+  - We do not test the hypothesis, but rather the null hypothesis
+  - We do not test the null hypothesis, but rather the probability of obtaining the same or a more extreme statistic assuming the null hypothesis
+ 
+## 2.2 A note on unethical practices
+- It is borderline unethical to come up with hypotheses after you have taken a look at your data
+- You will potentially make a fool out of yourself is you start comparing all possible groups in your data until you find some significant result. This is called *p-value hacking* and it is dangerous. Hypothesis testing methods become **useless** when used to do anything else than testing theoretically motivated hypotheses.
+- It is flatout unethical to tamper with your alpha-level once you have explored your results
+- p-values depend on sample size. A non-significant result may become significant with more observations. It is unethical to keep adding data until you reach p < 0.05 
+
+## 2.3 Some common misconceptions
+- There's no 'more' or 'less' significant. Either *p < alpha* or not
+- p-values have **nothing** to do with the size of a difference between groups. Differences are **not** stronger when p-values are lower!
+- p < 0.05 does **not** mean that your results are necesarily relevant. This is why you need solid hypotheses, subject matter knowledge, and good analytical skills
+- p > 0.05 does **not** mean that your results are irrelevant.
+- p < 0.05 does **not** mean that our hypothesis is true, or that our null hypothesis is false. p < 0.05 suggests that **for our sample** there is less than a 1/20 chance of finding data that supports the null hypothesis
+
+## 3. Comparing normally distributed data with t-tests
+## 3. Comparing normally distributed data with t-tests
+- The test we used to compare the two groups was a t-test
+- This test can be used to compare the means of two groups for normally distributed data
+- Two types:
+    - paired/dependent:
+        - Each observation in one group has a related observation in the other group. E.g. Experiment in which participants perform a task, undergo some experimental condition, and then perform the same task again
+    - unpaired/independent:
+        - The observations in the two groups are completely independent. E.g., Experiment with test and control groups
+
+## 3.1 Unpaired t-test
+- The paired t-test has some important assumptions (Levshina, 2015: 88):
+    - The samples have been randomly selected from the populations they represent 
+    - The observations are independent, both between the groups and within the groups. 
+    - The variable is quantitative or at least ordinal (e.g., Likert-scales)
+    - The data in **both** samples are normally distributed, and/or the sample sizes are greater than 30 
+    - The variances of the samples should be equal (less important, the `t.test` implementation in R corrects for that)
+ 
+## 3.2 Performing an unpaired t-test in R (1/4)
+- Both versions of the t-test can be performed with the same function in R
+- Here we perform a t-test to see if *ui* is recognized faster than *grinniken*
+- Hypothesis:
+    - *short, common words like* ui *are recognized faster in a lexical decision experiment than longer, less common words like * grinniken
+- Null hypothesis:
+    - *short, common words like* ui *are not recognized faster in a lexical decision experiment than longer, less common words like* grinniken
+ 
+## 3.2 Performing an unpaired t-test in R (2/4)
+- Our data approaches a normal distribution for both samples
+- With `r nrow(dataSet)` observations, we also have enough data points
+```{r t-machine0, eval=TRUE, echo=TRUE}
+shapiro.test(dataSet[dataSet$Word=="ui",]$LogRT)
+shapiro.test(dataSet[dataSet$Word=="grinniken",]$LogRT)
+```
+
+## 3.2 Performing an unpaired t-test in R (3/4)
+- `t.test` accepts multiple columns as arguments
+- The `paired=FALSE` argument specifies that it is an unpaired t-test. 
+- The `alternative` argument specifies that it is a one-tailed t-test. 
+    - The alternative hypothesis is that *ui* will have a smaller mean LogRT than *grinniken* (i.e., `mean(ui) - mean(grinniken) < 0`), so we specify `less`
+ - Other values are:
+    - `two.sided`: two-tailed test
+    - `greater`: alternative hypothesis states that the mean of the second group is higher than the mean of the first group
+- Be careful to use the right `alternative` setting
+- Be careful to order the arguments the right way:
+    - The column that is hypothesized to have lower/higher scores must come first!
+```{r t-machine1, eval=TRUE, echo=TRUE}
+ui <- dataSet[dataSet$Word =="ui",]
+grinniken <- dataSet[dataSet$Word =="grinniken",]
+t.test( ui$LogRT, grinniken$LogRT,alternative="less", paired = FALSE)
+```
+
+## 3.2 Performing an unpaired t-test in R (4/4)
+- `t.test` also accepts a formula specification and a data argument
+- Make sure that your grouping factor has the right order: 
+    - The group that is hypothesized to have lower/higher scores must be the reference level
+```{r t-machine2, eval=TRUE, echo=TRUE}
+dataSet$Word <- as.factor(dataSet$Word)
+dataSet$Word <- relevel(dataSet$Word, ref="ui")
+t.test(LogRT ~ Word, data=dataSet, alternative="less", paired = FALSE)
+```
+
+## 3.3 Paired t-test
+- The paired t-test has some important assumptions (Levshina, 2015: 88):
+    - The **subjects** have been sampled randomly
+    - The variable is quantitative 
+    - The differences between the pairs of scores (not the scores themselves!) are normally distributed, and/or the sample size is greater than 30
+
+```{r t-paired0, eval=TRUE, echo=FALSE, results="asis"}
+
+dataSet2 <- dataSet %>% 
+ group_by(Subject) %>% 
+ filter(n() >1) %>%
+ mutate(diff=LogRT[which(Word=="grinniken")]-LogRT[which(Word=="ui")]) %>%
+ ungroup() %>%
+  arrange(Subject)
+```
+
+## 3.4 Performing a paired t-test in R (1/3)
+- Some data-wrangling later we have a nice paired dataset of `r nrow(dataSet2)` observations based on our dataset:
+    - Reaction times for all the subjects for the two words
+```{r t-paired, eval=TRUE, echo=FALSE, results="asis"}
+pandoc.table(head(dataSet2, 10))
+```
+
+## 3.4 Performing a paired t-test in R (2/3)
+- The sample size is greater than 30 (`r nrow(dataSet2)` rows)
+- The differences between our scores are normally distributed
+```{r t-paired1, eval=TRUE, echo=TRUE, fig.height=3}
+shapiro.test(dataSet2[!duplicated(dataSet2$diff), ]$diff)
+qqnorm(dataSet2[!duplicated(dataSet2$diff), ]$diff)
+qqline(dataSet2[!duplicated(dataSet2$diff), ]$diff)
+```
+
+## 3.4 Performing a paired t-test in R (3/3)
+- By setting the argument `paired=TRUE` we tell R that we want a paired t-test
+- Hypothesis: 
+    - *Subjects will behave differently for the two words*
+- Null hypothesis:
+    - *There will be no difference between the two words*
+ 
+```{r t-paired2, eval=TRUE, echo=TRUE}
+dataSet2$Word <- as.factor(dataSet2$Word)
+dataSet2$Word <- relevel(dataSet2$Word, ref="ui")
+t.test(LogRT ~ Word, data=dataSet2, alternative="two.sided", paired=TRUE)
+
+```
+
+## 3.5 Interpreting a t-test output (1/4)
+- Let's take a minute to interpret the rich output of `t.test`:
+    - Test statistic `t`
+    - `df`= degrees of freedom
+    - `p-value`
+    - Confidence interval:
+        - If we were to repeat the same experiment over and over again with different samples, there would be a 95% probability that the interval contains the differences between the means of all these experiments 
+ - If your confidence interval includes `0` that's a bad thing, because the true difference may be zero
+
+## 3.5 Interpreting a t-test output (2/4)
+- Observe that the t-test only provides information on whether or not the difference between the means is significant
+- It tells us nothing about the size or importance of the difference
+- You should always include a measure of effect size:
+    - If you have only one variable, the difference between the means (or a standardized measure of effect size)
+    - If you have multiple variables, a standardized measure of effect size
+ 
+## 3.5 Interpreting a t-test output: effect size (3/4)
+- For differences between means,`Cohen's d` is the effect size measure of choice:
+    - `(Mean 1 - Mean 2) / standard deviation`
+    - Expresses the difference between the means in standard deviation units
+ - Here we find that the mean `LogRT` of  *ui* is 0.47 standard deviation units smaller than the mean `LogRT` of *grinniken*
+
+```{r effectSize, eval=TRUE, echo=TRUE}
+d <- (mean(dataSet[dataSet$Word=="ui",]$LogRT) - mean(dataSet[dataSet$Word=="grinniken",]$LogRT))/
+ sd(dataSet$LogRT)
+d
+``` 
+
+## 3.5 Interpreting a t-test output (4/4)
+- When you report differences between means, you report:
+    - The two means
+    - Which test you used (paired, unpaired, two-tailed, one-tailed)
+    - T-statistic value
+    - Degrees of freedom
+    - p-value (rounded: e.g., not `p = 00001244`, but rather: `p < 0.05`)
+    - If you are comparing multiple groups in a single text, a standardized effect size measure
+    - The standard error of the mean or the confidence interval of the mean
+
+## 4. A little side note on Standard Errors and confidence intervals
+## 4.1 Standard Error (1/3)
+- Standard errors are an abstract and difficult concept to grasp
+- Suppose the following:
+    - Our `population` consists of all numbers between one and ten
+    - We sample 100 x 100 random values from this population, allowing the same value to be included more than once (sampling with replacement)
+    - We calculate the `mean` for these 100 samples
+    - We get a new distribution of slightly different mean values. This is called the `sampling distribution of the mean`
+ 
+```{r samplingDistribution, eval=TRUE, echo=TRUE}
+# Our population
+population <- c(1:10)
+
+# Our sampling loop
+means <- sapply(1:100, FUN=function(x) {
+ sample <- sample(population, 100, replace=TRUE)
+ return(mean(sample))
+})
+
+# Results
+means
+``` 
+
+## 4.1 Standard Error (2/3)
+- If we take the standard deviation of the sampling distribution of the mean of a population, we obtain the `standard error` (SE) of the mean
+- The standard error is a hugely important statistic:
+    - It is the denominator in many statistical tests. E.g. the t-test without variance correction is defined as:
+    - `(Mean 1 - Mean 2)/SE`
+```{r samplingDistribution2, eval=TRUE, echo=TRUE}
+SE <- sd(means)
+SE
+``` 
+
+## 4.1 Standard Error (3/3)
+- Luckily, statisticians have come up with a way to estimate the standard error (i.e., the standard deviation of the sampling distribution of the mean) from a single sample:
+    - `standard deviation/square root of sample size`
+```{r samplingDistribution3, eval=TRUE, echo=TRUE}
+sample <- sample(population, 100, replace=TRUE)
+SE <- sd(sample)/sqrt(length(sample))
+SE
+``` 
+
+## 4.2 95% confidence intervals (1/3)
+- With the standard error of the mean we can also calculate confidence intervals for the means of two groups and their difference
+    - Confidence interval:
+    - If we were repeat the same experiment over and over again with different samples, there would be a 95% probability that the interval contains the values of all these experiments 
+ 
+## 4.2 95% confidence intervals (2/3)
+- We multiply the standard error with `1.96`, the t-value for `Infinite degrees of freedom` and p = 0.05 (1 - 0.05 = 0.95)
+- The lower bound is defined as the mean *minus* this value, the upper bound as the mean *plus* this value
+- Confidence interval for the mean:
+    - Upper bound: `mean + (1.96*SE)`
+    - Lower bound: `mean - (1.96*SE)`
+```{r CONFINT, eval=TRUE, echo=TRUE}
+meanUi <- mean(dataSet[dataSet$Word=="ui",]$LogRT)
+meanGrinniken <- mean(dataSet[dataSet$Word=="grinniken",]$LogRT)
+SE <- sd(dataSet$LogRT)/sqrt(nrow(dataSet))
+
+confmeanUi <- c(meanUi-(1.96*SE), meanUi+(1.96*SE))
+confmeanUi 
+
+confmeanGrinniken <- c(meanGrinniken-(1.96*SE), meanGrinniken+(1.96*SE))
+confmeanGrinniken
+``` 
+
+## 4.3 95% confidence interval for the difference of the means and Cohen's d 
+- We can use the same principle to calculate confidence intervals for the differences and the effect sizes
+```{r CONFINT2, eval=TRUE, echo=TRUE}
+difference <- meanUi -meanGrinniken
+confDifference <- c(difference-(1.96*SE), difference+(1.96*SE))
+confDifference
+
+effectSize<-(meanUi -meanGrinniken)/sd(dataSet$LogRT)
+confEffect <- c(effectSize-(1.96*SE), effectSize+(1.96*SE))
+confEffect
+``` 
+
+
+## 5. Comparing non-normally distributed data with Wilcoxon-tests
+
+## 5.1 Data
+ - 3,381 frequent nouns and adjectives from the *Corpus of Contemporary North American English* (COCA), adapted from http://www.wordfrequency.info (Davies, 2018)
+    - word
+    - pos (part of speech)
+    - coca_frequency
+    - word_length
+ 
+```{r coca, eval=TRUE, echo=TRUE}
+dataSet2 <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class4_Davies_2008_coca_frequency.csv")
+summary(dataSet2$coca_frequency)
+``` 
+
+## 5.2 Research design
+- Research question:
+    - *Are frequent nouns less frequent than frequent adjectives?*
+- Hypothesis:
+    - *Frequent nouns occur less often than frequent adjectives*
+- Null hypothesis:
+    - *Frequent nouns do not occur less often than frequent adjectives*
+ 
+## 5.3 When to use Wilcoxon tests
+- If your data is very different from a normal distribution, it is best not to use a t-test, even when your sample is large enough 
+- A **Wilcoxon test** does not make any assumptions about the shape of the data
+- It tests differences in medians: 
+    - What is the relative position of the median value of group A in the values of group B?  
+    - The null hypothesis is that the median does not shift left or right between the two groups (i.e., that its rank position does not change)
+- We can use the Wilcoxon test, if the data satisfies the following conditions (Levshina, 2015: 110):
+    - Each sample has been drawn randomly from the population
+    - The observations are independent, both between the two samples and within each sample
+    - The variable is quantitative
+    - The underlying population distributions should be of a similar shape
+
+## 5.3 When to use Wilcoxon tests
+```{r cocanormal, eval=TRUE, echo=TRUE}
+ggplot(dataSet2[dataSet2$pos=="noun",], aes(x=coca_frequency)) + 
+    geom_line(stat="density") + 
+    geom_vline(aes(xintercept=mean(dataSet2$coca_frequency)), color="red") + labs(title="Nouns")
+``` 
+
+## 5.3 When to use Wilcoxon tests
+```{r cocanormal2, eval=TRUE, echo=TRUE}
+ggplot(dataSet2[dataSet2$pos=="adjective",], aes(x=coca_frequency)) + 
+    geom_line(stat="density") + 
+    geom_vline(aes(xintercept=mean(dataSet2$coca_frequency)), color="red") + labs(title="Adjectives")
+``` 
+
+
+## 5.4 Computing a Wilcoxon test in R
+- Like the t-test, the Wilcoxon test accepts two numeric vectors or a formula with data
+- Like the t-test, the Wilcoxon test requires you to specify your alternative hypothesis:
+    - `two.tailed` for 'different'
+    - `less` if the median of the second group is hypothesized to be smaller
+    - `greater` if the median of the second group is hypothesized to be larger
+- If you use the Wilcoxon test for ordinal data (e.g., likert-scales), you have to set `correct=TRUE`
+- For use on paired data, you have to set `paired=TRUE`
+- `conf.int=TRUE` will give you a confidence interval of the difference between the medians of the two groups
+- `conf.level` defaults to 0.95 (95% confidence intervals), but you can set it to higher values if needed
+
+```{r wilcoxon, eval=TRUE, echo=TRUE}
+dataSet2$pos <- as.factor(dataSet2$pos)
+dataSet2$pos <- relevel(dataSet2$pos, ref="noun")
+wilcox.test(coca_frequency ~ pos, data = dataSet2, alternative="greater", conf.int=TRUE)
+``` 
+
+## 5.5 Interpreting the output of a Wilcoxon test 
+- The test suggests that nouns occur reliably less often than adjectives
+- Unfortunately, standardized effect size measures are not readily available for describing the effect size of non-normally distributed data.
+- Cohen's d should not be used here, as it assumes normally distributed data
+
+## 5.6 Confidence intervals for the median
+- We cannot use the standard error to compute confidence intervals here
+- The following (more advanced) code will compute the rank orders of the upper/lower limits of the confidence interval:
+    - We can turn it into a function to compute the confidence intervals of the median
+```{r confintMedian, eval=TRUE, echo=TRUE}
+
+confMedian <- function(x) {
+  sort(x)[qbinom(c(.025,.975), length(x), 0.5)]
+}
+median(dataSet2$coca_frequency)
+confMedian(dataSet2$coca_frequency)
+``` 
+
+## 5.7 Interpreting the output of a Wilcoxon test
+- When you report on a Wilcoxon test you provide:
+    - Medians of the two groups
+    - Difference of the medians
+    - Confidence interval of the difference of the medians
+    - W-statistic
+    - p-value
+ 
+## 6. Comparing groups with plots
+## 6. Comparing groups with plots (1/3)
+- When you report a t-test, you will want to provide a barplot of the *means* 
+- When you report a Wilcoxon test, you will want to provide a barplot of the *medians*
+- You can compute by-group means and confidence intervals easily with `dplyr`
+
+## 6. Comparing means with plots (2/3)
+- Consider the following code:
+    - `%>%`is a piping function: it passes the output of the previous function on to the first argument of the next function
+    - `group_by`: compute everything by `Word` group
+    - `summarise`: summarise the values into one line per group with several columns for each group
+
+```{r dplyr, eval=TRUE, echo=TRUE}
+# Standard error 
+SE <- sd(dataSet$LogRT) /sqrt(nrow(dataSet))
+# Summarization of values
+dataForPLot <- dataSet %>%
+    group_by(Word) %>%
+    summarise( lowerBound=mean(LogRT) - (1.96*SE), 
+    upperBound=mean(LogRT)+(1.96*SE), 
+    mean=mean(LogRT))
+dataForPLot
+``` 
+
+## 6. Comparing means with plots (3/3)
+- Now we can plot `dataForPlot` with `ggplot2`
+```{r plot, eval=TRUE, echo=TRUE}
+ggplot(dataForPLot, aes(x=Word, y=mean, color=Word, fill=Word)) + 
+  geom_bar(stat="identity") + 
+  geom_errorbar(aes(ymin=lowerBound, ymax=upperBound), color="black", width=0.5) 
+``` 
+
+## 6. Comparing medians with plots (1/2)
+- If we pass our confidence interval function to `dplyr`, it will calculate the confidence intervals for the median of each group 
+```{r dplyr2, eval=TRUE, echo=TRUE}
+# Confidence intervals for the median
+confMedian <- function(x) {
+  sort(x)[qbinom(c(.025,.975), length(x), 0.5)]
+}
+
+
+# Summarization of values
+dataForPLot <- dataSet2 %>%
+  group_by(pos) %>%
+  summarise(lowerBound=confMedian(coca_frequency)[1], 
+  upperBound=confMedian(coca_frequency)[2], 
+  median=median(coca_frequency))
+dataForPLot
+``` 
+
+## 6. Comparing medians with plots (2/2)
+- Now we can plot `dataForPlot` data with `ggplot2`
+```{r plotmedian, eval=TRUE, echo=TRUE}
+ggplot(dataForPLot, aes(x=pos, y=median, color=pos, fill=pos)) +
+  geom_bar(stat="identity") + 
+  geom_errorbar(aes(ymin=lowerBound, ymax=upperBound), color="black", width=0.5) 
+``` 
+
+## 7. Exercises
+- Go to http://www.jeroenclaes.be/statistics_for_linguistics/class4.html and perform the exercises
+
+## 8. References
+- Baayen, R. H. (2013). *languageR: Data sets and functions with "Analyzing Linguistic Data: A practical introduction to statistics"*. https://cran.r-project.org/web/packages/languageR/index.html. 
+- Davies, M. (2018). *Top-5000 most frequent words in Corpus of Contemporary American English (COCA)*. http://www.wordfrequency.info. 
+- Levshina, N. (2015). *How to do Linguistics with R: Data exploration and statistical analysis*. Amsterdam/Philadelphia, PA: John Benjamins.
+- Perdijk, K., Schreuder, R., Verhoeven, L. and Baayen, R. H. (2006) Tracing individual differences in reading skills of young children with linear mixed-effects models. Manuscript, Radboud University Nijmegen.

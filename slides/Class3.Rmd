@@ -1,0 +1,420 @@
+---
+title: 'Topic 3: Exploring qualitative variables'
+author: "Jeroen Claes"
+output:
+  word_document:
+    toc: no
+  revealjs::revealjs_presentation:
+    css: white.css
+    self_contained: no
+    transition: none
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval=TRUE, message=FALSE, warning=FALSE, error=FALSE, fig.height = 4, dpi = 300)
+
+library(pander)
+library(readr)
+library(dplyr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv")
+
+
+``` 
+
+
+## Contents
+1. Data for this class
+2. Factors
+3. Frequencies: counting values
+4. Proportions
+5. Bar plots
+6. References
+
+## 1. Data for this class
+- Data from Claes(2017):
+    - Corpus investigation into existential agreement variation in Peninsular Spanish
+    - Data drawn from *Twitter* and *Corpus Oral y Sonoro del Español Rural (COSER)*
+    - Random sample of 500 lines from the dataset
+  
+```{r data, eval=FALSE}
+library(readr)
+library(dplyr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv")
+glimpse(dataSet)
+```
+
+## 2. Factors
+- When a text/character column can only have a few values (e.g., absent, present) in your analysis, it is best to convert it to a factor
+- A factor is a special type of text column:
+    - R knows all of its unique values
+    - Factors are encoded internally as numbers, and many computations depend on that 
+    - Factors have an order, giving you control over the appearance of tables and plots
+        - The default order is always alphabetical
+    
+## 2.1 Conversion from character to factor
+- To convert  *character* columns to *factor* you can use `as.factor`
+```{r mutateIf1}
+dataSet$type <- as.factor(dataSet$type) 
+```
+
+## 2.2 Conversion from character to factor
+- To convert all *character* values to *factor* we may use the dplyr function `mutate_if`
+```{r mutateIf}
+library(dplyr)
+dataSet <- mutate_if(dataSet, is.character, as.factor)
+```
+
+## 2.3 Levels
+- The values a factor can assume are called `levels` 
+- The first level is called the `reference level` 
+
+```{r levels}
+levels(dataSet$type)
+```
+
+## 2.4 Re-ordering a factor
+- To re-order the levels of a factor, you can use `relevel`
+
+```{r relevel}
+levels(dataSet$type)
+dataSet$type <- relevel(dataSet$type, ref="singular")
+levels(dataSet$type)
+```
+
+## 2.4 Re-ordering a factor
+- To re-order the levels of a factor based on the values of another column, you can use the function `reorder`
+- Useful for organizing the appearance of plots 
+```{r reorder1}
+levels(dataSet$type)
+dataSet$type <- reorder(dataSet$type,dataSet$noun_length)
+levels(dataSet$type)
+```
+
+## 2.5 Changing factor values
+- Often you code your data in a particular way, but during the analysis you realize that your coding is not ideal
+- Changing factor values is called `recoding` and it used to be very hard to do
+- The function `recode` in the `dplyr` package changed that.
+    - Format: `"OldValue"="NewValue"`
+```{r recode1}
+levels(dataSet$broad.regions)
+dataSet$broad.regions <- recode(dataSet$broad.regions, 'North'="Top", "East"="Left", "Center"="Middle", "South"="Bottom") 
+levels(dataSet$broad.regions)
+```
+
+## 2.5 Changing factor values
+- You can also use `recode` to merge factor levels   
+```{r recode2}
+levels(dataSet$broad.regions)
+dataSet$broad.regions <- recode(dataSet$broad.regions, "Left"="Middle") 
+levels(dataSet$broad.regions)
+```
+
+## 2.6 Excercises
+- Go to http://www.jeroenclaes.be/statistics_for_linguistics/labs/class3.html and perform the excercises under *4.Factors*
+
+##  3. Frequencies: counting values
+##  3.1 Counting values
+- To describe a categorical variable, there's not much you can do except counting how many times each value occurs
+- This is what the `table` function does
+```{r table}
+table(dataSet$type)
+```
+
+## 3.2 Counts as data.frames
+- Tables are nice for interactive use, but they are less of a tidy data format to program with than data.frames
+- Tables can be converted to data.frames with `as.data.frame`
+```{r table2}
+tab <- as.data.frame(table(dataSet$type))
+tab
+```
+
+## 3.3 Excercises
+- Go to http://www.jeroenclaes.be/statistics_for_linguistics/labs/class3.html and perform the excercises under *5.Frequencies: counting values*
+
+## 4. Proportions
+## 4.1 Calculating proportions as decimals
+- Proportions are expressed as decimal numbers:
+    - `0.25` equals 25%
+- Proportions can be calculated from tables with `prop.table`
+```{r prop}
+prop.table(table(dataSet$type))
+```
+
+## 4.2 Proportions as percentages 
+- To have the result as numbers from 1 to 100, just multiply by 100
+```{r prop2}
+prop.table(table(dataSet$type)) * 100
+```
+
+## 4.3 Rounding proportions 
+- To round the proportions to a number of decimals, we can use `round`
+```{r prop21}
+tab <- prop.table(table(dataSet$type))  
+round(tab, 2)
+```
+
+## 4.4 Proportions as data.frames
+- You can convert proportions to data.frames, because they are still tables
+```{r prop3}
+tab <- prop.table(table(dataSet$type)) 
+tab <- as.data.frame(tab)
+tab 
+# In one line:
+# tab <- as.data.frame(prop.table(table(dataSet$type))) 
+
+```
+
+## 4.5 Calculating proportions yourself
+- Of course, you also store your counts in a data.frame and calculate the proportions yourself
+```{r prop4}
+tab <- table(dataSet$type)
+tab <- as.data.frame(tab)
+tab$proportion <- tab$Freq/sum(tab$Freq, na.rm=TRUE)
+tab
+```
+
+## 4.6 Excercises
+- Go to http://www.jeroenclaes.be/statistics_for_linguistics/labs/class3.html and perform the excercises under *6.Proportions*
+
+## 5. Bar plots
+## 5.1 Why plots?
+- Calculating counts and proportions is great for getting to understand your data, but in papers you will want to use charts:
+    - Charts are more intuitive and help people understand the magnitude of the differences between your proportions
+- Charts should speak for themselves: 
+    - if you can't figure out what the chart is supposed to show by just looking at the plot, you're doing something wrong!
+
+## 5.2 Plotting in `ggplot` (1/6)
+- Let's take a moment to review the basic syntax of `ggplot`
+- This command sets up the basis of `ggplot`:
+    - It defines the data we are working with (`dataSet`)
+    - It defines the aesthetics (`aes()`) that are inherited by the other plotting functions that follow behind the `+` signs:
+        - Our `x` axis (the horizontal axis) will plot the `type` variable
+        - We don't specify a `y` axis, the counts will be calculated by our plotting function
+```{r ggplot20, eval=FALSE}
+library(ggplot2)
+ggplot(dataSet, aes(x=type))
+```
+
+## 5.2 Plotting in `ggplot` (2/6)
+- After the basic setup, we can add multiple plot layers by adding plotting functions separated by a `+` sign. Here we will consider `geom_bar()`.
+
+```{r ggplot21, eval=FALSE}
+library(ggplot2)
+ggplot(dataSet, aes(x=type))  + 
+  geom_bar()
+```
+
+## 5.2 Plotting in `ggplot` (3/6)
+- Once we have our plotting layer(s), we can change the appearance of our plot with theme functions:
+    - All existing themes are listed on: http://ggplot2.tidyverse.org/reference/ggtheme.html
+    
+
+```{r ggplot211, eval=FALSE}
+library(ggplot2)
+ggplot(dataSet, aes(x=type))  + 
+  geom_bar() +
+  theme_minimal()
+```
+
+## 5.2 Plotting in `ggplot` (3/6)
+
+```{r ggplot211_plot, eval=TRUE}
+library(ggplot2)
+ggplot(dataSet, aes(x=type))  + 
+  geom_bar() +
+  theme_minimal()
+```
+
+
+## 5.2 Plotting in `ggplot` (4/6)
+- To modify aspects of the theme, we can add a call to `theme`
+- Useful theme settings include:
+    - `legend.position`:
+        - `none`: no legend
+        - `bottom`: bottom
+    - `legend.title`:
+        - `element_blank()`: no (sometimes ugly) legend title
+    - `axis.text.x`:
+        - `element_text(angle=90)` will rotate your text 90°
+
+```{r ggplot213, eval=FALSE}
+library(ggplot2)
+ggplot(dataSet, aes(x=type))  + 
+  geom_bar() +
+  theme_minimal() + 
+  theme(axis.text.x = element_text(angle=90), legend.title = element_blank())
+```
+
+## 5.2 Plotting in `ggplot` (5/6)
+- Finally, we can add axis and plot titles
+```{r ggplot2121_code, eval=FALSE}
+library(ggplot2)
+ggplot(dataSet, aes(x=type))  + 
+  geom_bar() +
+  theme_minimal() + 
+  theme(axis.text.x = element_text(angle=90)) +
+  labs(x="Type", y="Frequency", title="haber in Peninsular Spanish")
+```
+## 5.2 Plotting in `ggplot` (5/6)
+```{r ggplot2121, eval=TRUE}
+library(ggplot2)
+ggplot(dataSet, aes(x=type))  + 
+  geom_bar() +
+  theme_minimal() + 
+  theme(axis.text.x = element_text(angle=90)) +
+  labs(x="Type", y="Frequency", title="haber in Peninsular Spanish")
+```
+
+
+## 5.2 Plotting in `ggplot` (6/6)
+- Unfortunately, *italicising* parts of (axis) titles is rather complicated 
+```{r ggplot212, eval=TRUE, fig.height=3}
+library(ggplot2)
+titleWithItalics <- expression(paste(italic("Haber "), "in Peninsular Spanish"))
+ggplot(dataSet, aes(x=type))  + 
+  geom_bar() +
+  theme_minimal() + 
+  theme(axis.text.x = element_text(angle=90)) +
+  labs(x="Type", y="Frequency", title=titleWithItalics)
+```
+
+## 5.3 Bar plots
+- Barplots are great to visualize counts and proportions
+- A simple bar plot can be drawn with the code we already considered
+```{r barplot1, eval=FALSE}
+library(ggplot2)
+ggplot(dataSet, aes(x=type)) + 
+  geom_bar()
+```
+
+## 5.3.1 Bar plot options (1/3)
+- If you set the aesthetics `color` and `fill` to the same variable as your `x` axis, the categories of your variable will be colored differently 
+- This will also add a legend
+```{r barplotOptions, eval=FALSE}
+library(ggplot2)
+ggplot(dataSet, aes(x=type, color=type, fill=type)) + 
+  geom_bar()
+```
+
+## 5.3.1 Bar plot options (1/3)
+```{r barplotOptionsPlot, eval=TRUE}
+library(ggplot2)
+ggplot(dataSet, aes(x=type, color=type, fill=type)) + 
+  geom_bar()
+```
+
+## 5.3.1 Bar plot options (2/3)
+- You can get rid of the legend with `theme()` and the parameter `legend.position` 
+```{r barplotOptions21, eval=FALSE}
+library(ggplot2)
+ggplot(dataSet, aes(x=type, color=type, fill=type)) + 
+  geom_bar() + 
+  theme(legend.position = "none")
+```
+
+## 5.3.1 Bar plot options (2/3)
+```{r barplotOptions21Plot, eval=TRUE}
+library(ggplot2)
+ggplot(dataSet, aes(x=type, color=type, fill=type)) + 
+  geom_bar() + 
+  theme(legend.position = "none")
+```
+
+
+## 5.3.1 Bar plot options (3/3)
+- You can get rid of the legend title with `theme()` and the parameter `legend.title`
+```{r barplotOptions2, eval=FALSE}
+library(ggplot2)
+ggplot(dataSet, aes(x=type, color=type, fill=type)) + 
+  geom_bar() + 
+  theme(legend.title =  element_blank())
+```
+
+## 5.3.1 Bar plot options (3/3)
+```{r barplotOptions2Plot, eval=TRUE}
+library(ggplot2)
+ggplot(dataSet, aes(x=type, color=type, fill=type)) + 
+  geom_bar() + 
+  theme(legend.title =  element_blank())
+```
+
+
+## 5.3.2 Visualizing proportions with barplots (1/3)
+- To visualize proportions with barplots, we have to write some extra code:
+    - We set up our ggplot object as we would normally do
+    - We add `geom_bar()`
+    - We tell `geom_bar()` to calculate its `y` axis by dividing the count `..count..` (this is a special `ggplot` variable) of each value by the sum of the count of the values  `sum(..count..)`
+
+```{r proportions, eval=FALSE}
+library(ggplot2)
+ggplot(dataSet, aes(x=type))  +
+  geom_bar(aes(y=..count../sum(..count..)))
+```
+
+## 5.3.2 Visualizing proportions with barplots (1/3)
+
+```{r proportions_plot, eval=TRUE}
+library(ggplot2)
+ggplot(dataSet, aes(x=type))  +
+  geom_bar(aes(y=..count../sum(..count..)))
+```
+
+
+## 5.3.2 Visualizing proportions with barplots (2/3)
+- We can tell `ggplot` that the y-axis does not plot decimals, but rather proportions with `scale_y_continuous` and its `label` parameter.
+- If we set it to `percent`, then our `y` axis will have nice percentage formatting
+- We need the `scales` package for this to work
+
+```{r proportions2a, eval=FALSE}
+library(ggplot2)
+library(scales)
+ggplot(dataSet, aes(x=type))  +
+  geom_bar(aes(y=..count../sum(..count..))) +
+  scale_y_continuous(labels=percent)
+```
+
+## 5.3.2 Visualizing proportions with barplots (2/3)
+
+```{r proportions2aplot, eval=TRUE}
+library(ggplot2)
+library(scales)
+ggplot(dataSet, aes(x=type))  +
+  geom_bar(aes(y=..count../sum(..count..))) +
+  scale_y_continuous(labels=percent)
+```
+
+## 5.3.2 Visualizing proportions with barplots (3/3)
+- To make the plot pretty, we can add colors, remove the legend title, and add a better title for the `y` axis
+
+```{r proportions2, eval=FALSE}
+library(ggplot2)
+library(scales)
+ggplot(dataSet, aes(x=type, color=type, fill=type))  +
+  geom_bar(aes(y=..count../sum(..count..))) +
+  scale_y_continuous(labels=percent) +
+  theme(legend.title=element_blank()) + 
+  labs(y="Percentages")
+```
+
+
+## 5.3.2 Visualizing proportions with barplots (3/3)
+
+```{r proportions2plot, eval=TRUE}
+library(ggplot2)
+library(scales)
+ggplot(dataSet, aes(x=type, color=type, fill=type))  +
+  geom_bar(aes(y=..count../sum(..count..))) +
+  scale_y_continuous(labels=percent) +
+  theme(legend.title=element_blank()) + 
+  labs(y="Percentages")
+```
+
+## 5.4 Excercises
+- Go to http://www.jeroenclaes.be/statistics_for_linguistics/labs/class3.html and perform the excercises under *7. Bar plots*
+
+
+
+## Questions?
+- ???
+
+## 6. References
+- Claes, J. (2017). Cognitive and geographic constraints on morphosyntactic variation: The variable agreement of presentational haber in Peninsular Spanish. *Belgian Journal of Linguistics* (31), 28-53.

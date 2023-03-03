@@ -1,0 +1,368 @@
+---
+title: 'Topic 12: When things aren''t quite linear: Polynomial regression and elements
+  of Generalized Additive Modeling'
+author: "Jeroen Claes"
+output:
+  word_document:
+    toc: no
+  revealjs::revealjs_presentation:
+    css: white.css
+    self_contained: no
+    transition: none
+  html_document:
+    toc: no
+---
+
+```{r setup, include=FALSE}
+library(ggplot2)
+library(readr)
+knitr::opts_chunk$set(echo = TRUE, eval=TRUE, message=FALSE, warning=FALSE, error=FALSE, fig.height = 3, dpi = 300)
+library(pander)
+library(dplyr)
+
+
+multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
+  library(grid)
+  
+  # Make a list from the ... arguments and plotlist
+  plots <- c(list(...), plotlist)
+  
+  numPlots = length(plots)
+  
+  # If layout is NULL, then use 'cols' to determine layout
+  if (is.null(layout)) {
+    # Make the panel
+    # ncol: Number of columns of plots
+    # nrow: Number of rows needed, calculated from # of cols
+    layout <- matrix(seq(1, cols * ceiling(numPlots/cols)),
+                     ncol = cols, nrow = ceiling(numPlots/cols))
+  }
+  
+  if (numPlots==1) {
+    print(plots[[1]])
+    
+  } else {
+    # Set up the page
+    grid.newpage()
+    pushViewport(viewport(layout = grid.layout(nrow(layout), ncol(layout))))
+    
+    # Make each plot, in the correct location
+    for (i in 1:numPlots) {
+      # Get the i,j matrix positions of the regions that contain this subplot
+      matchidx <- as.data.frame(which(layout == i, arr.ind = TRUE))
+      
+      print(plots[[i]], vp = viewport(layout.pos.row = matchidx$row,
+                                      layout.pos.col = matchidx$col))
+    }
+  }
+}
+
+```
+
+## Contents
+1. What is polynomial regression and why is it used?
+2. How to check for polynomial effects
+3. How to specify polynomial regression terms in R
+4. How to check if polynomials improve the model fit
+5. How to interpret polynomial regression terms in R
+6. What is Generalized Additive Modeling and why is it used?
+7. How to specify a GAM in R
+8. How to specify random intercepts and slopes in a GAM
+9. How to interpret a GAM
+10. How to assess the fit of a GAM
+11. Exercises
+12. References
+
+## 1. What is polynomial regression and why is it used?
+## 1. What is polynomial regression and why is it used? (1/6)
+- Remember that one of the assumptions of logistic and linear regression is that the numeric independent variables are linearly related to either the dependent variable or, in logistic regression, the logit of the dependent variable
+- Often, however, the relationship is not linear. In previous classes, we have attempted to bring these non-linear relationships to a linear form with tranformations of the independent or the dependent variables
+- For certain types of non-linear relationships, however, it is much more appropriate to incoporate the non-linearity in the model specification
+
+## 1. What is polynomial regression and why is it used? (2/6)
+- Let us first generate some random data
+```{r polydatalinear}
+dataSet <- data.frame(x=rnorm(500))
+dataSet$y<- rnorm(500)+ (dataSet$x+ dataSet$x^2)
+ggplot(dataSet, aes(x=x, y=y)) + 
+  geom_point() 
+```
+
+## 1. What is polynomial regression and why is it used? (3/6)
+- If we were to regress `y ~x` with a linear model, this would not be a very close fit
+- To solve this, we could try to find a transformation of `x` or `y` (e.g., `sqrt`) that would render the relationship more linear 
+- However, this will never be more than an approximation, which comes at the cost of losing some interpretability 
+- Also transforming the dependent variable to establish a linear relationship with an independent variable will only work if there's only one predictor needing such a transformation
+```{r polydatalinearplot}
+ggplot(dataSet, aes(x=x, y=sqrt(y))) + 
+  geom_point() + 
+  geom_smooth(method="lm")
+```
+
+## 1. What is polynomial regression and why is it used? (4/6)
+- Another more valid option would be to incorporate the curvature into the model specification
+- To do so, we can add a square transformation of `x` alongside of `x` in our regression equation:
+    - `y = intercept + (x*effect1) + (x^2*effect1) + ... + error`
+- In algebra, functions of the form `f(x) = 2*x + 2*x^2` are known as `polynomials`
+- Polynomials allow us to model certain non-linear relationships for what they are
+- This will not work for variables that need e.g., a log-transformation 
+```{r polydataquadraticplot}
+ggplot(dataSet, aes(x=x, y=y)) + 
+  geom_point() +  
+  geom_smooth(method="lm", formula = "y ~ x + I(x^2)", color="red")
+```
+
+## 1. What is polynomial regression and why is it used? (5/6)
+- The gist of the idea is that you include the same numeric predictor a number of times:
+    - The numeric predictor as it is, this will model the bit of the curve that is actually linear
+    - The numeric predictor raised to an exponent. If the exponent is 2, then you only include the predictor raised to the power of 2. If it is higher, than you include the predictor raised to the power of 2, the predictor raised to the power of 3, etc.
+
+## 1. What is polynomial regression and why is it used? (6/6)
+- The exponent is called the `order` of the polynomial:
+    - Second-order polynomial: exponent 2; called `quadratic`. This polynomial order will turn up as a `parabola` shape on a plot
+    - Third-order polynomial: exponent 3, called `cubic`. Polynomial order will turn up as a `s-shape` on a plot
+    - Fourth-order polynomial: exponent 4, called `quartic`. This polynomial will turn up as a `u-shape` on a plot
+    
+## 1. What is polynomial regression and why is it used? (6/6)
+```{r polyshapes, eval=TRUE, echo=FALSE, asis=TRUE, fig.height=7, fig.width=10}
+dataSet <- data.frame(x=rnorm(500))
+dataSet$y<- rnorm(500)+ (dataSet$x+ dataSet$x^2)
+dataSet$order<-"quadratic"
+
+cubic<- data.frame(x=rnorm(500))
+cubic$y<- rnorm(500)+ (cubic$x+ cubic$x^2 + cubic$x^3)
+cubic$order<-"cubic"
+
+quartic <- data.frame(x=rnorm(500))
+quartic$y <- rnorm(500)+ (quartic$x+ quartic$x^2 + quartic$x^3 + quartic$x^4)
+quartic$order<-"quartic"
+
+pl1<- ggplot(dataSet, aes(x=x, y=y)) + geom_point() + geom_smooth(method="lm", formula="y ~ poly(x,2)")  + labs(list(title="Quadratic"))
+pl2<- ggplot(cubic, aes(x=x, y=y)) + geom_point() + geom_smooth(method="lm", formula="y ~ poly(x,3)")  + labs(list(title="Cubic"))
+pl3<-ggplot(quartic, aes(x=x, y=y)) + geom_point() + geom_smooth(method="lm", formula="y ~ poly(x,4)") + labs(list(title="Quartic"))
+
+multiplot(pl1, pl2, pl3, cols=1)
+
+```
+
+## 2. How to fit polynomial terms in R
+## 2. How to fit polynomial terms in R
+- To incorporate polynomials, we can include a call to the `poly` function in our formula specification
+- This function takes two arguments:
+    - Predictor column
+    - Order of the polynomial 
+- Here we will take a look at how polynomials work for `lm` models, but they work in the same way for `glm`, `lmer`, and `glmer` models
+
+```{r polymodelspecification}
+mod <- lm(y ~ poly(x, 2), dataSet)
+```
+
+## 3. How to check for polynomial effects
+## 3. How to check for polynomial effects: linear models
+- To find polynomial effects in your data, in the case of linear regression, you need to plot your dependent variable vs your independent variable to see which form is most adequate
+```{r linearPLotExample}
+ggplot(dataSet, aes(x=x, y=y)) + 
+  geom_point() +  
+  geom_smooth(method="lm", formula = "y ~ x", color="red") +
+  geom_smooth(method="lm", formula="y ~poly(x, 2)")
+```
+
+## 3. How to check for polynomial effects: logistic models
+- In the logistic case, you can plot your independent variable vs. predicted probabilities derived from a simple model that includes only your independent variable
+- In this case, the relationship is not linear and a second-order polynomial appears to provide the best fit
+```{r logexample}
+# Load some data
+logDataSet<-read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv") %>%
+  mutate_if(is.character, as.factor)
+# Specify simple logistic model
+logMod<-glm(type ~ characters_before_noun, family="binomial", logDataSet)
+# Generate all possible values between minimum and maximum of independent variable
+plotData <- data.frame(characters_before_noun=min(logDataSet$characters_before_noun):max(logDataSet$characters_before_noun))
+# Extract predicted probabilities
+plotData$predicted<-predict(logMod, newdata = plotData, type="response")
+# Plot
+ggplot(plotData, aes(x=characters_before_noun, y=predicted)) + 
+  geom_point() + 
+  geom_smooth(method="lm", formula = "y ~ x", color="red") + 
+  geom_smooth(method="lm", formula="y ~ poly(x, 2)")
+
+```
+
+## 3. How to check for polynomial effects: the code
+- In both cases, by adding a `lm` regression line to the plot, you can get an idea of how linear the relationships are
+- If you spot something that looks like it is not quite linear, you can incorporate a polynomial, by editing the `formula` argument of `geom_smooth`:
+    - e.g., `formula="y ~ poly(x,2)"`. The mapping of `x` and `y` to columns in the dataset is made in the `aes` mapping of the main `ggplot` call
+
+## 4. How to check if the polynomials improve the model fit
+## 4. How to check if the polynomials improve the model fit (1/2)
+- Which order of polynomial you include in your model is a matter of emperical adequacy. 
+- You will want to model your data as close as possible, but you want to avoid having too high a degree of polynomiality 
+- You start with second-order polynomials. Then you plot the relationship, and you explore if a higher-order polynomial is necessary
+- Polynomials of orders higher than three or four are usually a bad idea
+
+## 4. How to check if the polynomials improve the model fit (2/2)
+- Polynomial models are more complex than models without polynomials
+- Models with higher-order polynomials are more complex than models with lower-order polynomials
+- This means that we can use the AIC statistic to compare if polynomials contribute to the model fit
+
+```{r polyfit}
+mod <- lm(y ~ x, dataSet)
+mod1 <- lm(y~poly(x, 2), dataSet)
+AIC(mod)-AIC(mod1)
+mod2 <- lm(y~poly(x, 3), dataSet)
+AIC(mod1)-AIC(mod2)
+```
+
+## 5. How to interpret polynomial regression terms in R
+## 5. How to interpret polynomial regression terms in R (1/2)
+- Polynomial regression terms are hard to interpret:
+    - The effect estimates are spread over two or more variables:
+        - The first order of the polynomial describes the effect of `x`
+        - The second order of the polynomial describes the effect of `x^2`
+- We can no longer interprete the coefficients as indicating that "for each increase in X, there's a N-unit increase in Y"
+- If you want to interpret the terms, it is best to plot the relationship of the independent variable to the dependent variable. This way you can interpret the shape of the relationship and describe it in plain text
+
+```{r polysummary}
+summary(mod)
+```
+
+## 5. How to interpret polynomial regression terms in R (2/2)
+- For logistic models, you can plot the polynomial term vs the predicted values of the dependent variable, which can be obtained with `predict(mod, type="response")`
+
+```{r polyLogistic0 }
+logMod<-glm(type ~ poly(characters_before_noun, 2) + negation + Typical.Action.Chain.Pos + corpus + tense, family="binomial", logDataSet)
+# Extract predicted probabilities
+logDataSet$predicted<-predict(logMod, type="response")
+# Plot
+ggplot(plotData, aes(x=characters_before_noun, y=predicted)) +  
+  geom_point() + 
+  geom_smooth(method="lm", formula="y ~ poly(x, 2)")
+```
+
+## 6. What is Generalized Additive Modeling and why is it used? 
+## 6. What is Generalized Additive Modeling and why is it used? (1/3)
+- Generalized additive modeling is a technique that builds on `generalized linear models` (the type of model implemented in `glm`)
+- Like polynomials, GAMs allow us to model non-linear relationships as non-linear relationships
+- However, whereas polynomial regression models can only model non-linear relationships that can be described by a polynomial function, GAMs can handle any type of non-linearity
+- The non-linear relationships are modeled by smoothing functions
+- The predictors for which we specify a linear relationship are evaluated as in a 'normal' regression model
+
+## 6. What is Generalized Additive Modeling and why is it used? (2/3)
+- The assumptions of GAMs are the same as those that we looked at for, respectively, logistic and linear regression 
+- The only difference is that the linearity assumption is relaxed, i.e., as long as we specify our model in a correct way so that non-linear relationships are estimated using the smoothing functions, there is no strict linearity assumption
+- Note that linear relationships should be estimated using 'normal' regression terms
+
+## 6. What is Generalized Additive Modeling and why is it used? (3/3)
+- Wieling, Nerbonne & Baayen (2011) introduced generalized additive modeling to the field of linguistics
+- Their study showed that GAMs allow us to measure the non-linear influence of geography (lat, long coordinates) on a dependent variable, while controlling for other predictor variables
+- GAMs have mainly been used in quantitative dialectology and sociolinguistics
+
+## 7. How to fit a GAM in R
+## 7. How to fit a GAM in R (1/3)
+- We will use data by Wieling et al. (2011)
+- The dataset contains 19,446 observations of the way speakers from different Dutch localities pronounce a particular word:
+    - `LD`: dependent variable, which records the Levenshtein distance between the pronunciation of the speaker and standard Dutch. The Levenshtein distance measures the number of string edits that are necessary to go from one string to another. The variable was scaled and centered around zero
+    - `Location`: Data collection site
+    - `Word`: Word that is being pronounced
+    - `Longitude`, `Latitude`: Data collection site coordinates
+    - `PopCnt`: Population count, centered and scaled
+    - `PopAge`: Mean population age of the locality, centered and scaled
+    - `PopIncome`: Mean population income of the locality, centered and scaled
+    - `IsNoun`: 1 (noun), 0 (other word)
+    - `WordFreq`:  Word frequency, log-transformed
+    - `WordLength`: Word length, log-transformed
+    
+```{r bamdata}
+library(readr)
+library(dplyr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class12_Wieling_et_al_2011.csv")  %>%
+  mutate_if(is.character, as.factor)
+summary(dataSet)
+```
+
+## 7. How to fit a GAM in R (2/3)
+- GAMs can be fit in R using the `mgcv` package
+- The main function is `bam`
+- Like `glm` it takes three arguments:
+    - Formula
+    - Distribution family:
+        - To fit a logistic model, we add  `family="binomial"`
+        - To model a normally distributed dependent variable, we add `family="gaussian"`
+    - Data
+
+## 7. How to fit a GAM in R (3/3)
+- The formula bit of a GAM is somewhat special:
+    - If you do not want to evaluate a predictor in a linear way, you wrap it with `s()`
+    - If you want to evaluate the joint non-linear effect of two predictors on the outcome, you include the two predictors in the brackets after `s`, separated by comma
+    - Here we will do this for `Longitude` and `Latitude` so we can measure the effect of geography on pronunciation distance
+    - If you use coordinates in a `bam` formula it is important that you order them as we did here
+
+```{r bamfunction}
+library(mgcv)
+mod <- bam(LD ~ s(Longitude, Latitude) + PopCnt + PopAge + PopIncome + IsNoun + WordFreq + WordLength, family="gaussian", dataSet)
+```
+
+## 8. How to specify random intercepts and slopes in a GAM
+## 8. How to specify random intercepts and slopes in a GAM
+- In a GAM formula we can also specify random intercepts 
+- To do so, we wrap the variable name with `s` and we add the argument `bs="re"` to the call to `s`
+- This way, the `bam` function knows that it should treat the variable as a random intercept 
+- To include a `random slope`, we add another call to `s` and we include the intercept name and the variable name, followed by `bs="re"`
+
+```{r bamrandom}
+mod <- bam(LD ~ s(Longitude, Latitude) + s(Word, bs="re") +  s(Word, PopCnt, bs="re") +  PopCnt + PopAge + PopIncome + IsNoun + WordFreq + WordLength, family="gaussian", dataSet)
+```
+
+## 9. How to interpret a GAM
+## 9. How to interpret a GAM (1/4)
+- The output of a `bam` summary has two components:
+    - Parametric coefficients
+    - Smooth terms
+```{r bamsum}
+summary(mod)
+```
+
+## 9. How to interpret a GAM (2/4)
+- The interpretation of the `parametric coefficients` is the same as for a `glm` or `lm` model:
+    - `Estimate`: regression coefficient, on the same scale as the dependent variable or on the log odds scale when we fit a logistic model 
+    - `Std. Error`: standard error for the regression coefficient. Large standard errors point to less certainty about the effect estimate
+    - `t-value` (z-value in the logistic case): test statistic value that is used to calculate the significance of the effect
+    - `Pr(>|t|)`: p-value of the effect estimate
+
+## 9. How to interpret a GAM (3/4)
+- For the `smooth terms` we only get information on their significance
+- However, their effects on the dependent variable can be plotted
+- One of the main uses of GAMs in linguistics so far has been to create maps of the regions in space where you can find e.g., a more distinct pronounciation, while controlling for other variables such as population size, income, word, etc. 
+
+## 9. How to interpret a GAM (4/4)
+- Plotting the effects of a smooth term can be done with the `vis.gam` function
+- To plot a map of `LD` over space while controlling for the other variables, we can use the following code
+- The result looks like a map of The Netherlands. The red lines separate regions for which the model estimates lower/higher Levenshtein distances
+
+```{r polyLogistic1, eval=FALSE}
+vis.gam(mod, plot.type="contour", color="terrain", too.far=0.05, view=c("Longitude","Latitude"))
+```
+
+## 9. How to interpret a GAM (4/4)
+```{r polyLogistic11, eval=T, echo=F, fig.width= 5, fig.height=5}
+vis.gam(mod, plot.type="contour", color="terrain", too.far=0.05, view=c("Longitude","Latitude"))
+```
+
+## 10. How to assess the fit of a generalized additive model
+## 10. How to assess the fit of a generalized additive model
+- Like the summary of `lm` models, the summary output of `bam` models includes an adjusted r-squared measure
+- This r-squared measure is also provided for logistic models
+- In addition, for logistic models, we can calculate the c-index of concordance, using the `Hmisc` package
+
+```{r polyLogistic12, eval=F}
+#not run
+library(Hmisc)
+logisticMod
+somers2(fitted(logisticMod), as.numeric(data$dependent)-1)
+```
+
+## 11. Exercise
+- Please go to http://www.jeroenclaes.be/statistics_for_linguistics/class12.html and perform the exercise
+
+## 12. References
+- Wieling, M., Nerbonne, J.,  & Baayen, H. R. (2011). Quantitative Social Dialectology: Explaining Linguistic Variation Geographically and Socially. *Plos One*. DOI: https://doi.org/10.1371/journal.pone.0023613.

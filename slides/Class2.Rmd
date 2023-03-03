@@ -1,0 +1,602 @@
+---
+title: 'Topic 2: Distributions and basic descriptive statistics for quantitative variables'
+author: "Jeroen Claes"
+output:
+  word_document:
+    toc: no
+  revealjs::revealjs_presentation:
+    css: white.css
+    self_contained: no
+    transition: none
+  html_document:
+    toc: no
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval=TRUE, message=FALSE, warning=FALSE, error=FALSE, fig.height = 4, dpi = 300)
+
+library(pander)
+```
+
+## Contents
+1. How to load and view data from a CSV file
+2. Working with data.frames
+3. Measures of central tendency
+4. Normal distribution
+5. Dispersion measures
+6. What to do when your data is not distributed normally
+
+## 1. How to load data from a CSV file
+
+## 1. How to load data from a CSV file (1/2)
+
+In this class, we will be working with data by Balota et al. (2007), provided by Levshina (2015):
+
+  - Data in CSV (comma-separated values)
+  - Experiment in which subjects had to decide whether or not a word is an existing word.
+  - Columns: **Word**, **Word length**, **Word frequency**, and **Mean reaction time**
+
+## 1. How to load data from a CSV file (2/2)
+
+To load data, we use the package `readr` and we load the data straight from the course website. This works the same for local data sets. 
+
+```{r loadCsv}
+library(readr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class2_balota_et_al_2007.csv")
+```
+
+## 1. How to create a CSV file
+In Excel:
+
+  - Save as 'CSV' (Comma-separated values)
+  - Make sure you choose UTF-8 encoding (on Excel 2016 for Mac: *CSV UTF-8 Encoding*)
+  - If your Excel is set to Belgian locale, the separator will not be the comma `,`, but rather the semicolon `;`. 
+  - In that case, you have to use the `read_csv2` function to load your data. 
+
+## 2. Working with data.frames 
+
+## 2.1 Structure of data.frames (1/3)
+Now let's check out how the object `dataSet` looks like. Recall that we can use `str()` for this purpose.
+```{r structureData, eval=FALSE}
+str(dataSet)
+```
+
+## 2.1 Structure of data.frames (2/3)
+We can also get a nice table-like view of it
+```{r view, eval=F}
+View(dataSet)
+```
+
+## 2.1 Structure of data.frames (3/3)
+With `dim` we compute the number of dimensions (columns and rows), with `nrow` the number of rows, and with `ncol` the number of columns.
+```{r dimensions, eval=T}
+dim(dataSet)
+nrow(dataSet)
+ncol(dataSet)
+```
+
+
+## 2.2 `head`
+Print the first N lines from the data.frame
+```{r headTail}
+#first 6 lines 
+head(dataSet)
+```
+
+## 2.3 `tail`
+Print the last N lines from the data.frame
+```{r tail}
+#last 10 lines
+tail(dataSet, 10)
+```
+
+## 2.4 `glimpse`
+For data with many columns, RStudio will omit the columns that do not fit the console window. There's a function `glimpse` in the `dplyr` package that prints the first couple of lines of your data frame as a list. 
+```{r glimpse}
+library(dplyr)
+glimpse(dataSet)
+```
+
+## 2.5 `summary`
+The function `summary` prints a general overview of the values (minimum, maximum, median,mean,...) in a data.frame.
+```{r summary}
+summary(dataSet)
+```
+
+## 2.6 Dollar-sign operator: extracting a single column
+To extract a column (a single vector) from the data.frame, we use the dollar sign operator e.g., `dataSet$Word` 
+```{r dollarOperator}
+#first 6 lines of just the column Word
+head(dataSet$Word)
+
+#last 10 lines
+tail(dataSet$Word, 10)
+```
+
+## 2.7 Extracting multiple columns
+To extract multiple columns from a data.frame, we simply put a `character vector` of the column names we want to extract between square brackets, preceded by a comma:
+```{r subsetcolumns}
+#first 6 lines of Word and Freq
+head(dataSet[, c("Word", "Freq")])
+```
+
+## 2.8 Subsetting by rows 
+To extract rows from a data.frame we use a numeric vector of row numbers between square brackets, followed by a comma
+```{r subsetRows}
+dataSet[c(1, 2, 5), ]
+```
+
+## 2.9 Subsetting: the system
+- You will have noticed that the general pattern for subsetting dataframes is the following:
+    - dataframeName[rows, columns]
+
+## 2.10 Conditional selection by row (1/2)
+- Instead of writing the row numbers ourselves, we can also ask R to compute the indices of rows that fulfill some condition.
+- The following  statement will return the first six rows of all rows for which `Freq > 100`
+
+```{r condSubsets}
+head(dataSet[dataSet$Freq > 100, ])
+```
+
+## 2.10 Conditional selection by row (2/2)
+- Other useful conditions are:
+    - `is.na()` (e.g., `dataSet[is.na(dataSet$Freq), ]`) - "is empty value"
+    - `!is.na()` - "is NOT is empty value"
+    -  `<` - "smaller than"
+    - `<=` - "smaller than or equal to"
+    - `>` - "larger than"
+    - `>=` - "larger than or equal to"
+    - `%in%` (e.g., `dataSet[dataSet$Freq %in% c(1,2,4)]`) - "one of list"
+    -  `%in%` with NOT operator (e.g., `dataSet[!dataSet$Freq %in% c(1,2,4)]`) - "not one of list"
+ 
+## 2.11 Adding columns
+- Adding columns is just as easy as selecting columns
+- We simply type the dataframe name, followed by the dollar-sign operator and a name for the column. Then we can assign whatever value we want to the new column
+```{r addingColumns}
+dataSet$LogFreq <- log(dataSet$Freq)
+glimpse(dataSet)
+```
+  
+## 2.12 Excercises
+- Go to [http://www.jeroenclaes.be/statistics_for_linguistics/class2.html](http://www.jeroenclaes.be/statistics_for_linguistics/class2.html)
+- Perform the exercises under *data.frames*
+
+## 3. Distributions and measures of central tendency
+
+## 3. Distributions and measures of central tendency (1/2)
+
+- In statistics a set of scores/values/numbers is called a `distribution`. 
+- The values in the columns `Length`, `Freq`, and `Mean_RT` each constitute a distribution.
+- The typical values of a distribution are called its `central tendency`
+- Before we can establish relationships between variables, we have to understand their distributions first!
+
+## 3. Distributions and measures of central tendency (2/2)
+
+- We can describe distributions by calculating the following statistics: 
+    - Mean (average)
+    - Median
+    - Quantiles/quartiles
+    - Mode
+    - Minimum
+    - Maximum
+    
+Each of these statistics will allow us to say something about the typical values  (`central tendency`) of the distribution.
+
+## 3.1 Mean
+
+- The `mean` of a distribution equals to the sum of the values of a distribution divided by the number of values in the distribution. 
+- Summarizes the typical values of the distribution in a single number 
+
+```{r mean}
+#Mean word length
+mean(dataSet$Length, na.rm=TRUE)
+```
+## 3.2 Median
+
+- The `median` of a distribution equals to the value that marks the middle of the distribution. 
+- If a distribution has 100 values and we rank them from small to large, the median will be the 50th value. 
+
+```{r median}
+median(dataSet$Length, na.rm=TRUE)
+```
+
+## 3.3 Median
+When combined with the mean, the median provides a good idea of the central tendency of a distribution: 
+
+- The mean is prone to shift upwards or downwards if there is a single atypical value (called `outlier` in statistics) 
+- The median remains identical
+```{r medianvsmean}
+#Compare
+median(c(1, 2, 3, 4, 5, 6, 7, 8000, 190, 1000000)) # mean = 100821.8
+median(c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)) # mean = 5.5
+```
+
+## 3.4 Quantiles
+ - A related concept are `quantiles` (median = 0.5 quantile)
+ - `0.25 quantile` is also called the `first quartile`, median is second quartile etc.
+ - Quantiles express that a percentage of the values of the distribution is lower than a particular value 
+ - Useful to study the spread of the values in the distribution
+```{r quantile}
+# One quantile
+quantile(dataSet$Length, 0.25)
+
+# Multiple quantiles
+quantile(dataSet$Length, c(0.25, 0.5, 0.75))
+```
+
+## 3.5 Mode
+
+- Most frequent value in a distribution
+- Not widely used
+
+```{r mode}
+# table() counts the number of times a value occurs in a vector
+tab <- table(dataSet$Length)
+# We sort the table by its values, in decreasing order
+sorted <- sort(tab, decreasing = TRUE)
+# We extract the first value, which is the highest.
+mode <- sorted[1]
+# The number 8 is the mode. It occurs 16 time
+mode
+
+# In one line:
+sort(table(dataSet$Length), decreasing = TRUE)[1]
+```
+
+## 3.6 Minimum
+- Minimum: lowest value
+```{r min}
+min(dataSet$Length, na.rm=TRUE)
+```
+
+## 3.7 Maximum
+- Maximum: highest value
+```{r max}
+max(dataSet$Length, na.rm=TRUE)
+```
+
+## 3.8 Calculating most of these at once
+By calling `summary` on a single column, you can calculate many of the statistics discussed here with one command
+ 
+```{r smry}
+summary(dataSet$Length) 
+```
+ 
+## 3.9 Describing a distribution
+- Mean 
+- Median 
+
+If the mean is lower than the median, the distribution is `negatively skewed`. If the mean is higher than the median, it is `positively skewed`.
+
+## 3.10 Excercises
+
+- Go to [http://www.jeroenclaes.be/statistics_for_linguistics/class2.html](http://www.jeroenclaes.be/statistics_for_linguistics/class2.html)
+- Perform the excercises under *2.Measures of central tendency*
+
+## 4. The normal distribution
+
+- Statisticians have identified different types of distributions
+- The most important is the `normal` or `Gaussian` distribution
+- Most statistical tests assume that your data `approaches` this **theoretical** distribution:
+    - Important to check whether your data is `normally distributed`
+    - Otherwise statistical tests may produce unreliable results!
+
+- Most data drawn from sufficiently large samples will be normally distributed
+ 
+## 4.1 Characteristics (1/2)
+- The `mean` and the `median` are not very different (easy test)
+- The largest amount of values occur around the mean, the lowest amount of values occur near the minimum and maximum
+- The distribution is symmetrical: there are about as many values that are smaller than the mean than there are values that are larger than the mean
+
+## 4.1 Characteristics (2/2)
+- This pattern shows up as a `bell-shaped curve` in density plots
+
+``` {r normalDist, echo=FALSE, eval=TRUE}
+library(ggplot2)
+dat <- data.frame(values=rnorm(2000, mean=15))
+ggplot(dat, aes(x=values)) + geom_line(stat="density") + geom_vline(aes(xintercept=15), color="red")
+```
+
+## 4.2 Checking for normality
+- Plotting (preferred)
+- Shapiro-Wilk test
+
+## 4.2.1 Plotting
+## 4.2.1.1 Plotting in `ggplot` 
+- Let's take a moment to learn the basic syntax of `ggplot`,a  highly structured (almost language-like) plotting package
+- This command sets up the basis of `ggplot`:
+    - It defines the data we are working with (`dataSet`)
+    - It defines the aesthetics (`aes()`) that are inherited by the other plotting functions that follow behind the `+` signs:
+        - Our `x` axis (the horizontal axis) will plot the `Length` variable
+        - Our `y` axis (the vertical axis) will plot the `Mean_RT` variable
+        - If we don't specify a `y` axis,  this will have to be calculated by a plotting function (`stat="bin"` or `stat="density"`)
+```{r ggplot20, eval=FALSE}
+library(ggplot2)
+ggplot(dataSet, aes(x=Length, y=Mean_RT))
+```
+
+## 4.2.1.1 Plotting in `ggplot` 
+- After the basic setup, we can add multiple plot layers by adding plotting functions separated by a `+` sign:
+    - `geom_line()` for line graphs
+    - `geom_bar()` for bar charts
+    - `geom_vline()` for vertical lines
+    - `geom_abline()` for horizontal lines
+    - `geom_point()` for points (`scatterplots`)
+    - `stat_summary()` to summarise the `y` values in your data in function of `x` before plotting (here we take the mean of all `Mean_RT` values that correspond to the same `Length` value)
+    
+```{r ggplot21, eval=FALSE}
+library(ggplot2)
+ggplot(dataSet, aes(x=Length, y=Mean_RT))  + 
+  stat_summary(fun.y = "mean", geom = "line")
+```
+
+## 4.2.1.1 Plotting in `ggplot` 
+```{r ggplot2, eval=TRUE}
+library(ggplot2)
+ggplot(dataSet, aes(x=Length, y=Mean_RT))  +  
+  stat_summary(fun.y = "mean", geom = "line")
+```
+
+## 4.2.1.2 Density plots (1/2)
+- Suppose we want to know if our variable `Length` approaches a normal distribution:
+    - We draw up a density plot, an ordered plot that visualizes the number of occurrences of each value in our distribution
+    - We add a red vertical line at the mean
+    - We look for the characteristic bell curve and symmetrical pattern
+    - Observe that the `geom_vline` has its own aesthetic: `xintercept`, which defines the point where it crosses/intercepts the `x` axis (the x - intercept). We set this aesthetic to the mean of our `Length`variable
+
+```{r densityPlot1, eval=F}
+library(ggplot2)
+ggplot(dataSet, aes(x=Length))  + 
+geom_line(stat="density") + 
+geom_vline(aes(xintercept=mean(dataSet$Length)), color="red")
+```
+
+## 4.2.1.2 Density plots (2/2)
+```{r densityPlot2, eval=T}
+library(ggplot2)
+ggplot(dataSet, aes(x=Length))  + 
+geom_line(stat="density") + 
+geom_vline(aes(xintercept=mean(dataSet$Length)), color="red")
+```
+
+## 4.2.1.3 Histograms  (1/2)
+- Suppose we want to know if our variable `Length` approaches a normal distribution:
+    - We draw up a histogram, an ordered plot that visualizes the number of occurrences of each value in our distribution
+    - We add a red vertical line at the mean
+    - We look for the characteristic bell curve and symmetrical pattern
+
+```{r histogram1, eval=F}
+library(ggplot2)
+ggplot(dataSet, aes(x=Length))  + 
+geom_histogram(bins=11) + 
+geom_vline(aes(xintercept=mean(dataSet$Length)), color="red")
+```
+
+## 4.2.1.3 Histograms (2/2)
+
+```{r histogram, eval=T, echo=F}
+library(ggplot2)
+ggplot(dataSet, aes(x=Length))  + 
+geom_histogram(bins=11) + 
+geom_vline(aes(xintercept=mean(dataSet$Length)), color="red")
+```
+
+## 4.2.1.4 QQ-plots (1/2)
+- Another way to identify if your data are normally distributed are QQ-plots
+- If the dots follow the line closely, the data are normally distributed
+
+```{r qq1, eval=FALSE }
+qqnorm(dataSet$Length)
+qqline(dataSet$Length)
+```
+
+## 4.2.1.4 QQ-plots (2/2)
+```{r qq2, eval=TRUE }
+qqnorm(dataSet$Length)
+qqline(dataSet$Length)
+```
+
+## 4.2.2 Shapiro-Wilk test of normality
+- If p < 0.05 (don't worry about what that means for now), the data is **not** normally distributed
+- Plotting is preferred (especially QQ-plots), because this test depends on sample size
+
+```{r shapiroWilk }
+shapiro.test(dataSet$Length)
+```
+
+## 4.3 Excercises 
+- Go to [http://www.jeroenclaes.be/statistics_for_linguistics/class2.html](http://www.jeroenclaes.be/statistics_for_linguistics/class2.html)
+- Do the excercises under *3. The normal distribution*
+
+## 5. Measures of dispersion
+## 5. Measures of dispersion
+- If you data are normally distributed, the `mean` and the `median` are good representatives of the typical values of a distribution
+- Our analysis of the `Freq` and `Mean_RT`variables have shown that this is not the case for non-normal distributions
+- Measures of dispersion express how much variation there is between values of a distribution. They include:
+    - Range
+    - Variance
+    - Standard deviation
+    - Interquartile Range
+    - Median absolute deviation 
+- A `boxplot` allows you to display dispersion graphically
+  
+## 5.1 Range
+The range is the difference between the maximum and the minimum value of a distribution
+```{r range }
+max(dataSet$Length) - min(dataSet$Length)
+```
+
+## 5.2 Variance
+- Sum of the squared deviations from the mean, divided by the sample size minus one.
+- The larger the variance, the larger the differences between the individual values and the mean
+- Not on the same scale as the data: squared (the sum of the deviations from the mean would be zero without squaring it)
+- If the distribution is non-normal, this will lead us to overestimate the variation between the mean and an average score
+```{r variance }
+# Same as: 
+# sum((dataSet$Length-mean(dataSet$Length))^2 )/(length(dataSet$Length)-1)
+var(dataSet$Length)
+```
+
+## 5.3 Standard deviation
+- Then standard deviation is the square root of the `variance`
+- By taking the square root of the variance (which are the squared deviations from the mean) we get back to the original units of our data
+- Expresses the average deviation from the mean
+- If the distribution is non-normal, the standard deviation will lead us to overestimate the variation between the mean and an average score
+
+```{r sd }
+sd(dataSet$Length)
+```
+
+## 5.4 Interquartile Range
+- The interquartile range expresses the difference between the first quartile (the 25% lowest values) and the third quartile (the 75% lowest values)
+- More robust for non-normal distributions than the variance and standard deviations
+```{r iqr }
+IQR(dataSet$Length)
+```
+
+## 5.5 Median absolute deviation 
+- The median of the deviations between the values in the distribution and the median
+- Based on the median, so it is not sensitive to outliers
+```{r mad }
+mad(dataSet$Length)
+```
+
+## 5.6 Displaying dispersion graphically (1/2)
+- A box-and-whisker plot displays the `mean` and the `min` and `max` individual values
+- If there are outliers, the lines will be longer on one end of the graph
+```{r boxplot, eval=F}
+library(ggplot2)
+ggplot(dataSet, aes(x=1, y=Length)) + geom_boxplot()
+```
+
+## 5.6 Displaying dispersion graphically (2/2)
+```{r boxplot2, eval=T}
+library(ggplot2)
+ggplot(dataSet, aes(x=1, y=Length)) + geom_boxplot()
+```
+
+## 5.7 How to report it all?
+When you describe a distribution, you report:
+
+- Mean
+- Median
+- AND:
+    - If the data are **normally distributed**, you report the `standard deviation`
+    - If the data are not normally distributed, you report  `IQR` or `mad` scores
+- Ideally you also provide a box-and-whisker plot
+
+## 5.8 Excercises
+- Go to [http://www.jeroenclaes.be/statistics_for_linguistics/class2.html](http://www.jeroenclaes.be/statistics_for_linguistics/class2.html)
+- Do the excercises under *4. Measures of dispersion*
+
+## 6. What to do when your data is not distributed normally
+
+## 6. What to do when your data is not distributed normally
+- We have seen that `Freq` and `Mean_RT` are not normally distributed.
+- This does not mean that we cannot analyse them, but we will have to be careful. Most tests do not behave well when the data is not normally distributed or contains outliers (e.g., standard deviation and variance)
+- In general when you encounter a non-normal distribution you have two options:
+    - Remove outliers
+    - Apply a transformation
+
+## 6.1 Remove outliers (1/6)
+- If the deviation from the normal distribution is caused by a few atypical values, you may exclude these from your analysis
+- Let's consider `Mean_RT`
+```{r meanRT, eval=T}
+summary(dataSet$Mean_RT)
+```
+
+## 6.1 Remove outliers (2/6)
+- The summary shows that the interquartile range is 192.1
+- The difference between the 3rd quartile and the maximum value is 553.6. 
+- This suggest that there may be a few exceptionally large values in the right tail of the distribution
+
+## 6.1 Remove outliers (3/6)
+- Subjects appear to have had much difficulty with recognizing the top-4  words `diacritical`, `dessertspoon`, `acquisitiveness`, and `resuspension`
+- Maybe these were not the best test items?
+
+```{r outliersTable, eval=T, echo=F, results="asis"}
+library(dplyr)
+dataSet %>%
+  arrange(desc(Mean_RT)) %>%
+  head(6) %>%
+  as.data.frame() %>%
+  pandoc.table()
+```
+
+## 6.1 Remove outliers (4/6)
+- It is usually a good idea to select outliers based on `z-scores`
+- `z-scores` express how far the value is removed from the mean in standard deviation units
+- Positive z-scores are values that are larger than the mean, negative z-scores are values that are smaller
+
+```{r removedOutliers}
+#(dataSet$Mean_RT - mean(dataSet$Mean_RT))/sd(dataSet$Mean_RT)
+dataSet$zscores <- scale(dataSet$Mean_RT)
+summary(dataSet$zscores)
+```
+
+## 6.1 Remove outliers (5/6)
+- With this score we remove all values that are more than two standard deviations removed from the mean `(absolute value of z >= 2)` (Urdan, 2010: 18)
+- We need the absolute values (we have to ignore their +/- sign), so we wrap the scores with `abs`
+```{r removeOutliers2}
+dataSet <- dataSet[abs(dataSet$zscores) <= 2, ]
+```
+
+## 6.1 Remove outliers (6/6)
+- To check if our problem is solved, we can plot our variable
+```{r removedOutliers3}
+ggplot(dataSet, aes(x=Mean_RT)) + 
+  geom_line(stat="density") + 
+  geom_vline(aes(xintercept=mean(dataSet$Mean_RT)), color="red")
+```
+
+## 6.2 Apply a transformation (1/6)
+- The variable `Freq` cannot be brought to a normal distribution by removing a few outliers
+- It has the typical `power-law distribution` of word frequencies (Zipf's law):
+    - A few words occur very often
+    - The rest of the words have a very low frequency
+- Distribution with a very broad range
+- Can only be corrected with a transformation
+
+## 6.2 Apply a transformation (2/6)
+- Popular transformations are:
+    - Logarithm:
+        - Expresses to which power we have to raise the mathematical constant `e = 2.718281828459` (the base) to obtain the input number
+            - `log(1000) = 6.907755`, because `2.718281828459 ^ 6.907755 = 1000`
+        - Other bases are: 
+            - `10` (`log10(1000) = 3; 10 ^ 3 = 1000`) 
+            - `2` (`log2(1000) = 9.965784; 2 ^ 9.965784 = 1000`)
+        - Fixes `power-law distributions`
+        - Exponentiate the base with the logarithm to undo
+
+## 6.2 Apply a transformation (3/6)
+- Popular transformations are:
+    - Logarithm (fixes `power-law` distributions)
+    - Square root (fixes `positively skewed distributions`)
+    - Square transformation (fixes `negatively skewed distributions`)
+    - Reciprocal transformation (`1/(vector + 1)`), for distributions that look like a `j`
+- Best practice is to check which transformation works best for your data
+
+## 6.2 Apply a transformation (4/6)
+- Let's apply the logarithm to the `Freq` variable
+- The log of `0` is `-Inf`, which would render our data useless.
+- We add `1` to the values of `Freq` and then we apply the transformation (the log of `1` is `0`)
+ 
+## 6.2 Apply a transformation (5/6)
+```{r logtransform}
+dataSet$transformedFreq <- log(1+dataSet$Freq)
+qqnorm(dataSet$transformedFreq)
+qqline(dataSet$transformedFreq)
+```
+
+## 6.2 Apply a transformation (6/6)
+- There's always a trade-off to be made:
+    - If you need to have your distribution to be normal for some test, then you can consider a transformation
+    - Transforming your data makes it harder to interpret the values. E.g., `log(dataSet$Freq)` is less intuitively understandable than `dataSet$Freq`
+    - We will revisit transformations in later classes
+
+## Questions?
+?
+
+## References
+- Balota, D.A., Yap, M.J., & Cortese, M.J., et al. (2007). The English Lexicon Project. *Behavior Research Methods*, 39(3), 445–459. DOI: 10.3758/BF03193014. Data taken from Levshina (2015).
+- Levshina, N. (2015). *How to do Linguistics with R: Data exploration and statistical analysis*. Amsterdam/Philadelphia, PA: John Benjamins.

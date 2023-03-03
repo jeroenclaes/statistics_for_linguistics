@@ -1,0 +1,427 @@
+---
+title: 'Topic 10: Logistic regression'
+author: "Jeroen Claes"
+output:
+  word_document:
+    toc: no
+  revealjs::revealjs_presentation:
+    css: white.css
+    self_contained: no
+    transition: none
+  html_document:
+    toc: no
+---
+  
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval=TRUE, message=FALSE, warning=FALSE, error=FALSE, fig.height = 3, dpi = 300)
+library(pander)
+library(dplyr)
+```
+
+## Contents
+1. What is logistic regression and why is it used?
+2. Preliminary analyses
+3. Design choices
+4. `glm`: the Generalized Linear Model
+5. Assumptions of logistic regression
+6. How to fit logistic regression models in R
+7. How to interpret logistic regression models
+8. How to assess the fit of logistic regression models
+9. Testing for overfitting and numerical stability: the bootstrap
+10. Reporting on a logistic regression analysis
+11. Exercises
+12. References
+
+## 1. What is logistic regression and why is it used?
+## 1. What is logistic regression and why is it used? (1/9)
+- Recall that the `linear regression model` is a mathematical formula that allows us to calculate the value of the dependent variable as the sum of the linear effects of the independent variables, plus the intercept and the residual (prediction error):
+    - `y = intercept + (x1*effect1) + (x2*effect2) + ... + error`
+- The `linear regression model` assumes that the dependent variable may range between `-Inf` and `+Inf` and follows the normal distribution 
+
+## 1. What is logistic regression and why is it used? (2/9)
+- Logistic regression is used to model discrete variables e.g., `male` vs. `female`. 
+- Logistic regression predicts the `probability` that a particular observation belongs to one of the classes 
+- Logistic regression can be applied to binary problems or to problems with more than two categories
+- Here we will focus on the binary case
+
+## 1. What is logistic regression and why is it used? (3/9)
+- Descrete variables impose problems for the linear model:
+    - The dependent variable is not normally distributed (it has a `binomial distribution`)
+    - Rather than ranging between `-Inf` and `+Inf` (as ratio- or interval-scaled variables), for each combination of predictors, the two discrete values of the dependent variable occur with a certain probability
+        - E.g., Say we want to predict the gender of people as a binary opposition between `males` and `females` (however controversional that may be nowadays). We record hair length, muscle strength, use of lip gloss, and absence/presence of pink clothing elements. Given a large enough sample, for each combination of these variables, we will discover that a percentage of our sample is male
+
+## 1. What is logistic regression and why is it used? (4/9)
+- The linear regression equation would predict values between `-Inf` and `+Inf`, rather than a probability of `male` vs `female` 
+- Logistic regression solves this
+![](http://res.cloudinary.com/dyd911kmh/image/upload/f_auto,q_auto:best/v1523361626/linear_vs_logistic_regression_h8voek.jpg)
+(Image credit: https://www.datacamp.com/community/tutorials/logistic-regression-R)
+
+## 1. What is logistic regression and why is it used? (5/9)
+- Another problem that arises is that the independent variables are not linearly related to the probilities of the dependent variable
+- The result would be a terribly inaccurate model
+
+## 1. What is logistic regression and why is it used? (6/9)
+- Logistic regression solves the two problems outlined in the previous slides:
+    - The model formula is adapted so that it only generates probabilities between 0 and 1 
+         - The probabilities express the likelihood that the second class occurs (`P2` hereafter)
+         - A probability greater than 0.5 can be interpreted as a classification vote for `class 2`
+    - For binary dependent variables, the logistic regression formula is defined as follows, in which `e` is the base of the natural logarithm, `2.71828`: 
+    - `P2 = 1/1+e^-(intercept + (x1*effect1) + (x2*effect2) + ... + error)`
+    - The exponent of `e` looks familiar: it's the linear model! 
+         
+## 1. What is logistic regression and why is it used? (7/9)
+- The previous slide shows that the relationship between the probabilities and the dependent variables is not linear: rather than using the linear model to estimate the value of the probability of the second class, we used it to estimate the exponent of `e`
+- To make the relationship linear, we can flip the equation: rather than specifying a non-linear form for our model that generates the predictions, we can apply a non-linear transformation to the values we are modeling
+    - `P2/1−P2` = `e^(intercept + (x1*effect1) + (x2*effect2) + ... + error)`
+- If we take the `log` of the transformation of P2 we end up with a plain and simple linear model!
+    - `log(P2/(1-P2)) = intercept + (x1*effect1) + (x2*effect2) + ... + error`
+
+## 1. What is logistic regression and why is it used? (8/9)
+- In other words, in logistic regression the independent variables are not linearly related to the probabilities of the dependent variable, but rather to a non-linear transformation of the probabilities  of the dependent variable 
+- This transformation is called a `link function`. The specific form `log(P2/(1-P2))` is called the `logit` or the `log odds` (as it literally is the logarithm of the odds of finding the second class)
+      
+## 1. What is logistic regression and why is it used? (9/9)
+- The previous slides do not explain how the effect estimates that appear in the formula are generated
+- To calculate the predictor effect estimates for the formula,  R will iteratively try to find values for each effect so that the observed values of the dependent variable are the most likely ones to occur. This process is called `maximum likelihood estimation`.
+
+## 2. Preliminary analyses
+
+## 2.1 Data used in this class  (1/2)
+- In this class we will be working with an extended version of the dataset analyzed in Claes(2014, 2016):
+    - In standard Spanish, the NP of existential *haber* is a direct object, for which the verb normally does not agree with plural NPs. In many varieties of Spanish, variable agreement can be found
+    - The data records the following characteristics:
+        - `Type`: Singular or plural *haber*
+        - `Freq.Const.Speaker`: Frequency of plural *haber* in the speech of the interviewee up until that point
+        - `Agt.Freq.Noun`: Frequency with which the noun appears in an agentive role in a large spoken-language corpus
+        - `Tense`: preterit and present vs. all others
+        - `Pr.2.Pr`: The type of *haber* clause that was last used by the speaker, up until a 20-clause lag
+        - `Co.2.Pr`: The type of *haber* clause that was last used by the interviewer, up until a 20-clause lag
+        - `Polarity`: negation absent vs present
+        - `Style`: data collection method (interview, reading task, questionnaire task)
+        - `Gender`: gender
+        - `Age`: 21-35 years vs. 55+ years
+        - `Education`: University vs. less
+
+## 2.1 Data used in this class (2/2)
+- We use the `dplyr` function `mutate_if` to convert all strings to factors, which is required for modeling
+```{r dataset }
+library(readr)
+library(dplyr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class10_Claes_2014.csv")
+dataSet <- dataSet %>% 
+  mutate_if(is.character, as.factor)
+summary(dataSet)
+```
+
+## 2.2 Preliminary analyses (1/5)
+- As was the case for linear regression, we have to know our research questions, hypothesis, data and predictors really well before we start fitting our first model:
+    -  Assess each variable separately first
+    -  Assess the relationship of each independent variable, one at a time, with the dependent variable
+    - Assess the pairwise relationships between each of your predictors:
+        - Interactions
+        - Correlations/non-independence of factors
+- Of course, the limiting factor here will be that the response variable is not continuous, but rather discrete 
+
+## 2.2 Preliminary analyses (2/5)
+- In terms of preliminary analyses, we will want to:
+    - Assess each variable separately first:
+        - For numeric predictors:
+            - Obtain measures of central tendency and dispersion for numeric predictors
+            - Draw a boxplot 
+            - Is the variable normally distributed?
+        - For categorical predictors: 
+            - What are the proportions of the different categories? 
+            - Are they distributed evenly?
+            
+## 2.2 Preliminary analyses (3/5)
+- In terms of preliminary analyses, we will want to:
+    - Assess the relationship of each independent variable, one at a time, with the dependent variable:
+        - We will want to make sure that all of our combinations of the dependent and the independent variables have a frequency of more than one
+        - Calculate a `chisq.test` with the dependent variable (for factors)
+        - For numeric predictors, divide the numeric predictor in four quartile bins with the `dplyr` function `ntile` and compute a `chisq.test`
+        - Draw a grouped barchart
+        
+```{r chisq }
+table(ntile(dataSet$Freq.Const.Speaker, 4), dataSet$Type)
+chisq.test(ntile(dataSet$Freq.Const.Speaker, 4), dataSet$Type)
+```
+
+## 2.2 Preliminary analyses (4/5)
+- In terms of preliminary analyses, we will want to:
+    - Assess the relationships between all of the independent variables with each other:
+        - Perform pairwise correlation/Chi-squared tests
+        - Are the independent variables too highly correlated with one another?
+        
+## 2.2 Preliminary analyses (5/5)
+- In terms of preliminary analyses, we will want to:
+    - Scout for interactions with pairwise, faceted plotting
+    - For continuous predictors, we can again break up the continuum in four quartile groups with the `ntile` function
+
+## 3. Design choices
+## 3.1 Contrasts
+- As we did for the linear model, we have to choose how we want to handle categorical predictors:
+    - `treatment contrasts`: the coefficients express the change in the logit of the dependent variable with respect to the first level of the factor 
+    - `sum contrasts`: the coefficients express the change in the logit of the dependent variable with repect to the overall mean
+    - Here, we'll specify human-readable `sum contrasts` with the `contr.Sum` function of the `car` package
+```{r contr.sum }
+library(car)
+options(contr=c("contr.Sum"))
+```    
+    
+## 3.2 How many predictors to include
+- The most popular rule is that you should not have more coefficients in your model than the frequency of the least frequent category of your dependent variable divided by 10 (Hosmer et al., 2013: 407-408)
+    - E.g., Our least frequent dependent variable level (plural *haber*) has 684 observations. Our model should not include more than `684/1O = 68` coefficients 
+
+## 4. `glm`: the Generalized Linear Model
+## 4. `glm`: the Generalized Linear Model (1/3)
+- The regression equation above showed that the logistic regression equation is actually an extension (or 'generalization') of the linear model: 
+    - In the linear model, the equation is used to predict the values of the dependent variable directly
+    - In the logistic model, we apply a non-linear link function to our dependent variable before we apply the linear model 
+- The Generalized Linear Model is a set of techniques that allow us to model non-normally distributed response variables in the framework of linear regression
+
+## 4. `glm`: the Generalized Linear Model (2/3)
+- The key in each of these techniques is that the dependent variable is linearly related to the independent variables via a `link` function:
+    - The `logit` for logistic regression, i.e., binomial data
+    - The `natural logarithm` for count data (i.e., Poisson and negative binomial distributions)
+- In R the generalized linear model is implemented in the `glm` function. This function has three arguments:
+     - The formula you wish to estimate
+     - The dataset
+     - The name of the distribution type you want to model:
+        - `binomial` for binary logistic regression
+
+## 4. `glm`: the Generalized Linear Model (3/3)
+- As we did for linear regression, we can use an initial model to check the assumptions of logistic regression modeling
+
+```{r glm }
+ mod <- glm(Type ~  Freq.Const.Speaker + Agt.Freq.Noun + Tense + Pr.2.Pr + Co.2.Pr + Polarity + Style + Gender + Age +Education, family="binomial", dataSet)
+```
+      
+## 5. Assumptions of logistic regression
+   
+## 5. Assumptions of logistic regression
+- Compared to linear regression, logistic regression has almost no assumptions (Harrell, 2015: 236):
+    - The observations are independent. This is an assumption that is usually violated in linguistics research, as our observations are actually grouped together by speakers and words (Johnson, 2009)
+    - There are not outliers or overly influential observations in the data
+    - The predictors are not heavily correlated (there is no `multicollinearity`)
+    - The numeric predictors are linearly related to the logit of the probability of the dependent variable
+    - The model does not generate correct predictions in 100% of the cases (there is no `complete separation`)
+    - The model does not underpredict the variability in the dataset (there is no `overdispersion`) 
+
+## 5.1 There are not outliers or overly influential observations in the data
+- As we did for linear regression, we should check for overly influential observations and remove them as they would otherwise distort our entire analysis
+- We can use the `influencePlot` from the `car` package to achieve this
+```{r influencePlot }
+library(car)
+ mod <- glm(Type ~  Freq.Const.Speaker + Agt.Freq.Noun + Tense + Pr.2.Pr + Co.2.Pr + Polarity + Style + Gender + Age +Education , family="binomial", dataSet)
+influences<-influencePlot(mod)
+dataSet <- dataSet[-as.numeric(rownames(influences)),]
+```
+
+
+## 5.2  The predictors are not heavily correlated (there is no `multicollinearity`)
+- Your preliminary analyses will have provided you with a good picture of the degree of association/correlation between your predictors
+- As for linear regression models, we can use the `vif` function from the `car` package to check for predictors that are too heavily correlated
+- Recall that `GVIF^(1/(2*Df))` > 5 points to strong correlations between predictors that should be addressed
+```{r vif }
+library(car)
+mod <- glm(Type ~  Freq.Const.Speaker + Agt.Freq.Noun + Tense + Pr.2.Pr + Co.2.Pr + Polarity + Style + Gender + Age +Education, family="binomial", dataSet)
+vif(mod)
+```
+
+## 5.3 The predictors are linearly related to the logit of the dependent variable 
+- Recall that logistic regression is still a form of linear modeling, so any linear predictor we add to the model must stand in a linear relationship to the logit of the dependent variable
+- For a formal check of the linearity of a numeric predictor `A`, we can add the interaction `A*log(A)` to our model. If the interaction is significant, then the predictor is **not** linearly related to the logit of the dependent variable (Field et al., 2012: 345)
+- Here we find that our numeric predictors are linearly related to the logit
+
+```{r glm1}
+ mod_linearity <- glm(Type ~  Freq.Const.Speaker*log(1+Freq.Const.Speaker) + Agt.Freq.Noun*log(1+Agt.Freq.Noun)  + Tense + Pr.2.Pr + Co.2.Pr + Polarity + Style + Gender + Age +Education, family="binomial", dataSet)
+summary(mod_linearity)
+```
+      
+## 5.4 The model does not generate correct predictions in 100% of the cases 
+- Logistic regression models break when the data allows for a `complete separation` or a `quasi-complete separation`. We do not have to test for this, because the model will not converge when this is the case
+
+## 5.5 The model does not underpredict the variability in the dataset (there is no `overdispersion`)
+- Overdispersion indicates a situation where the predictions of your model are less diverse (i.e., less dispersed) than the observations in your dataset
+- Overdispersion can usually be fixed by incorporating the appropriate random effects structure in a mixed-effects logistic regression (see Topic 11)
+- If our model suffers from overdispersion, the residual deviance will be larger than the residual degrees of freedom (Speelman, 2014)
+```{r overdisp }
+mod$deviance >  mod$df.residual
+```
+
+## 6. How to fit logistic regression models in R
+- "Successful modeling of a complex data set is part science, part statistical methods, and part experience and common sense." (Hosmer et al., 2013: 89)
+
+## 6. How to fit logistic regression models in R (1/2)
+-  The idea is the same as for linear regression models:
+    - We get to know our data very well
+    - We include all predictors that are relevant for our hypotheses, as well as all the interactions of interest
+    - We fit an initial model that we use to validate the model assumptions
+    - To this model we apply Occam's razor: 
+        - We eliminate  predictors that have small effect sizes, large standard errors, and high p-values one at a time. 
+        - After each elimination, we run the model again and we compare the AIC value of the new model with that of the original model or a previous more parsimonious model
+        - If the elimination results in a drop of 2 AIC units or more, we have more evidence in favor of the model without the predictor
+    - For this pre-final model, we perform a bootstrap validation with 1,000 replicates. If there are coefficients that are not stable, remove them from the model and redo the bootstrap
+
+```{r mod1, echo=FALSE }
+mod1 <- glm(Type ~  Freq.Const.Speaker + Agt.Freq.Noun + Tense + Pr.2.Pr + Polarity + Style + Gender + Age +Education, family="binomial", dataSet)
+aicdiff<-AIC(mod)-AIC(mod1)
+```
+    
+## 6. How to fit logistic regression models in R (2/2)
+- Recall that we want to start by eliminating interactions, before we move on to the main effects
+- `Co.2.Pr` has a high p-value, so let's exclude that one
+- The resulting model has a AIC value that is `r aicdiff` units larger, so the exclusion of the variable does not appear to be warranted
+```{r summary }
+mod1 <- glm(Type ~  Freq.Const.Speaker + Agt.Freq.Noun + Tense + Pr.2.Pr + Polarity + Style + Gender + Age +Education, family="binomial", dataSet)
+AIC(mod)-AIC(mod1)
+```
+
+## 7. How to interpret logistic regression models
+## 7. How to interpret logistic regression models (1/4)
+
+```{r summary1 }
+mod <- glm(Type ~  Freq.Const.Speaker + Agt.Freq.Noun + Tense + Pr.2.Pr + Polarity + Style + Gender + Age +Education + Co.2.Pr, family="binomial", dataSet)
+summary(mod)
+```
+
+## 7. How to interpret logistic regression models (2/4)
+- `Estimate`: regression coefficient, on the log odds scale. 
+    - The coefficients always take the vantage point of the **second** level of your dependent variable. If you need your coefficients to take the vantage point of the other level, you need to use `dataSet$Type<-relevel(dataSet$Type, ref=2)` to change the ordering of the levels
+- `Std. Error`: standard error for the regression coefficient. Large standard errors point to less certainty about the effect estimate
+- `z-value`: test statistic value that is used to calculate the significance of the effect
+- `Pr(>|z|)`: p-value of the effect estimate
+-  `Null deviance`: likelihood measure of the model with only an intercept term. This model just predicts the most frequent outcome category every time
+-  `Residual deviance`: likelihood measure of the fitted model. The difference between the null deviance and the resiudual deviance shows you how much your predictors have improved the model's capacities with respect to the null model. Lower numbers indicate a better fit
+
+## 7. How to interpret logistic regression models (3/4)
+- Linear regression coefficients are reported on the same scale as the Y-axis
+- Logistic regression coefficients are reported on the `log odds` (or logit) scale 
+- The `logit` is the logarithm of the odds of finding the **second** level of our dependent variable (singular, in this case) vs the first level:
+    - E.g., Singular *haber* occurs with `r coefficients(mod)[5]` log odds in contexts primed by the speaker with plural *haber*. This corresponds with an odds of `r exp(coefficients(mod)[5])` to one, or a probability of `r plogis(coefficients(mod)[5])`
+    - E.g., Singular *haber* occurs with `r coefficients(mod)[6]` log odds in contexts primed by the speaker with singular *haber*. This corresponds with an odds of `r exp(coefficients(mod)[6])`  to one, or a probability of `r plogis(coefficients(mod)[6])`
+    
+## 7. How to interpret logistic regression models (4/4)
+- To convert log odds to odds, we can exponentiate them with `exp`
+- To convert log odds to probabilities, we can use the `plogis` function
+ 
+## 8. How to assess the fit of logistic regression models
+## 8. How to assess the fit of logistic regression models (1/6)
+- To assess the fit of linear regression models, we used R-squared. However, this measure is not as straighforwardly interpreted in logistic regression as it is in linear regression, where it represents the amount of variance explained 
+- We can calculate a pseudo-R-squared for `glm` models with the `r.squaredGLMM` function of the `MuMIn` package. 
+- This function will calculate Nakagawa & Schielzeth's (2013) pseudo-R-squared. 
+- Values above 0.50 are indicative of a good fit, as the pseudo-R-squared hardly reaches the high levels true R-squared reaches in linear regression
+
+```{r rsquared }
+library(MuMIn)
+r.squaredGLMM(mod)
+```
+
+## 8. How to assess the fit of logistic regression models (2/6)
+- To assess the discriminative power of logistic regression models,the C-index of concordance is commonly used (also know as *Area under Reciever Operating Characteristic Curve*; AUROC), which can be calculated with the `somers2` function of the `Hmisc` package
+- The C-index expresses how good the model is at classifying the observations in the two classes. In particular, it expresses the probability that the model will predict the second class in cases where the second class is observed (Harrell, 2015: 257)
+- Hosmer et al. (2013: 177) propose the following classification of C-index values:
+    - 0.5: No discrimination, the model performs at chance level
+    - 0.5 - 0.7: Poor discrimination, hardly better than chance 
+    - 0.7 - 0.8: Acceptable discrimination 
+    - 0.8-0.9: Excellent discrimination
+    - 0.9-1: Outstanding discrimination
+```{r cindex }
+library(Hmisc)
+somers2(fitted(mod), as.numeric(dataSet$Type)-1)
+```
+
+## 8. How to assess the fit of logistic regression models (3/6)
+- Two other measures that are frequently used in the context of logistic regression (especially in the field of machine learning) are *accuracy*, *precision* and *recall*:
+    - `Accuracy`:
+        - `Correctly classified`/ 
+        `Classified observations`
+    - `Precision`: 
+        - `Correctly classified as class 2`/
+          `Total number of times class 2 is predicted`
+    - `Recall`:  
+        - `Correctly classified as class 2`/
+          `Correctly classified as class 2 + Incorrectly classified as class 1`
+- To compute precision and recall, we first have to get predictions from our model
+
+```{r precisionRecall }
+# Predict probabilities rather than logits
+dataSet$predicted<-predict(mod, type="response")
+# Probability of more than 0.5 is a classification vote for the second level of our dependent variable
+dataSet$predicted<-ifelse(dataSet$predicted > 0.5, "Singular", "Plural")
+```
+
+## 8. How to assess the fit of logistic regression models (4/6)
+- We can obtain the number of correct and incorrect classifications with the `table` function
+- The corresponding table is known as a `confusion matrix` in statistics and machine learning
+```{r precisionRecall1 }
+tab <- table(dataSet$Type, dataSet$predicted)
+tab
+
+```
+
+## 8. How to assess the fit of logistic regression models (5/6)
+```{r precisionRecall12 }
+accuracy <- (tab[1] + tab[4]) /nrow(dataSet)
+accuracy
+precision<- tab[1]/(tab[1]+tab[2])
+precision
+recall <- tab[1]/(tab[1]+tab[3])
+recall
+```
+
+## 8. How to assess the fit of logistic regression models (6/6)
+- It is important that we compare the accuracy/precision of our model to the accuracy/precision we would get by just predicting the most frequent class every time  
+- Here we find that our precision score of `r precision` represents a `r round((precision-0.5867069)*100, 2)` percent lift with regards to the precision we would get by going for the most frequent class all of the time
+- Accuracy, precision and recall have been heavily criticized by statisticians (e.g. Harrell, 2015: 236), who feel that these measures should be avoided as they involve breaking up the probabilities into two classes using an arbitrary threshold.
+```{r precisionRecall2 }
+prop.table(table(dataSet$Type))
+```
+
+## 9. Testing for overfitting and numerical stability: the bootstrap 
+## 9. Testing for overfitting and numerical stability: the bootstrap (1/2)
+- The function we defined in Topic 8 to perform our bootstrap validation on the linear model also works for `glm` objects if we update the model fitting function from `lm` to `glm`
+```{r broom2, eval=TRUE}
+bootstrap <- function(model, replicates=1000) {
+  library(dplyr)
+  library(broom)
+intervals <- lapply(1:replicates, FUN=function(x) { 
+  indices <- sample(1:nrow(model$model), nrow(model$model), replace = TRUE) 
+  dat <- model$model[indices, ] 
+  mod <- glm(as.formula(model$call$formula),family="binomial", data=dat) 
+  return(tidy(mod)) 
+}) %>%
+  bind_rows() %>%
+  group_by(term) %>% 
+  summarise(`2.5%`= quantile(estimate, 0.025), `97.5%` = quantile(estimate, 0.975))
+  return(intervals)
+}
+```
+
+## 9. Testing for overfitting and numerical stability: the bootstrap (2/2)
+- Our confidence intervals suggest that `Age`, `Agt.Freq.Noun` and `Freq.Const.Speaker` are unstable under bootstrap validation. We should be careful when we draw inferences from them:
+    - Confidence interval > 1 log-odds unit
+    - Confidence interval includes 0
+
+```{r broom2boots, eval=TRUE}
+confintervals<-bootstrap(mod, 1000)
+confintervals
+```
+
+## 10 Reporting on a logistic regression analysis
+- All of your data transformation steps. Your analysis should be reproducible based upon your description
+- Your coefficients, standard errors, test statistics and p-values
+- Bootstrap confidence intervals
+- Summary statistics: C-index, pseudo-R-squared, AIC
+- Sample size
+
+## 11. Exercises
+- Please go to: http://www.jeroenclaes.be/statistics_for_linguistics/class10.html and perform the exercises
+
+## 12. References
+- Harrell, F. (2015). *Regression modeling strategies: With applications to linear models, logistic regression, and survival analysis*. New York, NY: Springer.
+- Hosmer, D., Lemeshow, S., Sturdivant, R. (2013). *Applied logistic regression*. Oxford: Wiley.
+- Johnson, D.E. (2009). Getting off the GoldVarb Standard: Introducing Rbrul for Mixed‐Effects Variable Rule Analysis. *Language and Linguistics Compass* 3(1). 359-383.
+- Nakagawa, S, Schielzeth, H. (2013). A general and simple method for obtaining R² from Generalized Linear Mixed-effects Models. *Methods in Ecology and Evolution* 4. 133–142.
+- Speelman, D. (2014). Logistic regression: A confirmatory technique for comparisons in corpus linguistics. In *Corpus Methods for Semantics: Quantitative studies in polysemy and synonymy* (487-533). Amsterdam/Philadephia, PA: John Benjamins.
+

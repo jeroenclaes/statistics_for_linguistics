@@ -1,0 +1,305 @@
+---
+title: 'Topic 9: Analysis of Variance (ANOVA)'
+author: "Jeroen Claes"
+output:
+  word_document:
+    toc: no
+  revealjs::revealjs_presentation:
+    css: white.css
+    self_contained: no
+    transition: none
+  html_document:
+    toc: no
+---
+  
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval=TRUE, message=FALSE, warning=FALSE, error=FALSE, fig.height = 3, dpi = 300)
+library(pander)
+library(dplyr)
+```
+
+## Contents
+1. What is *Analysis of Variance* and why is it used?
+2. Types of ANOVA
+3. One-way ANOVA
+4. Two-way/factorial ANOVA
+5. Exercises
+6. References
+
+## 1. What is *Analysis of Variance* and why is it used?
+- Analysis of Variance (ANOVA) is a group of methods that is used to establish whether or not the means of three or more groups are reliably different
+- In this sense, ANOVA is closely related to `t-tests` (see Topic 4):
+    - To find out if three groups `A`, `B`, `C` have different means, we could use t-tests to compare A to B, A to C, and C to B.  
+    - However, such a procedure would lead to an issue that is known as the `multiple comparisons problem` in statistics
+
+## 1. What is *Analysis of Variance* and why is it used?
+- `Multiple comparisons problem`:
+    - The probability (i.e., p-value) that is calculated in an hypothesis test is only valid under the assumption that it is the only hypothesis test that is being computed
+    - With each additional t-test that we perform on the same data, we increase the probability of finding a significant result that is actually not significant (i.e., a `Type I` error):
+        - For each test, there's a 95% chance that we do not commit a Type I error (since alpha = 0.05)
+        - If the tests are independent, we can multiply the probabilities to obtain the overall probability for our group of three tests: `0.95 * 0.95 * 0.95=0.86`
+        - By doing three tests,  our p-value/`familywise error rate` has increased from 0.05 on each individual test to 0.14 on the group of tests. Since 0.14 > 0.05, we can no longer reject the null hypothesis
+        - The `familywise error rate` can be calculated as follows: `family error=1-(0.95)^Number of tests`:
+              - 4 tests: 0.18
+              - 10 tests: 0.40
+- ANOVA does away with the need for multiple t-testing: the group means are compared simultaneously (Field et al.,2012: 399)
+    
+## 1. What is *Analysis of Variance* and why is it used?
+- Historically, ANOVA has been used heavily in psychology, psycholinguistics, and in experimental studies more generally
+- Linear regression has been used more heavily in corpus-based linguistics, and more generally, in fields that rely on real-world observations rather than experiments
+- ANOVA is closely related to linear regression. As a matter of fact, we can use `lm` with only categorical variables to perform certain types of ANOVA
+    
+## 1. What is *Analysis of Variance* and why is it used?
+- ANOVA is a method of measuring the overall significance of differences in means, it provides no insights into:
+    - The sizes of the effects
+    - Which groups caused the differences to be significant
+- Typically ANOVA is used to compare several groups that undergo different experimental conditions
+- In almost every case, ANOVA could (and perhaps, should) be substituted for linear regression:
+    - Linear regression is a more flexible, widely applicable, and general method
+    - Linear regression provides insights into the significance,the effect sizes of the different experimental conditions, which groups caused the result to be significant, and integrates this information into a single model
+    - Linear regression allows to make predictions
+- ANOVA slowly appears to become superseded by linear regression (especially mixed-effects linear regression) in current-day psycholinguistics 
+- Our goal here will be to gain a basic high-level understanding of the technique
+
+## 2. Types of ANOVA
+- ANOVA is not a single method, but rather a family of methods:
+    - Independent one-way ANOVA: used to compare the means of three and more groups. Its use is similar to that of the t-test 
+    - Independent two-way/factorial ANOVA: used to compare the means of groups created by two or more factors, as well as their interactions
+    - Repeated-measures and mixed ANOVA: used when the observations are not independent. 
+        - These techniques will not be covered here, as mixed-effects regression is much more appropriate for these kinds of settings. See Levshina (2015: Chap. 8)
+
+## 2. Types of ANOVA
+- Which type of ANOVA that is applied depends on the overall design of the study:
+    - `Within-subject design`: The same subjects are tested in several experimental conditions:
+        - E.g., Subjects perform a task, they receive a priming stimulus, and they perform another task. We have data on the subjects in our two conditions: primed vs. unprimed
+        - You need a `repeated-measures` or a `mixed` ANOVA
+    - `Between-group/between-subject design`: Different subjects are assigned to different experimental conditions
+        - E.g., Two groups of subjects perform the same task, but one group is presented with a priming stimulus before they perform the task. 
+        - We can analyze the data with a `one-way` or a `two-way/factorial` ANOVA
+
+## 3. One-way ANOVA
+
+## 3.1 Data
+- We will be working again with the extended version of the dataset by Balota et al. (2007) that we have seen before (data provided by Levshina, 2015)
+    - `Word`
+    - `Length`: word length
+    - `SUBTLWF`: normalized word frequency 
+    - `POS`: part-of-speech
+    - `Mean_RT`: Mean reaction time
+- Research question:
+    - *Does POS affect Mean_RT?*
+
+```{r data }
+library(readr)
+library(dplyr)
+library(ggplot2)
+
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class7_Balota_et_al_2007.csv")
+glimpse(dataSet)
+```
+
+## 3.2 Comparing the means
+- To obtain by-POS means, we can use `dplyr` and its `group_by` and `summarise` functions
+
+```{r dplyr }
+dataSet %>%
+  group_by(POS) %>%
+  summarise(means=mean(Mean_RT))
+
+```
+
+## 3.2 Comparing the means
+- With `ggplot2` we can easily draw up a boxplot to compare the groups visually
+```{r box }
+ggplot(dataSet, aes(x=POS, y=Mean_RT)) + 
+  geom_boxplot()
+```
+
+## 3.3 Assumptions of a one-way ANOVA
+- The null hypothesis of a one-way ANOVA is that none of the groups are different from one another
+- The alternative hypothesis states that at least two groups are different, so the test is non-directional
+- ANOVA is quite robust, but it is advisable to check the following assumptions:
+    - The observations are independent
+    - The response variable is ratio- or interval-scaled
+    - The scores in the groups are normally distributed
+    - The variance is homogeneous, i.e., the variances of the different groups should be equal
+- If the assumptions are not met, you can either opt to use a linear regression model (if the data satisfy the assumptions of linear regression modeling) or you can use other types of ANOVA techniques (see Levshina, 2015: Chap. 8), which we will not cover here
+
+## 3.3.1 The observations are independent
+- To ensure that our observations are independent, we should exclude `Mean_RT` scores that were obtained for the same word
+
+```{r duplicates }
+dataSet <- dataSet[!duplicated(dataSet$Word),]
+```
+
+## 3.3.2 The scores in the groups are normally distributed
+- To compute by-POS shapiro.tests, we can use the `group_by`, and `summarise` functions from the `dplyr` package
+- Note that we extract the p-value from the test with `$p.value`
+
+```{r shapext }
+ dataSet %>%
+  group_by(POS) %>%
+  summarise(shapiro.test=shapiro.test(Mean_RT)$p.value)
+```
+
+## 3.3.2 The scores in the groups are normally distributed
+- By specifying `POS` as the `group`, `fill`, and `color` argument in our `ggplot` call, we can obtain by-POS density plots
+```{r shapextplot }
+ggplot(dataSet, aes(x=Mean_RT, group=POS, color=POS, fill=POS)) + geom_line(stat="density")
+```
+
+## 3.3.2 The scores in the groups are normally distributed
+- It is obvious that our data contains quite a few outliers (see the boxplot we drew earlier as well)
+- To remove outliers within our POS groups, we use `filter` in conjunction with `group_by` to remove atypical observations based on MAD-scores
+- We set the cutoff at `2` to be on the strict side
+
+```{r shapFix }
+dataSet<- dataSet %>%
+  group_by(POS) %>%
+  filter(abs(((Mean_RT - median(Mean_RT))/mad(Mean_RT))) <= 2)
+```
+
+## 3.3.2 The scores in the groups are normally distributed
+- The result looks much better, but it is not perfect. However, as the sample size is large, this should not cause too much trouble. 
+
+```{r shapFixed }
+ dataSet %>%
+  group_by(POS) %>%
+  summarise(shapiro.test=shapiro.test(Mean_RT)$p.value)
+```
+
+## 3.3.2 The scores in the groups are normally distributed
+```{r shapFixedplot}
+ggplot(dataSet, aes(x=Mean_RT, group=POS, color=POS, fill=POS)) + 
+  geom_line(stat="density")
+```
+
+## 3.3.3 The variance is homogeneous
+- To evaluate whether the variances are homogeneous across the groups, we can use the `leveneTest` from the `car` package
+- If p < 0.05, the groups have non-constant variances
+```{r leveneTest }
+ library(car)
+leveneTest(Mean_RT ~ POS, data=dataSet)
+```
+
+## 3.3.4 How to perform a one-way independent ANOVA
+- One-way independent ANOVA's can be performed by calling `lm` with only one factor predictor
+- Rather than calling `summary` on the model to inspect it, we can use `anova` to get an analysis of variance table
+- The test statistic we are after here is the F-value. In the context of ANOVA, this statistic is interpreted as the ratio of the average between-group variability and the average within-group variability
+- This is what ANOVA measures: is there significantly more variation between groups than there is within groups?
+```{r lmAnova }
+anv<-lm(Mean_RT ~ POS, dataSet)
+anova(anv)
+```
+
+## 3.3.4 How to perform a one-way independent ANOVA
+- Another way of generating the same result is by calling `summary` on the result of the `aov` function 
+```{r aovAnova1 }
+anv<-aov(Mean_RT ~ POS, dataSet)
+summary(anv)
+```
+
+## 3.3.5 Post-Hoc testing
+- Since an ANOVA will only provide information on the overall significance of the differences between groups, we have to perform additional tests (called `post-hoc tests` in the ANOVA literature) to find out which pairwise differences are significant
+- One such test is the `Tukey Honest Significant Difference test`, it requires an `aov` object
+- It provides the differences between the means (`diff`), their 95% confidence intervals (`lwr` and `upr`), as well as the p-value of the difference. Here we find that the differences between all groups are significant
+```{r tukeyhonest1 }
+TukeyHSD(anv, "POS")
+```
+
+## 3.3.6 Reporting a one-way independent ANOVA
+- Full name of the test: `one-way independent ANOVA`
+- F-statistic and its degrees of freedom, usually written as `F(2,877)=13.12`
+- P-value
+- Differences in the group means and their confidence intervals
+
+## 4. Independent two-way/factorial ANOVA
+- A two-way/factorial ANOVA can be used to simultaneously measure the influence of two or more factors on the group means 
+- Let us first prepare some data
+```{r twoWay }
+dataSet <- dataSet %>%
+  mutate(Length_groups=as.factor(ntile(Length, 2)))
+
+dataSet %>%
+  group_by(POS, Length_groups) %>%
+  summarise(mean=mean(Mean_RT))
+```
+
+## 4.1 Assumptions of independent two-way ANOVA
+- The assumptions of the independent two-way ANOVA are identical to those of the one-way ANOVA:
+    - The observations are independent
+    - The response variable is ratio- or interval-scaled
+    - The scores in the groups are normally distributed
+    - The variance is homogeneous, i.e., the variances of the different groups should be equal
+    
+## 4.1.1 The scores in the groups are normally distributed
+- Adjectives and Verbs appear to be normally distributed, but the nouns have a somewhat different shape
+- Still, the fact that we have a large sample means that we do not have to worry about this too much, at least if the other assumptions are met
+
+```{r shap }
+ dataSet %>%
+  group_by(POS, Length_groups) %>%
+  summarise(shapiro.test=shapiro.test(Mean_RT)$p.value)
+```
+
+## 4.1.1 The scores in the groups are normally distributed
+
+```{r shapPlotSy }
+ggplot(dataSet, aes(x=Mean_RT, group=Length_groups, color=Length_groups, fill=Length_groups)) + 
+  geom_line(stat="density") + 
+  facet_wrap(~POS)
+```
+
+
+## 4.1.2 The scores in the groups have constant variances
+```{r convar }
+library(car)
+leveneTest(Mean_RT ~ Length_groups, data=dataSet)
+leveneTest(Mean_RT ~ POS, data=dataSet)
+```
+
+## 4.2 Performing an independent two-way ANOVA
+- To perform an independent two-way ANOVA, we need to specify `sum` contrasts on our factor variables
+- Then we can use the `aov` function to compute the ANOVA
+- Just like `lm` models, `aov` models can (but do not have to) include interactions
+```{r aov }
+library(car)
+options(contr = c("contr.Sum"))
+mod <- aov(Mean_RT ~ POS * Length_groups, dataSet)
+```
+
+## 4.2 Performing an independent two-way ANOVA
+- Next we should specify how the pairwise comparisons should be computed. This is especially important for unbalanced samples (i.e., when the different combinations of categories do not have the same amount of observations)
+- In the ANOVA-literature the different options are known as `Type I`, `Type II`, and `Type III` `sum of squares`:
+    - `Type I`: For factors A, B we test the main effects of A and B, followed by the effect of their  interaction
+    - `Type II`: For factor A, B, we test the main effects of A and B.
+    - `Type III`: For factors A, B we the test the main effects of A and B, while controlling for the other variables and their interactions
+    
+## 4.2 Performing an independent two-way ANOVA
+- `Type III` is the most useful in many cases. You can compute the ANOVA with `Type III` sum of squares by calling the `Anova` function from the `car` package on an `aov` model
+- Here we find that the interaction is not significant
+```{r aov2 }
+library(car)
+Anova(mod, type="III")
+```
+
+## 4.3 Post-Hoc testing
+- As we did for the one-way independent ANOVA, we can also perform the `Tuskey Honest Significant Difference test` for the two-way independent ANOVA. 
+- In this case we will want to specify the variable that is in focus
+- Keep in mind that the p-values that are reported by the `TukeyHSD` test are based on `Type I` sum of squares, so you may get results that look different from your `Anova` output
+```{r tukeyHSD1 }
+TukeyHSD(mod, "POS")
+```
+
+## 4.4 Reporting an independent two-way ANOVA
+- Full name of the test: `two-way independent ANOVA`
+- F-statistics and their degrees of freedom, usually written as `F(2,877)=13.12`
+- P-value
+- Differences in the group means and their confidence intervals
+
+## 5. Exercises
+- Please go to http://www.jeroenclaes.be/statistics_for_linguistics/class9.html and perform the exercises
+
+## 6. References
+- Field, A., Miles, J., & Field, Z. (2012). *Discovering statistics using R*. New York, NY/London: SAGE.
+- Levshina, N. (2015). *How to do Linguistics with R: Data exploration and statistical analysis*. Amsterdam/Philadelphia, PA: John Benjamins.

@@ -1,0 +1,259 @@
+---
+title: 'Topic 6: Relationships between qualitative variables'
+author: "Jeroen Claes"
+output:
+  word_document:
+    toc: no
+  revealjs::revealjs_presentation:
+    css: white.css
+    self_contained: no
+    transition: none
+  html_document:
+    toc: no
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval=TRUE, message=FALSE, warning=FALSE, error=FALSE, fig.height = 3, dpi = 300)
+library(pander)
+library(dplyr)
+library(ggplot2)
+```
+
+## Contents
+1. Cross-tabulation: the basic tool to explore relations between qualitative variables
+2. Chi-square test of independence
+3. Fisher exact test
+4. Effect sizes for relations between qualitative variables
+5. Plots to explore the associations between qualitative variables 
+6. Reporting on associations between qualitative variables
+7. Exercises
+8. Questions
+9. References
+
+## 1. Cross-tabulation: the basic tool to explore relations between qualitative variables
+## 1. Cross-tabulation: the basic tool to explore relations between qualitative variables
+## 1.1 Data
+- We will be working with a dataset by Claes (2017)
+    - Corpus investigation into existential agreement variation in Peninsular Spanish
+    - Data drawn from *Twitter* and *Corpus Oral y Sonoro del Español Rural (COSER)*
+    - Random sample of 500 lines from the dataset
+  
+```{r data, eval=TRUE}
+library(readr)
+library(dplyr)
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class3_claes_2017.csv")
+head(dataSet)
+```
+
+## 1.2 Crosstabulation (1/2)
+- To explore the relationship between two qualitative variables, we have to count how many times each combination of the two variables occur
+- This is called `crosstabulation`
+- The output table is called a `contingency table`
+- This can be done with the `table` function
+- So, to count the number of times the `singular` and the `plural` existential occur in each of the `negation` groups, we use:
+```{r table1, eval=TRUE}
+# 'x' axis first (groups/independent variable), then 'y' axis (dependent variable)
+table(dataSet$negation, dataSet$type)
+```
+
+## 1.2 Crosstabulation (2/2)
+- Absolute counts are nice, but we're usually interested in the proportions of one option vs another
+- This is what `prop.table` does. It takes two arguments:
+    - A table
+    - A `margin`:
+        - `1` calculate the proportions by row (each **row** sums 1)
+        - `2` calculate the proportions by column (each **column** sums 1)
+
+```{r table2, eval=TRUE}
+# 'x' axis first (groups/independent variable), then 'y' axis (dependent variable)
+tab<-table(dataSet$negation, dataSet$type)
+# proportions by row
+prop.table(tab, 1)
+# proportions by column
+prop.table(tab, 2)
+```
+
+## 2. Chi-square test of independence
+## 2. Chi-square test of independence 
+- The table shows that there is a sizeable difference between the frequencies of the singular and the plural existential in clauses with and without negation
+- But is this difference reliably large? To test this, we need to perform a `Chi-squared test of independence`
+- The `null hypothesis` of this test is that there is no association between the variables:
+    - *There is no influence of the presence of negation on the occurrence rate of the singular and the plural existential*
+- The test compares the `observed frequency` to the frequency you would expect by chance (`the expected frequency`) to see how likely the results are
+
+## 2. Chi-square test of independence 
+- To get the expected frequency for a table cell, we need to add the `marginal frequencies` to the table
+- Marginal frequencies are the row and column totals
+- We can get the marginal frequencies with `rowSums` and `colSums`
+```{r table3, eval=TRUE}
+tab <- table(dataSet$negation, dataSet$type)
+colSum<- colSums(tab)
+rowSum<-rowSums(tab)
+```
+
+## 2. Chi-square test of independence 
+- For the cell in column 1, row 1, the expected frequency can be found with the following formula:
+```{r table4, eval=TRUE}
+sampleSize <- sum(tab)
+(colSum[1]/sampleSize) * (rowSum[1]/sampleSize) * sampleSize
+```
+
+## 2. Chi-square test of independence 
+- Basically, the chi-square test functions as follows:
+    - Calculate the expected frequency for each cell
+    - Substract the expected frequency from the observed frequency. The resulting number is the `residual`
+    - Divide this number by the square root of the expected frequency. The resulting number is the `Pearson residual`
+    - Square all Pearson residuals and sum them. The resulting number is the `Chi-squared statistic`. 
+    - Look up the chi-squared value in a chi-squared probability table. The degrees of freedom are the number of rows in the table, minus one.
+- The R function `chisq.test` does all of that for us
+
+## 2.1 Assumptions of the Chi-square test of independence
+- The sample is randomly selected from the population of interest and the observations are independent. 
+- Every observation can be classifed into exactly one category according to the criterion represented by each variable (Levshina, 2015: 212)
+- The expected frequency for all cells is greater than 5
+- The numbers in the table are counts, not proportions (**NEVER** run association tests on percentages!)
+
+## 2.2 Performing a Chi-square test of independence in R (1/4)
+- The function `chisq.test` takes two factor or character columns as its arguments
+- It also accepts a matrix or a table of numeric values
+- You don't have to specify the directionality of the hypothesis, because it is always assumed to be two-tailed
+```{r chisq.1, eval=TRUE}
+chisq.test(dataSet$negation, dataSet$type)
+```
+ 
+## 2.2 Performing a Chi-square test of independence in R (2/4)
+- If you run the test on proportions, you end up with a p-value of 1
+```{r chisq.3, eval=TRUE}
+chisq.test(prop.table(table(dataSet$negation, dataSet$type),2))
+```
+
+## 2.2 Performing a Chi-square test of independence in R (3/4)
+- If you want to inspect the `expected frequencies`, you can pull them out of the test (or calculate them by hand with the formula above)
+- Remember, if your expected frequency in one of the cells is lower than 5, the Chisq-test is not appropriate.
+- R will fire the following warning when this is the case:
+    - `Chi-squared approximation may be incorrect`
+```{r chisq.21, eval=TRUE}
+chisq.test(dataSet$negation, dataSet$type)$expected
+```
+
+## 2.2 Performing a Chi-square test of independence in R (4/4)
+- The `chisq.test` also provides access to the residuals, the difference between the predicted and the expected values
+- To compare the residuals in a meaningful way, they are standardized by dividing the residuals by the square root of their variance
+- If we know the values of the standardized residuals, we may gain insight into which cells contributed significantly to the p-value
+- `Standardized residuals` greater than `1.96`/smaller than `-1.96` indicate that a cell contributed significantly to the chi-squared value at the level of 0.05
+- If only one "odd" table cell contributes nearly all of the chi-squared (without you expecting it to do so on theoretical grounds), there may a data imbalance issue you will have to investigate further. This is more likely to occur in larger-dimensionality tables
+```{r chisq.2, eval=TRUE}
+chisq.test(dataSet$negation, dataSet$type)$stdres
+```    
+
+## 3 Fisher-Yates exact test
+## 3 Fisher-Yates exact test
+- When one of your expected frequencies is lower than 5, it is better to perform a Fisher-Yates exact test
+```{r fisherYates, eval=TRUE}
+fisher.test(dataSet$negation, dataSet$type)
+```
+
+## 4. Effect sizes for relations between qualitative variables
+## 4. Effect sizes for relations between qualitative variables (1/2)
+- The p-values only tell you if the differences between the groups created by the X-variable is reliably large
+- They tell you nothing about the sizes of the differences
+- In the `vcd` package, the `assocstats` function computes several effect size statistics you can use to measure the strength of the differences
+- They are computed on a `table`
+```{r assocstats, eval=TRUE}
+library(vcd)
+tab<-table(dataSet$negation, dataSet$type)
+assocstats(tab)
+```
+
+## 4. Effect sizes for relations between qualitative variables (2/2)
+- For 2x2 tables, the measures are all identical (but not for e.g., 4x2 tables!)
+    - Cramér’s *V* 
+    - *ϕ* coefficient (phi) 
+    - Contingency coefficient (used less often)
+- For 2x2 tables, Cramér’s *V* and *ϕ*  range from 0 to 1
+- For larger tables,  *ϕ* surpasses 1, so the function only returns Cramér’s *V* in that case (*ϕ* is `NA`)
+- Rule of thumb for Cramer's *V* (and  *ϕ* in 2x2 tables):
+    - 0: no association
+    - 0-0.3: small effect size
+    - 0.3-0.5: moderate effect
+    - 0.5-0.99: large effect
+    - 1: perfect association
+    
+```{r assocstats2, eval=TRUE}
+library(vcd)
+tab<-table(dataSet$province, dataSet$type)
+assocstats(tab)
+```
+
+## 5. Plots to explore the associations between qualitative variables 
+## 5. Plots to explore the associations between qualitative variables (1/5)
+- Barplots are the method of choice to plot associations between qualitative variables
+- They come in three flavors:
+    - Side-by side: (`position="dodge"`)
+    - Stacked: (`position="stack"`)
+    - Percentages: (`position="fill"`)
+- Observe that we do not specify a `y`axis mapping here
+```{r dodge, eval=TRUE}
+ggplot(dataSet, aes(x=negation, fill=type, color=type)) + geom_bar(position = "dodge")
+``` 
+
+## 5. Plots to explore the associations between qualitative variables (2/5)
+- Barplots are the method of choice to plot associations between qualitative variables
+- They come in three varieties:
+    - Side-by side: (`position="dodge"`)
+    - Stacked: (`position="stack"`)
+    - Percentages: (`position="fill"`)
+- Observe that we do not specify a `y`axis mapping here
+```{r stack, eval=TRUE}
+ggplot(dataSet, aes(x=negation, fill=type, color=type)) + geom_bar(position = "stack")
+``` 
+
+## 5. Plots to explore the associations between qualitative variables (3/5)
+- Barplots are the method of choice to plot associations between qualitative variables
+- They come in three varieties:
+    - Side-by side: (`position="dodge"`)
+    - Stacked: (`position="stack"`)
+    - Percentages: (`position="fill"`)
+- Observe that we do not specify a `y`axis mapping here
+- We add `scale_y_continous` to have nice percent-formatted y-axis labels (requires scales package)
+```{r fill, eval=TRUE}
+library(scales)
+ggplot(dataSet, aes(x=negation, fill=type, color=type)) + 
+  geom_bar(position = "fill") + 
+  scale_y_continuous(labels = percent)
+``` 
+
+## 5. Plots to explore the associations between qualitative variables (4/5)
+- We can add data labels to our `dodged` plots with a text layer
+- For `stacked` and `filled` plots, this is very complicated
+
+```{r stack0, eval=TRUE}
+ggplot(dataSet, aes(x=negation, fill=type, color=type, label=..count..)) + 
+  geom_bar(position = "dodge") + 
+  geom_text(stat='count', position=position_dodge(width = 1), vjust=-1, color="black")
+``` 
+
+## 5. Plots to explore the associations between qualitative variables (5/5)
+- `stacked` plots are great to show your readers how much tokens you have for each 'condition' (e.g., for negation, for different locations, ...)
+- `dodged` plots are great to compare raw frequencies
+- `filled` plots are preferred when you want to make the point that the relative frequency of your dependent variable varies by condition
+
+## 6. Reporting associations between qualitative variables
+## 6. Reporting associations between qualitative variables
+- Contingency table
+- Test type (Chi-squared, fisher's exact)
+- Test statistic (Chi-squared)
+- Degrees of freedom
+- Effect sizes
+- Plots
+
+## 7. Exercises
+- Please go to: http://www.jeroenclaes.be/statistics_for_linguistics/class6.html and perform the exercises. 
+
+## 8. Questions?
+???
+
+## 9. References
+- Claes, J. (2017). Cognitive and geographic constraints on morphosyntactic variation: The variable agreement of presentational haber in Peninsular Spanish. *Belgian Journal of Linguistics* (31), 28-53.
+- Levshina, N. (2015). *How to do linguistics with R: Data exploration and statistical analysis*. Amsterdam/Philadelphia, PA: John Benjamins.
+- Urdan, T. (2010). *Statistics in Plain English*. New York NY/London: Routledge.

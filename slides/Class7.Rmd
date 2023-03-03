@@ -1,0 +1,418 @@
+---
+title: 'Topic 7: Linear regression: Theory and assumptions'
+author: "Jeroen Claes"
+output:
+  word_document:
+    toc: no
+  revealjs::revealjs_presentation:
+    css: white.css
+    self_contained: no
+    transition: none
+  html_document:
+    toc: no
+---
+  
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval=TRUE, message=FALSE, warning=FALSE, error=FALSE, fig.height = 3, dpi = 300)
+library(pander)
+library(dplyr)
+```
+
+## Contents
+1. What is linear regression analysis and why is it used?
+2. The Least Squares Regression equation
+3. Assumptions of regression modeling
+4. Validating the assumptions of regression modeling
+5. Exercises
+6. References
+
+## 1. What is linear regression analysis and why is it used? 
+## 1. What is linear regression analysis and why is it used? (1/3)
+- We will be working with an extended version of the dataset by Balota et al. (2007) we have seen before (Levshina, 2015):
+    - `Word`
+    - `Length`: word length
+    - `SUBTLWF`:  normalized word frequency 
+    - `POS`: part-of-speech
+    - `Mean_RT`: Mean reaction time
+-  Research question:
+    - *To what extent and how do word length, word frequency, and part-of speech condition subjects' reaction times in a lexical decision task?*
+
+```{r data }
+library(readr)
+library(dplyr)
+library(ggplot2)
+
+dataSet <- read_csv("http://www.jeroenclaes.be/statistics_for_linguistics/datasets/class7_Balota_et_al_2007.csv")
+glimpse(dataSet)
+```
+
+## 1. What is linear regression analysis and why is it used? (2/3)
+- Linear regression is a form of statistical modeling: 
+    - We model the values of a continous variable as a function of the values of one or more explanatory variables
+        - E.g., Grammatical complexity can be understood as a function of age, speakers vowel quality can be understood as a function of social variables and contextual features,...
+    - A linear regression model is a statistical implementation of a series of hypotheses about the way something works
+- In its simplest form, linear regression is closely related to correlation analysis:
+    - Correlation analysis **describes** the strenghts and significance of the associations between two continuous variables
+    - Linear regression attempts to **predict** the values of a continous variable using the values of another continuous variable
+  
+## 1. What is linear regression analysis and why is it used? (3/3)
+- Linear regression has two main purposes:
+    - It is used to model a quantity as the additive effect of **several variables**
+        - E.g., Reaction times can be modeled as the joint effect of word length, word frequency, age, years of schooling
+    - It is used to measure the effect of **one variable** while **controlling** for biases caused by other variables so as to make the effect estimates more meaningful and precise
+        - E.g., If we want to investigate the effect of *word length* on reaction times across different subjects, we may want to control for age, word frequency, years of schooling, etc.
+
+## 2. The Least Squares equation
+## 2. The Least Squares equation (1/8)
+- Linear regression predicts a linear trend line for Y at each point of X
+- As you can see, the line does not touch most points.
+- The regression equation estimates the **slope** (steepness) that minimizes the squared sum of the differences between the observed values (the dots) and the predicted values (the line):
+    - Differences between the predicted and the observed values are called **residuals**
+    - The sum of the squared residuals is called the **sum of squares**
+    - Linear regression is also called **ordinary least squares** regression
+    
+```{r scatterplot, eval=TRUE, results='asis', echo=FALSE}
+ggplot(dataSet, aes(x=Length, y=Mean_RT)) + 
+  geom_point() + 
+  geom_smooth(method="lm")
+```
+ 
+## 2. The Least Squares equation (2/8)
+- Least squares regression is a very powerful technique, but it has some limitations
+- In order to truly understand its limitations, it is necessary to have a high-level understanding of what the technique actually does
+- Here, we will consider only single-term regression: `Y ~ X`
+- In a single-term regression, there are three elements that enter the equation:
+    - The `slope coefficient` (the steepness of the line on the plot)
+    - The `intercept`: the predicted value of Y in X=0; the Y value where the line crosses/intercepts the Y-axis
+    - The predicted value of `Y`
+- Let us take a deeper look at each one of these elements
+```{r equation, eval=FALSE }
+y.predicted <- (slope*X) + intercept
+```
+
+## 2. The Least Squares equation (3/8)
+- The `slope coefficient` equals the `Pearson product-moment correlation coefficient` of the relationship between X and Y, multiplied by the standard deviation of Y divided by the standard deviation of X
+- This brings the correlation coefficient more or less to the same scale as X and Y
+
+```{r equationSlope, eval=TRUE }
+slope <- cor(dataSet$Length, dataSet$Mean_RT) * (sd(dataSet$Mean_RT)/sd(dataSet$Length))
+slope
+```
+
+## 2. The Least Squares equation (4/8)
+- The `intercept` equals the average value of Y minus the average value of X multiplied by the slope coefficient
+```{r equationIntercept0, eval=TRUE }
+intercept <- mean(dataSet$Mean_RT) - (slope*mean(dataSet$Length))
+intercept
+```
+
+## 2. The Least Squares equation (5/8)
+- With these values and our formula we can hand-draw the regression line for X
+```{r equationIntercept1, eval=TRUE }
+# We generate all values between the min and the max of Length
+X<- min(dataSet$Length):max(dataSet$Length)
+# We apply our equation
+y.predicted <-(slope*X)+intercept
+```
+
+## 2. The Least Squares equation (6/8)
+- If we store the values in a `data.frame` we can easily plot the observed and the predicted values
+```{r equationIntercept, eval=TRUE }
+values <- data.frame(x=X, y=y.predicted)
+
+ggplot(dataSet, aes(x=Length, y=Mean_RT)) + 
+  geom_point() + 
+  geom_line(data=values, aes(x=x, y=y), color="red")
+```
+
+## 2. The Least Squares equation (7/8)
+- With more than one predictor variable, the equation remains identical, but calculating the intercept becomes more complicated: 
+    - In `multiple regression` or `multivariate regression` the intercept equals the value of the dependent variable when all predictor variables are zero
+    - The predicted value is calculated as the sum of the intercept and the slope estimate for each variable
+    - The geometric form of the equation is no longer a line, but a *hyperplane*, a k-dimensional shape in k-dimensional space
+- In most cases you will want to construct a multivariate model to parcel out the effects of each individual variable
+
+```{r equationMultiplePredictor2s, eval=FALSE }
+y.predicted <- intercept + (slope1*dataSet$Length) + (slope2*dataSet$SUBTLWF) +  ...
+```
+
+## 2. The Least Squares equation (8/8)
+- The `lm` ("linear model") function in R will take care of calculating the intercept, slope and predicted values for us
+- It uses `formula notation`:
+    - The leftmost string is the dependend variable (`Mean_RT`)
+    - The `tilde` marks that the right-hand variable names are independent variables
+    - The `+` signs refer to the additive effect of the variables in the least squares equation
+- Don't forget to specify the data.frame that holds your data!
+- If your model includes all the columns in your data.frame, you can use short-hand notation:
+    - `Mean_RT ~ .`
+
+```{r equationMultiplePredictors, eval=TRUE }
+mod <- lm(Mean_RT ~ Length +   SUBTLWF + POS, data = dataSet)
+```
+
+## 3. Assumptions of linear regression modeling
+## 3. Assumptions of linear regression modeling (1/4)
+- The least-squares regression equation immediately exposes some of its assumptions and limitations:
+    - The slope is calculated using the Pearson product-moment correlation coefficient: 
+        - The technique will inherit the assumptions of the Pearson product-moment correlation coefficient (see Topic 5):
+            - Y is interval- or ratio-scaled (there are ways of dealing with ordinal or categorical data in X)
+            - The relationship between X and Y is **monotonic** 
+            - The relationship between X and Y is **linear**
+            - There are **no outliers** in X and Y
+            
+## 3. Assumptions of linear regression modeling (2/4)
+- The least-squares regression equation immediately exposes some of its assumptions and limitations:
+    - The slope is calculated using the standard deviations of X and Y:
+        - X and Y should follow the `normal distribution`, otherwise their standard deviations will be biased and the resulting slope estimate will be biased as well
+    - The intercept is calculated using the `means` of X and Y:
+        - X and Y will have to be normally distributed, or the means will not be good indicators of their central tendencies, resulting in poor intercept estimates
+        
+## 3. Assumptions of linear regression modeling (3/4)
+- The least-squares regression equation immediately exposes some of its assumptions and limitations:
+    - The predicted value of `Y` is calculated by adding up `(slope*Predictor1) + (slope*Predictor2) ...`:
+        - The effects of the independent variables should be additive, this means that the independent variables cannot be strongly correlated (there is no `multicollinearity`)
+
+## 3. Assumptions of linear regression modeling (4/4)
+- Levshina (2015: 155) lists the following additional assumptions:
+    - The observations are independent from one another (there is no `autocorrelation`)
+    - The variability of the residuals does not increase or decrease with the explanatory variables or the response (i.e., there is no `heteroskedasticity`)
+    - The residuals are not autocorrelated
+    - The residuals follow the normal distrubtion. This is less important if the sample size is large 
+
+## 4. Validating the assumptions of regression modeling
+## 4. Validating the assumptions of regression modeling
+- Before you think of fitting a linear regression model, you have to:
+    - Investigate the distributions of all of your variables:
+        - What are their shapes: are they normally distributed?
+        - What are their central tendencies?
+        - What is their dispersion?
+        - Are there any outliers?
+        
+## 4. Validating the assumptions of regression modeling
+- Before you think of fitting a linear regression model, you have to:
+    - Examine the relationship of the independent variables to your dependent variable:
+        - Are they linear?
+        - Are they homeoskedastic? 
+    - Examine the relationships between each of your individual predictors:
+        - Are they correlated? To which extent? 
+- After checking all of this, you can specify a first regression model to validate the regression assumptions further
+
+## 4.1 The observations are independent from one another 
+- Each value of the response variable should be independent from the values of other observations:
+    - E.g., the reaction times for *marveled* should not depend on the reaction times for another word
+    - For study designs where you gather multiple observations for the same subject/word, a `mixed-effects regression model` (a model that takes this fact into account) is more appropriate than the simple linear model
+
+## 4.2 There are no outliers/overly influential observations
+- Outliers may distort the regression analysis and should be removed:
+    - A boxplot of each of your variables will help you identify outliers
+- A `density plot` or a `QQ-plot` will help you estimate the shape of the distribution of each variable
+    - Depending on the shape of the distribution of your variable, you may want to:
+        - For normally distributed variables: 
+            - Remove outliers based on z-scores 
+        - For data that does not follow the normal distribution: 
+            - Remove outliers based on MAD-scores or the interquartile range 
+            
+## 4.3 There are no outliers/overly influential observations
+- Remove outliers based on z-scores:
+    - Here our dependent `Mean_RT` variable and our `Length` variable are mostly normally distributed, except for a couple of atypical observations
+    - Values that provide an absolute z-score of more than 2 are outliers (2 standard deviations higher/lower than the mean)
+```{r outliersZscores, eval=TRUE }
+dataSet<-dataSet[abs(scale(dataSet$Mean_RT)) <= 2, ]
+dataSet<-dataSet[abs(scale(dataSet$Length)) <= 2, ]
+```        
+
+## 4.4 There are no outliers/overly influential observations
+- Remove outliers based on MAD-scores/interquartile range:
+    - The `SUBTLWF` variable has the typical power-law distribution of word frequencies
+    - Here we have two possibilities:
+        - We exclude all variables that have a value smaller/higher than the first/third quartile minus/plus `1.5 times the interquartile range`. Note that we have to use `which` to find those values, because we need to specify an `AND` statement (written as `&`)
+        - We exclude all variables that have an absolute value greater than `3.5` when the median is substracted from the value and divided by the median absolute deviation 
+        
+```{r outliersMad, eval=TRUE }
+dataSet <- dataSet[abs((dataSet$SUBTLWF-median(dataSet$SUBTLWF))/mad(dataSet$SUBTLWF)) <= 3.5, ]
+# dataSet<- dataSet[which(dataSet$SUBTLWF >= quantile(dataSet$SUBTLWF, 0.25) - (1.5*IQR(dataSet$SUBTLWF)) & 
+# dataSet$SUBTLWF <= quantile(dataSet$SUBTLWF, 0.75) + (1.5*IQR(dataSet$SUBTLWF)) ),]
+# We refit our model to the changed data
+mod <- lm(Mean_RT ~ Length +   SUBTLWF + POS, data = dataSet)
+```        
+
+## 4.4 There are no outliers/overly influential observations
+- After these steps, we may define an intial regression model
+- The `influencePlot` function from the `car` package identifies the row indices of too influential observations
+
+## 4.4 There are no outliers/overly influential observations
+- The plot combines three values:
+    - Studentized residuals (Y-axis). These values represent the difference between observed and predicted values. Values more extreme than `2` should be investigated
+    - Hat-values or leverage (X-axis). How much influence an observation may have on the predicted values  
+    - Cook's distance (size of the bubbles). How much influence removing an observation may have on the regression coefficients
+
+```{r outliersInfluencePlot, eval=TRUE }
+library(car)
+influencePlot(mod)
+```
+
+## 4.4 There are no outliers/overly influential observations
+- The function returns a data.frame with the statistics for the most suspicious observations
+- The `row.names` of the data.frame are the indices of the observations that should be removed
+- It is usually a good idea to remove these
+
+```{r outliers2, eval=TRUE }
+library(car)
+indices <-row.names( influencePlot(mod))
+indices <-as.numeric(indices)
+dataSet <- dataSet[-indices, ]
+# We refit our model to the changed data
+mod <- lm(Mean_RT ~ Length +   SUBTLWF + POS, data = dataSet)
+```
+
+## 4.5 The relationship between the dependent and independent variables is linear
+- The first thing you should do is plotting the relationship of your numeric predictors to the dependent variable to fix the easy to spot non-linear trends
+- For regression models the `crPlot` function in the `car` package plots the relationship between X and Y
+- There are two lines on the plot: 
+    - The dashed red line plots the expected linear relationship
+    - The green line plots the observed relationship
+    
+```{r linearity, eval=TRUE }
+library(car)
+crPlot(mod, var = "Length")
+```
+
+## 4.5 The relationship between the dependent and independent variables is linear
+- If the two lines diverge greatly, the relationship is not linear
+- The relationships are not perfectly linear, but they come pretty close
+- Non-linear relationships may be made linear with transformations of the predictor variable
+- In other cases, it is more appropriate to model them with `polynomial regression terms`, linear approximations of the curvy relationship (see Topic 12). This makes the model less easily interpretable
+
+```{r linearity2, eval=TRUE }
+library(car)
+crPlot(mod, var = "SUBTLWF")
+```
+
+## 4.6 There is no heteroskedasticity
+- The previous two plots reveal that there is a bigger issue than some non-linearity: heteroskedasticity. Both for the `Length` and the  `SUBTLWF` variable the plots display a funnel-like pattern
+- This means that the variability of the residuals covaries (i.e, increases/decreases) with the explanatory variables or the response
+
+## 4.6 There is no heteroskedasticity
+
+```{r heteroskedasticity, eval=TRUE }
+plot(mod, which = 1)
+```
+
+## 4.7 There is no heteroskedasticity
+- The `car` package includes the `ncvTest` function
+- If p < 0.05, the fitted (predicted) values have non-constant variance with the residuals 
+- This test establishes whether or not heteroskedasticity is an issue for the model
+- Here it is clear that our model suffers from heteroskedasticity 
+```{r heteroskedasticity2, eval=TRUE }
+library(car)
+ncvTest(mod)
+```
+
+## 4.7 There is no heteroskedasticity
+- We should also check whether the residuals have constant variance depending on the values of quantitative explanatory variables
+- We perform the same  `ncvTest`  test, but we add the predictor variable 
+- This allows us to check if the problem is due to specific variables. Here we find that the `SUBTLWF` variable is the main culprit
+
+```{r heteroskedasticity3, eval=TRUE }
+library(car)
+ncvTest(mod, ~ Length)
+ncvTest(mod, ~ SUBTLWF)
+ncvTest(mod, ~POS)
+```
+
+## 4.7 There is no heteroskedasticity
+- Heteroskedasticity can be fixed with a power transformation of the **dependent variable**
+- We can try to find the right transformation by trial and error, or we can use a `boxCox` plot (from the `car` package) 
+- The X-value with the highest Y-value corresponds to the power of the optimal transformation for our dependent variable
+- If the Y-value is zero, the optimal transformation is the natural logarithm
+```{r heteroskedasticity4, eval=TRUE }
+library(car)
+boxCox(mod)
+```
+
+## 4.7 There is no heteroskedasticity
+- We can find the exact x-value that corresponds with the highest y-value as follows:
+    - We store the data for the plot in an object
+    - We set `plotit` to `FALSE` so we don't get a plot output
+    - We subset the x-vector by calling `which.max` (which vector item has the highest value) on the y-values
+```{r heteroskedasticity5, eval=TRUE }
+library(car)
+testValues <- boxCox(mod, plotit=FALSE)
+power <- testValues$x[which.max(testValues$y)]
+power
+```
+
+## 4.7 There is no heteroskedasticity
+- All we have to do now to fix the problem is raising `Mean_RT` to the power of ``r power`` and compute the model again
+- When we perform the `ncvTest` again, the  p-value is higher than 0.05, indicating that heteroskedasticity is no longer an issue
+
+```{r heteroskedasticity6, eval=TRUE }
+library(car)
+dataSet$Mean_RT <- dataSet$Mean_RT^power
+mod <- lm(Mean_RT ~ Length +  SUBTLWF, data = dataSet)
+ncvTest(mod)
+```
+
+## 4.8 The explanatory variables are not correlated (there is no `multicollinearity`)
+- For numerical variables:
+    - Perform pairwise correlation tests (see Topic 5)
+    - You will want to see p-values higher than 0.05 and/or weak to moderate correlations
+- For categorical variables:
+    - Perform pariwise Chi-squared tests of independence and calculate the effect sizes (see Topic 6)
+    - You will want to see p-values higher than 0.05 and/or small to moderate effect sizes
+- You can also assess multicollinearity directly from a fitted regression model:
+    - Calculate the Variance Inflation Factors (VIF)
+    - `VIF <= 5` indicates that there is no severe multicollinearity 
+    - `vif` in the `car` package
+    
+```{r multicol, eval=TRUE }
+library(car)
+vif(mod)
+```
+
+## 4.8 The explanatory variables are not correlated (there is no `multicollinearity`)
+- If some of your variables are collinear you should drop one of them
+- If it is of theoretical interest to investigate both variables, you can run parallel regression models, which each include one of the variables
+- If interpretability is not of primary concern (say, when the collinear variables only control for biases), techniques such as `principal components` (for quantitative variables) or `factor analysis` (for factors) can combine the two collinear variables into one or more non-correlated variables 
+
+## 4.9 The residuals are not autocorrelated
+- Just like the observations cannot be autocorrelated, the residuals cannot be autocorrelated either
+- To detect autocorrelation, we can perform a `durbinWatsonTest`
+- `durbinWatsonTest` in the `car` package 
+- If p > 0.05 autocorrelation is not an issue
+
+```{r autocor, eval=TRUE }
+library(car)
+durbinWatsonTest(mod)
+```
+
+## 4.9 The residuals are not autocorrelated
+- If the residuals are autocorrelated this may mean that:
+    - We did not include a variable that ought to be included
+        - **Solution**: Think, plot, and add the predictor
+    - We misspecified the shape of some critical relationship. This happens when we fit a straight line for a predictor that has a non-linear relationship to the dependent variable. 
+        - **Solution**: Add a non-linear (polynomial) term (see Topic 12)
+    - We have made some consistent error while measuring the dependent variable
+        - **Solution**: Find the observations with errors and exclude them
+- Autocorrelation will not affect the sizes and the numeric stability of the regression coefficients, but it will affect their standard errors, t-values, and p-values
+- Autocorrelation will also affect the predictive accuracy of your model
+
+## 4.10 The residuals follow the normal distribution
+- If everything is in order, the residuals (the "prediction errors" of our model) should be completely random, resulting in normally distributed values
+- If the residuals are not normally distributed, this could indicate that our model misses important information 
+    - E.g., We may have failed to include an important variable 
+- To inspect the residuals you can simply draw a `qqplot` with a `qqline` of the residuals (`resid` function). 
+- Alternatively, you can draw the plot with `plot(mod, which = 2)`, which adds index labels for problematic observations
+
+```{r residuals, eval=TRUE }
+qqnorm(resid(mod)) 
+qqline(resid(mod))
+```
+
+## 5. Exercises
+- Please go to http://www.jeroenclaes.be/statistics_for_linguistics/class7.html and perform the exercises
+
+## 6. References
+- Balota, D.A., Yap, M.J., & Cortese, M.J., et al. (2007). The English Lexicon Project. *Behavior Research Methods*, 39(3), 445–459. DOI: 10.3758/BF03193014. Data taken from Levshina (2015).
+- Levshina, N. (2015). *How to do Linguistics with R: Data exploration and statistical analysis*. Amsterdam/Philadelphia, PA: John Benjamins.
+- Urdan, T. (2010). *Statistics in Plain English*. New York NY/London: Routledge.
